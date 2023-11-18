@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity"
+    android:orientation="vertical"
+    android:background="@drawable/gradient_background">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher_foreground"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registro de usuario"
+        android:layout_gravity="center_horizontal"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
+        android:textColor="@color/white"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Nombre"
+            android:textColor="@color/white"
+            android:layout_marginEnd="15dp"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edit_text_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/edit_text"
+            android:layout_marginTop="20dp"
+            android:inputType="text"
+            android:padding="10dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Nombre de usuario (E-mail)"
+            android:textColor="@color/white"
+            android:layout_marginEnd="15dp"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edit_text_email"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/edit_text"
+            android:layout_marginTop="20dp"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Fecha de nacimiento"
+            android:textColor="@color/white"
+            android:layout_marginEnd="15dp"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edit_text_birth_date"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/edit_text"
+            android:layout_marginTop="20dp"
+            android:inputType="date"
+            android:padding="10dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Sexo"
+            android:textColor="@color/white"
+            android:layout_marginEnd="15dp"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edit_text_sex"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/edit_text"
+            android:layout_marginTop="20dp"
+            android:inputType="number"
+            android:padding="10dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Nivel educativo"
+            android:textColor="@color/white"
+            android:layout_marginEnd="15dp"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edit_text_education_level"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/edit_text"
+            android:layout_marginTop="20dp"
+            android:inputType="number"
+            android:padding="10dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Tipo de familia"
+            android:textColor="@color/white"
+            android:layout_marginEnd="15dp"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edit_text_family_type"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/edit_text"
+            android:layout_marginTop="20dp"
+            android:inputType="number"
+            android:padding="10dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Numero de hijos"
+            android:textColor="@color/white"
+            android:layout_marginEnd="15dp"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edit_text_number_of_children"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/edit_text"
+            android:layout_marginTop="20dp"
+            android:inputType="number"
+            android:padding="10dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Contraseña"
+            android:textColor="@color/white"
+            android:layout_marginEnd="15dp"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/edit_text_password"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/edit_text"
+            android:layout_marginTop="20dp"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Darse de alta"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/dark_blue"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/redirect_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:padding="0dp"
+        android:text="Más información sobre la App"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
+
+</LinearLayout>
