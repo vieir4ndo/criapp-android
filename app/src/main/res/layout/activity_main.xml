@@ -26,24 +26,73 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"/>
 
-    <Button
+   <EditText
+       android:id="@+id/edit_text_username"
+       android:layout_width="300dp"
+       android:layout_height="wrap_content"
+       android:hint="Nombre de usuario"
+       android:layout_gravity="center_horizontal"
+       android:background="@drawable/edit_text"
+       android:layout_marginTop="20dp"
+       android:inputType="textEmailAddress"
+       android:padding="10dp"
+       />
+
+    <EditText
+        android:id="@+id/edit_text_password"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Acceso"
+        android:hint="Contraseña"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/main_button"
+        android:background="@drawable/edit_text"
+        android:layout_marginTop="20dp"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Acceder"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/dark_blue"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¿Olvidó contraseña?"
+        android:text="¿Olvidaste tu contraseña?"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/white"
         android:textSize="17sp"
         android:layout_marginTop="20dp"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Si no tienes usuario,"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/redirect_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:padding="0dp"
+            android:text="Registrate"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+    </LinearLayout>
 
 </LinearLayout>
