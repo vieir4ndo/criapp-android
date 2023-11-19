@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registro de usuario"
+        android:text="@string/sign_up_title"
         android:layout_gravity="center_horizontal"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Nombre"
+            android:text="@string/name"
             android:textColor="@color/white"
             android:layout_marginEnd="15dp"
             android:textSize="17sp" />
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Nombre de usuario (E-mail)"
+            android:text="@string/username"
             android:textColor="@color/white"
             android:layout_marginEnd="15dp"
             android:textSize="17sp" />
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Fecha de nacimiento"
+            android:text="@string/birth_date"
             android:textColor="@color/white"
             android:layout_marginEnd="15dp"
             android:textSize="17sp" />
@@ -126,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Sexo"
+            android:text="@string/sex"
             android:textColor="@color/white"
             android:layout_marginEnd="15dp"
             android:textSize="17sp" />
@@ -155,7 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Nivel educativo"
+            android:text="@string/educational_level"
             android:textColor="@color/white"
             android:layout_marginEnd="15dp"
             android:textSize="17sp" />
@@ -184,7 +184,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Tipo de familia"
+            android:text="@string/family_type"
             android:textColor="@color/white"
             android:layout_marginEnd="15dp"
             android:textSize="17sp" />
@@ -213,7 +213,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Numero de hijos"
+            android:text="@string/number_of_children"
             android:textColor="@color/white"
             android:layout_marginEnd="15dp"
             android:textSize="17sp" />
@@ -242,7 +242,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Contraseña"
+            android:text="@string/password"
             android:textColor="@color/white"
             android:layout_marginEnd="15dp"
             android:textSize="17sp" />
