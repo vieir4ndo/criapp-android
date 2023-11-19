@@ -1,7 +1,9 @@
 package com.example.criapp.model
 
 import com.google.gson.Gson
+import kotlinx.serialization.Serializable
 
+@Serializable
 class ResponseModel(
     val success: Boolean,
     val data: List<Any>?,
