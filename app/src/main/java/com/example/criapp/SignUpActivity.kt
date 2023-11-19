@@ -3,9 +3,15 @@ package com.example.criapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import com.example.criapp.databinding.ActivitySignInBinding
+import com.example.criapp.databinding.ActivitySignUpBinding
 import com.example.criapp.model.CreateUserModel
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.services.CriappClient
@@ -13,20 +19,31 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.util.Arrays
 
-class SignUpActivity : AppCompatActivity() {
-    val criappClient = CriappClient();
-    var user = CreateUserModel();
+class SignUpActivity : AppCompatActivity(), OnItemSelectedListener{
+    private lateinit var mBinding: ActivitySignUpBinding;
+
+    private val criappClient = CriappClient();
+    private var user = CreateUserModel();
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up);
+        super.onCreate(savedInstanceState);
+        mBinding = ActivitySignUpBinding.inflate(layoutInflater);
+        setContentView(mBinding.root);
+
+        val aaSex= ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
+
+        aaSex.addAll(Arrays.asList("Hombre", "Mujer", "Otro"));
+
+        mBinding.spinnerSex.onItemSelectedListener = this;
+        mBinding.spinnerSex.adapter = aaSex;
 
         val buttonCreateUser = findViewById<Button>(R.id.button_create_user);
         val editTextName = findViewById<EditText>(R.id.edit_text_name);
         val editTextUsername = findViewById<EditText>(R.id.edit_text_create_username);
         val editTextBirthDate = findViewById<EditText>(R.id.edit_text_birth_date);
-        val editTextSex = findViewById<Spinner>(R.id.spinner_sex);
+        val spinnerSex = findViewById<Spinner>(R.id.spinner_sex);
         val editTextEducationalLevel = findViewById<Spinner>(R.id.spinner_educational_level);
         val editTextFamilyType = findViewById<Spinner>(R.id.spinner_family_type);
         val editTextNumberOfChildren = findViewById<EditText>(R.id.edit_text_number_of_children);
@@ -72,5 +89,17 @@ class SignUpActivity : AppCompatActivity() {
             val openSignInActivityIntent = Intent (this, SignInActivity::class.java);
             startActivity(openSignInActivityIntent);
         }
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+        user.sex = position;
+    }
+
+    fun onSexSpinnerSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+        user.sex = position;
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        TODO("Not yet implemented")
     }
 }
