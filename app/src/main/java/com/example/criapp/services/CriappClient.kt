@@ -23,6 +23,10 @@ class CriappClient {
 
         val response = client.newCall(request).execute();
 
-        return gson.fromJson(response.body()?.string(), ResponseModel::class.java)
+        val responseBody = gson.fromJson(response.body()?.string(), ResponseModel::class.java);
+
+        response.close();
+
+        return responseBody;
     }
 }
