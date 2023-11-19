@@ -9,8 +9,8 @@ import okhttp3.RequestBody
 
 class CriappClient {
 
-    val baseUri = "https://criapp-api-c5e0110cc8ae.herokuapp.com"
-    val gson = Gson()
+    private val baseUri = "https://criapp-api-c5e0110cc8ae.herokuapp.com"
+    private val gson = Gson()
     fun postWithoutCredentials(path: String, body : String, headers: List<String> = listOf("application/json", "charset=utf-8")) : ResponseModel? {
 
         val headersHttp = MediaType.parse(headers.joinToString(";"));
