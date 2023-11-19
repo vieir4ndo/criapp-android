@@ -33,237 +33,125 @@
         android:layout_gravity="start"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/label_edit_text_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:text="@string/name"
-            android:textColor="@color/white"
-            android:layout_marginEnd="15dp"
-            android:textSize="17sp" />
+            android:textColor="@color/white"/>
 
         <EditText
             android:id="@+id/edit_text_name"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="@drawable/edit_text"
-            android:layout_marginTop="20dp"
-            android:inputType="text"
-            android:padding="10dp"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="horizontal">
+            android:inputType="textPersonName"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/label_edit_text_create_username"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:text="@string/username"
-            android:textColor="@color/white"
-            android:layout_marginEnd="15dp"
-            android:textSize="17sp" />
+            android:textColor="@color/white"/>
 
         <EditText
             android:id="@+id/edit_text_create_username"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="@drawable/edit_text"
-            android:layout_marginTop="20dp"
-            android:inputType="textEmailAddress"
-            android:padding="10dp"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="horizontal">
+            android:inputType="textEmailAddress"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/label_edit_text_birth_date"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:text="@string/birth_date"
-            android:textColor="@color/white"
-            android:layout_marginEnd="15dp"
-            android:textSize="17sp" />
+            android:textColor="@color/white"/>
 
         <EditText
             android:id="@+id/edit_text_birth_date"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="@drawable/edit_text"
-            android:layout_marginTop="20dp"
-            android:inputType="text"
-            android:padding="10dp"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="horizontal">
+            android:inputType="text"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/label_spinner_sex"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:text="@string/sex"
-            android:textColor="@color/white"
-            android:layout_marginEnd="15dp"
-            android:textSize="17sp" />
+            android:textColor="@color/white"/>
 
-        <EditText
-            android:id="@+id/edit_text_sex"
-            android:layout_width="fill_parent"
+        <Spinner
+            android:id="@+id/spinner_sex"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="@drawable/edit_text"
-            android:layout_marginTop="20dp"
-            android:inputType="number"
-            android:padding="10dp"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="horizontal">
+            android:entries="@array/sex_array"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/label_spinner_educational_level"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:text="@string/educational_level"
-            android:textColor="@color/white"
-            android:layout_marginEnd="15dp"
-            android:textSize="17sp" />
+            android:textColor="@color/white"/>
 
-        <EditText
-            android:id="@+id/edit_text_education_level"
-            android:layout_width="fill_parent"
+        <Spinner
+            android:id="@+id/spinner_educational_level"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="@drawable/edit_text"
-            android:layout_marginTop="20dp"
-            android:inputType="number"
-            android:padding="10dp"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="horizontal">
+            android:entries="@array/educational_level_array"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/label_spinner_family_type"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:text="@string/family_type"
-            android:textColor="@color/white"
-            android:layout_marginEnd="15dp"
-            android:textSize="17sp" />
+            android:textColor="@color/white" />
 
-        <EditText
-            android:id="@+id/edit_text_family_type"
-            android:layout_width="fill_parent"
+        <Spinner
+            android:id="@+id/spinner_family_type"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="@drawable/edit_text"
-            android:layout_marginTop="20dp"
-            android:inputType="number"
-            android:padding="10dp"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="horizontal">
+            android:entries="@array/family_type_array"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/label_edit_text_number_of_children"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:text="@string/number_of_children"
-            android:textColor="@color/white"
-            android:layout_marginEnd="15dp"
-            android:textSize="17sp" />
+            android:textColor="@color/white"/>
 
         <EditText
             android:id="@+id/edit_text_number_of_children"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="@drawable/edit_text"
-            android:layout_marginTop="20dp"
-            android:inputType="number"
-            android:padding="10dp"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="horizontal">
+            android:inputType="number"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/label_edit_text_password"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:text="@string/password"
-            android:textColor="@color/white"
-            android:layout_marginEnd="15dp"
-            android:textSize="17sp" />
+            android:textColor="@color/white" />
 
         <EditText
             android:id="@+id/edit_text_password"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="@drawable/edit_text"
-            android:layout_marginTop="20dp"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            />
+            android:inputType="textPassword"/>
+
     </LinearLayout>
 
     <Button
         android:id="@+id/button_create_user"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Darse de alta"
+        android:text="@string/sign_up_button"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/dark_blue"
         android:textStyle="bold"
@@ -279,21 +167,8 @@
         android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
         android:padding="0dp"
-        android:text="Más información sobre la App"
+        android:text="@string/more_information_about_the_app"
         android:textColor="@color/white"
-        android:textSize="17sp" />
-
-
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner"
-        style="?android:attr/spinnerItemStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginEnd="72dp"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        android:entries="@array/planets_array"
-        />
+        android:textSize="15sp" />
 
 </LinearLayout>
