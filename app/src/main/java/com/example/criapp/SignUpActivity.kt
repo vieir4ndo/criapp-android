@@ -1,18 +1,25 @@
 package com.example.criapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import com.example.criapp.model.CreateUserModel
-import com.example.criapp.services.UserService
+import com.example.criapp.model.ResponseModel
+import com.example.criapp.services.CriappClient
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class SignUpActivity : AppCompatActivity() {
+    val criappClient = CriappClient();
+    var user = CreateUserModel();
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up);
-
-        val service = UserService();
 
         val buttonCreateUser = findViewById<Button>(R.id.button_create_user);
         val editTextName = findViewById<EditText>(R.id.edit_text_name);
@@ -25,7 +32,6 @@ class SignUpActivity : AppCompatActivity() {
         val editTextPassword = findViewById<EditText>(R.id.edit_text_password);
 
         buttonCreateUser.setOnClickListener{
-            val user = CreateUserModel();
             user.name = editTextName.text.toString();
             user.email = editTextUsername.text.toString();
             user.birthDate = editTextBirthDate.text.toString();
@@ -34,8 +40,35 @@ class SignUpActivity : AppCompatActivity() {
             user.familyType = editTextFamilyType.text.toString().toInt();
             user.password = editTextPassword.text.toString();
 
-           //TODO: Adicionar chamadas assíncronas e em threads separadas
-            service.createUser(user);
+            fetchData()
+        }
+    }
+    private fun fetchData() {
+        val scope = CoroutineScope(Dispatchers.Main)
+
+        val job = scope.async(Dispatchers.IO) {
+            fetchDataFromApi()
+        }
+
+        scope.launch {
+            val result = job.await()
+
+            handleResult(result)
+        }
+    }
+
+    private suspend fun fetchDataFromApi(): ResponseModel? {
+        return criappClient.postWithoutCredentials("/user", user.toString())
+    }
+
+    private fun handleResult(result: ResponseModel?) {
+        if (result != null && !result.success){
+            val openSignUpActivityIntent = Intent (this, SignUpActivity::class.java);
+            startActivity(openSignUpActivityIntent);
+        }
+        else {
+            val openSignInActivityIntent = Intent (this, SignInActivity::class.java);
+            startActivity(openSignInActivityIntent);
         }
     }
 }
