@@ -51,7 +51,7 @@
         />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/button_login_user"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="Acceder"
