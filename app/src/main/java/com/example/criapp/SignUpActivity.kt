@@ -57,20 +57,19 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun fetchDataFromApi() : String? {
+    private suspend fun fetchDataFromApi() : ResponseModel? {
         return criappClient.postWithoutCredentials("/user", user.toString());
     }
 
-    private fun handleResult(result: String?) {
-        println(result);
-
-       /* if (result != null && !result.success){
+    private fun handleResult(result: ResponseModel?) {
+        if (result != null && !result.success){
+            //TODO: Adicionar mensagens de erro
             val openSignUpActivityIntent = Intent (this, SignUpActivity::class.java);
             startActivity(openSignUpActivityIntent);
         }
         else {
             val openSignInActivityIntent = Intent (this, SignInActivity::class.java);
             startActivity(openSignInActivityIntent);
-        }*/
+        }
     }
 }
