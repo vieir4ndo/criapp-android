@@ -14,8 +14,6 @@ class CreateUserModel {
     override fun toString(): String {
         val gson = Gson();
 
-        println(gson.toJson(this));
-
         return gson.toJson(this);
     }
 }
