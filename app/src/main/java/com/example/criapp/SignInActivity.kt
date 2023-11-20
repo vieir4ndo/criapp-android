@@ -76,7 +76,7 @@ class SignInActivity : AppCompatActivity() {
             editor.apply()
 
 
-            val openFirstWelcomeActivityIntent = Intent(this, FirstWelcomePage::class.java);
+            val openFirstWelcomeActivityIntent = Intent(this, FirstWelcomePageActivity::class.java);
             startActivity(openFirstWelcomeActivityIntent);
         }
     }
