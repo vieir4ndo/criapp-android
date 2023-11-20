@@ -78,7 +78,7 @@ class CreateChildActivity : AppCompatActivity() {
         //TODO: verificar validade do token
 
         val headers = mapOf(
-            "Authorization" to "Bearer ''$token",
+            "Authorization" to "Bearer $token",
             "Content-Type" to "application/json",
             "charset" to "utf-8"
         );
