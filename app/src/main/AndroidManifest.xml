@@ -18,7 +18,22 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".FirstWelcomePage"
+            android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FifthWelcomePageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FourthWelcomePageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ThirdWelcomePageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SecondWelcomePageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FirstWelcomePageActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"
