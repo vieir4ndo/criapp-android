@@ -6,4 +6,5 @@ import kotlinx.serialization.Serializable
 class LoginUserResponse {
     val token = ""
     val expiresIn = ""
+    val user: UserModel? = null;
 }
