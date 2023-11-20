@@ -15,5 +15,11 @@
     <string name="sign_up_title">Registro de usuario</string>
     <string name="more_information_about_the_app">Más información sobre la App</string>
     <string name="sign_up_button">Darse de alta</string>
+    <string name="hello">¡Hola!</string>
+    <string name="first_welcome_message">Te damos la bienvenida a CRIApp, una experiencia sobre la crianza y el desarrollo de los niños y niñas entre 0 y 6 años.</string>
+    <string name="second_welcome_message">Nuestro objetivo es acompañarte en la tarea de la crianza y ayudarte a resolver las posibles dudas sobre situaciones del día a día.</string>
+    <string name="third_welcome_message">Nuestro apoyo reforzará tus sentimientos de seguridad y confianza ante la crianza de los niños y las niñas y contribuirá a crear un clima familiar positivo.</string>
+    <string name="fourth_welcome_message">Y lo más importante, con esta experiencia contribuirás a la mejora del desarrollo físico, cognitivo, social y emocional de tus hijos o hijas.</string>
+    <string name="lets_begin">¡Empecemos!</string>
 </resources>
 
