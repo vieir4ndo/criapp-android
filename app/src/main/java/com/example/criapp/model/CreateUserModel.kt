@@ -10,6 +10,7 @@ class CreateUserModel {
     var password = "";
     var familyType = 0;
     var educationalLevel = 0;
+    var numberOfChildren = 0;
 
     override fun toString(): String {
         val gson = Gson();

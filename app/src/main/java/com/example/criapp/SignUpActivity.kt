@@ -51,6 +51,7 @@ class SignUpActivity : AppCompatActivity(){
             user.email = editTextUsername.text.toString();
             user.password = editTextPassword.text.toString();
             user.birthDate = formatDate(birthDateYear, birthDateMonth, birthDateDay);
+            user.numberOfChildren = editTextNumberOfChildren.text.toString().toInt();
 
             fetchData()
         }
@@ -191,7 +192,7 @@ class SignUpActivity : AppCompatActivity(){
     }
 
     private suspend fun fetchDataFromApi() : ResponseModel? {
-        return criappClient.postWithoutCredentials("/user", user.toString());
+        return criappClient.post("/user", user.toString());
     }
 
     private fun handleResult(result: ResponseModel?) {
