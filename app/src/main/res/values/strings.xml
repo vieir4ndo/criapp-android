@@ -21,5 +21,8 @@
     <string name="third_welcome_message">Nuestro apoyo reforzará tus sentimientos de seguridad y confianza ante la crianza de los niños y las niñas y contribuirá a crear un clima familiar positivo.</string>
     <string name="fourth_welcome_message">Y lo más importante, con esta experiencia contribuirás a la mejora del desarrollo físico, cognitivo, social y emocional de tus hijos o hijas.</string>
     <string name="lets_begin">¡Empecemos!</string>
+    <string name="sign_up_success_message1">¡Usuario dado de alta!</string>
+    <string name="sign_up_success_message2">Por favor, consulte su e-mail o teléfono móvil.</string>
+    <string name="back">Volver</string>
 </resources>
 
