@@ -199,8 +199,8 @@ class SignUpActivity : AppCompatActivity(){
             //TODO: Adicionar mensagens de erro
         }
         else {
-            val openSignInActivityIntent = Intent (this, SignInActivity::class.java);
-            startActivity(openSignInActivityIntent);
+            val openSignUpSuccessActivityIntent = Intent (this, SignUpSuccessActivity::class.java);
+            startActivity(openSignUpSuccessActivityIntent);
         }
     }
 }
