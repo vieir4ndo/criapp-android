@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Registro de niño(a)"
+            android:text="@string/register_child"
             android:layout_gravity="center_horizontal"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -126,7 +126,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button_create_user"
+            android:id="@+id/button_create_child"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="@string/sign_up_button"

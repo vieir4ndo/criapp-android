@@ -58,7 +58,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private suspend fun fetchDataFromApi(): ResponseModel? {
-        return criappClient.postWithoutCredentials("/user/login", user.toString());
+        return criappClient.post("/user/login", user.toString());
     }
 
     private fun handleResult(result: ResponseModel?) {
