@@ -31,7 +31,7 @@ class CriappClient {
         val responseBody = response.body()?.string();
 
         println("Status Code: '${response.code()}'");
-        println("Body: '$body'");
+        println("Body: '$responseBody'");
 
         return gson.fromJson(responseBody, ResponseModel::class.java)
     }

@@ -73,8 +73,8 @@ class SignInActivity : AppCompatActivity() {
             val editor = sharedPreferences.edit()
             editor.putString("token", tokenData.token)
             editor.putString("token_expires_in", tokenData.expiresIn)
+            editor.putString("user_id", tokenData.user?.id)
             editor.apply()
-
 
             val openFirstWelcomeActivityIntent = Intent(this, FirstWelcomePageActivity::class.java);
             startActivity(openFirstWelcomeActivityIntent);
