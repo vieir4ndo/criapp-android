@@ -24,5 +24,7 @@
     <string name="sign_up_success_message1">¡Usuario dado de alta!</string>
     <string name="sign_up_success_message2">Por favor, consulte su e-mail o teléfono móvil.</string>
     <string name="back">Volver</string>
+    <string name="premature">Prematuro</string>
+    <string name="months_of_breast_feeding">Numero de meses lactancia</string>
 </resources>
 
