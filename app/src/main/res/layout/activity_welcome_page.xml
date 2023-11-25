@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstWelcomePageActivity"
+    tools:context=".WelcomePageActivity"
     android:orientation="vertical"
     android:gravity="center_vertical"
     android:background="@color/purple">
@@ -17,12 +17,12 @@
         android:layout_marginTop="50dp"/>
 
     <TextView
+        android:id="@+id/welcome_message"
         android:layout_width="wrap_content"
         android:layout_height="351dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:text="@string/fourth_welcome_message"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30sp" />
