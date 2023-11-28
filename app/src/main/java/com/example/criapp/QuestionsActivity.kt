@@ -13,7 +13,7 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.example.criapp.model.ChildModel
 import com.example.criapp.model.ResponseModel
-import com.example.criapp.services.CriappClient
+import com.example.criapp.services.CriAppClient
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,14 +22,13 @@ import kotlinx.coroutines.launch
 
 class QuestionsActivity : AppCompatActivity() {
     private var children : Array<ChildModel>? = null;
-    private var sharedPreferences : SharedPreferences? = null;
-    private val criappClient = CriappClient();
+    private var criAppClient : CriAppClient? = null;
     private val gson = Gson();
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questions)
-        sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE);
-
+        criAppClient = CriAppClient(getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE));
         fetchData();
     }
 
@@ -37,7 +36,7 @@ class QuestionsActivity : AppCompatActivity() {
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
-            fetchDataFromApi()
+            criAppClient!!.getAuthenticated("/child");
         }
 
         scope.launch {
@@ -45,21 +44,6 @@ class QuestionsActivity : AppCompatActivity() {
 
             handleResult(result)
         }
-    }
-
-    private suspend fun fetchDataFromApi() : ResponseModel? {
-
-        val token = sharedPreferences?.getString("token", "")
-
-        //TODO: verificar validade do token
-
-        val headers = mapOf(
-            "Authorization" to "Bearer $token",
-            "Content-Type" to "application/json",
-            "charset" to "utf-8"
-        );
-
-        return criappClient.get("/child", headers);
     }
 
     private fun handleResult(result: ResponseModel?) {
@@ -72,9 +56,7 @@ class QuestionsActivity : AppCompatActivity() {
 
             children = data;
 
-            println(data[0])
-
-            var view = findViewById<LinearLayout>(R.id.children);
+            val view = findViewById<LinearLayout>(R.id.children);
 
             for (child in children!!){
                 val button = Button(this)

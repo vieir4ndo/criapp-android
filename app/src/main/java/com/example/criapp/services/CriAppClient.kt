@@ -1,0 +1,103 @@
+package com.example.criapp.services
+
+import android.content.SharedPreferences
+import com.example.criapp.model.ResponseModel
+import com.google.gson.Gson
+import okhttp3.Headers
+import okhttp3.MediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+
+class CriAppClient(private val sharedPreferences: SharedPreferences) {
+    private val gson = Gson()
+    // TODO: Should put these variables as env vars
+    private val baseUri = "https://criapp-api-c5e0110cc8ae.herokuapp.com"
+    private val shouldLog : Boolean = true;
+
+    fun postAuthenticated(path: String, body : String) : ResponseModel? {
+        val headers = mapOf(
+            "Authorization" to getToken(),
+            "Content-Type" to "application/json",
+            "charset" to "utf-8"
+        );
+
+        return post(path, body, headers);
+    }
+
+    fun post(path: String, body : String, headers: Map<String, String> = mapOf(
+        "Content-Type" to "application/json",
+        "charset" to "utf-8"
+    )) : ResponseModel? {
+
+        val uri = baseUri + path;
+
+        if (shouldLog){
+            println("Url: '$uri'");
+            println("Body: '$body'");
+            println("Headers: '$headers'");
+        }
+
+        val headersHttp = MediaType.parse(listOf("application/json", "charset=utf-8").joinToString(";"));
+
+        val okHttpHeaders = Headers.of(headers)
+
+        val requestBody = RequestBody.create(headersHttp, body);
+
+        val client = OkHttpClient();
+
+        val request = Request.Builder().url(uri).headers(okHttpHeaders).post(requestBody).build();
+
+        val response = client.newCall(request).execute();
+
+        val responseBody = response.body()?.string();
+
+        if (shouldLog){
+            println("Status Code: '${response.code()}'");
+            println("Body: '$responseBody'");
+        }
+
+        return gson.fromJson(responseBody, ResponseModel::class.java)
+    }
+
+    fun getAuthenticated(path: String) : ResponseModel? {
+
+        val uri = baseUri + path;
+
+        val headers = mapOf(
+            "Authorization" to getToken(),
+            "Content-Type" to "application/json",
+            "charset" to "utf-8"
+        );
+
+        if (shouldLog) {
+            println("Url: '$uri'");
+            println("Headers: '$headers'");
+        }
+
+        val okHttpHeaders = Headers.of(headers)
+
+        val client = OkHttpClient();
+
+        val request = Request.Builder().url(uri).headers(okHttpHeaders).get().build();
+
+        val response = client.newCall(request).execute();
+
+        val responseBody = response.body()?.string();
+
+        if (shouldLog) {
+            println("Status Code: '${response.code()}'");
+            println("Body: '$responseBody'");
+        }
+
+        return gson.fromJson(responseBody, ResponseModel::class.java)
+    }
+
+    private fun getToken() : String {
+        val token = sharedPreferences.getString("token", "")
+        //TODO: validate expiresIn and refresh token if necessary
+        val expiresIn = sharedPreferences.getString("token_expires_in", "")
+
+        return "Bearer $token";
+    }
+}

@@ -1,6 +1,8 @@
 package com.example.criapp
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -11,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.databinding.ActivitySignUpBinding
 import com.example.criapp.model.CreateUserModel
 import com.example.criapp.model.ResponseModel
-import com.example.criapp.services.CriappClient
+import com.example.criapp.services.CriAppClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -21,7 +23,8 @@ import java.util.Arrays
 
 class SignUpActivity : AppCompatActivity(){
     private lateinit var mBinding: ActivitySignUpBinding;
-    private val criappClient = CriappClient();
+    private var criappClient : CriAppClient? = null;
+    private var sharedPreferences : SharedPreferences? = null;
     private var user = CreateUserModel();
     private var birthDateDay = 0;
     private var birthDateMonth = 0;
@@ -32,6 +35,9 @@ class SignUpActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState);
         mBinding = ActivitySignUpBinding.inflate(layoutInflater);
         setContentView(mBinding.root);
+
+        sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
+        criappClient = CriAppClient(sharedPreferences!!)
 
         configSexSpinner();
         configEducationalLevelSpinner();
@@ -181,7 +187,7 @@ class SignUpActivity : AppCompatActivity(){
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
-            fetchDataFromApi()
+            criappClient!!.post("/user", user.toString());
         }
 
         scope.launch {
@@ -189,10 +195,6 @@ class SignUpActivity : AppCompatActivity(){
 
             handleResult(result)
         }
-    }
-
-    private suspend fun fetchDataFromApi() : ResponseModel? {
-        return criappClient.post("/user", user.toString());
     }
 
     private fun handleResult(result: ResponseModel?) {
