@@ -13,7 +13,7 @@ import android.widget.EditText
 import com.example.criapp.databinding.ActivityCreateChildBinding
 import com.example.criapp.model.CreateChildModel
 import com.example.criapp.model.ResponseModel
-import com.example.criapp.services.CriappClient
+import com.example.criapp.services.CriAppClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -22,20 +22,19 @@ import java.util.Arrays
 
 class CreateChildActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityCreateChildBinding;
-    private val criappClient = CriappClient();
+    private var criappClient : CriAppClient? = null;
     private var birthDateDay = 0;
     private var birthDateMonth = 0;
     private var birthDateYear = 0;
     private val monthsOfTheYear = Arrays.asList("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Deciembre");
     private var child = CreateChildModel();
-    private var sharedPreferences : SharedPreferences? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityCreateChildBinding.inflate(layoutInflater);
         setContentView(mBinding.root);
 
-        sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE);
+        this.criappClient = CriAppClient(getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE));
 
         configSexSpinner();
         configPrematureSpinner();
@@ -60,7 +59,7 @@ class CreateChildActivity : AppCompatActivity() {
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
-            fetchDataFromApi()
+            criappClient!!.postAuthenticated("/child", child.toString());
         }
 
         scope.launch {
@@ -68,21 +67,6 @@ class CreateChildActivity : AppCompatActivity() {
 
             handleResult(result)
         }
-    }
-
-    private suspend fun fetchDataFromApi() : ResponseModel? {
-
-        val token = sharedPreferences?.getString("token", "")
-
-        //TODO: verificar validade do token
-
-        val headers = mapOf(
-            "Authorization" to "Bearer $token",
-            "Content-Type" to "application/json",
-            "charset" to "utf-8"
-        );
-
-        return criappClient.post("/child", child.toString(), headers);
     }
 
     private fun handleResult(result: ResponseModel?) {
