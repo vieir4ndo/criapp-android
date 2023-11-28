@@ -23,6 +23,8 @@ class AnswerActivity : AppCompatActivity() {
     private val gson = Gson();
     private var textView : TextView? = null;
     private var textQuestion : TextView? = null;
+    private var textQuestionTypeMin : TextView? = null;
+    private var textQuestionTypeMax : TextView? = null;
     private var criAppClient : CriAppClient? = null;
     private var sharedPreferences : SharedPreferences? = null;
     private var questions : Array<QuestionModel>? = null;
@@ -40,6 +42,8 @@ class AnswerActivity : AppCompatActivity() {
 
         textView = findViewById(R.id.text_child);
         textQuestion = findViewById(R.id.text_question);
+        textQuestionTypeMin = findViewById(R.id.text_min);
+        textQuestionTypeMax = findViewById(R.id.text_max);
         textView!!.text = "Respondendo preguntas para " + child!!.name;
         fetchData()
     }
@@ -72,6 +76,15 @@ class AnswerActivity : AppCompatActivity() {
     private fun showNextQuestion(){
         currentQuestion++;
         textQuestion!!.text = questions!![currentQuestion].text
+
+        if (questions!![currentQuestion].type == 1){
+            textQuestionTypeMin!!.text = "Nunca";
+            textQuestionTypeMax!!.text = "Siempre";
+        }
+        else {
+            textQuestionTypeMin!!.text = "En desacuerdo";
+            textQuestionTypeMax!!.text = "De acuerdo";
+        }
     }
 
     fun onArrowButtonClick(view: View?) {
