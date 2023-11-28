@@ -7,7 +7,6 @@ class CreateChildModel {
     var birthDate = "";
     var sex = 0;
     var monthsOfBreastFeeding = 0;
-    var prcId : String? = "";
     var isPremature : Boolean? = null;
 
     override fun toString(): String {

@@ -80,6 +80,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/questions"
                 android:background="@android:color/transparent"
+                android:onClick="onButtonChildQuestions"
                 />
 
             <Space

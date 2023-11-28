@@ -6,14 +6,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 
-class WelcomePageActivity : AppCompatActivity() {
+class WelcomeMessagesActivity : AppCompatActivity() {
 
     private var welcome_messages : Array<String>? = null;
     private var currentMessage = -1;
     private var textView : TextView? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_welcome_page);
+        setContentView(R.layout.activity_welcome_messages);
         textView = findViewById(R.id.welcome_message);
         welcome_messages = resources.getStringArray(R.array.welcome_messages);
         showNextMessage();
@@ -29,6 +29,8 @@ class WelcomePageActivity : AppCompatActivity() {
             val nextIntent = Intent(this, MenuActivity::class.java);
             startActivity(nextIntent);
         }
-       showNextMessage();
+        else{
+            showNextMessage();
+        }
     }
 }

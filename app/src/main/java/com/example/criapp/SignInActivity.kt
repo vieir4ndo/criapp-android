@@ -76,7 +76,7 @@ class SignInActivity : AppCompatActivity() {
             editor.putString("user_id", tokenData.user?.id)
             editor.apply()
 
-            val openFirstWelcomeActivityIntent = Intent(this, WelcomePageActivity::class.java);
+            val openFirstWelcomeActivityIntent = Intent(this, WelcomeMessagesActivity::class.java);
             startActivity(openFirstWelcomeActivityIntent);
         }
     }

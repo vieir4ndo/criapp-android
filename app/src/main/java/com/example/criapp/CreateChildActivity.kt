@@ -51,7 +51,6 @@ class CreateChildActivity : AppCompatActivity() {
             child.name = editTextName.text.toString();
             child.birthDate = formatDate(birthDateYear, birthDateMonth, birthDateDay);
             child.monthsOfBreastFeeding = editTextMonthsOfBreastFeeding.text.toString().toInt();
-            child.prcId = sharedPreferences?.getString("user_id", "");
 
             fetchData()
         }
