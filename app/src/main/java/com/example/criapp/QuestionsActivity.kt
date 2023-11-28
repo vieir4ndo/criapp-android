@@ -2,7 +2,6 @@ package com.example.criapp
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -81,8 +80,22 @@ class QuestionsActivity : AppCompatActivity() {
                     startActivity(intent);
                 }
 
+                val params = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+
+                params.bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
+
+                button.layoutParams = params
+
                 view.addView(button);
             }
         }
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MenuActivity::class.java);
+        startActivity(intent);
     }
 }

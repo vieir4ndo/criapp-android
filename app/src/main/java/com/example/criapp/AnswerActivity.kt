@@ -133,7 +133,7 @@ class AnswerActivity : AppCompatActivity() {
         } else {
 
             if (currentQuestion == questions!!.lastIndex){
-                val nextIntent = Intent(this, MenuActivity::class.java);
+                val nextIntent = Intent(this, QuestionsActivity::class.java);
                 startActivity(nextIntent);
             }
             else {
