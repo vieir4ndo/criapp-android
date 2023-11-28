@@ -15,4 +15,9 @@ class MenuActivity : AppCompatActivity() {
         val nextIntent = Intent(this, CreateChildActivity::class.java);
         startActivity(nextIntent);
     }
+
+    fun onButtonChildQuestions(view: View?) {
+        val nextIntent = Intent(this, QuestionsActivity::class.java);
+        startActivity(nextIntent);
+    }
 }

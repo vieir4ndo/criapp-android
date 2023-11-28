@@ -42,4 +42,30 @@ class CriappClient {
 
         return gson.fromJson(responseBody, ResponseModel::class.java)
     }
+
+    fun get(path: String, headers: Map<String, String> = mapOf(
+        "Content-Type" to "application/json",
+        "charset" to "utf-8"
+    )) : ResponseModel? {
+
+        val uri = baseUri + path;
+
+        println("Url: '$uri'");
+        println("Headers: '$headers'");
+
+        val okHttpHeaders = Headers.of(headers)
+
+        val client = OkHttpClient();
+
+        val request = Request.Builder().url(uri).headers(okHttpHeaders).get().build();
+
+        val response = client.newCall(request).execute();
+
+        val responseBody = response.body()?.string();
+
+        println("Status Code: '${response.code()}'");
+        println("Body: '$responseBody'");
+
+        return gson.fromJson(responseBody, ResponseModel::class.java)
+    }
 }
