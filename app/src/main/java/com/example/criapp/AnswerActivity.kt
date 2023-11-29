@@ -121,7 +121,8 @@ class AnswerActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        return;
+        val nextIntent = Intent(this, QuestionsActivity::class.java);
+        startActivity(nextIntent);
     }
 
     private fun registerAnswer(){
