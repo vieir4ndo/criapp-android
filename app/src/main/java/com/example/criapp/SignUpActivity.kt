@@ -54,7 +54,7 @@ class SignUpActivity : AppCompatActivity(){
 
         buttonCreateUser.setOnClickListener{
             user.name = editTextName.text.toString();
-            user.email = editTextUsername.text.toString();
+            user.username = editTextUsername.text.toString();
             user.password = editTextPassword.text.toString();
             user.birthDate = formatDate(birthDateYear, birthDateMonth, birthDateDay);
             user.numberOfChildren = editTextNumberOfChildren.text.toString().toInt();

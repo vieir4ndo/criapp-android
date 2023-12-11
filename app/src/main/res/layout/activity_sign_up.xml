@@ -62,7 +62,7 @@
                 android:id="@+id/edit_text_create_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"/>
+                android:inputType="text"/>
 
             <TextView
                 android:id="@+id/label_edit_text_birth_date"

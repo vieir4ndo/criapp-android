@@ -45,14 +45,14 @@ class AnswerActivity : AppCompatActivity() {
         textQuestionTypeMin = findViewById(R.id.text_min);
         textQuestionTypeMax = findViewById(R.id.text_max);
         textView!!.text = "Respondendo preguntas para " + child!!.name;
-        fetchData()
+        fetchData(child!!.id)
     }
 
-    private fun fetchData() {
+    private fun fetchData(childId: String) {
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
-            criAppClient!!.getAuthenticated("/question")
+            criAppClient!!.getAuthenticated("/question?childId=$childId")
         }
 
         scope.launch {

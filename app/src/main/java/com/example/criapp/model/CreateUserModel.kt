@@ -6,7 +6,7 @@ class CreateUserModel {
     var name = "";
     var birthDate = "";
     var sex = 0;
-    var email = "";
+    var username = "";
     var password = "";
     var familyType = 0;
     var educationalLevel = 0;
