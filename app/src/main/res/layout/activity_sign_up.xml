@@ -169,7 +169,7 @@
             android:id="@+id/button_create_user"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="@string/sign_up_button"
+            android:text="@string/ok"
             android:layout_gravity="center_horizontal"
             android:backgroundTint="@color/dark_blue"
             android:textStyle="bold"
