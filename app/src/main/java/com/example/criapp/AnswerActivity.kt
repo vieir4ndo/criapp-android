@@ -34,9 +34,9 @@ class AnswerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_answer)
 
-        criAppClient = CriAppClient(getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE));
-
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE);
+
+        criAppClient = CriAppClient(sharedPreferences!!);
 
         child = gson.fromJson(intent.getStringExtra("child"), ChildModel::class.java)
 

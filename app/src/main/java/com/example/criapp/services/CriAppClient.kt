@@ -25,6 +25,16 @@ class CriAppClient(private val sharedPreferences: SharedPreferences) {
         return post(path, body, headers);
     }
 
+    fun patchAuthenticated(path: String, body : String) : ResponseModel? {
+        val headers = mapOf(
+            "Authorization" to getToken(),
+            "Content-Type" to "application/json",
+            "charset" to "utf-8"
+        );
+
+        return patch(path, body, headers);
+    }
+
     fun post(path: String, body : String, headers: Map<String, String> = mapOf(
         "Content-Type" to "application/json",
         "charset" to "utf-8"
@@ -47,6 +57,41 @@ class CriAppClient(private val sharedPreferences: SharedPreferences) {
         val client = OkHttpClient();
 
         val request = Request.Builder().url(uri).headers(okHttpHeaders).post(requestBody).build();
+
+        val response = client.newCall(request).execute();
+
+        val responseBody = response.body()?.string();
+
+        if (shouldLog){
+            println("Status Code: '${response.code()}'");
+            println("Body: '$responseBody'");
+        }
+
+        return gson.fromJson(responseBody, ResponseModel::class.java)
+    }
+
+    fun patch(path: String, body : String, headers: Map<String, String> = mapOf(
+        "Content-Type" to "application/json",
+        "charset" to "utf-8"
+    )) : ResponseModel? {
+
+        val uri = baseUri + path;
+
+        if (shouldLog){
+            println("Url: '$uri'");
+            println("Body: '$body'");
+            println("Headers: '$headers'");
+        }
+
+        val headersHttp = MediaType.parse(listOf("application/json", "charset=utf-8").joinToString(";"));
+
+        val okHttpHeaders = Headers.of(headers)
+
+        val requestBody = RequestBody.create(headersHttp, body);
+
+        val client = OkHttpClient();
+
+        val request = Request.Builder().url(uri).headers(okHttpHeaders).patch(requestBody).build();
 
         val response = client.newCall(request).execute();
 

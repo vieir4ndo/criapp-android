@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.criapp.model.ChildModel
 import com.example.criapp.model.ResponseModel
@@ -56,6 +57,26 @@ class QuestionsActivity : AppCompatActivity() {
             children = data;
 
             val view = findViewById<LinearLayout>(R.id.children);
+
+            if (children!!.isEmpty()){
+                val text = TextView(this);
+
+                text.text = "Aún no hay nada por aquí";
+                text.gravity = Gravity.CENTER_HORIZONTAL;
+                text.textSize = 20f
+                text.setTextColor(ContextCompat.getColor(this, R.color.white))
+
+                val params = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+
+                params.bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
+
+                text.layoutParams = params
+
+                view.addView(text);
+            }
 
             for (child in children!!){
                 val button = Button(this)
