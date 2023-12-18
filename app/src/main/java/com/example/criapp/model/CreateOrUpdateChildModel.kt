@@ -2,7 +2,7 @@ package com.example.criapp.model
 
 import com.google.gson.Gson
 
-class CreateChildModel {
+class CreateOrUpdateChildModel {
     var name = "";
     var birthDate = "";
     var sex = 0;

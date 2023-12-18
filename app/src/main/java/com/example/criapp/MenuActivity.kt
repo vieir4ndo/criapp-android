@@ -12,7 +12,7 @@ class MenuActivity : AppCompatActivity() {
     }
 
     fun onButtonChildClick(view: View?) {
-        val nextIntent = Intent(this, CreateChildActivity::class.java);
+        val nextIntent = Intent(this, ChildActivity::class.java);
         startActivity(nextIntent);
     }
 

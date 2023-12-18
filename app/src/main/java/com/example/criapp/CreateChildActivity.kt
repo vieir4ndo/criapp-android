@@ -2,7 +2,6 @@ package com.example.criapp
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,7 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import com.example.criapp.databinding.ActivityCreateChildBinding
-import com.example.criapp.model.CreateChildModel
+import com.example.criapp.model.CreateOrUpdateChildModel
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.services.CriAppClient
 import kotlinx.coroutines.CoroutineScope
@@ -27,7 +26,7 @@ class CreateChildActivity : AppCompatActivity() {
     private var birthDateMonth = 0;
     private var birthDateYear = 0;
     private val monthsOfTheYear = Arrays.asList("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Deciembre");
-    private var child = CreateChildModel();
+    private var child = CreateOrUpdateChildModel();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

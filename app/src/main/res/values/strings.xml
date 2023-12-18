@@ -27,6 +27,8 @@
     <string name="new_password">Contraseña nueva</string>
     <string name="code">Código</string>
     <string name="forgot_password_page_title">Si olvidaste la contraseña</string>
+    <string name="children">Niños(as)</string>
+    <string name="edit_child">Edición de niño(a)</string>
 
 
     <string-array name="welcome_messages">
