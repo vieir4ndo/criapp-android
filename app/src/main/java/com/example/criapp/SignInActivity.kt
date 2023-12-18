@@ -36,6 +36,13 @@ class SignInActivity : AppCompatActivity() {
             startActivity(openSignUpActivityIntent);
         }
 
+        val buttonRedirectForgotPasswordActivity = findViewById<Button>(R.id.redirect_forgot_password_button);
+
+        buttonRedirectForgotPasswordActivity.setOnClickListener {
+            val openForgotPasswordActivity = Intent(this, ForgotPasswordActivity::class.java);
+            startActivity(openForgotPasswordActivity);
+        }
+
         val buttonLoginUser = findViewById<Button>(R.id.button_login_user);
         val editTextUsername = findViewById<EditText>(R.id.edit_text_username);
         val editTextPassword = findViewById<EditText>(R.id.edit_text_password);
@@ -76,8 +83,8 @@ class SignInActivity : AppCompatActivity() {
             editor.putString("user_id", tokenData.user?.id)
             editor.apply()
 
-            val openFirstWelcomeActivityIntent = Intent(this, WelcomeMessagesActivity::class.java);
-            startActivity(openFirstWelcomeActivityIntent);
+            val openWelcomeActivityIntent = Intent(this, WelcomeMessagesActivity::class.java);
+            startActivity(openWelcomeActivityIntent);
         }
     }
 }
