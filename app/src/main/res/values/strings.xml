@@ -23,6 +23,7 @@
     <string name="months_of_breast_feeding">Numero de meses lactancia</string>
     <string name="register_child">Registro de niño(a)</string>
     <string name="answer_questions">Responder preguntas</string>
+    <string name="recover_password">Recuperar contraseña</string>
 
 
     <string-array name="welcome_messages">
