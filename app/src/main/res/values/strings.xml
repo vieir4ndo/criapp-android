@@ -14,7 +14,7 @@
     <string name="sign_up">Registrate</string>
     <string name="sign_up_title">Registro de usuario</string>
     <string name="more_information_about_the_app">Más información sobre la App</string>
-    <string name="sign_up_button">Darse de alta</string>
+    <string name="ok">Darse de alta</string>
     <string name="hello">¡Hola!</string>
     <string name="sign_up_success_message1">¡Usuario dado de alta!</string>
     <string name="sign_up_success_message2">Por favor, consulte su e-mail o teléfono móvil.</string>
@@ -24,6 +24,9 @@
     <string name="register_child">Registro de niño(a)</string>
     <string name="answer_questions">Responder preguntas</string>
     <string name="recover_password">Recuperar contraseña</string>
+    <string name="new_password">Contraseña nueva</string>
+    <string name="code">Código</string>
+    <string name="forgot_password_page_title">Si olvidaste la contraseña</string>
 
 
     <string-array name="welcome_messages">
