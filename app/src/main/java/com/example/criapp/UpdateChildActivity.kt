@@ -59,8 +59,8 @@ class UpdateChildActivity : AppCompatActivity() {
         var editTextName = findViewById<EditText>(R.id.edit_text_name)
         var editTextMonthsOfBreastFeeding = findViewById<EditText>(R.id.edit_text_months_of_breast_feeding)
 
-        //editTextName.text = child!!.name;
-        //editTextMonthsOfBreastFeeding.text = child!!.monthsOfBreastFeeding.toString();
+        editTextName.setText(child!!.name);
+        editTextMonthsOfBreastFeeding.setText(child!!.monthsOfBreastFeeding.toString());
 
         buttonCreateChild.setOnClickListener{
             model.name = editTextName.text.toString()
@@ -75,7 +75,7 @@ class UpdateChildActivity : AppCompatActivity() {
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
-            criAppClient!!.patchAuthenticated("/child" + child!!.id, model.toString())
+            criAppClient!!.patchAuthenticated("/child/" + child!!.id, model.toString())
         }
 
         scope.launch {
@@ -126,6 +126,7 @@ class UpdateChildActivity : AppCompatActivity() {
             }
         }
         mBinding.spinnerPremature.adapter = aaPremature
+        mBinding.spinnerPremature.setSelection(if (child!!.isPremature)  1 else 2)
     }
 
     private fun configSexSpinner(){
@@ -144,6 +145,7 @@ class UpdateChildActivity : AppCompatActivity() {
 
         }
         mBinding.spinnerSex.adapter = aaSex
+        mBinding.spinnerSex.setSelection(child!!.sex)
     }
 
     private fun configBirthDateDaySpinner(){
@@ -157,11 +159,11 @@ class UpdateChildActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                birthDateDay = birthDateDay
             }
 
         }
         mBinding.spinnerBirthDateDay.adapter = aaBirthDateDay
+        mBinding.spinnerBirthDateDay.setSelection(birthDateDay - 1)
     }
 
     private fun configBirthDateMonthSpinner(){
@@ -175,11 +177,11 @@ class UpdateChildActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                birthDateMonth = birthDateMonth
             }
 
         }
         mBinding.spinnerBirthDateMonth.adapter = aaBirthDateMonth
+        mBinding.spinnerBirthDateMonth.setSelection(birthDateMonth - 1)
     }
 
     private fun configBirthDateYearSpinner(){
@@ -198,5 +200,6 @@ class UpdateChildActivity : AppCompatActivity() {
 
         }
         mBinding.spinnerBirthDateYear.adapter = aaBirthDateYear
+        mBinding.spinnerBirthDateYear.setSelection(birthDateYear - 1900)
     }
 }
