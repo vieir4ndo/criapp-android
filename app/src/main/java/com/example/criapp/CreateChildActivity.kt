@@ -74,7 +74,7 @@ class CreateChildActivity : AppCompatActivity() {
         }
         else {
 
-            val nextActivity = Intent (this, MenuActivity::class.java);
+            val nextActivity = Intent (this, ChildActivity::class.java);
             startActivity(nextActivity);
         }
     }
