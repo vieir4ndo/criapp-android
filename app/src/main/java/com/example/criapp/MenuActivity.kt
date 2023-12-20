@@ -16,6 +16,11 @@ class MenuActivity : AppCompatActivity() {
         startActivity(nextIntent);
     }
 
+    fun onButtonProfileClick(view: View?) {
+        val nextIntent = Intent(this, ProfileActivity::class.java);
+        startActivity(nextIntent);
+    }
+
     fun onButtonChildQuestions(view: View?) {
         val nextIntent = Intent(this, QuestionsActivity::class.java);
         startActivity(nextIntent);

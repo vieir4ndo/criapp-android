@@ -29,6 +29,7 @@
     <string name="forgot_password_page_title">Si olvidaste la contraseña</string>
     <string name="children">Niños(as)</string>
     <string name="edit_child">Edición de niño(a)</string>
+    <string name="profile">Perfil</string>
 
 
     <string-array name="welcome_messages">
