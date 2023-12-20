@@ -55,14 +55,14 @@ class UpdateChildActivity : AppCompatActivity() {
         configBirthDateMonthSpinner()
         configBirthDateYearSpinner()
 
-        val buttonCreateChild = findViewById<Button>(R.id.button_create_child)
+        val buttonUpdateChild = findViewById<Button>(R.id.button_update_child)
         var editTextName = findViewById<EditText>(R.id.edit_text_name)
         var editTextMonthsOfBreastFeeding = findViewById<EditText>(R.id.edit_text_months_of_breast_feeding)
 
         editTextName.setText(child!!.name);
         editTextMonthsOfBreastFeeding.setText(child!!.monthsOfBreastFeeding.toString());
 
-        buttonCreateChild.setOnClickListener{
+        buttonUpdateChild.setOnClickListener{
             model.name = editTextName.text.toString()
             model.birthDate = formatDate(birthDateYear, birthDateMonth, birthDateDay)
             model.monthsOfBreastFeeding = editTextMonthsOfBreastFeeding.text.toString().toInt()

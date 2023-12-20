@@ -162,4 +162,10 @@ class ChildActivity : AppCompatActivity() {
 
         return button;
     }
+
+    override fun onBackPressed() {
+        val nextIntent = Intent(this, MenuActivity::class.java);
+        startActivity(nextIntent);
+    }
+
 }
