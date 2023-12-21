@@ -5,9 +5,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class ResponseModel(
-    val success: Boolean,
-    val data: List<Any>?,
-    val messages: List<Any>?) {
+    var Success: Boolean,
+    var Data: List<Any>,
+    var Messages: List<String>) {
 
     override fun toString(): String {
         val gson = Gson();

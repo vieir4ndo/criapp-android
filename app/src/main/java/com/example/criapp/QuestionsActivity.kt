@@ -48,11 +48,11 @@ class QuestionsActivity : AppCompatActivity() {
     }
 
     private fun handleResult(result: ResponseModel?) {
-        if (result == null || !result.success){
-            Toast.makeText(this, "Hubo un error al buscar los niños, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
+        if (result == null || !result.Success){
+            Toast.makeText(this, result!!.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         }
         else {
-            val json = gson.toJson(result!!.data!!.first());
+            val json = gson.toJson(result!!.Data!!.first());
             val data = gson.fromJson(json, Array<ChildModel>::class.java);
 
             children = data;

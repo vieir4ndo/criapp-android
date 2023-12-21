@@ -64,10 +64,10 @@ class AnswerActivity : AppCompatActivity() {
     }
 
     private fun handleResult(result: ResponseModel?) {
-        if (result == null || !result.success) {
+        if (result == null || !result.Success) {
             Toast.makeText(this, "Hubo un error al buscar las preguntas, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
         } else {
-            val json = gson.toJson(result!!.data!!);
+            val json = gson.toJson(result!!.Data!!);
             questions = gson.fromJson(json, Array<QuestionModel>::class.java);
 
             showNextQuestion();
@@ -143,8 +143,8 @@ class AnswerActivity : AppCompatActivity() {
     }
 
     private fun handleResultAnswer(result: ResponseModel?) {
-        if (result == null || !result.success) {
-            Toast.makeText(this, "Hubo un error al responder la pregunta, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
+        if (result == null || !result.Success) {
+            Toast.makeText(this, result!!.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "Respuesta guardada con exito", Toast.LENGTH_SHORT).show()
             if (currentQuestion == questions!!.lastIndex){
