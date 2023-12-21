@@ -23,9 +23,12 @@ class SignInActivity : AppCompatActivity() {
     private var criappClient : CriAppClient? = null;
     private val gson = Gson()
     private var sharedPreferences : SharedPreferences? = null;
+    private var aLoadingDialog : ALoadingDialog? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
+
+        aLoadingDialog = ALoadingDialog(this);
 
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
         criappClient = CriAppClient(sharedPreferences!!)
@@ -49,6 +52,7 @@ class SignInActivity : AppCompatActivity() {
         val editTextPassword = findViewById<EditText>(R.id.edit_text_password);
 
         buttonLoginUser.setOnClickListener {
+            aLoadingDialog!!.show()
             user.username = editTextUsername.text.toString();
             user.password = editTextPassword.text.toString();
 
@@ -71,6 +75,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun handleResult(result: ResponseModel?) {
+        aLoadingDialog!!.cancel()
         if (result != null && !result.Success) {
             Toast.makeText(this, result.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         } else {
