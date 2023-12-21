@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.example.criapp.model.ChildModel
 import com.example.criapp.model.CreateAnswerModel
 import com.example.criapp.model.QuestionModel
@@ -64,7 +65,7 @@ class AnswerActivity : AppCompatActivity() {
 
     private fun handleResult(result: ResponseModel?) {
         if (result == null || !result.success) {
-            //TODO: Adicionar mensagens de erro
+            Toast.makeText(this, "Hubo un error al buscar las preguntas, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
         } else {
             val json = gson.toJson(result!!.data!!);
             questions = gson.fromJson(json, Array<QuestionModel>::class.java);
@@ -143,9 +144,9 @@ class AnswerActivity : AppCompatActivity() {
 
     private fun handleResultAnswer(result: ResponseModel?) {
         if (result == null || !result.success) {
-            //TODO: Adicionar mensagens de erro
+            Toast.makeText(this, "Hubo un error al responder la pregunta, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
         } else {
-
+            Toast.makeText(this, "Respuesta guardada con exito", Toast.LENGTH_SHORT).show()
             if (currentQuestion == questions!!.lastIndex){
                 val nextIntent = Intent(this, QuestionsActivity::class.java);
                 startActivity(nextIntent);

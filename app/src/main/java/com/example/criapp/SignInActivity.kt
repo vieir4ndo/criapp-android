@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.example.criapp.model.LoginUserModel
 import com.example.criapp.model.LoginUserResponse
 import com.example.criapp.model.ResponseModel
@@ -71,9 +72,8 @@ class SignInActivity : AppCompatActivity() {
 
     private fun handleResult(result: ResponseModel?) {
         if (result != null && !result.success) {
-            //TODO: Adicionar mensagens de erro
+            Toast.makeText(this, "Nombre de usuario o contraseña incorrecto, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
         } else {
-
             val json = gson.toJson(result!!.data!!.first());
             val tokenData = gson.fromJson(json, LoginUserResponse::class.java)
 

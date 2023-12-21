@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.criapp.model.ChildModel
 import com.example.criapp.model.ResponseModel
@@ -48,7 +49,7 @@ class QuestionsActivity : AppCompatActivity() {
 
     private fun handleResult(result: ResponseModel?) {
         if (result == null || !result.success){
-            //TODO: Adicionar mensagens de erro
+            Toast.makeText(this, "Hubo un error al buscar los niños, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
         }
         else {
             val json = gson.toJson(result!!.data!!.first());

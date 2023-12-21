@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.example.criapp.databinding.ActivityProfileBinding
 import com.example.criapp.databinding.ActivitySignUpBinding
 import com.example.criapp.model.ChildModel
@@ -61,7 +62,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun handleResultConsultUserAndLoadModel(result: ResponseModel?) {
         if (result == null || !result.success){
-            //TODO: Adicionar mensagens de erro
+            Toast.makeText(this, "Hubo un error al buscar los datas del usuario, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
         }
         else {
             val json = gson.toJson(result!!.data!!.first());
@@ -98,7 +99,7 @@ class ProfileActivity : AppCompatActivity() {
             buttonUpdateUser.setOnClickListener{
                 user.name = editTextName.text.toString();
                 user.birthDate = formatDate(birthDateYear, birthDateMonth, birthDateDay);
-                user.numberOfChildren = editTextNumberOfChildren.text.toString().toInt();
+                user.numberOfChildren = if (editTextNumberOfChildren.text.toString() == "") 0 else editTextNumberOfChildren.text.toString().toInt();
 
                 updateUser()
             }
@@ -243,11 +244,10 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun handleResultUpdateUser(result: ResponseModel?) {
         if (result != null && !result.success){
-            //TODO: Adicionar mensagens de erro
+            Toast.makeText(this, "Hubo un error al realizar la operación, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
         }
         else {
-            val nextActivity = Intent (this, MenuActivity::class.java);
-            startActivity(nextActivity);
+            Toast.makeText(this, "Perfil actualizado con exito", Toast.LENGTH_SHORT).show()
         }
     }
 }

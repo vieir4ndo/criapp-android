@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.example.criapp.model.ResetPasswordModel
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.services.CriAppClient
@@ -23,17 +24,17 @@ class ResetPasswordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reset_password)
 
+        model.username = intent.getStringExtra("username").toString();
+
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
         criappClient = CriAppClient(sharedPreferences!!)
 
         val buttonResetPassword = findViewById<Button>(R.id.button_reset_password);
 
-        val editTextUsername = findViewById<EditText>(R.id.edit_text_username);
         val editTextCode = findViewById<EditText>(R.id.edit_text_code);
         val editTextNewPassword = findViewById<EditText>(R.id.edit_text_new_password);
 
         buttonResetPassword.setOnClickListener {
-            model.username = editTextUsername.text.toString();
             model.newPassword = editTextNewPassword.text.toString();
             model.code = editTextCode.text.toString();
 
@@ -57,10 +58,11 @@ class ResetPasswordActivity : AppCompatActivity() {
 
     private fun handleResult(result: ResponseModel?) {
         if (result != null && !result.success) {
-            //TODO: Adicionar mensagens de erro
+            Toast.makeText(this, "Hubo un error al realizar la operación, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
         } else {
             val openSignInActivity = Intent(this, SignInActivity::class.java);
             startActivity(openSignInActivity);
+            Toast.makeText(this, "Contraseña actualizada con exito", Toast.LENGTH_SHORT).show()
         }
     }
 }

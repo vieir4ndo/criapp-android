@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.example.criapp.databinding.ActivityCreateChildBinding
 import com.example.criapp.model.CreateOrUpdateChildModel
 import com.example.criapp.model.ResponseModel
@@ -48,7 +49,7 @@ class CreateChildActivity : AppCompatActivity() {
         buttonCreateChild.setOnClickListener{
             child.name = editTextName.text.toString();
             child.birthDate = formatDate(birthDateYear, birthDateMonth, birthDateDay);
-            child.monthsOfBreastFeeding = editTextMonthsOfBreastFeeding.text.toString().toInt();
+            child.monthsOfBreastFeeding = if (editTextMonthsOfBreastFeeding.text.toString() == "") 0 else editTextMonthsOfBreastFeeding.text.toString().toInt();
 
             fetchData()
         }
@@ -70,12 +71,12 @@ class CreateChildActivity : AppCompatActivity() {
 
     private fun handleResult(result: ResponseModel?) {
         if (result == null || !result.success){
-            //TODO: Adicionar mensagens de erro
+            Toast.makeText(this, "Hubo un error al crear el/la niño(a), por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
         }
         else {
-
             val nextActivity = Intent (this, ChildActivity::class.java);
             startActivity(nextActivity);
+            Toast.makeText(this, "Niño(a) creado con exito", Toast.LENGTH_SHORT).show()
         }
     }
 
