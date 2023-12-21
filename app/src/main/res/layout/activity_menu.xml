@@ -40,7 +40,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:background="@android:color/transparent"
-                android:src="@drawable/logout" />
+                android:src="@drawable/logout"
+                android:onClick="onButtonLogoffClick"/>
         </LinearLayout>
 
         <LinearLayout

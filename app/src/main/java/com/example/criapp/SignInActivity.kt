@@ -87,4 +87,8 @@ class SignInActivity : AppCompatActivity() {
             startActivity(openWelcomeActivityIntent);
         }
     }
+
+    override fun onBackPressed() {
+        return;
+    }
 }
