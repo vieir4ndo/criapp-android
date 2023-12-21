@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.databinding.ActivitySignUpBinding
 import com.example.criapp.model.CreateUserModel
@@ -57,7 +58,7 @@ class SignUpActivity : AppCompatActivity(){
             user.username = editTextUsername.text.toString();
             user.password = editTextPassword.text.toString();
             user.birthDate = formatDate(birthDateYear, birthDateMonth, birthDateDay);
-            user.numberOfChildren = editTextNumberOfChildren.text.toString().toInt();
+            user.numberOfChildren = if (editTextNumberOfChildren.text.toString() == "") 0 else editTextNumberOfChildren.text.toString().toInt();
 
             fetchData()
         }
@@ -199,7 +200,7 @@ class SignUpActivity : AppCompatActivity(){
 
     private fun handleResult(result: ResponseModel?) {
         if (result != null && !result.success){
-            //TODO: Adicionar mensagens de erro
+            Toast.makeText(this, "Hubo un error al realizar la operación, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
         }
         else {
             val openSignUpSuccessActivityIntent = Intent (this, SignUpSuccessActivity::class.java);
