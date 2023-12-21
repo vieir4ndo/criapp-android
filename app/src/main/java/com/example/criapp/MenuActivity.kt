@@ -1,5 +1,6 @@
 package com.example.criapp
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,6 +24,17 @@ class MenuActivity : AppCompatActivity() {
 
     fun onButtonChildQuestions(view: View?) {
         val nextIntent = Intent(this, QuestionsActivity::class.java);
+        startActivity(nextIntent);
+    }
+
+    fun onButtonLogoffClick(view: View?) {
+        val sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
+
+        val editor = sharedPreferences.edit()
+
+        editor.clear();
+
+        val nextIntent = Intent(this, SignInActivity::class.java);
         startActivity(nextIntent);
     }
 }
