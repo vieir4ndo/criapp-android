@@ -1,7 +1,6 @@
 package com.example.criapp
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,11 +8,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.criapp.databinding.ActivityProfileBinding
-import com.example.criapp.databinding.ActivitySignUpBinding
-import com.example.criapp.model.ChildModel
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.model.UpdateUserModel
 import com.example.criapp.model.UserModel
@@ -61,11 +57,11 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun handleResultConsultUserAndLoadModel(result: ResponseModel?) {
-        if (result == null || !result.success){
-            Toast.makeText(this, "Hubo un error al buscar los datas del usuario, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
+        if (result == null || !result.Success){
+            Toast.makeText(this, result!!.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         }
         else {
-            val json = gson.toJson(result!!.data!!.first());
+            val json = gson.toJson(result!!.Data!!.first());
             val data = gson.fromJson(json, UserModel::class.java);
 
             user.name = data.name;
@@ -243,8 +239,8 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun handleResultUpdateUser(result: ResponseModel?) {
-        if (result != null && !result.success){
-            Toast.makeText(this, "Hubo un error al realizar la operación, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
+        if (result != null && !result.Success){
+            Toast.makeText(this, result!!.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         }
         else {
             Toast.makeText(this, "Perfil actualizado con exito", Toast.LENGTH_SHORT).show()

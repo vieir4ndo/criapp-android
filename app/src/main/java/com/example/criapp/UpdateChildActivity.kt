@@ -87,8 +87,8 @@ class UpdateChildActivity : AppCompatActivity() {
     }
 
     private fun handleResult(result: ResponseModel?) {
-        if (result == null || !result.success){
-            Toast.makeText(this, "Hubo un error al realizar la operación, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
+        if (result == null || !result.Success){
+            Toast.makeText(this, result!!.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         }
         else {
             val nextActivity = Intent (this, ChildActivity::class.java)

@@ -71,10 +71,10 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun handleResult(result: ResponseModel?) {
-        if (result != null && !result.success) {
-            Toast.makeText(this, "Nombre de usuario o contraseña incorrecto, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
+        if (result != null && !result.Success) {
+            Toast.makeText(this, result.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         } else {
-            val json = gson.toJson(result!!.data!!.first());
+            val json = gson.toJson(result!!.Data!!.first());
             val tokenData = gson.fromJson(json, LoginUserResponse::class.java)
 
             val editor = sharedPreferences!!.edit()
