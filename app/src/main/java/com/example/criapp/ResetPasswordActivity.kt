@@ -20,9 +20,12 @@ class ResetPasswordActivity : AppCompatActivity() {
     private var model = ResetPasswordModel();
     private var criappClient : CriAppClient? = null;
     private var sharedPreferences : SharedPreferences? = null;
+    private var aLoadingDialog : ALoadingDialog? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reset_password)
+
+        aLoadingDialog = ALoadingDialog(this);
 
         model.username = intent.getStringExtra("username").toString();
 
@@ -35,6 +38,7 @@ class ResetPasswordActivity : AppCompatActivity() {
         val editTextNewPassword = findViewById<EditText>(R.id.edit_text_new_password);
 
         buttonResetPassword.setOnClickListener {
+            aLoadingDialog!!.show()
             model.newPassword = editTextNewPassword.text.toString();
             model.code = editTextCode.text.toString();
 
@@ -57,8 +61,9 @@ class ResetPasswordActivity : AppCompatActivity() {
     }
 
     private fun handleResult(result: ResponseModel?) {
-        if (result != null && !result.Success) {
-            Toast.makeText(this, result!!.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
+        aLoadingDialog!!.cancel()
+        if (result != null && !result.success) {
+            Toast.makeText(this, result!!.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         } else {
             val openSignInActivity = Intent(this, SignInActivity::class.java);
             startActivity(openSignInActivity);

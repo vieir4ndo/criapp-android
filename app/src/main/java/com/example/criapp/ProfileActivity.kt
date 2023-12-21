@@ -32,17 +32,22 @@ class ProfileActivity : AppCompatActivity() {
     private var birthDateMonth = 0;
     private var birthDateYear = 0;
     private val monthsOfTheYear = Arrays.asList("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Deciembre")
+    private var aLoadingDialog : ALoadingDialog? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityProfileBinding.inflate(layoutInflater);
         setContentView(mBinding.root)
+
+        aLoadingDialog = ALoadingDialog(this);
+
         criAppClient = CriAppClient(getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE));
 
         consultUserAndLoadModel();
     }
 
     private fun consultUserAndLoadModel() {
+        aLoadingDialog!!.show()
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
@@ -57,11 +62,12 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun handleResultConsultUserAndLoadModel(result: ResponseModel?) {
-        if (result == null || !result.Success){
-            Toast.makeText(this, result!!.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
+        aLoadingDialog!!.cancel()
+        if (result == null || !result.success){
+            Toast.makeText(this, result!!.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         }
         else {
-            val json = gson.toJson(result!!.Data!!.first());
+            val json = gson.toJson(result!!.data!!.first());
             val data = gson.fromJson(json, UserModel::class.java);
 
             user.name = data.name;
@@ -93,6 +99,7 @@ class ProfileActivity : AppCompatActivity() {
             editTextNumberOfChildren.setText(user.numberOfChildren.toString());
 
             buttonUpdateUser.setOnClickListener{
+                aLoadingDialog!!.show()
                 user.name = editTextName.text.toString();
                 user.birthDate = formatDate(birthDateYear, birthDateMonth, birthDateDay);
                 user.numberOfChildren = if (editTextNumberOfChildren.text.toString() == "") 0 else editTextNumberOfChildren.text.toString().toInt();
@@ -239,8 +246,9 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun handleResultUpdateUser(result: ResponseModel?) {
-        if (result != null && !result.Success){
-            Toast.makeText(this, result!!.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
+        aLoadingDialog!!.cancel()
+        if (result != null && !result.success){
+            Toast.makeText(this, result!!.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         }
         else {
             Toast.makeText(this, "Perfil actualizado con exito", Toast.LENGTH_SHORT).show()

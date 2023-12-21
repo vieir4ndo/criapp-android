@@ -20,10 +20,12 @@ class ForgotPasswordActivity : AppCompatActivity() {
     private var model = ForgotPasswordModel();
     private var criappClient : CriAppClient? = null;
     private var sharedPreferences : SharedPreferences? = null;
-
+    private var aLoadingDialog : ALoadingDialog? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password)
+
+        aLoadingDialog = ALoadingDialog(this);
 
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
         criappClient = CriAppClient(sharedPreferences!!)
@@ -33,6 +35,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         val editTextUsername = findViewById<EditText>(R.id.edit_text_username);
 
         buttonForgotPassword.setOnClickListener {
+            aLoadingDialog!!.show()
             model.username = editTextUsername.text.toString();
 
             fetchData()
@@ -54,8 +57,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
     }
 
     private fun handleResult(result: ResponseModel?) {
-        if (result != null && !result.Success) {
-            Toast.makeText(this, result!!.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
+        aLoadingDialog!!.cancel()
+        if (result != null && !result.success) {
+            Toast.makeText(this, result!!.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         } else {
             val openResetPasswordActivityIntent = Intent(this, ResetPasswordActivity::class.java);
             openResetPasswordActivityIntent.putExtra("username", model.username)
