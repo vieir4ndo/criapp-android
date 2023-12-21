@@ -31,9 +31,13 @@ class AnswerActivity : AppCompatActivity() {
     private var questions : Array<QuestionModel>? = null;
     private var currentQuestion = -1;
     private var value : Int = 3;
+    private var aLoadingDialog : ALoadingDialog? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_answer)
+
+        aLoadingDialog = ALoadingDialog(this);
+        aLoadingDialog!!.show()
 
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE);
 
@@ -64,10 +68,11 @@ class AnswerActivity : AppCompatActivity() {
     }
 
     private fun handleResult(result: ResponseModel?) {
-        if (result == null || !result.Success) {
+        aLoadingDialog!!.cancel()
+        if (result == null || !result.success) {
             Toast.makeText(this, "Hubo un error al buscar las preguntas, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
         } else {
-            val json = gson.toJson(result!!.Data!!);
+            val json = gson.toJson(result!!.data!!);
             questions = gson.fromJson(json, Array<QuestionModel>::class.java);
 
             showNextQuestion();
@@ -127,6 +132,7 @@ class AnswerActivity : AppCompatActivity() {
     }
 
     private fun registerAnswer(){
+        aLoadingDialog!!.show()
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
@@ -143,8 +149,9 @@ class AnswerActivity : AppCompatActivity() {
     }
 
     private fun handleResultAnswer(result: ResponseModel?) {
-        if (result == null || !result.Success) {
-            Toast.makeText(this, result!!.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
+        aLoadingDialog!!.cancel()
+        if (result == null || !result.success) {
+            Toast.makeText(this, result!!.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "Respuesta guardada con exito", Toast.LENGTH_SHORT).show()
             if (currentQuestion == questions!!.lastIndex){

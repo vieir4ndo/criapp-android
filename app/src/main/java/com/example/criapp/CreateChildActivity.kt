@@ -28,11 +28,14 @@ class CreateChildActivity : AppCompatActivity() {
     private var birthDateYear = 0;
     private val monthsOfTheYear = Arrays.asList("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Deciembre");
     private var child = CreateOrUpdateChildModel();
+    private var aLoadingDialog : ALoadingDialog? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityCreateChildBinding.inflate(layoutInflater);
         setContentView(mBinding.root);
+
+        aLoadingDialog = ALoadingDialog(this);
 
         this.criappClient = CriAppClient(getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE));
 
@@ -47,6 +50,7 @@ class CreateChildActivity : AppCompatActivity() {
         val editTextMonthsOfBreastFeeding = findViewById<EditText>(R.id.edit_text_months_of_breast_feeding);
 
         buttonCreateChild.setOnClickListener{
+            aLoadingDialog!!.show()
             child.name = editTextName.text.toString();
             child.birthDate = formatDate(birthDateYear, birthDateMonth, birthDateDay);
             child.monthsOfBreastFeeding = if (editTextMonthsOfBreastFeeding.text.toString() == "") 0 else editTextMonthsOfBreastFeeding.text.toString().toInt();
@@ -70,8 +74,9 @@ class CreateChildActivity : AppCompatActivity() {
     }
 
     private fun handleResult(result: ResponseModel?) {
-        if (result == null || !result.Success){
-            Toast.makeText(this, result!!.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
+        aLoadingDialog!!.cancel()
+        if (result == null || !result.success){
+            Toast.makeText(this, result!!.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         }
         else {
             val nextActivity = Intent (this, ChildActivity::class.java);

@@ -25,11 +25,13 @@ class QuestionsActivity : AppCompatActivity() {
     private var children : Array<ChildModel>? = null;
     private var criAppClient : CriAppClient? = null;
     private val gson = Gson();
-
+    private var aLoadingDialog : ALoadingDialog? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questions)
+        aLoadingDialog = ALoadingDialog(this);
         criAppClient = CriAppClient(getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE));
+        aLoadingDialog!!.show()
         fetchData();
     }
 
@@ -48,11 +50,12 @@ class QuestionsActivity : AppCompatActivity() {
     }
 
     private fun handleResult(result: ResponseModel?) {
-        if (result == null || !result.Success){
-            Toast.makeText(this, result!!.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
+        aLoadingDialog!!.cancel()
+        if (result == null || !result.success){
+            Toast.makeText(this, result!!.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         }
         else {
-            val json = gson.toJson(result!!.Data!!.first());
+            val json = gson.toJson(result!!.data!!.first());
             val data = gson.fromJson(json, Array<ChildModel>::class.java);
 
             children = data;

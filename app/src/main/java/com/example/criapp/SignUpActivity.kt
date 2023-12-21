@@ -31,11 +31,13 @@ class SignUpActivity : AppCompatActivity(){
     private var birthDateMonth = 0;
     private var birthDateYear = 0;
     private val monthsOfTheYear = Arrays.asList("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Deciembre");
-
+    private var aLoadingDialog : ALoadingDialog? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         mBinding = ActivitySignUpBinding.inflate(layoutInflater);
         setContentView(mBinding.root);
+
+        aLoadingDialog = ALoadingDialog(this);
 
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
         criappClient = CriAppClient(sharedPreferences!!)
@@ -54,6 +56,7 @@ class SignUpActivity : AppCompatActivity(){
         val editTextPassword = findViewById<EditText>(R.id.edit_text_password);
 
         buttonCreateUser.setOnClickListener{
+            aLoadingDialog!!.show()
             user.name = editTextName.text.toString();
             user.username = editTextUsername.text.toString();
             user.password = editTextPassword.text.toString();
@@ -199,8 +202,9 @@ class SignUpActivity : AppCompatActivity(){
     }
 
     private fun handleResult(result: ResponseModel?) {
-        if (result != null && !result.Success){
-            Toast.makeText(this, result.Messages.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
+        aLoadingDialog!!.cancel()
+        if (result != null && !result.success){
+            Toast.makeText(this, result.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
         }
         else {
             val openSignUpSuccessActivityIntent = Intent (this, SignUpSuccessActivity::class.java);
