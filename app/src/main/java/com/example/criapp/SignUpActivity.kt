@@ -9,12 +9,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.databinding.ActivitySignUpBinding
 import com.example.criapp.model.CreateUserModel
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.services.CriAppClient
+import com.example.criapp.services.SpinnerFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -25,6 +27,7 @@ import java.util.Arrays
 class SignUpActivity : AppCompatActivity(){
     private lateinit var mBinding: ActivitySignUpBinding;
     private var criappClient : CriAppClient? = null;
+    private var spinnerFactory : SpinnerFactory = SpinnerFactory();
     private var sharedPreferences : SharedPreferences? = null;
     private var user = CreateUserModel();
     private var birthDateDay = 0;
@@ -76,21 +79,11 @@ class SignUpActivity : AppCompatActivity(){
     }
 
     private fun configSexSpinner(){
-        val aaSex= ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
-
-        aaSex.addAll(Arrays.asList("Seleccionar", "Hombre", "Mujer", "Otro"));
-
-        mBinding.spinnerSex.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                user.sex = position;
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                user.sex = 0;
-            }
-
-        };
-        mBinding.spinnerSex.adapter = aaSex;
+        spinnerFactory.configSpinner(this,
+            mBinding.spinnerSex,
+            listOf("Seleccionar", "Hombre", "Mujer", "Otro"),
+            { position : Int -> user.sex = position },
+            { -> user.sex = 0 })
     }
 
     private fun configEducationalLevelSpinner(){
