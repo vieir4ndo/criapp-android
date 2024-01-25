@@ -53,7 +53,7 @@ class CreateChildActivity : AppCompatActivity() {
         buttonCreateChild.setOnClickListener{
             aLoadingDialog!!.show()
             child.name = editTextName.text.toString();
-            child.birthDate = DateHelper.formatDate(birthDateYear, birthDateMonth, birthDateDay);
+            child.birthDate = DateHelper.formatDateYYYYMMDD(birthDateYear, birthDateMonth, birthDateDay);
             child.monthsOfBreastFeeding = if (editTextMonthsOfBreastFeeding.text.toString() == "") 0 else editTextMonthsOfBreastFeeding.text.toString().toInt();
 
             fetchData()

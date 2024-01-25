@@ -70,7 +70,7 @@ class UpdateChildActivity : AppCompatActivity() {
         buttonUpdateChild.setOnClickListener{
             aLoadingDialog!!.show()
             model.name = editTextName.text.toString()
-            model.birthDate = DateHelper.formatDate(birthDateYear, birthDateMonth, birthDateDay)
+            model.birthDate = DateHelper.formatDateYYYYMMDD(birthDateYear, birthDateMonth, birthDateDay)
             model.monthsOfBreastFeeding = if (editTextMonthsOfBreastFeeding.text.toString() == "") 0 else editTextMonthsOfBreastFeeding.text.toString().toInt()
 
             fetchData()

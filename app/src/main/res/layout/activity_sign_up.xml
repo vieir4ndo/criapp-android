@@ -71,29 +71,14 @@
                 android:text="@string/birth_date"
                 android:textColor="@color/white"/>
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/edit_text_birth_date"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <Spinner
-                    android:id="@+id/spinner_birth_date_day"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"/>
-                <Spinner
-                    android:id="@+id/spinner_birth_date_month"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"/>
-                <Spinner
-                    android:id="@+id/spinner_birth_date_year"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"/>
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:clickable="false"
+                android:focusable="false"
+                android:onClick="showDatePickerForBirthDate"/>
 
             <TextView
                 android:id="@+id/label_spinner_sex"
