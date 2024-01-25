@@ -9,14 +9,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.databinding.ActivitySignUpBinding
 import com.example.criapp.model.CreateUserModel
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.services.CriAppClient
-import com.example.criapp.services.SpinnerFactory
+import com.example.criapp.factories.SpinnerFactory
+import com.example.criapp.helpers.DateHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -60,19 +60,11 @@ class SignUpActivity : AppCompatActivity(){
             user.name = editTextName.text.toString();
             user.username = editTextUsername.text.toString();
             user.password = editTextPassword.text.toString();
-            user.birthDate = formatDate(birthDateYear, birthDateMonth, birthDateDay);
+            user.birthDate = DateHelper.formatDate(birthDateYear, birthDateMonth, birthDateDay);
             user.numberOfChildren = if (editTextNumberOfChildren.text.toString() == "") 0 else editTextNumberOfChildren.text.toString().toInt();
 
             fetchData()
         }
-    }
-
-    fun formatDate(ano: Int, mes: Int, dia: Int): String {
-        return "$ano-${formatNumber(mes)}-${formatNumber(dia)}"
-    }
-
-    fun formatNumber(numero: Int): String {
-        return if (numero < 10) "0$numero" else numero.toString()
     }
 
     private fun configSpinners(){

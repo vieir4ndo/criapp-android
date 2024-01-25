@@ -10,6 +10,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.criapp.databinding.ActivityProfileBinding
+import com.example.criapp.factories.SpinnerFactory
+import com.example.criapp.helpers.DateHelper
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.model.UpdateUserModel
 import com.example.criapp.model.UserModel
@@ -84,9 +86,7 @@ class ProfileActivity : AppCompatActivity() {
             user.educationalLevel = data.educationalLevel;
             user.numberOfChildren = data.educationalLevel;
 
-            configSexSpinner();
-            configEducationalLevelSpinner();
-            configFamilyTypeSpinner();
+            configSpinners();
             configBirthDateDaySpinner();
             configBirthDateMonthSpinner();
             configBirthDateYearSpinner()
@@ -101,7 +101,7 @@ class ProfileActivity : AppCompatActivity() {
             buttonUpdateUser.setOnClickListener{
                 aLoadingDialog!!.show()
                 user.name = editTextName.text.toString();
-                user.birthDate = formatDate(birthDateYear, birthDateMonth, birthDateDay);
+                user.birthDate = DateHelper.formatDate(birthDateYear, birthDateMonth, birthDateDay);
                 user.numberOfChildren = if (editTextNumberOfChildren.text.toString() == "") 0 else editTextNumberOfChildren.text.toString().toInt();
 
                 updateUser()
@@ -109,71 +109,23 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    fun formatDate(ano: Int, mes: Int, dia: Int): String {
-        return "$ano-${formatNumber(mes)}-${formatNumber(dia)}"
-    }
-
-    fun formatNumber(numero: Int): String {
-        return if (numero < 10) "0$numero" else numero.toString()
-    }
-
-    private fun configSexSpinner(){
-        val aaSex= ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
-
-        aaSex.addAll(Arrays.asList("Seleccionar", "Hombre", "Mujer", "Otro"));
-
-        mBinding.spinnerSex.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                user.sex = position;
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-
-        };
-        mBinding.spinnerSex.adapter = aaSex;
+    private fun configSpinners(){
+        SpinnerFactory.configSpinner(this,
+            mBinding.spinnerSex,
+            SpinnerFactory.sexOptions,
+            { position : Int -> user.sex = position })
         mBinding.spinnerSex.setSelection(user.sex)
-    }
 
-    private fun configEducationalLevelSpinner(){
-        val aaEducationalLevel= ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
-
-        aaEducationalLevel.addAll(Arrays.asList("Seleccionar", "Sin estudios", "Primaria/ESO", "Bachillerato", "Formación profesional", "Estudios universitarios"));
-
-        mBinding.spinnerEducationalLevel.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                user.educationalLevel = position;
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-
-        };
-        mBinding.spinnerEducationalLevel.adapter = aaEducationalLevel;
+        SpinnerFactory.configSpinner(this,
+            mBinding.spinnerEducationalLevel,
+            SpinnerFactory.educationalLevelOptions,
+            { position : Int -> user.educationalLevel = position })
         mBinding.spinnerEducationalLevel.setSelection(user.educationalLevel)
-    }
 
-    private fun configFamilyTypeSpinner(){
-        val aaFamilyType= ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
-
-        aaFamilyType.addAll(
-            Arrays.asList("Seleccionar",
-            "Monoparental femenina (mujer sola con niñas o niños a cargo)",
-            "Monoparental masculina (hombre sólo con niñas o niños a cargo)",
-            "Pareja de hombre y mujer con niñas o niños a cargo",
-            "Pareja de hombre y hombre con niñas o niños a cargo",
-            "Pareja de mujer y mujer con niñas o niños a cargo"));
-
-        mBinding.spinnerFamilyType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                user.familyType = position;
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-
-        };
-        mBinding.spinnerFamilyType.adapter = aaFamilyType;
+        SpinnerFactory.configSpinner(this,
+            mBinding.spinnerFamilyType,
+            SpinnerFactory.familyTypeOptions,
+            { position:Int -> user.familyType = position })
         mBinding.spinnerFamilyType.setSelection(user.familyType)
     }
 
