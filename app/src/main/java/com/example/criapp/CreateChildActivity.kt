@@ -11,6 +11,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.criapp.databinding.ActivityCreateChildBinding
+import com.example.criapp.factories.SpinnerFactory
+import com.example.criapp.helpers.DateHelper
 import com.example.criapp.model.CreateOrUpdateChildModel
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.services.CriAppClient
@@ -39,8 +41,7 @@ class CreateChildActivity : AppCompatActivity() {
 
         this.criappClient = CriAppClient(getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE));
 
-        configSexSpinner();
-        configPrematureSpinner();
+        configSpinners();
         configBirthDateDaySpinner();
         configBirthDateMonthSpinner();
         configBirthDateYearSpinner();
@@ -52,7 +53,7 @@ class CreateChildActivity : AppCompatActivity() {
         buttonCreateChild.setOnClickListener{
             aLoadingDialog!!.show()
             child.name = editTextName.text.toString();
-            child.birthDate = formatDate(birthDateYear, birthDateMonth, birthDateDay);
+            child.birthDate = DateHelper.formatDate(birthDateYear, birthDateMonth, birthDateDay);
             child.monthsOfBreastFeeding = if (editTextMonthsOfBreastFeeding.text.toString() == "") 0 else editTextMonthsOfBreastFeeding.text.toString().toInt();
 
             fetchData()
@@ -85,55 +86,25 @@ class CreateChildActivity : AppCompatActivity() {
         }
     }
 
-    fun formatDate(ano: Int, mes: Int, dia: Int): String {
-        return "$ano-${formatNumber(mes)}-${formatNumber(dia)}"
-    }
+    private fun configSpinners(){
+        SpinnerFactory.configSpinner(this,
+            mBinding.spinnerSex,
+            SpinnerFactory.sexOptions,
+            { position : Int -> child.sex = position },
+            { child.sex = 0 })
 
-    fun formatNumber(numero: Int): String {
-        return if (numero < 10) "0$numero" else numero.toString()
-    }
-
-
-    private fun configPrematureSpinner(){
-        val aaPremature= ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
-
-        aaPremature.addAll(Arrays.asList("Seleccionar", "Sí", "No"));
-
-        mBinding.spinnerPremature.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-
-                when (position) {
-                    1 -> child.isPremature = true
-                    2 -> child.isPremature = false
-                    else -> {
-                        child.isPremature = null;
-                    }
+        SpinnerFactory.configSpinner(this,
+            mBinding.spinnerPremature,
+            SpinnerFactory.yesOrNoOptions,
+            { position : Int -> when (position) {
+                1 -> child.isPremature = true
+                2 -> child.isPremature = false
+                else -> {
+                    child.isPremature = null;
                 }
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                child.isPremature = false;
-            }
-        };
-        mBinding.spinnerPremature.adapter = aaPremature;
-    }
-
-    private fun configSexSpinner(){
-        val aaSex= ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
-
-        aaSex.addAll(Arrays.asList("Seleccionar", "Hombre", "Mujer", "Otro"));
-
-        mBinding.spinnerSex.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                child.sex = position;
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                child.sex = 0;
-            }
-
-        };
-        mBinding.spinnerSex.adapter = aaSex;
+            }},
+            { child.isPremature = false }
+        )
     }
 
     private fun configBirthDateDaySpinner(){

@@ -1,4 +1,4 @@
-package com.example.criapp.services
+package com.example.criapp.factories
 
 import android.content.Context
 import android.view.View
@@ -17,13 +17,14 @@ class SpinnerFactory {
             "Pareja de hombre y mujer con niñas o niños a cargo",
             "Pareja de hombre y hombre con niñas o niños a cargo",
             "Pareja de mujer y mujer con niñas o niños a cargo");
+        val yesOrNoOptions = listOf("Seleccionar", "Sí", "No");
 
         fun configSpinner(
             context: Context,
             spinner: Spinner,
             options: List<String>,
             onSelected: (Int) -> Unit,
-            onNothingSelected: () -> Unit
+            onNothingSelected: (() -> Unit)? = null
         ) {
             val arrayAdapter = ArrayAdapter<String>(
                 context,
@@ -42,7 +43,7 @@ class SpinnerFactory {
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    onNothingSelected()
+                    if (onNothingSelected != null) onNothingSelected()
                 }
             }
 

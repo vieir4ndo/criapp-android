@@ -12,6 +12,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.criapp.databinding.ActivityUpdateChildBinding
+import com.example.criapp.factories.SpinnerFactory
+import com.example.criapp.helpers.DateHelper
 import com.example.criapp.model.ChildModel
 import com.example.criapp.model.CreateOrUpdateChildModel
 import com.example.criapp.model.ResponseModel
@@ -53,8 +55,7 @@ class UpdateChildActivity : AppCompatActivity() {
         birthDateMonth = date.monthValue
         birthDateYear = date.year
 
-        configSexSpinner()
-        configPrematureSpinner()
+        configSpinners();
         configBirthDateDaySpinner()
         configBirthDateMonthSpinner()
         configBirthDateYearSpinner()
@@ -69,7 +70,7 @@ class UpdateChildActivity : AppCompatActivity() {
         buttonUpdateChild.setOnClickListener{
             aLoadingDialog!!.show()
             model.name = editTextName.text.toString()
-            model.birthDate = formatDate(birthDateYear, birthDateMonth, birthDateDay)
+            model.birthDate = DateHelper.formatDate(birthDateYear, birthDateMonth, birthDateDay)
             model.monthsOfBreastFeeding = if (editTextMonthsOfBreastFeeding.text.toString() == "") 0 else editTextMonthsOfBreastFeeding.text.toString().toInt()
 
             fetchData()
@@ -102,57 +103,27 @@ class UpdateChildActivity : AppCompatActivity() {
         }
     }
 
-    fun formatDate(ano: Int, mes: Int, dia: Int): String {
-        return "$ano-${formatNumber(mes)}-${formatNumber(dia)}"
-    }
-
-    fun formatNumber(numero: Int): String {
-        return if (numero < 10) "0$numero" else numero.toString()
-    }
-
-
-    private fun configPrematureSpinner(){
-        val aaPremature= ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item)
-
-        aaPremature.addAll(Arrays.asList("Seleccionar", "Sí", "No"))
-
-        mBinding.spinnerPremature.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-
-                when (position) {
-                    1 -> model.isPremature = true
-                    2 -> model.isPremature = false
-                    else -> {
-                        model.isPremature = null
-                    }
-                }
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                model.isPremature = child!!.isPremature
-            }
-        }
-        mBinding.spinnerPremature.adapter = aaPremature
-        mBinding.spinnerPremature.setSelection(if (child!!.isPremature)  1 else 2)
-    }
-
-    private fun configSexSpinner(){
-        val aaSex= ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item)
-
-        aaSex.addAll(Arrays.asList("Seleccionar", "Hombre", "Mujer", "Otro"))
-
-        mBinding.spinnerSex.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                model.sex = position
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                model.sex = child!!.sex
-            }
-
-        }
-        mBinding.spinnerSex.adapter = aaSex
+    private fun configSpinners(){
+        SpinnerFactory.configSpinner(this,
+            mBinding.spinnerSex,
+            SpinnerFactory.sexOptions,
+            { position : Int -> model.sex = position },
+            { model.sex = child!!.sex })
         mBinding.spinnerSex.setSelection(child!!.sex)
+
+        SpinnerFactory.configSpinner(this,
+            mBinding.spinnerPremature,
+            SpinnerFactory.yesOrNoOptions,
+            { position : Int -> when (position) {
+                1 -> model.isPremature = true
+                2 -> model.isPremature = false
+                else -> {
+                    model.isPremature = null;
+                }
+            }},
+            { model.isPremature = child!!.isPremature }
+        )
+        mBinding.spinnerPremature.setSelection(if (child!!.isPremature)  1 else 2)
     }
 
     private fun configBirthDateDaySpinner(){
