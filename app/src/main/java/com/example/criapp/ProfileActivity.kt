@@ -101,7 +101,7 @@ class ProfileActivity : AppCompatActivity() {
             buttonUpdateUser.setOnClickListener{
                 aLoadingDialog!!.show()
                 user.name = editTextName.text.toString();
-                user.birthDate = DateHelper.formatDate(birthDateYear, birthDateMonth, birthDateDay);
+                user.birthDate = DateHelper.formatDateYYYYMMDD(birthDateYear, birthDateMonth, birthDateDay);
                 user.numberOfChildren = if (editTextNumberOfChildren.text.toString() == "") 0 else editTextNumberOfChildren.text.toString().toInt();
 
                 updateUser()

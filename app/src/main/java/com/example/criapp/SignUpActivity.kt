@@ -5,8 +5,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -21,7 +19,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.util.Arrays
 
 
 class SignUpActivity : AppCompatActivity(){
@@ -32,8 +29,8 @@ class SignUpActivity : AppCompatActivity(){
     private var birthDateDay = 0;
     private var birthDateMonth = 0;
     private var birthDateYear = 0;
-    private val monthsOfTheYear = Arrays.asList("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Deciembre");
     private var aLoadingDialog : ALoadingDialog? = null;
+    private var editTextBirthDate : EditText? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         mBinding = ActivitySignUpBinding.inflate(layoutInflater);
@@ -45,10 +42,8 @@ class SignUpActivity : AppCompatActivity(){
         criappClient = CriAppClient(sharedPreferences!!)
 
         configSpinners();
-        configBirthDateDaySpinner();
-        configBirthDateMonthSpinner();
-        configBirthDateYearSpinner()
 
+        editTextBirthDate = findViewById<EditText>(R.id.edit_text_birth_date);
         val buttonCreateUser = findViewById<Button>(R.id.button_create_user);
         val editTextName = findViewById<EditText>(R.id.edit_text_name);
         val editTextUsername = findViewById<EditText>(R.id.edit_text_create_username);
@@ -60,7 +55,7 @@ class SignUpActivity : AppCompatActivity(){
             user.name = editTextName.text.toString();
             user.username = editTextUsername.text.toString();
             user.password = editTextPassword.text.toString();
-            user.birthDate = DateHelper.formatDate(birthDateYear, birthDateMonth, birthDateDay);
+            user.birthDate = DateHelper.formatDateYYYYMMDD(birthDateYear, birthDateMonth, birthDateDay);
             user.numberOfChildren = if (editTextNumberOfChildren.text.toString() == "") 0 else editTextNumberOfChildren.text.toString().toInt();
 
             fetchData()
@@ -88,59 +83,17 @@ class SignUpActivity : AppCompatActivity(){
         )
     }
 
-    private fun configBirthDateDaySpinner(){
-        val aaBirthDateDay = ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
-        for (i in 1..31){
-            aaBirthDateDay.add(i.toString());
+    fun showDatePickerForBirthDate(view : View){
+        val datePicker = DatePickerFragment { day: Int, month: Int, year: Int ->
+            birthDateDay = day;
+            birthDateMonth = month + 1;
+            birthDateYear = year;
+            editTextBirthDate!!.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
         }
-        mBinding.spinnerBirthDateDay.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                birthDateDay = position + 1
-            }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                birthDateDay = 0;
-            }
-
-        };
-        mBinding.spinnerBirthDateDay.adapter = aaBirthDateDay;
+        datePicker.show(supportFragmentManager, "datePicker")
     }
 
-    private fun configBirthDateMonthSpinner(){
-        val aaBirthDateMonth = ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
-
-        aaBirthDateMonth.addAll(monthsOfTheYear);
-
-        mBinding.spinnerBirthDateMonth.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                birthDateMonth = position + 1
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                birthDateMonth = 0;
-            }
-
-        };
-        mBinding.spinnerBirthDateMonth.adapter = aaBirthDateMonth;
-    }
-
-    private fun configBirthDateYearSpinner(){
-        val aaBirthDateYear = ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
-        for (i in 1900..2100){
-            aaBirthDateYear.add(i.toString());
-        }
-        mBinding.spinnerBirthDateYear.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                birthDateYear = 1900 + position
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                birthDateYear = 0;
-            }
-
-        };
-        mBinding.spinnerBirthDateYear.adapter = aaBirthDateYear;
-    }
     private fun fetchData() {
         val scope = CoroutineScope(Dispatchers.Main)
 
