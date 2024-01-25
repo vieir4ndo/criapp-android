@@ -27,7 +27,6 @@ import java.util.Arrays
 class SignUpActivity : AppCompatActivity(){
     private lateinit var mBinding: ActivitySignUpBinding;
     private var criappClient : CriAppClient? = null;
-    private var spinnerFactory : SpinnerFactory = SpinnerFactory();
     private var sharedPreferences : SharedPreferences? = null;
     private var user = CreateUserModel();
     private var birthDateDay = 0;
@@ -45,9 +44,7 @@ class SignUpActivity : AppCompatActivity(){
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
         criappClient = CriAppClient(sharedPreferences!!)
 
-        configSexSpinner();
-        configEducationalLevelSpinner();
-        configFamilyTypeSpinner();
+        configSpinners();
         configBirthDateDaySpinner();
         configBirthDateMonthSpinner();
         configBirthDateYearSpinner()
@@ -78,53 +75,25 @@ class SignUpActivity : AppCompatActivity(){
         return if (numero < 10) "0$numero" else numero.toString()
     }
 
-    private fun configSexSpinner(){
-        spinnerFactory.configSpinner(this,
+    private fun configSpinners(){
+        SpinnerFactory.configSpinner(this,
             mBinding.spinnerSex,
-            listOf("Seleccionar", "Hombre", "Mujer", "Otro"),
+            SpinnerFactory.sexOptions,
             { position : Int -> user.sex = position },
-            { -> user.sex = 0 })
-    }
+            { user.sex = 0 })
 
-    private fun configEducationalLevelSpinner(){
-        val aaEducationalLevel= ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
+        SpinnerFactory.configSpinner(this,
+            mBinding.spinnerEducationalLevel,
+            SpinnerFactory.educationalLevelOptions,
+            { position : Int -> user.educationalLevel = position },
+            { user.educationalLevel = 0 })
 
-        aaEducationalLevel.addAll(Arrays.asList("Seleccionar", "Sin estudios", "Primaria/ESO", "Bachillerato", "Formación profesional", "Estudios universitarios"));
-
-        mBinding.spinnerEducationalLevel.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                user.educationalLevel = position;
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                user.educationalLevel = 0;
-            }
-
-        };
-        mBinding.spinnerEducationalLevel.adapter = aaEducationalLevel;
-    }
-
-    private fun configFamilyTypeSpinner(){
-        val aaFamilyType= ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
-
-        aaFamilyType.addAll(Arrays.asList("Seleccionar",
-            "Monoparental femenina (mujer sola con niñas o niños a cargo)",
-            "Monoparental masculina (hombre sólo con niñas o niños a cargo)",
-            "Pareja de hombre y mujer con niñas o niños a cargo",
-            "Pareja de hombre y hombre con niñas o niños a cargo",
-            "Pareja de mujer y mujer con niñas o niños a cargo"));
-
-        mBinding.spinnerFamilyType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                user.familyType = position;
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                user.familyType = 0;
-            }
-
-        };
-        mBinding.spinnerFamilyType.adapter = aaFamilyType;
+        SpinnerFactory.configSpinner(this,
+            mBinding.spinnerFamilyType,
+            SpinnerFactory.familyTypeOptions,
+            { position:Int -> user.familyType = position },
+            { user.familyType = 0 }
+        )
     }
 
     private fun configBirthDateDaySpinner(){

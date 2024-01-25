@@ -7,20 +7,46 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 
 class SpinnerFactory {
-    fun configSpinner(context: Context, spinner: Spinner, options: List<String>, onSelected : (Int) -> Unit, onNothingSelected: () -> Unit) {
-        val arrayAdapter = ArrayAdapter<String>(context, com.google.android.material.R.layout.support_simple_spinner_dropdown_item)
-        arrayAdapter.addAll(options)
+    companion object {
 
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                onSelected(position)
+        val sexOptions = listOf("Seleccionar", "Hombre", "Mujer", "Otro");
+        val educationalLevelOptions = listOf("Seleccionar", "Sin estudios", "Primaria/ESO", "Bachillerato", "Formación profesional", "Estudios universitarios")
+        val familyTypeOptions = listOf("Seleccionar",
+            "Monoparental femenina (mujer sola con niñas o niños a cargo)",
+            "Monoparental masculina (hombre sólo con niñas o niños a cargo)",
+            "Pareja de hombre y mujer con niñas o niños a cargo",
+            "Pareja de hombre y hombre con niñas o niños a cargo",
+            "Pareja de mujer y mujer con niñas o niños a cargo");
+
+        fun configSpinner(
+            context: Context,
+            spinner: Spinner,
+            options: List<String>,
+            onSelected: (Int) -> Unit,
+            onNothingSelected: () -> Unit
+        ) {
+            val arrayAdapter = ArrayAdapter<String>(
+                context,
+                com.google.android.material.R.layout.support_simple_spinner_dropdown_item
+            )
+            arrayAdapter.addAll(options)
+
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    onSelected(position)
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    onNothingSelected()
+                }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                onNothingSelected()
-            }
+            spinner.adapter = arrayAdapter
         }
-
-        spinner.adapter = arrayAdapter
     }
 }
