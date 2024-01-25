@@ -36,9 +36,9 @@ class UpdateChildActivity : AppCompatActivity() {
     private var birthDateDay = 0
     private var birthDateMonth = 0
     private var birthDateYear = 0
-    private val monthsOfTheYear = Arrays.asList("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Deciembre")
     private var model = CreateOrUpdateChildModel()
     private var aLoadingDialog : ALoadingDialog? = null;
+    private var editTextBirthDate : EditText? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityUpdateChildBinding.inflate(layoutInflater)
@@ -49,23 +49,22 @@ class UpdateChildActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
         criAppClient = CriAppClient(sharedPreferences!!)
         child = gson.fromJson(intent.getStringExtra("child"), ChildModel::class.java)
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
-        val date = LocalDateTime.parse(child!!.birthDate, formatter)
-        birthDateDay = date.dayOfMonth
-        birthDateMonth = date.monthValue
-        birthDateYear = date.year
+
+        val date = DateHelper.getDayMonthAndYearFromFormattedDate(child!!.birthDate)
+        birthDateDay = date.first
+        birthDateMonth = date.second
+        birthDateYear = date.third
 
         configSpinners();
-        configBirthDateDaySpinner()
-        configBirthDateMonthSpinner()
-        configBirthDateYearSpinner()
 
         val buttonUpdateChild = findViewById<Button>(R.id.button_update_child)
         var editTextName = findViewById<EditText>(R.id.edit_text_name)
         var editTextMonthsOfBreastFeeding = findViewById<EditText>(R.id.edit_text_months_of_breast_feeding)
+        editTextBirthDate = findViewById(R.id.edit_text_birth_date);
 
         editTextName.setText(child!!.name);
         editTextMonthsOfBreastFeeding.setText(child!!.monthsOfBreastFeeding.toString());
+        editTextBirthDate!!.setText(DateHelper.formatDateDDMMYYYY(birthDateYear, birthDateMonth, birthDateDay))
 
         buttonUpdateChild.setOnClickListener{
             aLoadingDialog!!.show()
@@ -126,57 +125,14 @@ class UpdateChildActivity : AppCompatActivity() {
         mBinding.spinnerPremature.setSelection(if (child!!.isPremature)  1 else 2)
     }
 
-    private fun configBirthDateDaySpinner(){
-        val aaBirthDateDay = ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item)
-        for (i in 1..31){
-            aaBirthDateDay.add(i.toString())
+    fun showDatePickerForBirthDate(view : View){
+        val datePicker = DatePickerFragment { day: Int, month: Int, year: Int ->
+            birthDateDay = day;
+            birthDateMonth = month + 1;
+            birthDateYear = year;
+            editTextBirthDate!!.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
         }
-        mBinding.spinnerBirthDateDay.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                birthDateDay = position + 1
-            }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-
-        }
-        mBinding.spinnerBirthDateDay.adapter = aaBirthDateDay
-        mBinding.spinnerBirthDateDay.setSelection(birthDateDay - 1)
-    }
-
-    private fun configBirthDateMonthSpinner(){
-        val aaBirthDateMonth = ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item)
-
-        aaBirthDateMonth.addAll(monthsOfTheYear)
-
-        mBinding.spinnerBirthDateMonth.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                birthDateMonth = position + 1
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-
-        }
-        mBinding.spinnerBirthDateMonth.adapter = aaBirthDateMonth
-        mBinding.spinnerBirthDateMonth.setSelection(birthDateMonth - 1)
-    }
-
-    private fun configBirthDateYearSpinner(){
-        val aaBirthDateYear = ArrayAdapter<String>(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item)
-        for (i in 1900..2100){
-            aaBirthDateYear.add(i.toString())
-        }
-        mBinding.spinnerBirthDateYear.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                birthDateYear = 1900 + position
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-
-        }
-        mBinding.spinnerBirthDateYear.adapter = aaBirthDateYear
-        mBinding.spinnerBirthDateYear.setSelection(birthDateYear - 1900)
+        datePicker.show(supportFragmentManager, "datePicker")
     }
 }
