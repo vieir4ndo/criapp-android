@@ -43,12 +43,12 @@ class SignUpActivity : AppCompatActivity(){
 
         configSpinners();
 
-        editTextBirthDate = findViewById<EditText>(R.id.edit_text_birth_date);
         val buttonCreateUser = findViewById<Button>(R.id.button_create_user);
         val editTextName = findViewById<EditText>(R.id.edit_text_name);
         val editTextUsername = findViewById<EditText>(R.id.edit_text_create_username);
         val editTextNumberOfChildren = findViewById<EditText>(R.id.edit_text_number_of_children);
         val editTextPassword = findViewById<EditText>(R.id.edit_text_password);
+        editTextBirthDate = findViewById(R.id.edit_text_birth_date);
 
         buttonCreateUser.setOnClickListener{
             aLoadingDialog!!.show()
