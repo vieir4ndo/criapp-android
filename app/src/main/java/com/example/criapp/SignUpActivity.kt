@@ -13,8 +13,8 @@ import com.example.criapp.databinding.ActivitySignUpBinding
 import com.example.criapp.model.CreateUserModel
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.services.CriAppClient
-import com.example.criapp.factories.SpinnerFactory
-import com.example.criapp.helpers.DateHelper
+import com.example.criapp.services.SpinnerFactory
+import com.example.criapp.services.DateHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

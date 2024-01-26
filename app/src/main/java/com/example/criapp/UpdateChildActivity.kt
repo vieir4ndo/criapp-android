@@ -6,14 +6,12 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.criapp.databinding.ActivityUpdateChildBinding
-import com.example.criapp.factories.SpinnerFactory
-import com.example.criapp.helpers.DateHelper
+import com.example.criapp.services.SpinnerFactory
+import com.example.criapp.services.DateHelper
 import com.example.criapp.model.ChildModel
 import com.example.criapp.model.CreateOrUpdateChildModel
 import com.example.criapp.model.ResponseModel
@@ -23,9 +21,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.Arrays
 
 class UpdateChildActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityUpdateChildBinding
