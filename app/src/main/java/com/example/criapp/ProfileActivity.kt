@@ -4,14 +4,12 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.criapp.databinding.ActivityProfileBinding
-import com.example.criapp.factories.SpinnerFactory
-import com.example.criapp.helpers.DateHelper
+import com.example.criapp.services.SpinnerFactory
+import com.example.criapp.services.DateHelper
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.model.UpdateUserModel
 import com.example.criapp.model.UserModel
@@ -21,9 +19,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.Arrays
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityProfileBinding;
