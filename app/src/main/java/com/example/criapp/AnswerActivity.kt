@@ -151,7 +151,8 @@ class AnswerActivity : AppCompatActivity() {
     private fun handleResultAnswer(result: ResponseModel?) {
         aLoadingDialog!!.cancel()
         if (result == null || !result.success) {
-            Toast.makeText(this, result!!.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
+            println(result!!.Messages!!.joinToString(separator = "\n"));
+            Toast.makeText(this, "Hubo un error al guardar tu respuesta, inténtalo nuevamente", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "Respuesta guardada con exito", Toast.LENGTH_SHORT).show()
             if (currentQuestion == questions!!.lastIndex){

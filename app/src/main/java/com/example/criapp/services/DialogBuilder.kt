@@ -56,6 +56,15 @@ class DialogBuilder {
         return this;
     }
 
+    fun withSubmitButtonDismissing() : DialogBuilder{
+        var submitButton = dialog.findViewById<Button>(R.id.submit_button);
+        submitButton.setOnClickListener{
+            dialog.dismiss()
+        }
+
+        return this;
+    }
+
     fun create() : Dialog{
         dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 

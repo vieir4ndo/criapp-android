@@ -13,8 +13,9 @@ import com.example.criapp.databinding.ActivitySignUpBinding
 import com.example.criapp.model.CreateUserModel
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.services.CriAppClient
-import com.example.criapp.services.SpinnerFactory
+import com.example.criapp.services.SpinnerHelper
 import com.example.criapp.services.DateHelper
+import com.example.criapp.services.DialogFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -63,21 +64,21 @@ class SignUpActivity : AppCompatActivity(){
     }
 
     private fun configSpinners(){
-        SpinnerFactory.configSpinner(this,
+        SpinnerHelper.configSpinner(this,
             mBinding.spinnerSex,
-            SpinnerFactory.sexOptions,
+            SpinnerHelper.sexOptions,
             { position : Int -> user.sex = position },
             { user.sex = 0 })
 
-        SpinnerFactory.configSpinner(this,
+        SpinnerHelper.configSpinner(this,
             mBinding.spinnerEducationalLevel,
-            SpinnerFactory.educationalLevelOptions,
+            SpinnerHelper.educationalLevelOptions,
             { position : Int -> user.educationalLevel = position },
             { user.educationalLevel = 0 })
 
-        SpinnerFactory.configSpinner(this,
+        SpinnerHelper.configSpinner(this,
             mBinding.spinnerFamilyType,
-            SpinnerFactory.familyTypeOptions,
+            SpinnerHelper.familyTypeOptions,
             { position:Int -> user.familyType = position },
             { user.familyType = 0 }
         )
@@ -111,7 +112,8 @@ class SignUpActivity : AppCompatActivity(){
     private fun handleResult(result: ResponseModel?) {
         aLoadingDialog!!.cancel()
         if (result != null && !result.success){
-            Toast.makeText(this, result.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
+            val dialog = DialogFactory.createErrorDialog(this, result.Messages!!.joinToString(separator = "\n"))
+            dialog.show()
         }
         else {
             val openSignUpSuccessActivityIntent = Intent (this, SignUpSuccessActivity::class.java);

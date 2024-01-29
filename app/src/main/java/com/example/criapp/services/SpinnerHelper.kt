@@ -6,7 +6,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 
-class SpinnerFactory {
+class SpinnerHelper {
     companion object {
 
         val sexOptions = listOf("Seleccionar", "Hombre", "Mujer", "Otro");
