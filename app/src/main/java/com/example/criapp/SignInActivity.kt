@@ -12,6 +12,7 @@ import com.example.criapp.model.LoginUserModel
 import com.example.criapp.model.LoginUserResponse
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.services.CriAppClient
+import com.example.criapp.services.DialogFactory
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -77,7 +78,8 @@ class SignInActivity : AppCompatActivity() {
     private fun handleResult(result: ResponseModel?) {
         aLoadingDialog!!.cancel()
         if (result != null && !result.success) {
-            Toast.makeText(this, result.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
+            val dialog = DialogFactory.createErrorDialog(this, result.Messages!!.joinToString(separator = "\n"))
+            dialog.show()
         } else {
             val json = gson.toJson(result!!.data!!.first());
             val tokenData = gson.fromJson(json, LoginUserResponse::class.java)

@@ -9,11 +9,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.criapp.databinding.ActivityCreateChildBinding
-import com.example.criapp.services.SpinnerFactory
+import com.example.criapp.services.SpinnerHelper
 import com.example.criapp.services.DateHelper
 import com.example.criapp.model.CreateOrUpdateChildModel
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.services.CriAppClient
+import com.example.criapp.services.DialogFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -72,7 +73,8 @@ class CreateChildActivity : AppCompatActivity() {
     private fun handleResult(result: ResponseModel?) {
         aLoadingDialog!!.cancel()
         if (result == null || !result.success){
-            Toast.makeText(this, result!!.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
+            val dialog = DialogFactory.createErrorDialog(this, result!!.Messages!!.joinToString(separator = "\n"))
+            dialog.show()
         }
         else {
             val nextActivity = Intent (this, ChildActivity::class.java);
@@ -82,15 +84,15 @@ class CreateChildActivity : AppCompatActivity() {
     }
 
     private fun configSpinners(){
-        SpinnerFactory.configSpinner(this,
+        SpinnerHelper.configSpinner(this,
             mBinding.spinnerSex,
-            SpinnerFactory.sexOptions,
+            SpinnerHelper.sexOptions,
             { position : Int -> child.sex = position },
             { child.sex = 0 })
 
-        SpinnerFactory.configSpinner(this,
+        SpinnerHelper.configSpinner(this,
             mBinding.spinnerPremature,
-            SpinnerFactory.yesOrNoOptions,
+            SpinnerHelper.yesOrNoOptions,
             { position : Int -> when (position) {
                 1 -> child.isPremature = true
                 2 -> child.isPremature = false

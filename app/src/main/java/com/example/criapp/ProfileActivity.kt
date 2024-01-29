@@ -8,12 +8,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.criapp.databinding.ActivityProfileBinding
-import com.example.criapp.services.SpinnerFactory
+import com.example.criapp.services.SpinnerHelper
 import com.example.criapp.services.DateHelper
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.model.UpdateUserModel
 import com.example.criapp.model.UserModel
 import com.example.criapp.services.CriAppClient
+import com.example.criapp.services.DialogFactory
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -103,21 +104,21 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun configSpinners(){
-        SpinnerFactory.configSpinner(this,
+        SpinnerHelper.configSpinner(this,
             mBinding.spinnerSex,
-            SpinnerFactory.sexOptions,
+            SpinnerHelper.sexOptions,
             { position : Int -> user.sex = position })
         mBinding.spinnerSex.setSelection(user.sex)
 
-        SpinnerFactory.configSpinner(this,
+        SpinnerHelper.configSpinner(this,
             mBinding.spinnerEducationalLevel,
-            SpinnerFactory.educationalLevelOptions,
+            SpinnerHelper.educationalLevelOptions,
             { position : Int -> user.educationalLevel = position })
         mBinding.spinnerEducationalLevel.setSelection(user.educationalLevel)
 
-        SpinnerFactory.configSpinner(this,
+        SpinnerHelper.configSpinner(this,
             mBinding.spinnerFamilyType,
-            SpinnerFactory.familyTypeOptions,
+            SpinnerHelper.familyTypeOptions,
             { position:Int -> user.familyType = position })
         mBinding.spinnerFamilyType.setSelection(user.familyType)
     }
@@ -150,7 +151,8 @@ class ProfileActivity : AppCompatActivity() {
     private fun handleResultUpdateUser(result: ResponseModel?) {
         aLoadingDialog!!.cancel()
         if (result != null && !result.success){
-            Toast.makeText(this, result!!.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
+            val dialog = DialogFactory.createErrorDialog(this, result.Messages!!.joinToString(separator = "\n"))
+            dialog.show()
         }
         else {
             Toast.makeText(this, "Perfil actualizado con exito", Toast.LENGTH_SHORT).show()

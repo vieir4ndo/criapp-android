@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.example.criapp.model.ForgotPasswordModel
 import com.example.criapp.model.ResponseModel
 import com.example.criapp.services.CriAppClient
+import com.example.criapp.services.DialogFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -59,7 +60,8 @@ class ForgotPasswordActivity : AppCompatActivity() {
     private fun handleResult(result: ResponseModel?) {
         aLoadingDialog!!.cancel()
         if (result != null && !result.success) {
-            Toast.makeText(this, result!!.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
+            val dialog = DialogFactory.createErrorDialog(this, result.Messages!!.joinToString(separator = "\n"))
+            dialog.show()
         } else {
             val openResetPasswordActivityIntent = Intent(this, ResetPasswordActivity::class.java);
             openResetPasswordActivityIntent.putExtra("username", model.username)
