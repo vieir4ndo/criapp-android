@@ -1,9 +1,9 @@
-package com.example.criapp.services
+package com.example.criapp.abstractions
 
 import android.util.Patterns
 import android.widget.EditText
 
-abstract class AbstractModel<T> {
+abstract class AbstractValidator {
 
     private var rules: MutableList<Triple<String, EditText, (EditText, String) -> Boolean>> =
         emptyList<Triple<String, EditText, (EditText, String) -> Boolean>>().toMutableList()
@@ -36,7 +36,7 @@ abstract class AbstractModel<T> {
     }
 
     fun hasMaxLength100Char(input: EditText, inputName: String): Boolean {
-        if (input.text.toString().length > 255) {
+        if (input.text.toString().length > 100) {
             input.error = "$inputName debe contener un máximo de 100 caracteres";
             return false;
         }
@@ -64,5 +64,16 @@ abstract class AbstractModel<T> {
         input.error = "$inputName es inválido";
 
         return false;
+    }
+
+
+    fun isValidDate(input: EditText, inputName: String) : Boolean{
+        val pattern = Regex("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}")
+        if (!pattern.matches(input.text.toString())) {
+            input.error = "$inputName es inválida";
+            return false;
+        }
+
+        return true;
     }
 }

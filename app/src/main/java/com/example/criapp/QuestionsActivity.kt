@@ -10,10 +10,9 @@ import android.view.Gravity
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.example.criapp.model.ChildModel
-import com.example.criapp.model.ResponseModel
+import com.example.criapp.models.ChildModel
+import com.example.criapp.models.ResponseModel
 import com.example.criapp.services.CriAppClient
 import com.example.criapp.services.DialogFactory
 import com.google.gson.Gson

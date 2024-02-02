@@ -1,4 +1,4 @@
-package com.example.criapp.model
+package com.example.criapp.models
 data class UserModel(
     val id: String,
     val name: String,

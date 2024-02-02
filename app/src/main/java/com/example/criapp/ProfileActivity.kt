@@ -10,9 +10,9 @@ import android.widget.Toast
 import com.example.criapp.databinding.ActivityProfileBinding
 import com.example.criapp.services.SpinnerHelper
 import com.example.criapp.services.DateHelper
-import com.example.criapp.model.ResponseModel
-import com.example.criapp.model.UpdateUserModel
-import com.example.criapp.model.UserModel
+import com.example.criapp.models.ResponseModel
+import com.example.criapp.models.UpdateUserModel
+import com.example.criapp.models.UserModel
 import com.example.criapp.services.CriAppClient
 import com.example.criapp.services.DialogFactory
 import com.google.gson.Gson

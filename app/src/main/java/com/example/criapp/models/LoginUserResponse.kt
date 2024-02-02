@@ -1,4 +1,4 @@
-package com.example.criapp.model
+package com.example.criapp.models
 
 import kotlinx.serialization.Serializable
 

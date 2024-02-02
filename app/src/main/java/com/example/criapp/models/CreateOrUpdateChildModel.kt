@@ -1,14 +1,13 @@
-package com.example.criapp.model
+package com.example.criapp.models
 
 import com.google.gson.Gson
 
-class UpdateUserModel {
+class CreateOrUpdateChildModel {
     var name = "";
     var birthDate = "";
     var sex = 0;
-    var familyType = 0;
-    var educationalLevel = 0;
-    var numberOfChildren = 0;
+    var monthsOfBreastFeeding = 0;
+    var isPremature : Boolean? = null;
 
     override fun toString(): String {
         val gson = Gson();

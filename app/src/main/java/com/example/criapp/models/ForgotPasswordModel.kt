@@ -1,12 +1,9 @@
-package com.example.criapp.model
+package com.example.criapp.models
 
 import com.google.gson.Gson
 
-class ResetPasswordModel {
+class ForgotPasswordModel {
     var username = "";
-    var newPassword = "";
-    var code = "";
-
     override fun toString(): String {
         val gson = Gson();
 
