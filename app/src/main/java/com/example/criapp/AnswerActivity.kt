@@ -8,10 +8,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import com.example.criapp.model.ChildModel
-import com.example.criapp.model.CreateAnswerModel
-import com.example.criapp.model.QuestionModel
-import com.example.criapp.model.ResponseModel
+import com.example.criapp.models.ChildModel
+import com.example.criapp.models.CreateAnswerModel
+import com.example.criapp.models.QuestionModel
+import com.example.criapp.models.ResponseModel
 import com.example.criapp.services.CriAppClient
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope

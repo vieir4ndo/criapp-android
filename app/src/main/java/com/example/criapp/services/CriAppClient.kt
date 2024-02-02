@@ -1,7 +1,7 @@
 package com.example.criapp.services
 
 import android.content.SharedPreferences
-import com.example.criapp.model.ResponseModel
+import com.example.criapp.models.ResponseModel
 import com.google.gson.Gson
 import okhttp3.Headers
 import okhttp3.MediaType

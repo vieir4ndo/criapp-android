@@ -24,5 +24,12 @@ class DateHelper {
 
             return Triple(date.dayOfMonth, date.monthValue, date.year)
         }
+
+        fun getDayMonthAndYearFromFormattedDateTest(date : String) : Triple<Int, Int, Int> {
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val date = LocalDateTime.parse(date, formatter)
+
+            return Triple(date.dayOfMonth, date.monthValue, date.year)
+        }
     }
 }
