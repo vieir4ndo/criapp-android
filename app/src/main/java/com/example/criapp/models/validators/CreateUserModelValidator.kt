@@ -1,4 +1,4 @@
-package com.example.criapp.validators
+package com.example.criapp.models.validators
 
 import com.example.criapp.abstractions.AbstractValidator
 import com.example.criapp.models.CreateUserModel
@@ -17,5 +17,7 @@ class CreateUserModelValidator(
         ruleFor("Fecha de nacimiento", createUserModel.editTextBirthDate, this::isValidDate)
 
         ruleFor("Contraseña", createUserModel.editTextPassword, this::isNotEmpty)
+
+        ruleFor("Sexo", createUserModel.spinnerSex, this::isSpinnerNotEmpty)
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -15,12 +16,12 @@ import com.example.criapp.services.CriAppClient
 import com.example.criapp.services.SpinnerHelper
 import com.example.criapp.services.DateHelper
 import com.example.criapp.services.DialogFactory
-import com.example.criapp.validators.CreateUserModelValidator
+import com.example.criapp.models.validators.CreateUserModelValidator
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivitySignUpBinding;
@@ -46,7 +47,6 @@ class SignUpActivity : AppCompatActivity() {
         criAppClient = CriAppClient(sharedPreferences!!)
 
         configSpinners();
-
         val buttonCreateUser = findViewById<Button>(R.id.button_create_user);
         editTextBirthDate = findViewById(R.id.edit_text_birth_date);
 
@@ -69,24 +69,23 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun configSpinners() {
-        SpinnerHelper.configSpinner(this,
+        val sexSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_sex_input_layout);
+        SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerSex,
             SpinnerHelper.sexOptions,
-            { position: Int -> sex = position },
-            { sex = 0 })
+            sexSpinnerInputLayout)
 
-        SpinnerHelper.configSpinner(this,
+        val spinnerEducationalLevelInputLayout = findViewById<TextInputLayout>(R.id.spinner_educational_level_input_layout);
+        SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerEducationalLevel,
             SpinnerHelper.educationalLevelOptions,
-            { position: Int -> educationalLevel = position },
-            { educationalLevel = 0 })
+            spinnerEducationalLevelInputLayout)
 
-        SpinnerHelper.configSpinner(this,
+        val spinnerFamilyTypeInputLayout = findViewById<TextInputLayout>(R.id.spinner_family_type_input_layout);
+        SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerFamilyType,
             SpinnerHelper.familyTypeOptions,
-            { position: Int -> familyType = position },
-            { familyType = 0 }
-        )
+            spinnerFamilyTypeInputLayout)
     }
 
     fun showDatePickerForBirthDate(view: View) {
