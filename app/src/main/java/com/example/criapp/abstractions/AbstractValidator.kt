@@ -1,14 +1,16 @@
 package com.example.criapp.abstractions
 
 import android.util.Patterns
-import android.widget.EditText
+import android.view.View
+import android.widget.Spinner
+import android.widget.TextView
 
 abstract class AbstractValidator {
 
-    private var rules: MutableList<Triple<String, EditText, (EditText, String) -> Boolean>> =
-        emptyList<Triple<String, EditText, (EditText, String) -> Boolean>>().toMutableList()
+    private var rules: MutableList<Triple<String, View, (View, String) -> Boolean>> =
+        emptyList<Triple<String, View, (View, String) -> Boolean>>().toMutableList()
 
-    fun ruleFor(fieldName: String, editText: EditText, function: ((EditText, String) -> Boolean)) {
+    fun ruleFor(fieldName: String, editText: View, function: ((View, String) -> Boolean)) {
         rules.add(Triple(fieldName, editText, function));
     }
 
@@ -27,7 +29,8 @@ abstract class AbstractValidator {
         return isValid;
     }
 
-    fun isNotEmpty(input: EditText, inputName: String): Boolean {
+    fun isNotEmpty(input: View, inputName: String): Boolean {
+        input as TextView
         if (input.text.toString().isEmpty() || input.text.toString().isBlank()) {
             input.error = "$inputName es obligatorio";
             return false;
@@ -35,7 +38,18 @@ abstract class AbstractValidator {
         return true;
     }
 
-    fun hasMaxLength100Char(input: EditText, inputName: String): Boolean {
+    fun isSpinnerNotEmpty(input: View, inputName: String): Boolean {
+        input as Spinner
+        val adapter = input.getAdapter() as CriAppSpinnerAdapter;
+        if (adapter.position == 0) {
+            adapter.inputLayout.error = "$inputName es obligatorio";
+            return false;
+        }
+        return true;
+    }
+
+    fun hasMaxLength100Char(input: View, inputName: String): Boolean {
+        input as TextView
         if (input.text.toString().length > 100) {
             input.error = "$inputName debe contener un máximo de 100 caracteres";
             return false;
@@ -43,15 +57,8 @@ abstract class AbstractValidator {
         return true;
     }
 
-    fun isGreaterThan0(input: EditText, inputName: String): Boolean {
-        if (input.text.toString().toInt() > 0) {
-            input.error = "$inputName debe ser informado";
-            return false;
-        }
-        return true;
-    }
-
-    fun isValidUsername(input: EditText, inputName: String) : Boolean{
+    fun isValidUsername(input: View, inputName: String) : Boolean{
+        input as TextView
         if (Patterns.EMAIL_ADDRESS.matcher(input.text.toString()).matches()) {
             return true;
         }
@@ -67,7 +74,8 @@ abstract class AbstractValidator {
     }
 
 
-    fun isValidDate(input: EditText, inputName: String) : Boolean{
+    fun isValidDate(input: View, inputName: String) : Boolean{
+        input as TextView
         val pattern = Regex("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}")
         if (!pattern.matches(input.text.toString())) {
             input.error = "$inputName es inválida";

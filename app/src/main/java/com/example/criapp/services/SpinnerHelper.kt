@@ -5,6 +5,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import com.example.criapp.abstractions.CriAppSpinnerAdapter
+import com.google.android.material.textfield.TextInputLayout
 
 class SpinnerHelper {
     companion object {
@@ -44,6 +46,35 @@ class SpinnerHelper {
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     if (onNothingSelected != null) onNothingSelected()
+                }
+            }
+
+            spinner.adapter = arrayAdapter
+        }
+
+        fun configCriAppSpinner(
+            context: Context,
+            spinner: Spinner,
+            options: List<String>,
+            inputLayout: TextInputLayout
+        ) {
+
+            val arrayAdapter = CriAppSpinnerAdapter(context, options)
+
+            arrayAdapter.inputLayout = inputLayout
+
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    arrayAdapter.position = position;
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    arrayAdapter.position = 0;
                 }
             }
 

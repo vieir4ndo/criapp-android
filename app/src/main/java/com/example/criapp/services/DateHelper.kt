@@ -1,7 +1,9 @@
 package com.example.criapp.services
 
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class DateHelper {
 
@@ -18,18 +20,19 @@ class DateHelper {
             return "${formatNumber(dia)}/${formatNumber(mes)}/$ano"
         }
 
-        fun getDayMonthAndYearFromFormattedDate(date : String) : Triple<Int, Int, Int> {
+        fun getDayMonthAndYearFromFormattedDate(date: String): Triple<Int, Int, Int> {
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
             val date = LocalDateTime.parse(date, formatter)
 
             return Triple(date.dayOfMonth, date.monthValue, date.year)
         }
 
-        fun getDayMonthAndYearFromFormattedDateTest(date : String) : Triple<Int, Int, Int> {
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            val date = LocalDateTime.parse(date, formatter)
+        fun convertDateFromMMDDYYYYtoYYYYMMDD(inputDate: String): String {
+            val inputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
-            return Triple(date.dayOfMonth, date.monthValue, date.year)
+            val date = inputFormat.parse(inputDate)
+            return outputFormat.format(date!!)
         }
     }
 }
