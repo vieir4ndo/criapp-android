@@ -71,6 +71,7 @@ class SpinnerHelper {
                     id: Long
                 ) {
                     arrayAdapter.position = position;
+                    arrayAdapter.inputLayout.error = null;
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
