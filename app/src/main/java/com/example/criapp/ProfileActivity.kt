@@ -131,6 +131,7 @@ class ProfileActivity : AppCompatActivity() {
             birthDateMonth = month + 1;
             birthDateYear = year;
             editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
+            editTextBirthDate.error = null;
         }
 
         datePicker.show(supportFragmentManager, "datePicker")

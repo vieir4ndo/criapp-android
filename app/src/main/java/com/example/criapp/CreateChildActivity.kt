@@ -15,6 +15,7 @@ import com.example.criapp.models.CreateOrUpdateChildModel
 import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
 import com.example.criapp.services.DialogFactory
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -22,13 +23,13 @@ import kotlinx.coroutines.launch
 
 class CreateChildActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityCreateChildBinding;
-    private var criappClient : CriAppClient? = null;
+    private var criAppClient : CriAppClient? = null;
     private var birthDateDay = 0;
     private var birthDateMonth = 0;
     private var birthDateYear = 0;
-    private var child = CreateOrUpdateChildModel();
+    private lateinit var model : CreateOrUpdateChildModel;
     private var aLoadingDialog : ALoadingDialog? = null;
-    private var editTextBirthDate : EditText? = null;
+    private lateinit var editTextBirthDate : EditText;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +38,7 @@ class CreateChildActivity : AppCompatActivity() {
 
         aLoadingDialog = ALoadingDialog(this);
 
-        this.criappClient = CriAppClient(getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE));
+        this.criAppClient = CriAppClient(getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE));
 
         configSpinners();
 
@@ -46,21 +47,23 @@ class CreateChildActivity : AppCompatActivity() {
         val editTextMonthsOfBreastFeeding = findViewById<EditText>(R.id.edit_text_months_of_breast_feeding);
         editTextBirthDate = findViewById(R.id.edit_text_birth_date);
 
-        buttonCreateChild.setOnClickListener{
-            aLoadingDialog!!.show()
-            child.name = editTextName.text.toString();
-            child.birthDate = DateHelper.formatDateYYYYMMDD(birthDateYear, birthDateMonth, birthDateDay);
-            child.monthsOfBreastFeeding = if (editTextMonthsOfBreastFeeding.text.toString() == "") 0 else editTextMonthsOfBreastFeeding.text.toString().toInt();
+        model = CreateOrUpdateChildModel(editTextName,editTextBirthDate, mBinding.spinnerSex, editTextMonthsOfBreastFeeding, mBinding.spinnerPremature)
 
-            fetchData()
+        buttonCreateChild.setOnClickListener{
+
+            if (model.validate()){
+                fetchData(model.toRequest())
+            }
         }
     }
 
-    private fun fetchData() {
+    private fun fetchData(requestBody:String) {
+        aLoadingDialog!!.show()
+
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
-            criappClient!!.postAuthenticated("/child", child.toString());
+            criAppClient!!.postAuthenticated("/child", requestBody);
         }
 
         scope.launch {
@@ -84,23 +87,18 @@ class CreateChildActivity : AppCompatActivity() {
     }
 
     private fun configSpinners(){
-        SpinnerHelper.configSpinner(this,
+        val sexSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_sex_input_layout);
+        SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerSex,
             SpinnerHelper.sexOptions,
-            { position : Int -> child.sex = position },
-            { child.sex = 0 })
+            sexSpinnerInputLayout
+           )
 
-        SpinnerHelper.configSpinner(this,
+        val prematureSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_premature_input_layout);
+        SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerPremature,
             SpinnerHelper.yesOrNoOptions,
-            { position : Int -> when (position) {
-                1 -> child.isPremature = true
-                2 -> child.isPremature = false
-                else -> {
-                    child.isPremature = null;
-                }
-            }},
-            { child.isPremature = false }
+            prematureSpinnerInputLayout
         )
     }
 
@@ -109,7 +107,8 @@ class CreateChildActivity : AppCompatActivity() {
             birthDateDay = day;
             birthDateMonth = month + 1;
             birthDateYear = year;
-            editTextBirthDate!!.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
+            editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
+            editTextBirthDate.error = null;
         }
 
         datePicker.show(supportFragmentManager, "datePicker")

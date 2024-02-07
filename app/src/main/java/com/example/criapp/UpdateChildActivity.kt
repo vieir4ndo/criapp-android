@@ -17,6 +17,7 @@ import com.example.criapp.models.CreateOrUpdateChildModel
 import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
 import com.example.criapp.services.DialogFactory
+import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,9 +33,9 @@ class UpdateChildActivity : AppCompatActivity() {
     private var birthDateDay = 0
     private var birthDateMonth = 0
     private var birthDateYear = 0
-    private var model = CreateOrUpdateChildModel()
+    private lateinit var model : CreateOrUpdateChildModel
     private var aLoadingDialog : ALoadingDialog? = null;
-    private var editTextBirthDate : EditText? = null;
+    private lateinit var editTextBirthDate : EditText;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityUpdateChildBinding.inflate(layoutInflater)
@@ -60,23 +61,24 @@ class UpdateChildActivity : AppCompatActivity() {
 
         editTextName.setText(child!!.name);
         editTextMonthsOfBreastFeeding.setText(child!!.monthsOfBreastFeeding.toString());
-        editTextBirthDate!!.setText(DateHelper.formatDateDDMMYYYY(birthDateYear, birthDateMonth, birthDateDay))
+        editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(birthDateYear, birthDateMonth, birthDateDay))
+
+        model = CreateOrUpdateChildModel(editTextName,editTextBirthDate, mBinding.spinnerSex, editTextMonthsOfBreastFeeding, mBinding.spinnerPremature)
 
         buttonUpdateChild.setOnClickListener{
-            aLoadingDialog!!.show()
-            model.name = editTextName.text.toString()
-            model.birthDate = DateHelper.formatDateYYYYMMDD(birthDateYear, birthDateMonth, birthDateDay)
-            model.monthsOfBreastFeeding = if (editTextMonthsOfBreastFeeding.text.toString() == "") 0 else editTextMonthsOfBreastFeeding.text.toString().toInt()
-
-            fetchData()
+           if (model.validate()){
+               fetchData(model.toRequest())
+           }
         }
     }
 
-    private fun fetchData() {
+    private fun fetchData(requestBody:String) {
+        aLoadingDialog!!.show()
+
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
-            criAppClient!!.patchAuthenticated("/child/" + child!!.id, model.toString())
+            criAppClient!!.patchAuthenticated("/child/" + child!!.id, requestBody)
         }
 
         scope.launch {
@@ -100,24 +102,19 @@ class UpdateChildActivity : AppCompatActivity() {
     }
 
     private fun configSpinners(){
-        SpinnerHelper.configSpinner(this,
+        val sexSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_sex_input_layout);
+        SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerSex,
             SpinnerHelper.sexOptions,
-            { position : Int -> model.sex = position },
-            { model.sex = child!!.sex })
+            sexSpinnerInputLayout
+            )
         mBinding.spinnerSex.setSelection(child!!.sex)
 
-        SpinnerHelper.configSpinner(this,
+        val prematureSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_premature_input_layout);
+        SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerPremature,
             SpinnerHelper.yesOrNoOptions,
-            { position : Int -> when (position) {
-                1 -> model.isPremature = true
-                2 -> model.isPremature = false
-                else -> {
-                    model.isPremature = null;
-                }
-            }},
-            { model.isPremature = child!!.isPremature }
+            prematureSpinnerInputLayout
         )
         mBinding.spinnerPremature.setSelection(if (child!!.isPremature)  1 else 2)
     }
@@ -127,7 +124,8 @@ class UpdateChildActivity : AppCompatActivity() {
             birthDateDay = day;
             birthDateMonth = month + 1;
             birthDateYear = year;
-            editTextBirthDate!!.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
+            editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
+            editTextBirthDate.error = null;
         }
 
         datePicker.show(supportFragmentManager, "datePicker")

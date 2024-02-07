@@ -1,17 +1,38 @@
 package com.example.criapp.models
 
-import com.google.gson.Gson
+import android.widget.EditText
+import android.widget.Spinner
+import com.example.criapp.abstractions.CriAppSpinnerAdapter
+import com.example.criapp.abstractions.IModel
+import com.example.criapp.models.requests.CreateOrUpdateChildRequest
+import com.example.criapp.models.validators.CreateOrUpdateChildModelValidator
+import com.example.criapp.services.DateHelper
 
-class CreateOrUpdateChildModel {
-    var name = "";
-    var birthDate = "";
-    var sex = 0;
-    var monthsOfBreastFeeding = 0;
-    var isPremature : Boolean? = null;
-
-    override fun toString(): String {
-        val gson = Gson();
-
-        return gson.toJson(this);
+class CreateOrUpdateChildModel(
+    val editTextName: EditText,
+    val editTextBirthDate: EditText,
+    val spinnerSex: Spinner,
+    val editTextMonthsOfBreastFeeding: EditText,
+    val spinnerIsPremature: Spinner,
+) : IModel<CreateOrUpdateChildModel> {
+    override fun validate(): Boolean {
+        return CreateOrUpdateChildModelValidator(this).isValid()
     }
+
+    override fun toRequest(): String {
+        val sexAdapter = spinnerSex.getAdapter() as CriAppSpinnerAdapter;
+        val prematureAdapter = spinnerIsPremature.getAdapter() as CriAppSpinnerAdapter;
+
+        return CreateOrUpdateChildRequest(
+            editTextName.text.toString(),
+            DateHelper.convertDateFromMMDDYYYYtoYYYYMMDD(editTextBirthDate.text.toString()),
+            sexAdapter.position,
+            if (editTextMonthsOfBreastFeeding.text.toString() == "") 0 else editTextMonthsOfBreastFeeding.text.toString().toInt(),
+            when (prematureAdapter.position) {
+                1 -> true;
+                else -> false
+            }
+        ).toString()
+    }
+
 }
