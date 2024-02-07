@@ -17,7 +17,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class ForgotPasswordActivity : AppCompatActivity() {
-    private var model = ForgotPasswordModel();
+    private lateinit var model : ForgotPasswordModel;
     private var criappClient : CriAppClient? = null;
     private var sharedPreferences : SharedPreferences? = null;
     private var aLoadingDialog : ALoadingDialog? = null;
@@ -34,19 +34,22 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         val editTextUsername = findViewById<EditText>(R.id.edit_text_username);
 
-        buttonForgotPassword.setOnClickListener {
-            aLoadingDialog!!.show()
-            model.username = editTextUsername.text.toString();
+        model = ForgotPasswordModel(editTextUsername);
 
-            fetchData()
+        buttonForgotPassword.setOnClickListener {
+            if (model.validate()){
+                fetchData(model.toRequest())
+            }
         }
     }
 
-    private fun fetchData() {
+    private fun fetchData(requestBody : String) {
+        aLoadingDialog!!.show()
+
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
-            criappClient!!.post("/user/forgot-password", model.toString());
+            criappClient!!.post("/user/forgot-password", requestBody);
         }
 
         scope.launch {
@@ -63,7 +66,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
             dialog.show()
         } else {
             val openResetPasswordActivityIntent = Intent(this, ResetPasswordActivity::class.java);
-            openResetPasswordActivityIntent.putExtra("username", model.username)
+            openResetPasswordActivityIntent.putExtra("username", model.editTextUsername.text.toString())
             startActivity(openResetPasswordActivityIntent);
         }
     }
