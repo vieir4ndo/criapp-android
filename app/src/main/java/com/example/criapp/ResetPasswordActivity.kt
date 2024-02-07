@@ -18,8 +18,8 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class ResetPasswordActivity : AppCompatActivity() {
-    private var model = ResetPasswordModel();
-    private var criappClient : CriAppClient? = null;
+    private lateinit var model : ResetPasswordModel;
+    private var criAppClient : CriAppClient? = null;
     private var sharedPreferences : SharedPreferences? = null;
     private var aLoadingDialog : ALoadingDialog? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,30 +28,35 @@ class ResetPasswordActivity : AppCompatActivity() {
 
         aLoadingDialog = ALoadingDialog(this);
 
-        model.username = intent.getStringExtra("username").toString();
 
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
-        criappClient = CriAppClient(sharedPreferences!!)
+        criAppClient = CriAppClient(sharedPreferences!!)
 
         val buttonResetPassword = findViewById<Button>(R.id.button_reset_password);
 
         val editTextCode = findViewById<EditText>(R.id.edit_text_code);
         val editTextNewPassword = findViewById<EditText>(R.id.edit_text_new_password);
 
-        buttonResetPassword.setOnClickListener {
-            aLoadingDialog!!.show()
-            model.newPassword = editTextNewPassword.text.toString();
-            model.code = editTextCode.text.toString();
+        model = ResetPasswordModel(
+            intent.getStringExtra("username").toString(),
+            editTextNewPassword,
+            editTextCode
+        );
 
-            fetchData()
+        buttonResetPassword.setOnClickListener {
+            if (model.validate()){
+                fetchData(model.toRequest())
+            }
         }
     }
 
-    private fun fetchData() {
+    private fun fetchData(requestBody : String) {
+        aLoadingDialog!!.show()
+
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
-            criappClient!!.post("/user/reset-password", model.toString());
+            criAppClient!!.post("/user/reset-password", requestBody);
         }
 
         scope.launch {
