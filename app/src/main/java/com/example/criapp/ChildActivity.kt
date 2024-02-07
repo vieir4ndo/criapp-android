@@ -11,8 +11,8 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.example.criapp.models.ChildModel
-import com.example.criapp.models.ResponseModel
+import com.example.criapp.models.responses.ChildResponse
+import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
 import com.example.criapp.services.DialogFactory
 import com.google.gson.Gson
@@ -22,7 +22,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class ChildActivity : AppCompatActivity() {
-    private var children : Array<ChildModel>? = null;
+    private var children : Array<ChildResponse>? = null;
     private var criAppClient : CriAppClient? = null;
     private val gson = Gson();
     private var aLoadingDialog : ALoadingDialog? = null;
@@ -57,7 +57,7 @@ class ChildActivity : AppCompatActivity() {
         }
         else {
             val json = gson.toJson(result!!.data!!.first());
-            val data = gson.fromJson(json, Array<ChildModel>::class.java);
+            val data = gson.fromJson(json, Array<ChildResponse>::class.java);
 
             children = data;
 
@@ -80,7 +80,7 @@ class ChildActivity : AppCompatActivity() {
         }
     }
 
-    private fun generateChildButton(child: ChildModel) : Button {
+    private fun generateChildButton(child: ChildResponse) : Button {
         val button = Button(this)
         button.gravity = Gravity.CENTER_HORIZONTAL
         button.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white))

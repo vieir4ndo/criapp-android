@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.criapp.models.ResetPasswordModel
-import com.example.criapp.models.ResponseModel
+import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
 import com.example.criapp.services.DialogFactory
 import kotlinx.coroutines.CoroutineScope

@@ -8,8 +8,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import com.example.criapp.models.LoginUserModel
-import com.example.criapp.models.LoginUserResponse
-import com.example.criapp.models.ResponseModel
+import com.example.criapp.models.responses.LoginUserResponse
+import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
 import com.example.criapp.services.DialogFactory
 import com.google.gson.Gson
@@ -19,7 +19,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class SignInActivity : AppCompatActivity() {
-    private var user = LoginUserModel();
+    private lateinit var loginUserModel : LoginUserModel;
     private var criappClient : CriAppClient? = null;
     private val gson = Gson()
     private var sharedPreferences : SharedPreferences? = null;
@@ -51,20 +51,21 @@ class SignInActivity : AppCompatActivity() {
         val editTextUsername = findViewById<EditText>(R.id.edit_text_username);
         val editTextPassword = findViewById<EditText>(R.id.edit_text_password);
 
-        buttonLoginUser.setOnClickListener {
-            aLoadingDialog!!.show()
-            user.username = editTextUsername.text.toString();
-            user.password = editTextPassword.text.toString();
+        loginUserModel = LoginUserModel(editTextUsername, editTextPassword);
 
-            fetchData()
+        buttonLoginUser.setOnClickListener {
+            if (loginUserModel.validate()) {
+                fetchData(loginUserModel.toRequest())
+            }
         }
     }
 
-    private fun fetchData() {
+    private fun fetchData(requestBody : String) {
+        aLoadingDialog!!.show()
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
-            criappClient!!.post("/user/login", user.toString());
+            criappClient!!.post("/user/login", requestBody);
         }
 
         scope.launch {

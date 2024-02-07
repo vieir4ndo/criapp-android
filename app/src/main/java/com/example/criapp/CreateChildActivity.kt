@@ -12,7 +12,7 @@ import com.example.criapp.databinding.ActivityCreateChildBinding
 import com.example.criapp.services.SpinnerHelper
 import com.example.criapp.services.DateHelper
 import com.example.criapp.models.CreateOrUpdateChildModel
-import com.example.criapp.models.ResponseModel
+import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
 import com.example.criapp.services.DialogFactory
 import kotlinx.coroutines.CoroutineScope

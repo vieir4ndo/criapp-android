@@ -1,10 +1,21 @@
 package com.example.criapp.models
-import com.google.gson.Gson
-class LoginUserModel {
-    var username = "";
-    var password = "";
-    override fun toString(): String {
-        val gson = Gson();
-        return gson.toJson(this);
+import android.widget.EditText
+import com.example.criapp.abstractions.IModel
+import com.example.criapp.models.requests.LoginUserRequest
+import com.example.criapp.models.validators.LoginUserModelValidator
+
+class LoginUserModel(
+    val editTextUsername: EditText,
+    val editTextPassword: EditText
+) : IModel<LoginUserModel>{
+    override fun validate(): Boolean {
+        return LoginUserModelValidator(this).isValid();
+    }
+
+    override fun toRequest(): String {
+        return LoginUserRequest(
+            editTextUsername.text.toString(),
+            editTextPassword.text.toString()
+        ).toString();
     }
 }

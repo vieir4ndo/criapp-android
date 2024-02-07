@@ -1,4 +1,4 @@
-package com.example.criapp.models
+package com.example.criapp.models.responses
 
 import com.google.gson.Gson
 import kotlinx.serialization.Serializable

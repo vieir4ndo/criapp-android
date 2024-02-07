@@ -1,8 +1,8 @@
-package com.example.criapp.models
+package com.example.criapp.models.responses
 
 import com.google.gson.Gson
 
-class ChildModel(
+class ChildResponse(
     val id : String,
     val name: String,
     val birthDate: String,

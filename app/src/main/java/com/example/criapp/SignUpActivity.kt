@@ -5,18 +5,16 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
-import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.databinding.ActivitySignUpBinding
 import com.example.criapp.models.CreateUserModel
-import com.example.criapp.models.ResponseModel
+import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
 import com.example.criapp.services.SpinnerHelper
 import com.example.criapp.services.DateHelper
 import com.example.criapp.services.DialogFactory
-import com.example.criapp.models.validators.CreateUserModelValidator
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,9 +29,6 @@ class SignUpActivity : AppCompatActivity() {
     private var birthDateDay = 0;
     private var birthDateMonth = 0;
     private var birthDateYear = 0;
-    private var sex = 0;
-    private var educationalLevel = 0;
-    private var familyType = 0;
     private var aLoadingDialog: ALoadingDialog? = null;
     private var editTextBirthDate: EditText? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +58,7 @@ class SignUpActivity : AppCompatActivity() {
 
         buttonCreateUser.setOnClickListener {
             if (createUserModel.validate()) {
-                fetchData(createUserModel.toRequest(sex, familyType, educationalLevel))
+                fetchData(createUserModel.toRequest())
             }
         }
     }

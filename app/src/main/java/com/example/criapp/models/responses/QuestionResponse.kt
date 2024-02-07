@@ -1,8 +1,8 @@
-package com.example.criapp.models
+package com.example.criapp.models.responses
 
 import com.google.gson.Gson
 
-class QuestionModel(
+class QuestionResponse(
     val id : String,
     val text: String,
     val active: Boolean,
