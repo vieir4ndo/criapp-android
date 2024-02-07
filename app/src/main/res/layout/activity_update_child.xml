@@ -63,8 +63,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:clickable="false"
-                android:focusable="false"
                 android:onClick="showDatePickerForBirthDate"/>
 
             <TextView
@@ -74,12 +72,18 @@
                 android:text="@string/sex"
                 android:textColor="@color/white"/>
 
-            <Spinner
-                android:id="@+id/spinner_sex"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/spinner_sex_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:errorEnabled="true"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="5dp">
+                <Spinner
+                    android:id="@+id/spinner_sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/label_spinner_premature"
@@ -88,12 +92,18 @@
                 android:text="@string/premature"
                 android:textColor="@color/white"/>
 
-            <Spinner
-                android:id="@+id/spinner_premature"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/spinner_premature_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:errorEnabled="true"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="5dp">
+                <Spinner
+                    android:id="@+id/spinner_premature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/label_edit_text_months_of_breast_feeding"
