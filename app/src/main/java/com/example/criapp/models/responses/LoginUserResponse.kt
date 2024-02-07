@@ -1,4 +1,4 @@
-package com.example.criapp.models
+package com.example.criapp.models.responses
 
 import kotlinx.serialization.Serializable
 
@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 class LoginUserResponse {
     val token = ""
     val expiresIn = ""
-    val user: UserModel? = null;
+    val user: UserResponse? = null;
 }

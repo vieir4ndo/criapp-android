@@ -12,9 +12,9 @@ import android.widget.Toast
 import com.example.criapp.databinding.ActivityUpdateChildBinding
 import com.example.criapp.services.SpinnerHelper
 import com.example.criapp.services.DateHelper
-import com.example.criapp.models.ChildModel
+import com.example.criapp.models.responses.ChildResponse
 import com.example.criapp.models.CreateOrUpdateChildModel
-import com.example.criapp.models.ResponseModel
+import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
 import com.example.criapp.services.DialogFactory
 import com.google.gson.Gson
@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 
 class UpdateChildActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityUpdateChildBinding
-    private var child : ChildModel? = null
+    private var child : ChildResponse? = null
     private val gson = Gson()
     private var criAppClient : CriAppClient? = null
     private var sharedPreferences : SharedPreferences? = null
@@ -44,7 +44,7 @@ class UpdateChildActivity : AppCompatActivity() {
 
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
         criAppClient = CriAppClient(sharedPreferences!!)
-        child = gson.fromJson(intent.getStringExtra("child"), ChildModel::class.java)
+        child = gson.fromJson(intent.getStringExtra("child"), ChildResponse::class.java)
 
         val date = DateHelper.getDayMonthAndYearFromFormattedDate(child!!.birthDate)
         birthDateDay = date.first

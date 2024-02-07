@@ -1,5 +1,5 @@
-package com.example.criapp.models
-data class UserModel(
+package com.example.criapp.models.responses
+data class UserResponse(
     val id: String,
     val name: String,
     val birthDate: String,

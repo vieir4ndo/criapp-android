@@ -23,9 +23,11 @@ class CreateUserModel(
         return CreateUserModelValidator(this).isValid()
     }
 
-    fun toRequest(sex: Int, familyType: Int, educationalLevel: Int): String {
+    override fun toRequest(): String {
 
         val sexAdapter = spinnerSex.getAdapter() as CriAppSpinnerAdapter;
+        val familyTypeAdapter = spinnerFamilyType.getAdapter() as CriAppSpinnerAdapter;
+        val educationalLevelAdapter = spinnerEducationalLevel.getAdapter() as CriAppSpinnerAdapter;
 
         return CreateUserRequest(
             editTextName.text.toString(),
@@ -35,8 +37,8 @@ class CreateUserModel(
             if (editTextNumberOfChildren.text.toString() == "") 0 else editTextNumberOfChildren.text.toString()
                 .toInt(),
             sexAdapter.position,
-            if (familyType == 0) null else familyType,
-            if (educationalLevel == 0) null else educationalLevel,
+            if (familyTypeAdapter.position == 0) null else familyTypeAdapter.position,
+            if (educationalLevelAdapter.position == 0) null else educationalLevelAdapter.position,
         ).toString()
     }
 }

@@ -8,10 +8,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import com.example.criapp.models.ChildModel
+import com.example.criapp.models.responses.ChildResponse
 import com.example.criapp.models.CreateAnswerModel
-import com.example.criapp.models.QuestionModel
-import com.example.criapp.models.ResponseModel
+import com.example.criapp.models.responses.QuestionResponse
+import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +20,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class AnswerActivity : AppCompatActivity() {
-    private var child : ChildModel? = null;
+    private var child : ChildResponse? = null;
     private val gson = Gson();
     private var textView : TextView? = null;
     private var textQuestion : TextView? = null;
@@ -28,7 +28,7 @@ class AnswerActivity : AppCompatActivity() {
     private var textQuestionTypeMax : TextView? = null;
     private var criAppClient : CriAppClient? = null;
     private var sharedPreferences : SharedPreferences? = null;
-    private var questions : Array<QuestionModel>? = null;
+    private var questions : Array<QuestionResponse>? = null;
     private var currentQuestion = -1;
     private var value : Int = 3;
     private var aLoadingDialog : ALoadingDialog? = null;
@@ -43,7 +43,7 @@ class AnswerActivity : AppCompatActivity() {
 
         criAppClient = CriAppClient(sharedPreferences!!);
 
-        child = gson.fromJson(intent.getStringExtra("child"), ChildModel::class.java)
+        child = gson.fromJson(intent.getStringExtra("child"), ChildResponse::class.java)
 
         textView = findViewById(R.id.text_child);
         textQuestion = findViewById(R.id.text_question);
@@ -73,7 +73,7 @@ class AnswerActivity : AppCompatActivity() {
             Toast.makeText(this, "Hubo un error al buscar las preguntas, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
         } else {
             val json = gson.toJson(result!!.data!!);
-            questions = gson.fromJson(json, Array<QuestionModel>::class.java);
+            questions = gson.fromJson(json, Array<QuestionResponse>::class.java);
 
             showNextQuestion();
         }

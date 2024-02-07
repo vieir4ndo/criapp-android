@@ -10,9 +10,9 @@ import android.widget.Toast
 import com.example.criapp.databinding.ActivityProfileBinding
 import com.example.criapp.services.SpinnerHelper
 import com.example.criapp.services.DateHelper
-import com.example.criapp.models.ResponseModel
+import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.models.UpdateUserModel
-import com.example.criapp.models.UserModel
+import com.example.criapp.models.responses.UserResponse
 import com.example.criapp.services.CriAppClient
 import com.example.criapp.services.DialogFactory
 import com.google.gson.Gson
@@ -66,7 +66,7 @@ class ProfileActivity : AppCompatActivity() {
         }
         else {
             val json = gson.toJson(result!!.data!!.first());
-            val data = gson.fromJson(json, UserModel::class.java);
+            val data = gson.fromJson(json, UserResponse::class.java);
 
             user.name = data.name;
             user.birthDate = data.birthDate;
