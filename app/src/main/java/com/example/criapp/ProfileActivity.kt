@@ -15,22 +15,24 @@ import com.example.criapp.models.UpdateUserModel
 import com.example.criapp.models.responses.UserResponse
 import com.example.criapp.services.CriAppClient
 import com.example.criapp.services.DialogFactory
+import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import okhttp3.RequestBody
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityProfileBinding;
     private var criAppClient : CriAppClient? = null;
     private val gson = Gson();
-    private var user : UpdateUserModel = UpdateUserModel();
+    private lateinit var updateUserModel : UpdateUserModel;
     private var birthDateDay = 0;
     private var birthDateMonth = 0;
     private var birthDateYear = 0;
     private var aLoadingDialog : ALoadingDialog? = null;
-    private var editTextBirthDate : EditText? = null;
+    private lateinit var editTextBirthDate : EditText;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,20 +68,12 @@ class ProfileActivity : AppCompatActivity() {
         }
         else {
             val json = gson.toJson(result!!.data!!.first());
-            val data = gson.fromJson(json, UserResponse::class.java);
+            val user = gson.fromJson(json, UserResponse::class.java);
 
-            user.name = data.name;
-            user.birthDate = data.birthDate;
-
-            val date = DateHelper.getDayMonthAndYearFromFormattedDate(data!!.birthDate)
+            val date = DateHelper.getDayMonthAndYearFromFormattedDate(user!!.birthDate)
             birthDateDay = date.first
             birthDateMonth = date.second
             birthDateYear = date.third
-
-            user.sex = data.sex;
-            user.familyType = data.familyType;
-            user.educationalLevel = data.educationalLevel;
-            user.numberOfChildren = data.educationalLevel;
 
             configSpinners();
 
@@ -90,37 +84,45 @@ class ProfileActivity : AppCompatActivity() {
 
             editTextName.setText(user.name);
             editTextNumberOfChildren.setText(user.numberOfChildren.toString());
-            editTextBirthDate!!.setText(DateHelper.formatDateDDMMYYYY(birthDateYear, birthDateMonth, birthDateDay))
+            editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(birthDateYear, birthDateMonth, birthDateDay))
+            mBinding.spinnerSex.setSelection(user.sex);
+            mBinding.spinnerFamilyType.setSelection(user.familyType);
+            mBinding.spinnerEducationalLevel.setSelection(user.educationalLevel);
+
+            updateUserModel = UpdateUserModel(
+                editTextName,
+                editTextBirthDate,
+                mBinding.spinnerSex,
+                mBinding.spinnerEducationalLevel,
+                mBinding.spinnerFamilyType,
+                editTextNumberOfChildren)
 
             buttonUpdateUser.setOnClickListener{
-                aLoadingDialog!!.show()
-                user.name = editTextName.text.toString();
-                user.birthDate = DateHelper.formatDateYYYYMMDD(birthDateYear, birthDateMonth, birthDateDay);
-                user.numberOfChildren = if (editTextNumberOfChildren.text.toString() == "") 0 else editTextNumberOfChildren.text.toString().toInt();
-
-                updateUser()
+               if (updateUserModel.validate()){
+                   updateUser(updateUserModel.toRequest())
+               }
             }
         }
     }
 
     private fun configSpinners(){
-        SpinnerHelper.configSpinner(this,
+        val sexSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_sex_input_layout);
+        SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerSex,
             SpinnerHelper.sexOptions,
-            { position : Int -> user.sex = position })
-        mBinding.spinnerSex.setSelection(user.sex)
+            sexSpinnerInputLayout)
 
-        SpinnerHelper.configSpinner(this,
+        val spinnerEducationalLevelInputLayout = findViewById<TextInputLayout>(R.id.spinner_educational_level_input_layout);
+        SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerEducationalLevel,
             SpinnerHelper.educationalLevelOptions,
-            { position : Int -> user.educationalLevel = position })
-        mBinding.spinnerEducationalLevel.setSelection(user.educationalLevel)
+            spinnerEducationalLevelInputLayout)
 
-        SpinnerHelper.configSpinner(this,
+        val spinnerFamilyTypeInputLayout = findViewById<TextInputLayout>(R.id.spinner_family_type_input_layout);
+        SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerFamilyType,
             SpinnerHelper.familyTypeOptions,
-            { position:Int -> user.familyType = position })
-        mBinding.spinnerFamilyType.setSelection(user.familyType)
+            spinnerFamilyTypeInputLayout)
     }
 
     fun showDatePickerForBirthDate(view : View){
@@ -128,17 +130,18 @@ class ProfileActivity : AppCompatActivity() {
             birthDateDay = day;
             birthDateMonth = month + 1;
             birthDateYear = year;
-            editTextBirthDate!!.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
+            editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
         }
 
         datePicker.show(supportFragmentManager, "datePicker")
     }
 
-    private fun updateUser() {
+    private fun updateUser(requestBody: String) {
+        aLoadingDialog!!.show()
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
-            criAppClient!!.patchAuthenticated("/user", user.toString());
+            criAppClient!!.patchAuthenticated("/user", requestBody);
         }
 
         scope.launch {
