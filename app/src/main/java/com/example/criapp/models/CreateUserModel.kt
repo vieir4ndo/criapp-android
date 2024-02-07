@@ -24,7 +24,6 @@ class CreateUserModel(
     }
 
     override fun toRequest(): String {
-
         val sexAdapter = spinnerSex.getAdapter() as CriAppSpinnerAdapter;
         val familyTypeAdapter = spinnerFamilyType.getAdapter() as CriAppSpinnerAdapter;
         val educationalLevelAdapter = spinnerEducationalLevel.getAdapter() as CriAppSpinnerAdapter;
