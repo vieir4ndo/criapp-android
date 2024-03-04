@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.criapp.R;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class CriAppSpinnerAdapter extends BaseAdapter {
     private Context context;
     private List<String> data;
     public int position;
-    public TextInputLayout inputLayout;
+    public TextView errorTextView;
 
     public CriAppSpinnerAdapter(Context context, List<String> data) {
         this.context = context;

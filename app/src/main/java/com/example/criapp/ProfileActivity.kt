@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.criapp.databinding.ActivityProfileBinding
 import com.example.criapp.services.SpinnerHelper
@@ -106,23 +107,24 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun configSpinners(){
-        val sexSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_sex_input_layout);
+        val errorTextView = findViewById<TextView>(R.id.text_view_errors);
+        //val sexSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_sex_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerSex,
             SpinnerHelper.sexOptions,
-            sexSpinnerInputLayout)
+            errorTextView)
 
-        val spinnerEducationalLevelInputLayout = findViewById<TextInputLayout>(R.id.spinner_educational_level_input_layout);
+        //val spinnerEducationalLevelInputLayout = findViewById<TextInputLayout>(R.id.spinner_educational_level_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerEducationalLevel,
             SpinnerHelper.educationalLevelOptions,
-            spinnerEducationalLevelInputLayout)
+            errorTextView)
 
-        val spinnerFamilyTypeInputLayout = findViewById<TextInputLayout>(R.id.spinner_family_type_input_layout);
+        //val spinnerFamilyTypeInputLayout = findViewById<TextInputLayout>(R.id.spinner_family_type_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerFamilyType,
             SpinnerHelper.familyTypeOptions,
-            spinnerFamilyTypeInputLayout)
+            errorTextView)
     }
 
     fun showDatePickerForBirthDate(view : View){
