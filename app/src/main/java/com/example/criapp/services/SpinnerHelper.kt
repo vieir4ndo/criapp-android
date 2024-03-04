@@ -23,13 +23,10 @@ class SpinnerHelper {
         fun configCriAppSpinner(
             context: Context,
             spinner: Spinner,
-            options: List<String>,
-            errorTextView: TextView
+            options: List<String>
         ) {
 
             val arrayAdapter = CriAppSpinnerAdapter(context, options)
-
-            arrayAdapter.errorTextView = errorTextView
 
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -39,7 +36,6 @@ class SpinnerHelper {
                     id: Long
                 ) {
                     arrayAdapter.position = position;
-                    arrayAdapter.errorTextView.error = null;
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {

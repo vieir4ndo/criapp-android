@@ -82,18 +82,12 @@
                 android:text="@string/sex"
                 android:textColor="@color/white"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/spinner_sex_input_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp">
                 <Spinner
                     android:id="@+id/spinner_sex"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"/>
 
             <TextView
                 android:id="@+id/label_spinner_educational_level"
@@ -102,19 +96,12 @@
                 android:text="@string/educational_level"
                 android:textColor="@color/white"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/spinner_educational_level_input_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp">
                 <Spinner
                     android:id="@+id/spinner_educational_level"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"/>
 
             <TextView
                 android:id="@+id/label_spinner_family_type"
@@ -123,18 +110,12 @@
                 android:text="@string/family_type"
                 android:textColor="@color/white" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/spinner_family_type_input_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp">
                 <Spinner
                     android:id="@+id/spinner_family_type"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"/>
 
             <TextView
                 android:id="@+id/label_edit_text_number_of_children"

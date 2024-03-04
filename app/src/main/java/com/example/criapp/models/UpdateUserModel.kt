@@ -2,6 +2,7 @@ package com.example.criapp.models
 
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import com.example.criapp.abstractions.CriAppSpinnerAdapter
 import com.example.criapp.abstractions.IModel
 import com.example.criapp.models.requests.UpdateUserRequest
@@ -16,8 +17,8 @@ class UpdateUserModel(
     val spinnerFamilyType: Spinner,
     val editTextNumberOfChildren: EditText
 ) : IModel<UpdateUserModel> {
-    override fun validate(): Boolean {
-        return UpdateUserModelValidator(this).isValid();
+    override fun validate(errorTextView : TextView): Boolean {
+        return UpdateUserModelValidator(this, errorTextView).isValid();
     }
 
     override fun toRequest(): String {

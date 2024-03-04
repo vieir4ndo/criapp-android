@@ -16,7 +16,6 @@ public class CriAppSpinnerAdapter extends BaseAdapter {
     private Context context;
     private List<String> data;
     public int position;
-    public TextView errorTextView;
 
     public CriAppSpinnerAdapter(Context context, List<String> data) {
         this.context = context;

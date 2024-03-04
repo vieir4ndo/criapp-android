@@ -43,6 +43,8 @@ class SignUpActivity : AppCompatActivity() {
         criAppClient = CriAppClient(sharedPreferences!!)
 
         configSpinners();
+
+        val errorTextView = findViewById<TextView>(R.id.text_view_errors);
         val buttonCreateUser = findViewById<Button>(R.id.button_create_user);
         editTextBirthDate = findViewById(R.id.edit_text_birth_date);
 
@@ -58,31 +60,24 @@ class SignUpActivity : AppCompatActivity() {
         )
 
         buttonCreateUser.setOnClickListener {
-            if (createUserModel.validate()) {
+            if (createUserModel.validate(errorTextView)) {
                 fetchData(createUserModel.toRequest())
             }
         }
     }
 
     private fun configSpinners() {
-        val errorTextView = findViewById<TextView>(R.id.text_view_errors);
-        //val sexSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_sex_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerSex,
-            SpinnerHelper.sexOptions,
-            errorTextView)
+            SpinnerHelper.sexOptions)
 
-        //val spinnerEducationalLevelInputLayout = findViewById<TextInputLayout>(R.id.spinner_educational_level_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerEducationalLevel,
-            SpinnerHelper.educationalLevelOptions,
-            errorTextView)
+            SpinnerHelper.educationalLevelOptions)
 
-        //val spinnerFamilyTypeInputLayout = findViewById<TextInputLayout>(R.id.spinner_family_type_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerFamilyType,
-            SpinnerHelper.familyTypeOptions,
-            errorTextView)
+            SpinnerHelper.familyTypeOptions)
     }
 
     fun showDatePickerForBirthDate(view: View) {

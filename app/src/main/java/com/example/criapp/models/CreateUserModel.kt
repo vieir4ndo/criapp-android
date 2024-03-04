@@ -2,6 +2,7 @@ package com.example.criapp.models
 
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import com.example.criapp.abstractions.CriAppSpinnerAdapter
 import com.example.criapp.abstractions.IModel
 import com.example.criapp.models.requests.CreateUserRequest
@@ -19,8 +20,8 @@ class CreateUserModel(
     val spinnerFamilyType: Spinner,
 ) :IModel<CreateUserModel> {
 
-    override fun validate(): Boolean {
-        return CreateUserModelValidator(this).isValid()
+    override fun validate(errorTextView : TextView): Boolean {
+        return CreateUserModelValidator(this, errorTextView).isValid()
     }
 
     override fun toRequest(): String {

@@ -55,6 +55,7 @@ class UpdateChildActivity : AppCompatActivity() {
 
         configSpinners();
 
+        val errorTextView = findViewById<TextView>(R.id.text_view_errors);
         val buttonUpdateChild = findViewById<Button>(R.id.button_update_child)
         var editTextName = findViewById<EditText>(R.id.edit_text_name)
         var editTextMonthsOfBreastFeeding = findViewById<EditText>(R.id.edit_text_months_of_breast_feeding)
@@ -67,7 +68,7 @@ class UpdateChildActivity : AppCompatActivity() {
         model = CreateOrUpdateChildModel(editTextName,editTextBirthDate, mBinding.spinnerSex, editTextMonthsOfBreastFeeding, mBinding.spinnerPremature)
 
         buttonUpdateChild.setOnClickListener{
-           if (model.validate()){
+           if (model.validate(errorTextView)){
                fetchData(model.toRequest())
            }
         }
@@ -103,20 +104,15 @@ class UpdateChildActivity : AppCompatActivity() {
     }
 
     private fun configSpinners(){
-        val errorTextView = findViewById<TextView>(R.id.text_view_errors);
-        //val sexSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_sex_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerSex,
-            SpinnerHelper.sexOptions,
-            errorTextView
+            SpinnerHelper.sexOptions
             )
         mBinding.spinnerSex.setSelection(child!!.sex)
 
-        //val prematureSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_premature_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerPremature,
-            SpinnerHelper.yesOrNoOptions,
-            errorTextView
+            SpinnerHelper.yesOrNoOptions
         )
         mBinding.spinnerPremature.setSelection(if (child!!.isPremature)  1 else 2)
     }
