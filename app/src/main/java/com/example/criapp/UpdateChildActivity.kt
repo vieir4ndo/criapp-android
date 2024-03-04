@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.criapp.databinding.ActivityUpdateChildBinding
 import com.example.criapp.services.SpinnerHelper
@@ -102,19 +103,20 @@ class UpdateChildActivity : AppCompatActivity() {
     }
 
     private fun configSpinners(){
-        val sexSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_sex_input_layout);
+        val errorTextView = findViewById<TextView>(R.id.text_view_errors);
+        //val sexSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_sex_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerSex,
             SpinnerHelper.sexOptions,
-            sexSpinnerInputLayout
+            errorTextView
             )
         mBinding.spinnerSex.setSelection(child!!.sex)
 
-        val prematureSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_premature_input_layout);
+        //val prematureSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_premature_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerPremature,
             SpinnerHelper.yesOrNoOptions,
-            prematureSpinnerInputLayout
+            errorTextView
         )
         mBinding.spinnerPremature.setSelection(if (child!!.isPremature)  1 else 2)
     }

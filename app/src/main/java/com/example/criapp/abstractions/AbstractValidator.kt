@@ -42,7 +42,7 @@ abstract class AbstractValidator {
         input as Spinner
         val adapter = input.getAdapter() as CriAppSpinnerAdapter;
         if (adapter.position == 0) {
-            adapter.inputLayout.error = "$inputName es obligatorio";
+            adapter.errorTextView.text = adapter.errorTextView.text.toString().plus("\n$inputName es obligatorio");
             return false;
         }
         return true;
