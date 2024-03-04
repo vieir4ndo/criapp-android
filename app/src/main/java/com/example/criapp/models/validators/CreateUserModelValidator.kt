@@ -1,11 +1,12 @@
 package com.example.criapp.models.validators
 
+import android.widget.TextView
 import com.example.criapp.abstractions.AbstractValidator
 import com.example.criapp.models.CreateUserModel
 
 class CreateUserModelValidator(
-    createUserModel: CreateUserModel
-) : AbstractValidator() {
+    createUserModel: CreateUserModel, errorTextView : TextView
+) : AbstractValidator(errorTextView) {
     init {
         ruleFor("Nombre", createUserModel.editTextName, this::isNotEmpty)
         ruleFor("Nombre", createUserModel.editTextName, this::hasMaxLength100Char)

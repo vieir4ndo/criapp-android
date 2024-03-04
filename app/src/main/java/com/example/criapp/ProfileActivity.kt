@@ -78,6 +78,7 @@ class ProfileActivity : AppCompatActivity() {
 
             configSpinners();
 
+            val errorTextView = findViewById<TextView>(R.id.text_view_errors);
             val buttonUpdateUser = findViewById<Button>(R.id.button_update_user);
             val editTextName = findViewById<EditText>(R.id.edit_text_name);
             val editTextNumberOfChildren = findViewById<EditText>(R.id.edit_text_number_of_children);
@@ -99,7 +100,7 @@ class ProfileActivity : AppCompatActivity() {
                 editTextNumberOfChildren)
 
             buttonUpdateUser.setOnClickListener{
-               if (updateUserModel.validate()){
+               if (updateUserModel.validate(errorTextView)){
                    updateUser(updateUserModel.toRequest())
                }
             }
@@ -107,24 +108,17 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun configSpinners(){
-        val errorTextView = findViewById<TextView>(R.id.text_view_errors);
-        //val sexSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_sex_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerSex,
-            SpinnerHelper.sexOptions,
-            errorTextView)
+            SpinnerHelper.sexOptions)
 
-        //val spinnerEducationalLevelInputLayout = findViewById<TextInputLayout>(R.id.spinner_educational_level_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerEducationalLevel,
-            SpinnerHelper.educationalLevelOptions,
-            errorTextView)
+            SpinnerHelper.educationalLevelOptions)
 
-        //val spinnerFamilyTypeInputLayout = findViewById<TextInputLayout>(R.id.spinner_family_type_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerFamilyType,
-            SpinnerHelper.familyTypeOptions,
-            errorTextView)
+            SpinnerHelper.familyTypeOptions)
     }
 
     fun showDatePickerForBirthDate(view : View){

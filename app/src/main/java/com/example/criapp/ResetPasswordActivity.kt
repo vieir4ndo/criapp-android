@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.criapp.models.ResetPasswordModel
 import com.example.criapp.models.responses.ResponseModel
@@ -33,7 +34,7 @@ class ResetPasswordActivity : AppCompatActivity() {
         criAppClient = CriAppClient(sharedPreferences!!)
 
         val buttonResetPassword = findViewById<Button>(R.id.button_reset_password);
-
+        val errorTextView = findViewById<TextView>(R.id.text_view_errors);
         val editTextCode = findViewById<EditText>(R.id.edit_text_code);
         val editTextNewPassword = findViewById<EditText>(R.id.edit_text_new_password);
 
@@ -44,7 +45,7 @@ class ResetPasswordActivity : AppCompatActivity() {
         );
 
         buttonResetPassword.setOnClickListener {
-            if (model.validate()){
+            if (model.validate(errorTextView)){
                 fetchData(model.toRequest())
             }
         }

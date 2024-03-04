@@ -1,9 +1,10 @@
 package com.example.criapp.models.validators
 
+import android.widget.TextView
 import com.example.criapp.abstractions.AbstractValidator
 import com.example.criapp.models.CreateOrUpdateChildModel
 
-class CreateOrUpdateChildModelValidator(createOrUpdateChildModel : CreateOrUpdateChildModel) : AbstractValidator() {
+class CreateOrUpdateChildModelValidator(createOrUpdateChildModel : CreateOrUpdateChildModel, errorTextView : TextView) : AbstractValidator(errorTextView) {
 
     init {
         ruleFor("Nombre", createOrUpdateChildModel.editTextName, this::isNotEmpty)

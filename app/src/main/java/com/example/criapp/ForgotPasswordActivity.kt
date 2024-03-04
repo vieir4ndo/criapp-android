@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import com.example.criapp.models.ForgotPasswordModel
 import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
@@ -30,14 +31,14 @@ class ForgotPasswordActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
         criappClient = CriAppClient(sharedPreferences!!)
 
+        val errorTextView = findViewById<TextView>(R.id.text_view_errors);
         val buttonForgotPassword = findViewById<Button>(R.id.button_forgot_password);
-
         val editTextUsername = findViewById<EditText>(R.id.edit_text_username);
 
         model = ForgotPasswordModel(editTextUsername);
 
         buttonForgotPassword.setOnClickListener {
-            if (model.validate()){
+            if (model.validate(errorTextView)){
                 fetchData(model.toRequest())
             }
         }

@@ -43,6 +43,7 @@ class CreateChildActivity : AppCompatActivity() {
 
         configSpinners();
 
+        val errorTextView = findViewById<TextView>(R.id.text_view_errors);
         val buttonCreateChild = findViewById<Button>(R.id.button_create_child);
         val editTextName = findViewById<EditText>(R.id.edit_text_name);
         val editTextMonthsOfBreastFeeding = findViewById<EditText>(R.id.edit_text_months_of_breast_feeding);
@@ -52,7 +53,7 @@ class CreateChildActivity : AppCompatActivity() {
 
         buttonCreateChild.setOnClickListener{
 
-            if (model.validate()){
+            if (model.validate(errorTextView)){
                 fetchData(model.toRequest())
             }
         }
@@ -88,20 +89,14 @@ class CreateChildActivity : AppCompatActivity() {
     }
 
     private fun configSpinners(){
-        val errorTextView = findViewById<TextView>(R.id.text_view_errors);
-
-        //val sexSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_sex_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerSex,
             SpinnerHelper.sexOptions,
-            errorTextView
            )
 
-        //val prematureSpinnerInputLayout = findViewById<TextInputLayout>(R.id.spinner_premature_input_layout);
         SpinnerHelper.configCriAppSpinner(this,
             mBinding.spinnerPremature,
             SpinnerHelper.yesOrNoOptions,
-            errorTextView
         )
     }
 

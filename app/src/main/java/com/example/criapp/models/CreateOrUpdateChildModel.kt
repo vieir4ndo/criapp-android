@@ -2,6 +2,7 @@ package com.example.criapp.models
 
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import com.example.criapp.abstractions.CriAppSpinnerAdapter
 import com.example.criapp.abstractions.IModel
 import com.example.criapp.models.requests.CreateOrUpdateChildRequest
@@ -15,8 +16,8 @@ class CreateOrUpdateChildModel(
     val editTextMonthsOfBreastFeeding: EditText,
     val spinnerIsPremature: Spinner,
 ) : IModel<CreateOrUpdateChildModel> {
-    override fun validate(): Boolean {
-        return CreateOrUpdateChildModelValidator(this).isValid()
+    override fun validate(errorTextView: TextView): Boolean {
+        return CreateOrUpdateChildModelValidator(this, errorTextView).isValid()
     }
 
     override fun toRequest(): String {

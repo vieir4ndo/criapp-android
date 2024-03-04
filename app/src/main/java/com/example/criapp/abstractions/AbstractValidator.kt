@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.Spinner
 import android.widget.TextView
 
-abstract class AbstractValidator {
+abstract class AbstractValidator(var errorTextView: TextView) {
 
     private var rules: MutableList<Triple<String, View, (View, String) -> Boolean>> =
         emptyList<Triple<String, View, (View, String) -> Boolean>>().toMutableList()
@@ -32,7 +32,7 @@ abstract class AbstractValidator {
     fun isNotEmpty(input: View, inputName: String): Boolean {
         input as TextView
         if (input.text.toString().isEmpty() || input.text.toString().isBlank()) {
-            input.error = "$inputName es obligatorio";
+            errorTextView.text = errorTextView.text.toString().plus("\n$inputName es obligatorio");
             return false;
         }
         return true;
@@ -42,7 +42,7 @@ abstract class AbstractValidator {
         input as Spinner
         val adapter = input.getAdapter() as CriAppSpinnerAdapter;
         if (adapter.position == 0) {
-            adapter.errorTextView.text = adapter.errorTextView.text.toString().plus("\n$inputName es obligatorio");
+            errorTextView.text = errorTextView.text.toString().plus("\n$inputName es obligatorio");
             return false;
         }
         return true;
@@ -51,7 +51,7 @@ abstract class AbstractValidator {
     fun hasMaxLength100Char(input: View, inputName: String): Boolean {
         input as TextView
         if (input.text.toString().length > 100) {
-            input.error = "$inputName debe contener un máximo de 100 caracteres";
+            errorTextView.text = errorTextView.text.toString().plus("\n$inputName debe contener un máximo de 100 caracteres");
             return false;
         }
         return true;
@@ -68,7 +68,7 @@ abstract class AbstractValidator {
             return true;
         }
 
-        input.error = "$inputName es inválido";
+        errorTextView.text = errorTextView.text.toString().plus("\n$inputName es inválido");
 
         return false;
     }
@@ -78,7 +78,7 @@ abstract class AbstractValidator {
         input as TextView
         val pattern = Regex("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}")
         if (!pattern.matches(input.text.toString())) {
-            input.error = "$inputName es inválida";
+            errorTextView.text = errorTextView.text.toString().plus("\n$inputName es inválida");
             return false;
         }
 

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import com.example.criapp.models.LoginUserModel
 import com.example.criapp.models.responses.LoginUserResponse
 import com.example.criapp.models.responses.ResponseModel
@@ -47,6 +48,7 @@ class SignInActivity : AppCompatActivity() {
             startActivity(openForgotPasswordActivity);
         }
 
+        val errorTextView = findViewById<TextView>(R.id.text_view_errors);
         val buttonLoginUser = findViewById<Button>(R.id.button_login_user);
         val editTextUsername = findViewById<EditText>(R.id.edit_text_username);
         val editTextPassword = findViewById<EditText>(R.id.edit_text_password);
@@ -54,7 +56,7 @@ class SignInActivity : AppCompatActivity() {
         loginUserModel = LoginUserModel(editTextUsername, editTextPassword);
 
         buttonLoginUser.setOnClickListener {
-            if (loginUserModel.validate()) {
+            if (loginUserModel.validate(errorTextView)) {
                 fetchData(loginUserModel.toRequest())
             }
         }
