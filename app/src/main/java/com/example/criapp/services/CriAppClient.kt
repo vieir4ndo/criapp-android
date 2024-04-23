@@ -35,10 +35,21 @@ class CriAppClient(private val sharedPreferences: SharedPreferences) {
         return patch(path, body, headers);
     }
 
+    fun getAuthenticated(path: String) : ResponseModel?{
+        val headers = mapOf(
+            "Authorization" to getToken(),
+            "Content-Type" to "application/json",
+            "charset" to "utf-8"
+        );
+
+        return get(path, headers)
+    }
+
     fun post(path: String, body : String, headers: Map<String, String> = mapOf(
         "Content-Type" to "application/json",
         "charset" to "utf-8"
-    )) : ResponseModel? {
+    )) : ResponseModel?
+    {
 
         val uri = baseUri + path;
 
@@ -73,7 +84,8 @@ class CriAppClient(private val sharedPreferences: SharedPreferences) {
     fun patch(path: String, body : String, headers: Map<String, String> = mapOf(
         "Content-Type" to "application/json",
         "charset" to "utf-8"
-    )) : ResponseModel? {
+    )) : ResponseModel?
+    {
 
         val uri = baseUri + path;
 
@@ -105,15 +117,12 @@ class CriAppClient(private val sharedPreferences: SharedPreferences) {
         return gson.fromJson(responseBody, ResponseModel::class.java)
     }
 
-    fun getAuthenticated(path: String) : ResponseModel? {
-
+    fun get(path: String, headers: Map<String, String> = mapOf(
+        "Content-Type" to "application/json",
+        "charset" to "utf-8"
+    )) : ResponseModel?
+    {
         val uri = baseUri + path;
-
-        val headers = mapOf(
-            "Authorization" to getToken(),
-            "Content-Type" to "application/json",
-            "charset" to "utf-8"
-        );
 
         if (shouldLog) {
             println("Url: '$uri'");
@@ -138,7 +147,8 @@ class CriAppClient(private val sharedPreferences: SharedPreferences) {
         return gson.fromJson(responseBody, ResponseModel::class.java)
     }
 
-    private fun getToken() : String {
+    private fun getToken() : String
+    {
         val token = sharedPreferences.getString("token", "")
         //TODO: validate expiresIn and refresh token if necessary
         val expiresIn = sharedPreferences.getString("token_expires_in", "")
