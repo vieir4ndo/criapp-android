@@ -27,6 +27,11 @@ class MenuActivity : AppCompatActivity() {
         startActivity(nextIntent);
     }
 
+    fun onButtonFaqClick(view: View?){
+        val nextIntent = Intent(this, FaqActivity::class.java);
+        startActivity(nextIntent);
+    }
+
     fun onButtonLogoffClick(view: View?) {
         val sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
 
