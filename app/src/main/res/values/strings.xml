@@ -38,6 +38,7 @@
     <string name="audiovisual_resources">Recursos Audiovisuales</string>
     <string name="logoff">Salir</string>
     <string name="deactivate_account">Desactivar cuenta</string>
+    <string name="errors">Errores:</string>
 
 
     <string-array name="welcome_messages">
