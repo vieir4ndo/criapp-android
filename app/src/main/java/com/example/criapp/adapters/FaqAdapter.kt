@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.R
+import com.example.criapp.models.responses.FaqResponse
 
-class FaqAdapter(private val data: List<Pair<String, String>>)  : RecyclerView.Adapter<FaqAdapter.ViewHolder>() {
+class FaqAdapter(private val data: Array<FaqResponse>)  : RecyclerView.Adapter<FaqAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FaqAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.faq_item_layout, parent, false)
         return ViewHolder(view)
@@ -16,8 +17,8 @@ class FaqAdapter(private val data: List<Pair<String, String>>)  : RecyclerView.A
     override fun onBindViewHolder(holder: FaqAdapter.ViewHolder, position: Int) {
         val item = data[position]
 
-        holder.question.text = item.first;
-        holder.answer.text = item.second;
+        holder.question.text = item.question
+        holder.answer.text = item.answer;
     }
 
     override fun getItemCount(): Int {

@@ -21,8 +21,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class FaqActivity : AppCompatActivity() {
-    private lateinit var titleView : View
-    private lateinit var imageView : View
     private lateinit var criAppClient : CriAppClient
     private lateinit var sharedPreferences : SharedPreferences
     private lateinit var aLoadingDialog : ALoadingDialog
@@ -36,8 +34,6 @@ class FaqActivity : AppCompatActivity() {
         criAppClient = CriAppClient(sharedPreferences);
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        titleView = findViewById(R.id.title_faq)
-        imageView = findViewById(R.id.image_faq)
 
         fetchData()
     }
@@ -69,14 +65,7 @@ class FaqActivity : AppCompatActivity() {
         {
             val json = gson.toJson(result.data);
             var questions = gson.fromJson(json, Array<FaqResponse>::class.java);
-
-            var faqData = mutableListOf<Pair<String, String>>()
-
-            questions.forEach {
-                faqData.add(Pair(it.question, it.answer))
-            }
-
-            val adapter = FaqAdapter(faqData);
+            val adapter = FaqAdapter(questions);
             recyclerView.adapter = adapter
         }
     }
