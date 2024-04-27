@@ -3,13 +3,14 @@ package com.example.criapp
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ExpandableListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.criapp.adapters.FaqExpandableListAdapter
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.criapp.adapters.FaqAdapter
 import com.example.criapp.models.responses.FaqResponse
 import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
@@ -20,12 +21,12 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class FaqActivity : AppCompatActivity() {
-    private lateinit var expandableListView : ExpandableListView
     private lateinit var titleView : View
     private lateinit var imageView : View
     private lateinit var criAppClient : CriAppClient
     private lateinit var sharedPreferences : SharedPreferences
     private lateinit var aLoadingDialog : ALoadingDialog
+    private lateinit var recyclerView : RecyclerView
     private val gson = Gson();
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,8 @@ class FaqActivity : AppCompatActivity() {
         aLoadingDialog = ALoadingDialog(this);
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE);
         criAppClient = CriAppClient(sharedPreferences);
-        expandableListView = findViewById(R.id.expandableListView)
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         titleView = findViewById(R.id.title_faq)
         imageView = findViewById(R.id.image_faq)
 
@@ -74,22 +76,8 @@ class FaqActivity : AppCompatActivity() {
                 faqData.add(Pair(it.question, it.answer))
             }
 
-            val adapter = FaqExpandableListAdapter(this@FaqActivity, faqData)
-
-            expandableListView.setAdapter(adapter)
-
-            val layoutParams = expandableListView.layoutParams
-
-            val displayMetrics = DisplayMetrics()
-            windowManager.defaultDisplay.getMetrics(displayMetrics)
-            val screenHeight = displayMetrics.heightPixels
-
-           // val otherViewsHeight = titleView.height + imageView.height
-            val remainingHeight = screenHeight
-            //- otherViewsHeight
-
-            layoutParams.height = remainingHeight
-            expandableListView.layoutParams = layoutParams
+            val adapter = FaqAdapter(faqData);
+            recyclerView.adapter = adapter
         }
     }
 }
