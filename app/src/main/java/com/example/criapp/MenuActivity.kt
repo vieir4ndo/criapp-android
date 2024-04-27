@@ -1,6 +1,5 @@
 package com.example.criapp
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,14 +31,8 @@ class MenuActivity : AppCompatActivity() {
         startActivity(nextIntent);
     }
 
-    fun onButtonLogoffClick(view: View?) {
-        val sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
-
-        val editor = sharedPreferences.edit()
-
-        editor.clear();
-
-        val nextIntent = Intent(this, SignInActivity::class.java);
+    fun onButtonAudioVisualResourcesClick(view: View?){
+        val nextIntent = Intent(this, AudioVisualResourcesActivity::class.java);
         startActivity(nextIntent);
     }
 }
