@@ -1,6 +1,7 @@
 package com.example.criapp
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -157,5 +158,16 @@ class ProfileActivity : AppCompatActivity() {
         else {
             Toast.makeText(this, "Perfil actualizado con exito", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun onButtonLogoffClick(view: View?) {
+        val sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
+
+        val editor = sharedPreferences.edit()
+
+        editor.clear();
+
+        val nextIntent = Intent(this, SignInActivity::class.java);
+        startActivity(nextIntent);
     }
 }
