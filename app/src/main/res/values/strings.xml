@@ -31,6 +31,13 @@
     <string name="edit_child">Edición de niño(a)</string>
     <string name="profile">Perfil</string>
     <string name="faq">FAQ</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="questionnaires">Cuestionarios</string>
+    <string name="foruns">Foros</string>
+    <string name="awards">Premios</string>
+    <string name="audiovisual_resources">Recursos Audiovisuales</string>
+    <string name="logoff">Salir</string>
+    <string name="deactivate_account">Desactivar cuenta</string>
 
 
     <string-array name="welcome_messages">

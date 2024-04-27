@@ -50,5 +50,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
     implementation("com.airbnb.android:lottie:5.2.0")
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 
 }
