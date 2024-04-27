@@ -84,8 +84,9 @@ class FaqActivity : AppCompatActivity() {
             windowManager.defaultDisplay.getMetrics(displayMetrics)
             val screenHeight = displayMetrics.heightPixels
 
-            val otherViewsHeight = titleView.height + imageView.height
-            val remainingHeight = screenHeight - otherViewsHeight
+           // val otherViewsHeight = titleView.height + imageView.height
+            val remainingHeight = screenHeight
+            //- otherViewsHeight
 
             layoutParams.height = remainingHeight
             expandableListView.layoutParams = layoutParams

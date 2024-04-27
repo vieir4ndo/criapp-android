@@ -279,7 +279,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/card_holo_purple"
-                android:onClick="onButtonFaqClick"
+                android:onClick="onButtonAudioVisualResourcesClick"
                 android:orientation="vertical"
                 android:padding="10dp">
 

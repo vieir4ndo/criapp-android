@@ -80,6 +80,7 @@ class ProfileActivity : AppCompatActivity() {
             configSpinners();
 
             val errorTextView = findViewById<TextView>(R.id.text_view_errors);
+            errorTextView.visibility = View.GONE
             val buttonUpdateUser = findViewById<Button>(R.id.button_update_user);
             val editTextName = findViewById<EditText>(R.id.edit_text_name);
             val editTextNumberOfChildren = findViewById<EditText>(R.id.edit_text_number_of_children);
@@ -104,6 +105,7 @@ class ProfileActivity : AppCompatActivity() {
                if (updateUserModel.validate(errorTextView)){
                    updateUser(updateUserModel.toRequest())
                }
+               else { errorTextView.visibility = View.VISIBLE }
             }
         }
     }

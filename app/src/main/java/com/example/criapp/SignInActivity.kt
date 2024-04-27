@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -49,6 +50,7 @@ class SignInActivity : AppCompatActivity() {
         }
 
         val errorTextView = findViewById<TextView>(R.id.text_view_errors);
+        errorTextView.visibility = View.GONE
         val buttonLoginUser = findViewById<Button>(R.id.button_login_user);
         val editTextUsername = findViewById<EditText>(R.id.edit_text_username);
         val editTextPassword = findViewById<EditText>(R.id.edit_text_password);
@@ -59,6 +61,7 @@ class SignInActivity : AppCompatActivity() {
             if (loginUserModel.validate(errorTextView)) {
                 fetchData(loginUserModel.toRequest())
             }
+            else { errorTextView.visibility = View.VISIBLE }
         }
     }
 
@@ -90,6 +93,7 @@ class SignInActivity : AppCompatActivity() {
             editor.putString("token", tokenData.token)
             editor.putString("token_expires_in", tokenData.expiresIn)
             editor.putString("user_id", tokenData.user?.id)
+            editor.putString("user_name", tokenData.user?.name)
             editor.apply()
 
             val openWelcomeActivityIntent = Intent(this, WelcomeMessagesActivity::class.java);
