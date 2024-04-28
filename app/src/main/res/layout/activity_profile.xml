@@ -149,6 +149,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/ok"
                 android:textColor="@color/white"
+                android:backgroundTint="@color/dark_blue"
                 android:textSize="20sp"
                 android:textStyle="bold" />
             <Button
