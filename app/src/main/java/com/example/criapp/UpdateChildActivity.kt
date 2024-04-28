@@ -56,6 +56,7 @@ class UpdateChildActivity : AppCompatActivity() {
         configSpinners();
 
         val errorTextView = findViewById<TextView>(R.id.text_view_errors);
+        errorTextView.visibility = View.GONE
         val buttonUpdateChild = findViewById<Button>(R.id.button_update_child)
         var editTextName = findViewById<EditText>(R.id.edit_text_name)
         var editTextMonthsOfBreastFeeding = findViewById<EditText>(R.id.edit_text_months_of_breast_feeding)
@@ -71,6 +72,7 @@ class UpdateChildActivity : AppCompatActivity() {
            if (model.validate(errorTextView)){
                fetchData(model.toRequest())
            }
+           else { errorTextView.visibility = View.VISIBLE }
         }
     }
 
