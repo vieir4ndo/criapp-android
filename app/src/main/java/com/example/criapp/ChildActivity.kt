@@ -11,6 +11,8 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginTop
+import androidx.core.view.setPadding
 import com.example.criapp.models.responses.ChildResponse
 import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
@@ -108,7 +110,9 @@ class ChildActivity : AppCompatActivity() {
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
 
-        params.bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
+        params.topMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
+        params.marginEnd = resources.getDimensionPixelSize(R.dimen.margin_top)
+        params.marginStart = resources.getDimensionPixelSize(R.dimen.margin_top)
 
         button.layoutParams = params
 
@@ -128,7 +132,7 @@ class ChildActivity : AppCompatActivity() {
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
 
-        params.bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
+        params.topMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
 
         text.layoutParams = params
 
@@ -162,7 +166,9 @@ class ChildActivity : AppCompatActivity() {
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
 
-        params.bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
+        params.topMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
+        params.marginEnd = resources.getDimensionPixelSize(R.dimen.margin_top)
+        params.marginStart = resources.getDimensionPixelSize(R.dimen.margin_top)
 
         button.layoutParams = params
 
