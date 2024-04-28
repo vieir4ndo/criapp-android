@@ -143,7 +143,7 @@
 
             <Button
                 android:id="@+id/button_update_user"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
@@ -152,7 +152,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
             <Button
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:backgroundTint="@android:color/holo_purple"
@@ -162,7 +162,7 @@
                 android:textStyle="bold"/>
             <Button
                 android:id="@+id/button_logout"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:backgroundTint="@android:color/holo_purple"
