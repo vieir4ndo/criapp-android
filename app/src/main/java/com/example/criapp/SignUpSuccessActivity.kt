@@ -9,6 +9,7 @@ class SignUpSuccessActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up_success)
+        window.setNavigationBarColor(getResources().getColor(R.color.light_blue))
     }
 
     fun onButtonClick(view: View?) {

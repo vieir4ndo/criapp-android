@@ -37,6 +37,8 @@ class SignUpActivity : AppCompatActivity() {
         mBinding = ActivitySignUpBinding.inflate(layoutInflater);
         setContentView(mBinding.root);
 
+        window.setNavigationBarColor(getResources().getColor(R.color.light_blue))
+
         aLoadingDialog = ALoadingDialog(this);
 
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)

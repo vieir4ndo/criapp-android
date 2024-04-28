@@ -4,6 +4,7 @@
         <item name="colorAccent">@color/dark_blue</item>
         <item name="colorSecondary">@color/light_blue</item>
         <item name="colorPrimary">@color/purple</item>
+        <item name="android:navigationBarColor">@color/dark_purple</item>
     </style>
 
     <style name="Theme.CRIApp" parent="Base.Theme.CRIApp" />

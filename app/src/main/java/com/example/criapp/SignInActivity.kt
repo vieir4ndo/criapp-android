@@ -30,6 +30,8 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
+        window.setNavigationBarColor(getResources().getColor(R.color.light_blue))
+
         aLoadingDialog = ALoadingDialog(this);
 
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
