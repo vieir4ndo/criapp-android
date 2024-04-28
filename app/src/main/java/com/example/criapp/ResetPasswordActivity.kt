@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -29,12 +30,12 @@ class ResetPasswordActivity : AppCompatActivity() {
 
         aLoadingDialog = ALoadingDialog(this);
 
-
         sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
         criAppClient = CriAppClient(sharedPreferences!!)
 
         val buttonResetPassword = findViewById<Button>(R.id.button_reset_password);
         val errorTextView = findViewById<TextView>(R.id.text_view_errors);
+        errorTextView.visibility = View.GONE
         val editTextCode = findViewById<EditText>(R.id.edit_text_code);
         val editTextNewPassword = findViewById<EditText>(R.id.edit_text_new_password);
 
@@ -48,6 +49,7 @@ class ResetPasswordActivity : AppCompatActivity() {
             if (model.validate(errorTextView)){
                 fetchData(model.toRequest())
             }
+            else { errorTextView.visibility = View.VISIBLE }
         }
     }
 

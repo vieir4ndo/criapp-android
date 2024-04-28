@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -32,6 +33,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         criappClient = CriAppClient(sharedPreferences!!)
 
         val errorTextView = findViewById<TextView>(R.id.text_view_errors);
+        errorTextView.visibility = View.GONE
         val buttonForgotPassword = findViewById<Button>(R.id.button_forgot_password);
         val editTextUsername = findViewById<EditText>(R.id.edit_text_username);
 
@@ -41,6 +43,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
             if (model.validate(errorTextView)){
                 fetchData(model.toRequest())
             }
+            else { errorTextView.visibility = View.VISIBLE }
         }
     }
 
