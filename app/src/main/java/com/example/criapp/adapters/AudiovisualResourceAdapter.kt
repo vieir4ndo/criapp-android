@@ -21,7 +21,7 @@ class AudiovisualResourceAdapter(private val data: Array<AudiovisualResourceResp
 
         holder.name.text = item.name
         holder.description.text = item.description;
-        holder.webView.loadData(item.link, "text/html", "utf-8");
+        holder.webView.loadData(item.iframe, "text/html", "utf-8");
         holder.webView.settings.javaScriptEnabled = true
         holder.webView.webChromeClient = WebChromeClient()
     }
