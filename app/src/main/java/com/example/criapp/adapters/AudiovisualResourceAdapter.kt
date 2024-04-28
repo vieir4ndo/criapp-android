@@ -3,6 +3,8 @@ package com.example.criapp.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.webkit.WebView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.R
@@ -19,6 +21,9 @@ class AudiovisualResourceAdapter(private val data: Array<AudiovisualResourceResp
 
         holder.name.text = item.name
         holder.description.text = item.description;
+        holder.webView.loadData(item.link, "text/html", "utf-8");
+        holder.webView.settings.javaScriptEnabled = true
+        holder.webView.webChromeClient = WebChromeClient()
     }
 
     override fun getItemCount(): Int {
@@ -28,5 +33,6 @@ class AudiovisualResourceAdapter(private val data: Array<AudiovisualResourceResp
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.text_name)
         val description: TextView = itemView.findViewById(R.id.text_description)
+        val webView : WebView = itemView.findViewById(R.id.webview)
     }
 }
