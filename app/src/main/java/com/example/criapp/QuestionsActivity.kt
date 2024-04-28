@@ -76,7 +76,7 @@ class QuestionsActivity : AppCompatActivity() {
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
 
-                params.bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
+                params.topMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
 
                 text.layoutParams = params
 
@@ -111,7 +111,7 @@ class QuestionsActivity : AppCompatActivity() {
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
 
-                params.bottomMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
+                params.topMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
 
                 button.layoutParams = params
 
