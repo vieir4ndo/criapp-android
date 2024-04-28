@@ -45,6 +45,7 @@ class SignUpActivity : AppCompatActivity() {
         configSpinners();
 
         val errorTextView = findViewById<TextView>(R.id.text_view_errors);
+        errorTextView.visibility = View.GONE
         val buttonCreateUser = findViewById<Button>(R.id.button_create_user);
         editTextBirthDate = findViewById(R.id.edit_text_birth_date);
 
@@ -63,6 +64,7 @@ class SignUpActivity : AppCompatActivity() {
             if (createUserModel.validate(errorTextView)) {
                 fetchData(createUserModel.toRequest())
             }
+            else { errorTextView.visibility = View.VISIBLE }
         }
     }
 
