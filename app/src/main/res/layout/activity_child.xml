@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_purple_to_holo_purple_background"
-    tools:context=".QuestionsActivity">
+    tools:context=".ChildActivity">
 
     <ImageView
         android:id="@+id/image"
