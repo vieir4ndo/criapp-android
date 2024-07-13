@@ -64,7 +64,7 @@ class ForumsActivity : AppCompatActivity() {
             }
 
             for (forum in forums){
-                val button = ViewFactory.generateButton(this, resources, forum.name, forum.toString(), ForumActivity::class.java);
+                val button = ViewFactory.generateButton(this, resources, forum.name, forum.toString(), ForumActivity::class.java, "forum");
 
                 view.addView(button);
             }

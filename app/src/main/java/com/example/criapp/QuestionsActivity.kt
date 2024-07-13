@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.example.criapp.helpers.ViewFactory
 import com.example.criapp.models.responses.ChildResponse
 import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
@@ -22,16 +23,16 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class QuestionsActivity : AppCompatActivity() {
-    private var children : Array<ChildResponse>? = null;
-    private var criAppClient : CriAppClient? = null;
+    private lateinit var children : Array<ChildResponse>
+    private lateinit var criAppClient : CriAppClient;
     private val gson = Gson();
-    private var aLoadingDialog : ALoadingDialog? = null;
+    private lateinit var aLoadingDialog : ALoadingDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questions)
         aLoadingDialog = ALoadingDialog(this);
         criAppClient = CriAppClient(getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE));
-        aLoadingDialog!!.show()
+        aLoadingDialog.show()
         fetchData();
     }
 
@@ -39,7 +40,7 @@ class QuestionsActivity : AppCompatActivity() {
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
-            criAppClient!!.getAuthenticated("/child");
+            criAppClient.getAuthenticated("/child");
         }
 
         scope.launch {
@@ -50,70 +51,27 @@ class QuestionsActivity : AppCompatActivity() {
     }
 
     private fun handleResult(result: ResponseModel?) {
-        aLoadingDialog!!.cancel()
+        aLoadingDialog.cancel()
         if (result == null || !result.success){
             val dialog = DialogFactory.createErrorDialog(this, result!!.Messages!!.joinToString(separator = "\n"))
             dialog.show()
         }
         else {
-            val json = gson.toJson(result!!.data!!.first());
+            val json = gson.toJson(result.data.first());
             val data = gson.fromJson(json, Array<ChildResponse>::class.java);
 
             children = data;
 
             val view = findViewById<LinearLayout>(R.id.children);
 
-            if (children!!.isEmpty()){
-                val text = TextView(this);
-
-                text.text = "Aún no hay nada por aquí";
-                text.gravity = Gravity.CENTER_HORIZONTAL;
-                text.textSize = 20f
-                text.setTextColor(ContextCompat.getColor(this, R.color.white))
-
-                val params = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-
-                params.topMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
-
-                text.layoutParams = params
+            if (children.isEmpty()){
+                val text = ViewFactory.generateEmptyTextMessage(this, resources);
 
                 view.addView(text);
             }
 
-            for (child in children!!){
-                val button = Button(this)
-                button.gravity = Gravity.CENTER_HORIZONTAL
-                button.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white))
-                button.textSize = 20f
-                button.setTypeface(null, Typeface.BOLD)
-                button.setTextColor(ContextCompat.getColor(this, R.color.dark_blue))
-
-                val shape = GradientDrawable()
-                shape.shape = GradientDrawable.RECTANGLE
-                shape.cornerRadius = resources.getDimension(R.dimen.border_radius)
-                shape.setColor(ContextCompat.getColor(this, R.color.white))
-
-                button.background = shape
-
-                button.text = "Para " + child.name
-
-                button.setOnClickListener { view ->
-                    val intent = Intent(this, AnswerActivity::class.java);
-                    intent.putExtra("child", child.toString())
-                    startActivity(intent);
-                }
-
-                val params = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-
-                params.topMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
-
-                button.layoutParams = params
+            for (child in children){
+                val button = ViewFactory.generateButton(this, resources, "Para " + child.name, child.toString(), AnswerActivity::class.java, "child");
 
                 view.addView(button);
             }
