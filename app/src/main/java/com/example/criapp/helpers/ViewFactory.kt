@@ -15,7 +15,7 @@ import com.example.criapp.R
 class ViewFactory {
 
     companion object {
-        fun <T> generateButton(context : Context, resources : Resources, text: String, content : String, redirectTo : Class<T>) : Button {
+        fun <T> generateButton(context : Context, resources : Resources, text: String, content : String, redirectTo : Class<T>, key : String) : Button {
             val button = Button(context)
             button.gravity = Gravity.CENTER_HORIZONTAL
             button.setBackgroundColor(ContextCompat.getColor(context, android.R.color.white))
@@ -34,7 +34,7 @@ class ViewFactory {
 
             button.setOnClickListener { view ->
                 val intent = Intent(context, redirectTo);
-                intent.putExtra("child", content)
+                intent.putExtra(key, content)
                 context.startActivity(intent);
             }
 
