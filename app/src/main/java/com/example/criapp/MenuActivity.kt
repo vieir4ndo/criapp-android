@@ -28,7 +28,7 @@ class MenuActivity : AppCompatActivity() {
         startActivity(nextIntent);
     }
 
-    fun onButtonChildQuestions(view: View?) {
+    fun onButtonQuestionsClick(view: View?) {
         val nextIntent = Intent(this, QuestionsActivity::class.java);
         startActivity(nextIntent);
     }
@@ -40,6 +40,11 @@ class MenuActivity : AppCompatActivity() {
 
     fun onButtonAudioVisualResourcesClick(view: View?){
         val nextIntent = Intent(this, AudioVisualResourcesActivity::class.java);
+        startActivity(nextIntent);
+    }
+
+    fun onButtonForumClick(view: View?){
+        val nextIntent = Intent(this, ForumsActivity::class.java);
         startActivity(nextIntent);
     }
 
