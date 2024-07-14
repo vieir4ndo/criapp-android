@@ -30,26 +30,21 @@
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/forums_scroll_view"
+        app:layout_constraintBottom_toTopOf="@+id/forums"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image" />
 
-    <ScrollView
-        android:id="@+id/forums_scroll_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/card_purple"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title">
         <LinearLayout
             android:id="@+id/forums"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="vertical" />
-    </ScrollView>
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/card_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title">
+        </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
