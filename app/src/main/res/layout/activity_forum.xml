@@ -73,6 +73,23 @@
         android:textColor="@color/white"
         android:textSize="20sp"/>
 
+    <TextView
+        android:id="@+id/text_view_errors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/card_red"
+        android:padding="10dp"
+        android:text="@string/errors"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintTop_toBottomOf="@id/forum_description"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -82,7 +99,7 @@
         android:layout_marginEnd="30dp"
         android:background="@drawable/card_purple"
         app:layout_constraintBottom_toTopOf="@id/comment_section"
-        app:layout_constraintTop_toBottomOf="@id/forum_description" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_errors" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/comment_section"
@@ -96,6 +113,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         >
         <EditText
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:id="@+id/text_comment"
             android:layout_height="50dp"
             android:layout_width="0dp"

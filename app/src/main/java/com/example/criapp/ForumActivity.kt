@@ -1,20 +1,27 @@
 package com.example.criapp
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.adapters.CommentAdapter
 import com.example.criapp.adapters.FaqAdapter
+import com.example.criapp.models.CreateCommentModel
+import com.example.criapp.models.CreateOrUpdateChildModel
 import com.example.criapp.models.responses.CommentResponse
 import com.example.criapp.models.responses.FaqResponse
 import com.example.criapp.models.responses.ForumResponse
 import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
+import com.example.criapp.services.DialogFactory
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +35,8 @@ class ForumActivity : AppCompatActivity() {
     private lateinit var recyclerView : RecyclerView
     private lateinit var forum : ForumResponse
     private val gson = Gson()
+    private lateinit var comments : Array<CommentResponse>
+    private lateinit var editTextText: EditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forum)
@@ -42,17 +51,30 @@ class ForumActivity : AppCompatActivity() {
         var textViewForumName = findViewById<TextView>(R.id.forum_name);
         var textViewForumDescription = findViewById<TextView>(R.id.forum_description);
         var textViewForumOwner = findViewById<TextView>(R.id.forum_owner);
+        editTextText = findViewById<EditText>(R.id.text_comment);
+        var buttomCreateComment = findViewById<ImageButton>(R.id.comment_button);
 
         textViewForumName.text = forum.name;
         textViewForumDescription.text = forum.description;
         textViewForumOwner.text = "Creado por " + forum.prcName;
 
+        val errorTextView = findViewById<TextView>(R.id.text_view_errors);
+        errorTextView.visibility = View.GONE
+
+        var model = CreateCommentModel(editTextText, forum.id)
+        buttomCreateComment.setOnClickListener{
+
+            if (model.validate(errorTextView)){
+                fetchComment(model.toRequest())
+            }
+            else { errorTextView.visibility = View.VISIBLE }
+        }
+
+        aLoadingDialog.show()
         fetchData();
     }
 
     private fun fetchData() {
-        aLoadingDialog.show()
-
         val scope = CoroutineScope(Dispatchers.Main)
 
         val job = scope.async(Dispatchers.IO) {
@@ -76,9 +98,39 @@ class ForumActivity : AppCompatActivity() {
         else
         {
             val json = gson.toJson(result.data);
-            var comments = gson.fromJson(json, Array<CommentResponse>::class.java);
+            comments = gson.fromJson(json, Array<CommentResponse>::class.java);
             val adapter = CommentAdapter(comments);
             recyclerView.adapter = adapter
+        }
+    }
+
+
+    private fun fetchComment(requestBody: String){
+        aLoadingDialog.show()
+
+        val scope = CoroutineScope(Dispatchers.Main)
+
+        val job = scope.async(Dispatchers.IO) {
+            criAppClient.postAuthenticated("/comment", requestBody);
+        }
+
+        scope.launch {
+            val result = job.await()
+
+            handleResultComment(result)
+        }
+    }
+
+    private fun handleResultComment(result: ResponseModel?) {
+        if (result == null || !result.success){
+            aLoadingDialog.cancel()
+            val dialog = DialogFactory.createErrorDialog(this, result!!.Messages!!.joinToString(separator = "\n"))
+            dialog.show()
+        }
+        else {
+            fetchData()
+            editTextText.text = null
+            Toast.makeText(this, "Comentario creado con exito", Toast.LENGTH_SHORT).show()
         }
     }
 }
