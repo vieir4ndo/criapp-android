@@ -45,6 +45,16 @@ class CriAppClient(private val sharedPreferences: SharedPreferences) {
         return get(path, headers)
     }
 
+    fun deleteAuthenticated(path: String) : ResponseModel?{
+        val headers = mapOf(
+            "Authorization" to getToken(),
+            "Content-Type" to "application/json",
+            "charset" to "utf-8"
+        );
+
+        return delete(path, headers)
+    }
+
     fun post(path: String, body : String, headers: Map<String, String> = mapOf(
         "Content-Type" to "application/json",
         "charset" to "utf-8"
@@ -154,5 +164,35 @@ class CriAppClient(private val sharedPreferences: SharedPreferences) {
         val expiresIn = sharedPreferences.getString("token_expires_in", "")
 
         return "Bearer $token";
+    }
+
+    fun delete(path: String, headers: Map<String, String> = mapOf(
+        "Content-Type" to "application/json",
+        "charset" to "utf-8"
+    )) : ResponseModel?
+    {
+        val uri = baseUri + path;
+
+        if (shouldLog) {
+            println("Url: '$uri'");
+            println("Headers: '$headers'");
+        }
+
+        val okHttpHeaders = Headers.of(headers)
+
+        val client = OkHttpClient();
+
+        val request = Request.Builder().url(uri).headers(okHttpHeaders).delete().build();
+
+        val response = client.newCall(request).execute();
+
+        val responseBody = response.body()?.string();
+
+        if (shouldLog) {
+            println("Status Code: '${response.code()}'");
+            println("Body: '$responseBody'");
+        }
+
+        return gson.fromJson(responseBody, ResponseModel::class.java)
     }
 }

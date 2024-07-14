@@ -99,7 +99,8 @@ class ForumActivity : AppCompatActivity() {
         {
             val json = gson.toJson(result.data);
             comments = gson.fromJson(json, Array<CommentResponse>::class.java);
-            val adapter = CommentAdapter(comments);
+            val userId = sharedPreferences.getString("user_id", "")
+            val adapter = CommentAdapter(comments, userId!!, ::deleteComment);
             recyclerView.adapter = adapter
         }
     }
@@ -131,6 +132,35 @@ class ForumActivity : AppCompatActivity() {
             fetchData()
             editTextText.text = null
             Toast.makeText(this, "Comentario creado con exito", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun deleteComment(id : String){
+        aLoadingDialog.show()
+
+        val scope = CoroutineScope(Dispatchers.Main)
+
+        val job = scope.async(Dispatchers.IO) {
+            criAppClient.deleteAuthenticated("/comment/" + id);
+        }
+
+        scope.launch {
+            val result = job.await()
+
+            handleResultDelete(result)
+        }
+    }
+
+    private fun handleResultDelete(result: ResponseModel?) {
+        if (result == null || !result.success){
+            aLoadingDialog.cancel()
+            val dialog = DialogFactory.createErrorDialog(this, result!!.Messages!!.joinToString(separator = "\n"))
+            dialog.show()
+        }
+        else {
+            fetchData()
+            editTextText.text = null
+            Toast.makeText(this, "Comentario borrado con exito", Toast.LENGTH_SHORT).show()
         }
     }
 }
