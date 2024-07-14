@@ -13,6 +13,7 @@ import com.example.criapp.models.CreateAnswerModel
 import com.example.criapp.models.responses.QuestionResponse
 import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.services.CriAppClient
+import com.example.criapp.services.DialogFactory
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -75,7 +76,13 @@ class AnswerActivity : AppCompatActivity() {
             val json = gson.toJson(result!!.data!!);
             questions = gson.fromJson(json, Array<QuestionResponse>::class.java);
 
-            showNextQuestion();
+            if (questions!!.isEmpty()){
+                val dialog = DialogFactory.createSuccessDialog(this, "Ya contestaste todas las preguntas de " + child!!.name + " hoy", QuestionsActivity::class.java)
+                dialog.show()
+            }
+            else {
+                showNextQuestion();
+            }
         }
     }
 
@@ -156,8 +163,8 @@ class AnswerActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Respuesta guardada con exito", Toast.LENGTH_SHORT).show()
             if (currentQuestion == questions!!.lastIndex){
-                val nextIntent = Intent(this, QuestionsActivity::class.java);
-                startActivity(nextIntent);
+                val dialog = DialogFactory.createSuccessDialog(this, "Ya contestaste todas las preguntas de " + child!!.name + " hoy", QuestionsActivity::class.java)
+                dialog.show()
             }
             else {
                 showNextQuestion();

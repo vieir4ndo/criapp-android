@@ -1,6 +1,7 @@
 package com.example.criapp
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
@@ -72,5 +73,10 @@ class ForumsActivity : AppCompatActivity() {
             val buttonAddChild = ViewFactory.generateAddButton(this, resources, "Añadir foro", CreateForumActivity::class.java)
             view.addView(buttonAddChild);
         }
+    }
+
+    override fun onBackPressed() {
+        val nextIntent = Intent(this, MenuActivity::class.java);
+        startActivity(nextIntent);
     }
 }
