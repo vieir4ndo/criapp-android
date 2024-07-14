@@ -6,6 +6,7 @@ class CommentResponse(
     val id : String,
     val text: String,
     val prcName: String,
+    val prcId: String
 ) {
     override fun toString(): String {
         val gson = Gson();
