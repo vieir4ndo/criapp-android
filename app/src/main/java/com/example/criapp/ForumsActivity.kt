@@ -27,7 +27,6 @@ class ForumsActivity : AppCompatActivity() {
     private lateinit var criAppClient : CriAppClient;
     private val gson = Gson();
     private lateinit var aLoadingDialog : ALoadingDialog;
-    //private lateinit var recyclerView : RecyclerView
     private lateinit var sharedPreferences : SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +35,6 @@ class ForumsActivity : AppCompatActivity() {
         aLoadingDialog = ALoadingDialog(this);
         criAppClient = CriAppClient(sharedPreferences);
         aLoadingDialog.show()
-        //recyclerView = findViewById(R.id.recyclerView)
-        //recyclerView.layoutManager = LinearLayoutManager(this)
         fetchData();
     }
 
