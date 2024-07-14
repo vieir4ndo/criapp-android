@@ -129,10 +129,6 @@ class AnswerActivity : AppCompatActivity() {
         value = 5
     }
 
-    fun onRadioButton6Click(view: View?) {
-        value = 6
-    }
-
     override fun onBackPressed() {
         val nextIntent = Intent(this, QuestionsActivity::class.java);
         startActivity(nextIntent);
