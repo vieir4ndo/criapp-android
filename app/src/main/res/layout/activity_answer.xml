@@ -143,6 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioButton1Click"
+                    app:buttonTint="@color/radio_button_colors"
                     android:text="1" />
 
                 <RadioButton
@@ -150,6 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioButton2Click"
+                    app:buttonTint="@color/radio_button_colors"
                     android:text="2" />
 
                 <RadioButton
@@ -157,6 +159,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
+                    app:buttonTint="@color/radio_button_colors"
                     android:onClick="onRadioButton3Click"
                     android:text="3" />
 
@@ -165,6 +168,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioButton4Click"
+                    app:buttonTint="@color/radio_button_colors"
                     android:text="4" />
 
                 <RadioButton
@@ -172,14 +176,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioButton5Click"
+                    app:buttonTint="@color/radio_button_colors"
                     android:text="5" />
-
-                <RadioButton
-                    android:id="@+id/radioButton6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onRadioButton6Click"
-                    android:text="6" />
             </RadioGroup>
         </LinearLayout>
 
