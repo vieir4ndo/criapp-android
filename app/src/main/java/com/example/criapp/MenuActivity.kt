@@ -13,7 +13,7 @@ class MenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_menu)
 
         val sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
-        val name = sharedPreferences!!.getString("user_name", "")
+        val name = sharedPreferences!!.getString("user_name", "")!!.split(" ")[0]
         val greeting = findViewById<TextView>(R.id.greeting)
         greeting!!.text = "¡Hola, " + name + "!"
     }

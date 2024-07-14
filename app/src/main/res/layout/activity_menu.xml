@@ -45,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textAlignment="center"
                 android:text="¡Hola, usuario!"
                 android:textColor="@color/white"
                 android:textSize="22sp"
@@ -55,6 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textAlignment="center"
                 android:text="Bienvenido a CRIApp"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
