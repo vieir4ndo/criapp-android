@@ -6,7 +6,7 @@ class ForumResponse(
     val id : String,
     val name: String,
     val description: String,
-    val pcrName: String,
+    val prcName: String,
     val comments: Array<CommentResponse>
 ) {
     override fun toString(): String {

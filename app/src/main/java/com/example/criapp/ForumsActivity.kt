@@ -22,7 +22,7 @@ class ForumsActivity : AppCompatActivity() {
     private lateinit var aLoadingDialog : ALoadingDialog;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_forum)
+        setContentView(R.layout.activity_forums)
         aLoadingDialog = ALoadingDialog(this);
         criAppClient = CriAppClient(getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE));
         aLoadingDialog.show()
