@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_purple_to_holo_purple_background"
-    tools:context=".ForumsActivity">
-
+    tools:context=".ForumActivity">
     <ImageView
         android:id="@+id/image"
         android:layout_width="wrap_content"
@@ -30,26 +29,91 @@
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/forums_scroll_view"
+        app:layout_constraintBottom_toTopOf="@+id/forum_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image" />
 
-    <ScrollView
-        android:id="@+id/forums_scroll_view"
+    <TextView
+        android:id="@+id/forum_name"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forum Name"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/forum_owner"
+        app:layout_constraintTop_toBottomOf="@+id/forum_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forum Owner"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/forum_description"
+        app:layout_constraintTop_toBottomOf="@+id/forum_owner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forum Description"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/card_purple"
+        app:layout_constraintBottom_toTopOf="@id/comment_section"
+        app:layout_constraintTop_toBottomOf="@id/forum_description" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/comment_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title">
-        <LinearLayout
-            android:id="@+id/forums"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical" />
-    </ScrollView>
+        >
+        <EditText
+            android:id="@+id/text_comment"
+            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:background="@drawable/edit_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/comment_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+        <ImageButton
+            android:id="@+id/comment_button"
+            android:background="@drawable/ic_check"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/text_comment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
