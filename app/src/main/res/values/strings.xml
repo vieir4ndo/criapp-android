@@ -39,6 +39,7 @@
     <string name="logoff">Salir</string>
     <string name="deactivate_account">Desactivar cuenta</string>
     <string name="errors">Errores:</string>
+    <string name="description">Descripción</string>
 
 
     <string-array name="welcome_messages">

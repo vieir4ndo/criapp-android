@@ -131,7 +131,6 @@ class ForumActivity : AppCompatActivity() {
         else {
             fetchData()
             editTextText.text = null
-            Toast.makeText(this, "Comentario creado con exito", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -160,7 +159,6 @@ class ForumActivity : AppCompatActivity() {
         else {
             fetchData()
             editTextText.text = null
-            Toast.makeText(this, "Comentario borrado con exito", Toast.LENGTH_SHORT).show()
         }
     }
 }
