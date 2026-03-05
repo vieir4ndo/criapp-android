@@ -12,7 +12,7 @@ import okhttp3.RequestBody
 class CriAppClient(private val sharedPreferences: SharedPreferences) {
     private val gson = Gson()
     // TODO: Should put these variables as env vars
-    private val baseUri = "http://66.135.11.124:4500"
+    private val baseUri = "http://10.0.2.2:4500"
     private val shouldLog : Boolean = true;
 
     fun postAuthenticated(path: String, body : String) : ResponseModel? {
