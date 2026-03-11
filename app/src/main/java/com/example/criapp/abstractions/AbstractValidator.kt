@@ -63,9 +63,10 @@ abstract class AbstractValidator(var errorTextView: TextView) {
             return true;
         }
 
-        val pattern = Regex("^(\\+34|34)?[6-9]\\d{8}\$")
+        //TODO: Verify validation for phone number
+        val pattern = Regex("^\\+?[1-9]\\d{7,14}$")
         if (pattern.matches(input.text.toString())) {
-            return true;
+            return true
         }
 
         errorTextView.text = errorTextView.text.toString().plus("\n$inputName es inválido");
