@@ -1,175 +1,130 @@
 package com.example.criapp
 
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.data.local.PreferencesManager
+import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.repository.ProfileRepositoryImpl
 import com.example.criapp.databinding.ActivityProfileBinding
-import com.example.criapp.services.SpinnerHelper
-import com.example.criapp.services.DateHelper
-import com.example.criapp.models.responses.ResponseModel
 import com.example.criapp.models.UpdateUserModel
-import com.example.criapp.models.responses.UserResponse
-import com.example.criapp.services.CriAppClient
+import com.example.criapp.presentation.common.UiState
+import com.example.criapp.presentation.profile.ProfileViewModel
+import com.example.criapp.presentation.profile.ProfileViewModelFactory
+import com.example.criapp.services.DateHelper
 import com.example.criapp.services.DialogFactory
-import com.google.android.material.textfield.TextInputLayout
-import com.google.gson.Gson
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import okhttp3.RequestBody
+import com.example.criapp.services.SpinnerHelper
 
 class ProfileActivity : AppCompatActivity() {
-    private lateinit var mBinding: ActivityProfileBinding;
-    private var criAppClient : CriAppClient? = null;
-    private val gson = Gson();
-    private lateinit var updateUserModel : UpdateUserModel;
-    private var birthDateDay = 0;
-    private var birthDateMonth = 0;
-    private var birthDateYear = 0;
-    private var aLoadingDialog : ALoadingDialog? = null;
-    private lateinit var editTextBirthDate : EditText;
+
+    private lateinit var mBinding: ActivityProfileBinding
+    private val viewModel: ProfileViewModel by viewModels {
+        ProfileViewModelFactory(ProfileRepositoryImpl(CriAppHttpClient(PreferencesManager(this))))
+    }
+    private var aLoadingDialog: ALoadingDialog? = null
+    private lateinit var editTextBirthDate: EditText
+    private lateinit var errorTextView: TextView
+    private var birthDateDay = 0
+    private var birthDateMonth = 0
+    private var birthDateYear = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = ActivityProfileBinding.inflate(layoutInflater);
+        mBinding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        aLoadingDialog = ALoadingDialog(this);
+        aLoadingDialog = ALoadingDialog(this)
 
-        criAppClient = CriAppClient(getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE));
+        viewModel.profileState.observe(this) { state ->
+            when (state) {
+                is UiState.Loading -> aLoadingDialog?.show()
+                is UiState.Success -> {
+                    aLoadingDialog?.cancel()
+                    val user = state.data
+                    val date = DateHelper.getDayMonthAndYearFromFormattedDate(user.birthDate)
+                    birthDateDay = date.first
+                    birthDateMonth = date.second
+                    birthDateYear = date.third
 
-        consultUserAndLoadModel();
-    }
+                    configSpinners()
 
-    private fun consultUserAndLoadModel() {
-        aLoadingDialog!!.show()
-        val scope = CoroutineScope(Dispatchers.Main)
+                    errorTextView = findViewById(R.id.text_view_errors)
+                    errorTextView.visibility = View.GONE
+                    val editTextName = findViewById<EditText>(R.id.edit_text_name)
+                    val editTextNumberOfChildren = findViewById<EditText>(R.id.edit_text_number_of_children)
+                    editTextBirthDate = findViewById(R.id.edit_text_birth_date)
 
-        val job = scope.async(Dispatchers.IO) {
-            criAppClient!!.getAuthenticated("/user");
-        }
+                    editTextName.setText(user.name)
+                    editTextNumberOfChildren.setText(user.numberOfChildren.toString())
+                    editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(birthDateYear, birthDateMonth, birthDateDay))
+                    mBinding.spinnerSex.setSelection(user.sex)
+                    mBinding.spinnerFamilyType.setSelection(user.familyType)
+                    mBinding.spinnerEducationalLevel.setSelection(user.educationalLevel)
 
-        scope.launch {
-            val result = job.await()
+                    val updateUserModel = UpdateUserModel(
+                        editTextName, editTextBirthDate, mBinding.spinnerSex,
+                        mBinding.spinnerEducationalLevel, mBinding.spinnerFamilyType, editTextNumberOfChildren
+                    )
 
-            handleResultConsultUserAndLoadModel(result)
-        }
-    }
-
-    private fun handleResultConsultUserAndLoadModel(result: ResponseModel?) {
-        aLoadingDialog!!.cancel()
-        if (result == null || !result.success){
-            Toast.makeText(this, result!!.Messages!!.joinToString(separator = "\n"), Toast.LENGTH_SHORT).show()
-        }
-        else {
-            val json = gson.toJson(result!!.data!!.first());
-            val user = gson.fromJson(json, UserResponse::class.java);
-
-            val date = DateHelper.getDayMonthAndYearFromFormattedDate(user!!.birthDate)
-            birthDateDay = date.first
-            birthDateMonth = date.second
-            birthDateYear = date.third
-
-            configSpinners();
-
-            val errorTextView = findViewById<TextView>(R.id.text_view_errors);
-            errorTextView.visibility = View.GONE
-            val buttonUpdateUser = findViewById<Button>(R.id.button_update_user);
-            val editTextName = findViewById<EditText>(R.id.edit_text_name);
-            val editTextNumberOfChildren = findViewById<EditText>(R.id.edit_text_number_of_children);
-            editTextBirthDate = findViewById(R.id.edit_text_birth_date);
-
-            editTextName.setText(user.name);
-            editTextNumberOfChildren.setText(user.numberOfChildren.toString());
-            editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(birthDateYear, birthDateMonth, birthDateDay))
-            mBinding.spinnerSex.setSelection(user.sex);
-            mBinding.spinnerFamilyType.setSelection(user.familyType);
-            mBinding.spinnerEducationalLevel.setSelection(user.educationalLevel);
-
-            updateUserModel = UpdateUserModel(
-                editTextName,
-                editTextBirthDate,
-                mBinding.spinnerSex,
-                mBinding.spinnerEducationalLevel,
-                mBinding.spinnerFamilyType,
-                editTextNumberOfChildren)
-
-            buttonUpdateUser.setOnClickListener{
-               if (updateUserModel.validate(errorTextView)){
-                   updateUser(updateUserModel.toRequest())
-               }
-               else { errorTextView.visibility = View.VISIBLE }
+                    findViewById<Button>(R.id.button_update_user).setOnClickListener {
+                        if (updateUserModel.validate(errorTextView)) {
+                            viewModel.updateProfile(updateUserModel.toRequest())
+                        } else {
+                            errorTextView.visibility = View.VISIBLE
+                        }
+                    }
+                }
+                is UiState.Error -> {
+                    aLoadingDialog?.cancel()
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                }
+                else -> Unit
             }
         }
-    }
 
-    private fun configSpinners(){
-        SpinnerHelper.configCriAppSpinner(this,
-            mBinding.spinnerSex,
-            SpinnerHelper.sexOptions)
-
-        SpinnerHelper.configCriAppSpinner(this,
-            mBinding.spinnerEducationalLevel,
-            SpinnerHelper.educationalLevelOptions)
-
-        SpinnerHelper.configCriAppSpinner(this,
-            mBinding.spinnerFamilyType,
-            SpinnerHelper.familyTypeOptions)
-    }
-
-    fun showDatePickerForBirthDate(view : View){
-        val datePicker = DatePickerFragment { day: Int, month: Int, year: Int ->
-            birthDateDay = day;
-            birthDateMonth = month + 1;
-            birthDateYear = year;
-            editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
-            editTextBirthDate.error = null;
+        viewModel.updateState.observe(this) { state ->
+            when (state) {
+                is UiState.Loading -> aLoadingDialog?.show()
+                is UiState.Success -> {
+                    aLoadingDialog?.cancel()
+                    Toast.makeText(this, "Perfil actualizado con exito", Toast.LENGTH_SHORT).show()
+                }
+                is UiState.Error -> {
+                    aLoadingDialog?.cancel()
+                    DialogFactory.createErrorDialog(this, state.message).show()
+                }
+                else -> Unit
+            }
         }
 
+        viewModel.loadProfile()
+    }
+
+    private fun configSpinners() {
+        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerSex, SpinnerHelper.sexOptions)
+        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerEducationalLevel, SpinnerHelper.educationalLevelOptions)
+        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerFamilyType, SpinnerHelper.familyTypeOptions)
+    }
+
+    fun showDatePickerForBirthDate(view: View) {
+        val datePicker = DatePickerFragment { day: Int, month: Int, year: Int ->
+            birthDateDay = day
+            birthDateMonth = month + 1
+            birthDateYear = year
+            editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
+            editTextBirthDate.error = null
+        }
         datePicker.show(supportFragmentManager, "datePicker")
     }
 
-    private fun updateUser(requestBody: String) {
-        aLoadingDialog!!.show()
-        val scope = CoroutineScope(Dispatchers.Main)
-
-        val job = scope.async(Dispatchers.IO) {
-            criAppClient!!.patchAuthenticated("/user", requestBody);
-        }
-
-        scope.launch {
-            val result = job.await()
-
-            handleResultUpdateUser(result)
-        }
-    }
-
-    private fun handleResultUpdateUser(result: ResponseModel?) {
-        aLoadingDialog!!.cancel()
-        if (result != null && !result.success){
-            val dialog = DialogFactory.createErrorDialog(this, result.Messages!!.joinToString(separator = "\n"))
-            dialog.show()
-        }
-        else {
-            Toast.makeText(this, "Perfil actualizado con exito", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     fun onButtonLogoffClick(view: View?) {
-        val sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
-
-        val editor = sharedPreferences.edit()
-
-        editor.clear();
-
-        val nextIntent = Intent(this, SignInActivity::class.java);
-        startActivity(nextIntent);
+        PreferencesManager(this).clearAll()
+        startActivity(Intent(this, SignInActivity::class.java))
     }
 }
