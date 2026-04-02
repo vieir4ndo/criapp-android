@@ -51,6 +51,7 @@ class DialogBuilder {
         submitButton.setOnClickListener{
             val nextIntent = Intent(this.context, redirectTo);
             this.context.startActivity(nextIntent);
+            (this.context as? android.app.Activity)?.finish();
         }
 
         return this;

@@ -125,6 +125,8 @@ class ProfileActivity : AppCompatActivity() {
 
     fun onButtonLogoffClick(view: View?) {
         PreferencesManager(this).clearAll()
-        startActivity(Intent(this, SignInActivity::class.java))
+        startActivity(Intent(this, SignInActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        })
     }
 }

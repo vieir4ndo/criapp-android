@@ -1,6 +1,5 @@
 package com.example.criapp
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -54,7 +53,7 @@ class CreateForumActivity : AppCompatActivity() {
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
                     Toast.makeText(this, "Foro creado con exito", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, ForumsActivity::class.java))
+                    finish()
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()

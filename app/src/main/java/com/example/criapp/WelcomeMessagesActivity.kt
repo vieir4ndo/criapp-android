@@ -28,6 +28,7 @@ class WelcomeMessagesActivity : AppCompatActivity() {
     fun onArrowButtonClick(view: View?) {
         if (currentMessage == welcomeMessages!!.lastIndex) {
             startActivity(Intent(this, MenuActivity::class.java))
+            finish()
         } else {
             showNextMessage()
         }
