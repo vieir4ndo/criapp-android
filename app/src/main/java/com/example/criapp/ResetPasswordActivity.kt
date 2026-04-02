@@ -58,7 +58,9 @@ class ResetPasswordActivity : AppCompatActivity() {
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
                     Toast.makeText(this, "Contraseña actualizada con exito", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, SignInActivity::class.java))
+                    startActivity(Intent(this, SignInActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    })
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()

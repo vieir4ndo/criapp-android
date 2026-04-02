@@ -1,6 +1,5 @@
 package com.example.criapp
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -118,8 +117,4 @@ class AnswerActivity : AppCompatActivity() {
     fun onRadioButton3Click(view: View?) { value = 3 }
     fun onRadioButton4Click(view: View?) { value = 4 }
     fun onRadioButton5Click(view: View?) { value = 5 }
-
-    override fun onBackPressed() {
-        startActivity(Intent(this, QuestionsActivity::class.java))
-    }
 }

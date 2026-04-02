@@ -13,6 +13,8 @@ class SignUpSuccessActivity : AppCompatActivity() {
     }
 
     fun onButtonClick(view: View?) {
-        startActivity(Intent(this, SignInActivity::class.java))
+        startActivity(Intent(this, SignInActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        })
     }
 }

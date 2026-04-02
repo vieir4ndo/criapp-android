@@ -1,6 +1,5 @@
 package com.example.criapp
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.activity.viewModels
@@ -59,9 +58,5 @@ class ChildActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         viewModel.loadChildren()
-    }
-
-    override fun onBackPressed() {
-        startActivity(Intent(this, MenuActivity::class.java))
     }
 }
