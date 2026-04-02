@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
 
@@ -16,6 +17,10 @@ class MenuActivity : AppCompatActivity() {
 
         val name = PreferencesManager(this).getUserName().split(" ")[0]
         findViewById<TextView>(R.id.greeting).text = "¡Hola, $name!"
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() { }
+        })
     }
 
     fun onButtonChildClick(view: View?) = startActivity(Intent(this, ChildActivity::class.java))
@@ -24,6 +29,4 @@ class MenuActivity : AppCompatActivity() {
     fun onButtonFaqClick(view: View?) = startActivity(Intent(this, FaqActivity::class.java))
     fun onButtonAudioVisualResourcesClick(view: View?) = startActivity(Intent(this, AudioVisualResourcesActivity::class.java))
     fun onButtonForumClick(view: View?) = startActivity(Intent(this, ForumsActivity::class.java))
-
-    override fun onBackPressed() = Unit
 }

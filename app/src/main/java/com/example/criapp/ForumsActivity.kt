@@ -78,7 +78,4 @@ class ForumsActivity : AppCompatActivity() {
         startActivity(Intent(this, ForumActivity::class.java).putExtra("forum", forum))
     }
 
-    override fun onBackPressed() {
-        startActivity(Intent(this, MenuActivity::class.java))
-    }
 }

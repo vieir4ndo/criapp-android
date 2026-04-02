@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
@@ -72,6 +73,7 @@ class SignInActivity : AppCompatActivity() {
                         state.data.user?.name
                     )
                     startActivity(Intent(this, WelcomeMessagesActivity::class.java))
+                    finish()
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
@@ -80,7 +82,9 @@ class SignInActivity : AppCompatActivity() {
                 else -> Unit
             }
         }
-    }
 
-    override fun onBackPressed() = Unit
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() { }
+        })
+    }
 }

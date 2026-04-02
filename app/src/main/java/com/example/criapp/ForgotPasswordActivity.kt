@@ -56,6 +56,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     val intent = Intent(this, ResetPasswordActivity::class.java)
                     intent.putExtra("username", model.editTextUsername.text.toString())
                     startActivity(intent)
+                    finish()
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
