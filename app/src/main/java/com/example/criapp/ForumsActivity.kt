@@ -36,6 +36,7 @@ class ForumsActivity : AppCompatActivity() {
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
                     val view = findViewById<LinearLayout>(R.id.forums)
+                    view.removeAllViews()
                     val forums = state.data
                     val userId = PreferencesManager(this).getUserId()
 
@@ -62,7 +63,10 @@ class ForumsActivity : AppCompatActivity() {
                 else -> Unit
             }
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
         viewModel.loadForums()
     }
 

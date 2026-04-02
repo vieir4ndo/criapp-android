@@ -35,6 +35,7 @@ class QuestionsActivity : AppCompatActivity() {
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
                     val view = findViewById<LinearLayout>(R.id.children)
+                    view.removeAllViews()
                     val children = state.data
 
                     if (children.isEmpty()) {
@@ -53,6 +54,10 @@ class QuestionsActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModel.loadChildren()
     }
 
