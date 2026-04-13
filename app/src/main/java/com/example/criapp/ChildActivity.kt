@@ -5,7 +5,7 @@ import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ChildRepositoryImpl
 import com.example.criapp.helpers.ViewFactory
 import com.example.criapp.presentation.child.ChildViewModel
@@ -16,7 +16,7 @@ import com.example.criapp.services.DialogFactory
 class ChildActivity : AppCompatActivity() {
 
     private val viewModel: ChildViewModel by viewModels {
-        ChildViewModelFactory(ChildRepositoryImpl(CriAppHttpClient(PreferencesManager(this))))
+        ChildViewModelFactory(ChildRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
     }
     private var aLoadingDialog: ALoadingDialog? = null
 

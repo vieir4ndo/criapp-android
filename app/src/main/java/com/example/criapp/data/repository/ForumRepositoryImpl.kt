@@ -1,25 +1,21 @@
 package com.example.criapp.data.repository
 
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.domain.repository.IForumRepository
 import com.example.criapp.models.responses.CommentResponse
 import com.example.criapp.models.responses.ForumResponse
-import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
 
-class ForumRepositoryImpl(private val httpClient: CriAppHttpClient) : IForumRepository {
-
-    private val gson = Gson()
+class ForumRepositoryImpl(private val apiService: CriAppApiService) : IForumRepository {
 
     override suspend fun getForums(): Result<List<ForumResponse>> {
         return try {
-            val response = withContext(Dispatchers.IO) { httpClient.getAuthenticated("/forum") }
-            if (response != null && response.success) {
-                val json = gson.toJson(response.data)
-                Result.success(gson.fromJson(json, Array<ForumResponse>::class.java).toList())
+            val response = apiService.getForums()
+            if (response.success) {
+                Result.success(response.data ?: emptyList())
             } else {
-                Result.failure(Exception(response?.Messages?.joinToString("\n") ?: "Error desconocido"))
+                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -28,9 +24,10 @@ class ForumRepositoryImpl(private val httpClient: CriAppHttpClient) : IForumRepo
 
     override suspend fun createForum(requestBody: String): Result<Unit> {
         return try {
-            val response = withContext(Dispatchers.IO) { httpClient.postAuthenticated("/forum", requestBody) }
-            if (response != null && response.success) Result.success(Unit)
-            else Result.failure(Exception(response?.Messages?.joinToString("\n") ?: "Error desconocido"))
+            val body = requestBody.toRequestBody("application/json".toMediaType())
+            val response = apiService.createForum(body)
+            if (response.success) Result.success(Unit)
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -38,9 +35,10 @@ class ForumRepositoryImpl(private val httpClient: CriAppHttpClient) : IForumRepo
 
     override suspend fun updateForum(forumId: String, requestBody: String): Result<Unit> {
         return try {
-            val response = withContext(Dispatchers.IO) { httpClient.patchAuthenticated("/forum/$forumId", requestBody) }
-            if (response != null && response.success) Result.success(Unit)
-            else Result.failure(Exception(response?.Messages?.joinToString("\n") ?: "Error desconocido"))
+            val body = requestBody.toRequestBody("application/json".toMediaType())
+            val response = apiService.updateForum(forumId, body)
+            if (response.success) Result.success(Unit)
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -48,12 +46,11 @@ class ForumRepositoryImpl(private val httpClient: CriAppHttpClient) : IForumRepo
 
     override suspend fun getComments(forumId: String): Result<List<CommentResponse>> {
         return try {
-            val response = withContext(Dispatchers.IO) { httpClient.getAuthenticated("/forum/$forumId/comments") }
-            if (response != null && response.success) {
-                val json = gson.toJson(response.data)
-                Result.success(gson.fromJson(json, Array<CommentResponse>::class.java).toList())
+            val response = apiService.getComments(forumId)
+            if (response.success) {
+                Result.success(response.data ?: emptyList())
             } else {
-                Result.failure(Exception(response?.Messages?.joinToString("\n") ?: "Error desconocido"))
+                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -62,9 +59,10 @@ class ForumRepositoryImpl(private val httpClient: CriAppHttpClient) : IForumRepo
 
     override suspend fun createComment(requestBody: String): Result<Unit> {
         return try {
-            val response = withContext(Dispatchers.IO) { httpClient.postAuthenticated("/comment", requestBody) }
-            if (response != null && response.success) Result.success(Unit)
-            else Result.failure(Exception(response?.Messages?.joinToString("\n") ?: "Error desconocido"))
+            val body = requestBody.toRequestBody("application/json".toMediaType())
+            val response = apiService.createComment(body)
+            if (response.success) Result.success(Unit)
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -72,9 +70,9 @@ class ForumRepositoryImpl(private val httpClient: CriAppHttpClient) : IForumRepo
 
     override suspend fun deleteComment(commentId: String): Result<Unit> {
         return try {
-            val response = withContext(Dispatchers.IO) { httpClient.deleteAuthenticated("/comment/$commentId") }
-            if (response != null && response.success) Result.success(Unit)
-            else Result.failure(Exception(response?.Messages?.joinToString("\n") ?: "Error desconocido"))
+            val response = apiService.deleteComment(commentId)
+            if (response.success) Result.success(Unit)
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
         } catch (e: Exception) {
             Result.failure(e)
         }

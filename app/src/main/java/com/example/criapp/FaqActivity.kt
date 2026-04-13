@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.adapters.FaqAdapter
 import com.example.criapp.data.local.PreferencesManager
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.FaqRepositoryImpl
 import com.example.criapp.presentation.common.UiState
 import com.example.criapp.presentation.faq.FaqViewModel
@@ -17,7 +17,7 @@ import com.example.criapp.presentation.faq.FaqViewModelFactory
 class FaqActivity : AppCompatActivity() {
 
     private val viewModel: FaqViewModel by viewModels {
-        FaqViewModelFactory(FaqRepositoryImpl(CriAppHttpClient(PreferencesManager(this))))
+        FaqViewModelFactory(FaqRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
     }
     private var aLoadingDialog: ALoadingDialog? = null
     private lateinit var recyclerView: RecyclerView

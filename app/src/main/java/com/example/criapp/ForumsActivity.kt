@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.adapters.ForumAdapter
 import com.example.criapp.data.local.PreferencesManager
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ForumRepositoryImpl
 import com.example.criapp.helpers.ViewFactory
 import com.example.criapp.presentation.common.UiState
@@ -20,7 +20,7 @@ import com.example.criapp.services.DialogFactory
 class ForumsActivity : AppCompatActivity() {
 
     private val viewModel: ForumViewModel by viewModels {
-        ForumViewModelFactory(ForumRepositoryImpl(CriAppHttpClient(PreferencesManager(this))))
+        ForumViewModelFactory(ForumRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
     }
     private var aLoadingDialog: ALoadingDialog? = null
 
