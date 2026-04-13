@@ -1,72 +1,50 @@
 package com.example.criapp
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.View
-import android.widget.ExpandableListView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.adapters.FaqAdapter
-import com.example.criapp.models.responses.FaqResponse
-import com.example.criapp.models.responses.ResponseModel
-import com.example.criapp.services.CriAppClient
-import com.google.gson.Gson
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import com.example.criapp.data.local.PreferencesManager
+import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.repository.FaqRepositoryImpl
+import com.example.criapp.presentation.common.UiState
+import com.example.criapp.presentation.faq.FaqViewModel
+import com.example.criapp.presentation.faq.FaqViewModelFactory
 
 class FaqActivity : AppCompatActivity() {
-    private lateinit var criAppClient : CriAppClient
-    private lateinit var sharedPreferences : SharedPreferences
-    private lateinit var aLoadingDialog : ALoadingDialog
-    private lateinit var recyclerView : RecyclerView
-    private val gson = Gson();
+
+    private val viewModel: FaqViewModel by viewModels {
+        FaqViewModelFactory(FaqRepositoryImpl(CriAppHttpClient(PreferencesManager(this))))
+    }
+    private var aLoadingDialog: ALoadingDialog? = null
+    private lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_faq)
-        aLoadingDialog = ALoadingDialog(this);
-        sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE);
-        criAppClient = CriAppClient(sharedPreferences);
+
+        aLoadingDialog = ALoadingDialog(this)
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        fetchData()
-    }
-
-    private fun fetchData() {
-        aLoadingDialog.show()
-
-        val scope = CoroutineScope(Dispatchers.Main)
-
-        val job = scope.async(Dispatchers.IO) {
-            criAppClient.get("/faq")
+        viewModel.state.observe(this) { state ->
+            when (state) {
+                is UiState.Loading -> aLoadingDialog?.show()
+                is UiState.Success -> {
+                    aLoadingDialog?.cancel()
+                    recyclerView.adapter = FaqAdapter(state.data.toTypedArray())
+                }
+                is UiState.Error -> {
+                    aLoadingDialog?.cancel()
+                    Toast.makeText(this, "Hubo un error al buscar las preguntas, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
+                }
+                else -> Unit
+            }
         }
 
-        scope.launch {
-            val result = job.await()
-
-            handleResult(result)
-        }
-    }
-
-    private fun handleResult(result: ResponseModel?) {
-        aLoadingDialog.cancel()
-
-        if (result == null || !result.success)
-        {
-            Toast.makeText(this, "Hubo un error al buscar las preguntas, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
-        }
-        else
-        {
-            val json = gson.toJson(result.data);
-            var questions = gson.fromJson(json, Array<FaqResponse>::class.java);
-            val adapter = FaqAdapter(questions);
-            recyclerView.adapter = adapter
-        }
+        viewModel.loadFaqs()
     }
 }

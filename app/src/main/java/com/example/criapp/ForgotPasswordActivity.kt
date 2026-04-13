@@ -1,79 +1,69 @@
 package com.example.criapp
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.data.local.PreferencesManager
+import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.repository.AuthRepositoryImpl
 import com.example.criapp.models.ForgotPasswordModel
-import com.example.criapp.models.responses.ResponseModel
-import com.example.criapp.services.CriAppClient
+import com.example.criapp.presentation.auth.ForgotPasswordViewModel
+import com.example.criapp.presentation.auth.ForgotPasswordViewModelFactory
+import com.example.criapp.presentation.common.UiState
 import com.example.criapp.services.DialogFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
 class ForgotPasswordActivity : AppCompatActivity() {
-    private lateinit var model : ForgotPasswordModel;
-    private var criappClient : CriAppClient? = null;
-    private var sharedPreferences : SharedPreferences? = null;
-    private var aLoadingDialog : ALoadingDialog? = null;
+
+    private val viewModel: ForgotPasswordViewModel by viewModels {
+        ForgotPasswordViewModelFactory(AuthRepositoryImpl(CriAppHttpClient(PreferencesManager(this))))
+    }
+    private var aLoadingDialog: ALoadingDialog? = null
+    private lateinit var model: ForgotPasswordModel
+    private lateinit var errorTextView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password)
 
-        window.setNavigationBarColor(getResources().getColor(R.color.light_blue))
+        window.setNavigationBarColor(resources.getColor(R.color.light_blue))
 
-        aLoadingDialog = ALoadingDialog(this);
+        aLoadingDialog = ALoadingDialog(this)
 
-        sharedPreferences = getSharedPreferences("ApiCredentials", Context.MODE_PRIVATE)
-        criappClient = CriAppClient(sharedPreferences!!)
-
-        val errorTextView = findViewById<TextView>(R.id.text_view_errors);
+        errorTextView = findViewById(R.id.text_view_errors)
         errorTextView.visibility = View.GONE
-        val buttonForgotPassword = findViewById<Button>(R.id.button_forgot_password);
-        val editTextUsername = findViewById<EditText>(R.id.edit_text_username);
 
-        model = ForgotPasswordModel(editTextUsername);
+        val editTextUsername = findViewById<EditText>(R.id.edit_text_username)
+        model = ForgotPasswordModel(editTextUsername)
 
-        buttonForgotPassword.setOnClickListener {
-            if (model.validate(errorTextView)){
-                fetchData(model.toRequest())
+        findViewById<Button>(R.id.button_forgot_password).setOnClickListener {
+            if (model.validate(errorTextView)) {
+                viewModel.forgotPassword(model.toRequest())
+            } else {
+                errorTextView.visibility = View.VISIBLE
             }
-            else { errorTextView.visibility = View.VISIBLE }
-        }
-    }
-
-    private fun fetchData(requestBody : String) {
-        aLoadingDialog!!.show()
-
-        val scope = CoroutineScope(Dispatchers.Main)
-
-        val job = scope.async(Dispatchers.IO) {
-            criappClient!!.post("/user/forgot-password", requestBody);
         }
 
-        scope.launch {
-            val result = job.await()
-
-            handleResult(result)
-        }
-    }
-
-    private fun handleResult(result: ResponseModel?) {
-        aLoadingDialog!!.cancel()
-        if (result != null && !result.success) {
-            val dialog = DialogFactory.createErrorDialog(this, result.Messages!!.joinToString(separator = "\n"))
-            dialog.show()
-        } else {
-            val openResetPasswordActivityIntent = Intent(this, ResetPasswordActivity::class.java);
-            openResetPasswordActivityIntent.putExtra("username", model.editTextUsername.text.toString())
-            startActivity(openResetPasswordActivityIntent);
+        viewModel.state.observe(this) { state ->
+            when (state) {
+                is UiState.Loading -> aLoadingDialog?.show()
+                is UiState.Success -> {
+                    aLoadingDialog?.cancel()
+                    val intent = Intent(this, ResetPasswordActivity::class.java)
+                    intent.putExtra("username", model.editTextUsername.text.toString())
+                    startActivity(intent)
+                    finish()
+                }
+                is UiState.Error -> {
+                    aLoadingDialog?.cancel()
+                    DialogFactory.createErrorDialog(this, state.message).show()
+                }
+                else -> Unit
+            }
         }
     }
 }
