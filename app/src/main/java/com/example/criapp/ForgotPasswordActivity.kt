@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.AuthRepositoryImpl
 import com.example.criapp.models.ForgotPasswordModel
 import com.example.criapp.presentation.auth.ForgotPasswordViewModel
@@ -20,7 +20,7 @@ import com.example.criapp.services.DialogFactory
 class ForgotPasswordActivity : AppCompatActivity() {
 
     private val viewModel: ForgotPasswordViewModel by viewModels {
-        ForgotPasswordViewModelFactory(AuthRepositoryImpl(CriAppHttpClient(PreferencesManager(this))))
+        ForgotPasswordViewModelFactory(AuthRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
     }
     private var aLoadingDialog: ALoadingDialog? = null
     private lateinit var model: ForgotPasswordModel

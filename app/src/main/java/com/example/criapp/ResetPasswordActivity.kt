@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.AuthRepositoryImpl
 import com.example.criapp.models.ResetPasswordModel
 import com.example.criapp.presentation.auth.ResetPasswordViewModel
@@ -21,7 +21,7 @@ import com.example.criapp.services.DialogFactory
 class ResetPasswordActivity : AppCompatActivity() {
 
     private val viewModel: ResetPasswordViewModel by viewModels {
-        ResetPasswordViewModelFactory(AuthRepositoryImpl(CriAppHttpClient(PreferencesManager(this))))
+        ResetPasswordViewModelFactory(AuthRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
     }
     private var aLoadingDialog: ALoadingDialog? = null
     private lateinit var model: ResetPasswordModel

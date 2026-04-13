@@ -1,26 +1,20 @@
 package com.example.criapp.data.repository
 
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.domain.repository.IQuestionRepository
 import com.example.criapp.models.responses.QuestionResponse
-import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
 
-class QuestionRepositoryImpl(private val httpClient: CriAppHttpClient) : IQuestionRepository {
-
-    private val gson = Gson()
+class QuestionRepositoryImpl(private val apiService: CriAppApiService) : IQuestionRepository {
 
     override suspend fun getQuestions(childId: String): Result<List<QuestionResponse>> {
         return try {
-            val response = withContext(Dispatchers.IO) {
-                httpClient.getAuthenticated("/question?childId=$childId")
-            }
-            if (response != null && response.success) {
-                val json = gson.toJson(response.data)
-                Result.success(gson.fromJson(json, Array<QuestionResponse>::class.java).toList())
+            val response = apiService.getQuestions(childId)
+            if (response.success) {
+                Result.success(response.data ?: emptyList())
             } else {
-                Result.failure(Exception(response?.Messages?.joinToString("\n") ?: "Error desconocido"))
+                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -29,9 +23,10 @@ class QuestionRepositoryImpl(private val httpClient: CriAppHttpClient) : IQuesti
 
     override suspend fun answerQuestion(requestBody: String): Result<Unit> {
         return try {
-            val response = withContext(Dispatchers.IO) { httpClient.postAuthenticated("/answer", requestBody) }
-            if (response != null && response.success) Result.success(Unit)
-            else Result.failure(Exception(response?.Messages?.joinToString("\n") ?: "Error desconocido"))
+            val body = requestBody.toRequestBody("application/json".toMediaType())
+            val response = apiService.answerQuestion(body)
+            if (response.success) Result.success(Unit)
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
         } catch (e: Exception) {
             Result.failure(e)
         }

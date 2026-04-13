@@ -10,7 +10,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.AuthRepositoryImpl
 import com.example.criapp.models.LoginUserModel
 import com.example.criapp.presentation.auth.SignInViewModel
@@ -22,7 +22,7 @@ class SignInActivity : AppCompatActivity() {
 
     private val prefsManager by lazy { PreferencesManager(this) }
     private val viewModel: SignInViewModel by viewModels {
-        SignInViewModelFactory(AuthRepositoryImpl(CriAppHttpClient(prefsManager)))
+        SignInViewModelFactory(AuthRepositoryImpl(RetrofitProvider.create(prefsManager)))
     }
     private var aLoadingDialog: ALoadingDialog? = null
     private lateinit var errorTextView: TextView
