@@ -1,24 +1,22 @@
 package com.example.criapp.data.repository
 
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.domain.repository.IProfileRepository
 import com.example.criapp.models.responses.UserResponse
-import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
 
-class ProfileRepositoryImpl(private val httpClient: CriAppHttpClient) : IProfileRepository {
-
-    private val gson = Gson()
+class ProfileRepositoryImpl(private val apiService: CriAppApiService) : IProfileRepository {
 
     override suspend fun getProfile(): Result<UserResponse> {
         return try {
-            val response = withContext(Dispatchers.IO) { httpClient.getAuthenticated("/user") }
-            if (response != null && response.success) {
-                val json = gson.toJson(response.data.first())
-                Result.success(gson.fromJson(json, UserResponse::class.java))
+            val response = apiService.getProfile()
+            if (response.success) {
+                val user = response.data?.firstOrNull()
+                    ?: return Result.failure(Exception("Respuesta vacía del servidor"))
+                Result.success(user)
             } else {
-                Result.failure(Exception(response?.Messages?.joinToString("\n") ?: "Error desconocido"))
+                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -27,9 +25,10 @@ class ProfileRepositoryImpl(private val httpClient: CriAppHttpClient) : IProfile
 
     override suspend fun updateProfile(requestBody: String): Result<Unit> {
         return try {
-            val response = withContext(Dispatchers.IO) { httpClient.patchAuthenticated("/user", requestBody) }
-            if (response != null && response.success) Result.success(Unit)
-            else Result.failure(Exception(response?.Messages?.joinToString("\n") ?: "Error desconocido"))
+            val body = requestBody.toRequestBody("application/json".toMediaType())
+            val response = apiService.updateProfile(body)
+            if (response.success) Result.success(Unit)
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
         } catch (e: Exception) {
             Result.failure(e)
         }

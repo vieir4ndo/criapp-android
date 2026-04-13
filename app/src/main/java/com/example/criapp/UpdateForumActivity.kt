@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ForumRepositoryImpl
 import com.example.criapp.models.CreateForumModel
 import com.example.criapp.models.responses.ForumResponse
@@ -21,7 +21,7 @@ import com.google.gson.Gson
 class UpdateForumActivity : AppCompatActivity() {
 
     private val viewModel: ForumViewModel by viewModels {
-        ForumViewModelFactory(ForumRepositoryImpl(CriAppHttpClient(PreferencesManager(this))))
+        ForumViewModelFactory(ForumRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
     }
     private lateinit var forum: ForumResponse
     private val gson = Gson()

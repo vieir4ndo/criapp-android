@@ -5,7 +5,7 @@ import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ChildRepositoryImpl
 import com.example.criapp.data.repository.QuestionRepositoryImpl
 import com.example.criapp.helpers.ViewFactory
@@ -17,8 +17,8 @@ import com.example.criapp.services.DialogFactory
 class QuestionsActivity : AppCompatActivity() {
 
     private val viewModel: QuestionViewModel by viewModels {
-        val client = CriAppHttpClient(PreferencesManager(this))
-        QuestionViewModelFactory(ChildRepositoryImpl(client), QuestionRepositoryImpl(client))
+        val service = RetrofitProvider.create(PreferencesManager(this))
+        QuestionViewModelFactory(ChildRepositoryImpl(service), QuestionRepositoryImpl(service))
     }
     private var aLoadingDialog: ALoadingDialog? = null
 
