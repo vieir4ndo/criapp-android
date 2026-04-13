@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ProfileRepositoryImpl
 import com.example.criapp.databinding.ActivityProfileBinding
 import com.example.criapp.models.UpdateUserModel
@@ -25,7 +25,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityProfileBinding
     private val viewModel: ProfileViewModel by viewModels {
-        ProfileViewModelFactory(ProfileRepositoryImpl(CriAppHttpClient(PreferencesManager(this))))
+        ProfileViewModelFactory(ProfileRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
     }
     private var aLoadingDialog: ALoadingDialog? = null
     private lateinit var editTextBirthDate: EditText
