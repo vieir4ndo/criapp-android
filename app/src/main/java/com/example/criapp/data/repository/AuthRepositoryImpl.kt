@@ -1,26 +1,23 @@
 package com.example.criapp.data.repository
 
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.domain.repository.IAuthRepository
 import com.example.criapp.models.requests.LoginUserRequest
 import com.example.criapp.models.responses.LoginUserResponse
-import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
 
-class AuthRepositoryImpl(private val httpClient: CriAppHttpClient) : IAuthRepository {
-
-    private val gson = Gson()
+class AuthRepositoryImpl(private val apiService: CriAppApiService) : IAuthRepository {
 
     override suspend fun login(username: String, password: String): Result<LoginUserResponse> {
         return try {
-            val body = LoginUserRequest(username, password).toString()
-            val response = withContext(Dispatchers.IO) { httpClient.post("/user/login", body) }
-            if (response != null && response.success) {
-                val json = gson.toJson(response.data.first())
-                Result.success(gson.fromJson(json, LoginUserResponse::class.java))
+            val response = apiService.login(LoginUserRequest(username, password))
+            if (response.success) {
+                val loginData = response.data?.firstOrNull()
+                    ?: return Result.failure(Exception("Respuesta vacía del servidor"))
+                Result.success(loginData)
             } else {
-                Result.failure(Exception(response?.Messages?.joinToString("\n") ?: "Error desconocido"))
+                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -29,9 +26,10 @@ class AuthRepositoryImpl(private val httpClient: CriAppHttpClient) : IAuthReposi
 
     override suspend fun createUser(requestBody: String): Result<Unit> {
         return try {
-            val response = withContext(Dispatchers.IO) { httpClient.post("/user", requestBody) }
-            if (response != null && response.success) Result.success(Unit)
-            else Result.failure(Exception(response?.Messages?.joinToString("\n") ?: "Error desconocido"))
+            val body = requestBody.toRequestBody("application/json".toMediaType())
+            val response = apiService.createUser(body)
+            if (response.success) Result.success(Unit)
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -39,9 +37,10 @@ class AuthRepositoryImpl(private val httpClient: CriAppHttpClient) : IAuthReposi
 
     override suspend fun forgotPassword(requestBody: String): Result<Unit> {
         return try {
-            val response = withContext(Dispatchers.IO) { httpClient.post("/user/forgot-password", requestBody) }
-            if (response != null && response.success) Result.success(Unit)
-            else Result.failure(Exception(response?.Messages?.joinToString("\n") ?: "Error desconocido"))
+            val body = requestBody.toRequestBody("application/json".toMediaType())
+            val response = apiService.forgotPassword(body)
+            if (response.success) Result.success(Unit)
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -49,9 +48,10 @@ class AuthRepositoryImpl(private val httpClient: CriAppHttpClient) : IAuthReposi
 
     override suspend fun resetPassword(requestBody: String): Result<Unit> {
         return try {
-            val response = withContext(Dispatchers.IO) { httpClient.post("/user/reset-password", requestBody) }
-            if (response != null && response.success) Result.success(Unit)
-            else Result.failure(Exception(response?.Messages?.joinToString("\n") ?: "Error desconocido"))
+            val body = requestBody.toRequestBody("application/json".toMediaType())
+            val response = apiService.resetPassword(body)
+            if (response.success) Result.success(Unit)
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
         } catch (e: Exception) {
             Result.failure(e)
         }

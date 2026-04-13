@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.adapters.AudiovisualResourceAdapter
 import com.example.criapp.data.local.PreferencesManager
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ResourceRepositoryImpl
 import com.example.criapp.presentation.common.UiState
 import com.example.criapp.presentation.resource.ResourceViewModel
@@ -17,7 +17,7 @@ import com.example.criapp.presentation.resource.ResourceViewModelFactory
 class AudioVisualResourcesActivity : AppCompatActivity() {
 
     private val viewModel: ResourceViewModel by viewModels {
-        ResourceViewModelFactory(ResourceRepositoryImpl(CriAppHttpClient(PreferencesManager(this))))
+        ResourceViewModelFactory(ResourceRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
     }
     private var aLoadingDialog: ALoadingDialog? = null
     private lateinit var recyclerView: RecyclerView
