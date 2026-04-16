@@ -1,6 +1,7 @@
 package com.example.criapp.data.local
 
 import android.content.Context
+import java.time.OffsetDateTime
 
 class PreferencesManager(context: Context) {
 
@@ -29,8 +30,16 @@ class PreferencesManager(context: Context) {
         prefs.edit().clear().apply()
     }
 
-    fun isSessionActive(): Boolean =
-        prefs.getString(KEY_TOKEN, "").isNullOrEmpty().not()
+    fun isSessionActive(): Boolean {
+        val token = prefs.getString(KEY_TOKEN, "")
+        if (token.isNullOrEmpty()) return false
+        val expiresIn = prefs.getString(KEY_EXPIRES_IN, "") ?: return false
+        return try {
+            OffsetDateTime.parse(expiresIn).isAfter(OffsetDateTime.now())
+        } catch (e: Exception) {
+            false
+        }
+    }
 
     fun hasCompletedOnboarding(): Boolean =
         appStatePrefs.getBoolean(KEY_ONBOARDING_COMPLETED, false)
