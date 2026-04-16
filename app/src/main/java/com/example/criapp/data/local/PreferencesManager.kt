@@ -4,6 +4,8 @@ import android.content.Context
 
 class PreferencesManager(context: Context) {
 
+    val applicationContext: Context = context.applicationContext
+
     private val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     private val appStatePrefs = context.getSharedPreferences(APP_STATE_PREFS_NAME, Context.MODE_PRIVATE)
 
