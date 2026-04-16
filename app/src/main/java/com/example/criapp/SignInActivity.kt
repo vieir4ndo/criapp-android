@@ -30,6 +30,13 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (prefsManager.isSessionActive()) {
+            startActivity(Intent(this, MenuActivity::class.java))
+            finish()
+            return
+        }
+
         setContentView(R.layout.activity_sign_in)
 
         window.setNavigationBarColor(resources.getColor(R.color.light_blue))
@@ -72,7 +79,12 @@ class SignInActivity : AppCompatActivity() {
                         state.data.user?.id,
                         state.data.user?.name
                     )
-                    startActivity(Intent(this, WelcomeMessagesActivity::class.java))
+                    val destination = if (prefsManager.hasCompletedOnboarding()) {
+                        MenuActivity::class.java
+                    } else {
+                        WelcomeMessagesActivity::class.java
+                    }
+                    startActivity(Intent(this, destination))
                     finish()
                 }
                 is UiState.Error -> {
