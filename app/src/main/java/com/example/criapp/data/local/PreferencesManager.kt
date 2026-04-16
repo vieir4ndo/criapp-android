@@ -29,6 +29,9 @@ class PreferencesManager(context: Context) {
         prefs.edit().clear().apply()
     }
 
+    fun isSessionActive(): Boolean =
+        prefs.getString(KEY_TOKEN, "").isNullOrEmpty().not()
+
     fun hasCompletedOnboarding(): Boolean =
         appStatePrefs.getBoolean(KEY_ONBOARDING_COMPLETED, false)
 

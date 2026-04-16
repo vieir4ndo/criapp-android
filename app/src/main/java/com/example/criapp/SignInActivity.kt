@@ -30,6 +30,13 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (prefsManager.isSessionActive()) {
+            startActivity(Intent(this, MenuActivity::class.java))
+            finish()
+            return
+        }
+
         setContentView(R.layout.activity_sign_in)
 
         window.setNavigationBarColor(resources.getColor(R.color.light_blue))
