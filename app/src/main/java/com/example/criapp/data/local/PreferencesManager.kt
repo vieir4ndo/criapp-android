@@ -5,6 +5,7 @@ import android.content.Context
 class PreferencesManager(context: Context) {
 
     private val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    private val appStatePrefs = context.getSharedPreferences(APP_STATE_PREFS_NAME, Context.MODE_PRIVATE)
 
     fun getAuthorizationHeader(): String = "Bearer ${prefs.getString(KEY_TOKEN, "") ?: ""}"
 
@@ -26,11 +27,20 @@ class PreferencesManager(context: Context) {
         prefs.edit().clear().apply()
     }
 
+    fun hasCompletedOnboarding(): Boolean =
+        appStatePrefs.getBoolean(KEY_ONBOARDING_COMPLETED, false)
+
+    fun markOnboardingCompleted() {
+        appStatePrefs.edit().putBoolean(KEY_ONBOARDING_COMPLETED, true).apply()
+    }
+
     companion object {
         private const val PREFS_NAME = "ApiCredentials"
+        private const val APP_STATE_PREFS_NAME = "AppState"
         private const val KEY_TOKEN = "token"
         private const val KEY_EXPIRES_IN = "token_expires_in"
         private const val KEY_USER_ID = "user_id"
         private const val KEY_USER_NAME = "user_name"
+        private const val KEY_ONBOARDING_COMPLETED = "onboarding_completed"
     }
 }
