@@ -72,7 +72,12 @@ class SignInActivity : AppCompatActivity() {
                         state.data.user?.id,
                         state.data.user?.name
                     )
-                    startActivity(Intent(this, WelcomeMessagesActivity::class.java))
+                    val destination = if (prefsManager.hasCompletedOnboarding()) {
+                        MenuActivity::class.java
+                    } else {
+                        WelcomeMessagesActivity::class.java
+                    }
+                    startActivity(Intent(this, destination))
                     finish()
                 }
                 is UiState.Error -> {
