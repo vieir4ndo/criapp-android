@@ -55,7 +55,7 @@ class AnswerActivity : AppCompatActivity() {
                     aLoadingDialog?.cancel()
                     questions = state.data
                     if (questions.isEmpty()) {
-                        DialogFactory.createSuccessDialog(this, "Ya contestaste todas las preguntas de " + child.name + " hoy", QuestionsActivity::class.java).show()
+                        DialogFactory.createSuccessDialog(this, "Ya contestaste todas las preguntas de " + child.name + " hoy").show()
                     } else {
                         showNextQuestion()
                     }
@@ -75,7 +75,7 @@ class AnswerActivity : AppCompatActivity() {
                     aLoadingDialog?.cancel()
                     Toast.makeText(this, "Respuesta guardada con exito", Toast.LENGTH_SHORT).show()
                     if (currentQuestion == questions.lastIndex) {
-                        DialogFactory.createSuccessDialog(this, "Ya contestaste todas las preguntas de " + child.name + " hoy", QuestionsActivity::class.java).show()
+                        DialogFactory.createSuccessDialog(this, "Ya contestaste todas las preguntas de " + child.name + " hoy").show()
                     } else {
                         showNextQuestion()
                     }
