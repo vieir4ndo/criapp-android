@@ -15,13 +15,13 @@ class DialogFactory {
                 .create()
         }
 
-        fun <T> createSuccessDialog(context : Context, message : String, clazz: Class<T>) : Dialog {
+        fun createSuccessDialog(context : Context, message : String) : Dialog {
             return DialogBuilder(context)
                 .withCancelable()
                 .withTitle("Enhorabuena")
                 .withMessage(message)
                 .withSubmitButtonMessage("OK")
-                .withSubmitButtonRedirectingToActivity(clazz)
+                .withSubmitButtonFinishingCurrentActivity()
                 .create()
         }
     }
