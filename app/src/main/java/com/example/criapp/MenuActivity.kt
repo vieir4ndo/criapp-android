@@ -29,4 +29,5 @@ class MenuActivity : AppCompatActivity() {
     fun onButtonAudioVisualResourcesClick(view: View?) = startActivity(Intent(this, AudioVisualResourcesActivity::class.java))
     fun onButtonForumClick(view: View?) = startActivity(Intent(this, ForumsActivity::class.java))
     fun onButtonAwardClick(view: View?) = startActivity(Intent(this, AwardActivity::class.java))
+    fun onButtonChildBookClick(view: View?) = startActivity(Intent(this, RecommendationActivity::class.java))
 }
