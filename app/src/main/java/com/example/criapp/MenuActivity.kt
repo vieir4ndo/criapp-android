@@ -1,6 +1,5 @@
 package com.example.criapp
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -29,4 +28,5 @@ class MenuActivity : AppCompatActivity() {
     fun onButtonFaqClick(view: View?) = startActivity(Intent(this, FaqActivity::class.java))
     fun onButtonAudioVisualResourcesClick(view: View?) = startActivity(Intent(this, AudioVisualResourcesActivity::class.java))
     fun onButtonForumClick(view: View?) = startActivity(Intent(this, ForumsActivity::class.java))
+    fun onButtonAwardClick(view: View?) = startActivity(Intent(this, AwardActivity::class.java))
 }

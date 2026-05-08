@@ -2,6 +2,7 @@ package com.example.criapp.data.remote
 
 import com.example.criapp.models.requests.LoginUserRequest
 import com.example.criapp.models.responses.AudiovisualResourceResponse
+import com.example.criapp.models.responses.AwardResponse
 import com.example.criapp.models.responses.ChildResponse
 import com.example.criapp.models.responses.CommentResponse
 import com.example.criapp.models.responses.FaqResponse
@@ -20,7 +21,7 @@ import retrofit2.http.Query
 
 interface CriAppApiService {
 
-    // ── Autenticación ──────────────────────────────────────────────────────
+    // ── Authentication ──────────────────────────────────────────────────────
 
     @POST("user/login")
     suspend fun login(@Body request: LoginUserRequest): ApiResponse<List<LoginUserResponse>>
@@ -34,7 +35,7 @@ interface CriAppApiService {
     @POST("user/reset-password")
     suspend fun resetPassword(@Body body: RequestBody): ApiResponse<List<Any>>
 
-    // ── Perfil ─────────────────────────────────────────────────────────────
+    // ── Profile ─────────────────────────────────────────────────────────────
 
     @GET("user")
     suspend fun getProfile(): ApiResponse<List<UserResponse>>
@@ -42,9 +43,8 @@ interface CriAppApiService {
     @PATCH("user")
     suspend fun updateProfile(@Body body: RequestBody): ApiResponse<List<Any>>
 
-    // ── Niño ───────────────────────────────────────────────────────────────
+    // ── Child ───────────────────────────────────────────────────────────────
 
-    /** La API devuelve data: [ [child1, child2, …] ] — lista envuelta en lista. */
     @GET("child")
     suspend fun getChildren(): ApiResponse<List<List<ChildResponse>>>
 
@@ -57,7 +57,7 @@ interface CriAppApiService {
         @Body body: RequestBody
     ): ApiResponse<List<Any>>
 
-    // ── Preguntas y respuestas ─────────────────────────────────────────────
+    // ── Questions and Answers ─────────────────────────────────────────────
 
     @GET("question")
     suspend fun getQuestions(@Query("childId") childId: String): ApiResponse<List<QuestionResponse>>
@@ -65,7 +65,7 @@ interface CriAppApiService {
     @POST("answer")
     suspend fun answerQuestion(@Body body: RequestBody): ApiResponse<List<Any>>
 
-    // ── FAQ (público) ──────────────────────────────────────────────────────
+    // ── FAQ (public) ──────────────────────────────────────────────────────
 
     @GET("faq")
     suspend fun getFaqs(): ApiResponse<List<FaqResponse>>
@@ -75,7 +75,7 @@ interface CriAppApiService {
     @GET("audiovisual-resource")
     suspend fun getResources(): ApiResponse<List<AudiovisualResourceResponse>>
 
-    // ── Foros ─────────────────────────────────────────────────────────────
+    // ── Forums ─────────────────────────────────────────────────────────────
 
     @GET("forum")
     suspend fun getForums(): ApiResponse<List<ForumResponse>>
@@ -97,4 +97,8 @@ interface CriAppApiService {
 
     @DELETE("comment/{id}")
     suspend fun deleteComment(@Path("id") id: String): ApiResponse<List<Any>>
+
+    // ── Awards ──────────────────────────────────────────────────────
+    @GET("user/awards")
+    suspend fun getAwards(): ApiResponse<List<AwardResponse>>
 }
