@@ -117,4 +117,5 @@ class AnswerActivity : AppCompatActivity() {
     fun onRadioButton3Click(view: View?) { value = 3 }
     fun onRadioButton4Click(view: View?) { value = 4 }
     fun onRadioButton5Click(view: View?) { value = 5 }
+    fun onRadioButton6Click(view: View?) { value = 6 }
 }
