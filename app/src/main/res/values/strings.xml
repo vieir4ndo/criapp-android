@@ -1,5 +1,26 @@
 <resources>
+
+    <!-- App -->
     <string name="app_name">CRIApp</string>
+
+    <!-- Auth - Sign In -->
+    <string name="sign_in">Acceder</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="dont_have_an_account">Si no tienes usuario,</string>
+
+    <!-- Auth - Sign Up -->
+    <string name="sign_up">Registrate</string>
+    <string name="sign_up_title">Registro de usuario</string>
+    <string name="more_information_about_the_app">Más información sobre la App</string>
+    <string name="sign_up_success_message1">¡Usuario dado de alta!</string>
+    <string name="sign_up_success_message2">Por favor, consulte su correo o móvil.</string>
+
+    <!-- Auth - Forgot / Reset Password -->
+    <string name="forgot_password_page_title">Si olvidaste la contraseña</string>
+    <string name="forgot_password_instruction">Introduzca tu nombre de usuario (correo o móvil) y te enviaremos un código para cambiar tu contraseña</string>
+    <string name="recover_password">Recuperar contraseña</string>
+
+    <!-- Form fields -->
     <string name="name">Nombre</string>
     <string name="username">Nombre de usuario (E-mail o Móvil)</string>
     <string name="birth_date">Fecha de nacimiento</string>
@@ -8,36 +29,98 @@
     <string name="family_type">Tipo de familia</string>
     <string name="number_of_children">Numero de hijos</string>
     <string name="password">Contraseña</string>
-    <string name="sign_in">Acceder</string>
-    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
-    <string name="dont_have_an_account">Si no tienes usuario,</string>
-    <string name="sign_up">Registrate</string>
-    <string name="sign_up_title">Registro de usuario</string>
-    <string name="more_information_about_the_app">Más información sobre la App</string>
-    <string name="ok">Darse de alta</string>
-    <string name="hello">¡Hola!</string>
-    <string name="sign_up_success_message1">¡Usuario dado de alta!</string>
-    <string name="sign_up_success_message2">Por favor, consulte su correo o móvil.</string>
-    <string name="back">Volver</string>
-    <string name="premature">Prematuro</string>
-    <string name="months_of_breast_feeding">Numero de meses de lactancia</string>
-    <string name="register_child">Registro de niño(a)</string>
-    <string name="answer_questions">Responder preguntas</string>
-    <string name="recover_password">Recuperar contraseña</string>
     <string name="new_password">Contraseña nueva</string>
     <string name="code">Código</string>
-    <string name="forgot_password_page_title">Si olvidaste la contraseña</string>
-    <string name="children">Niños(as)</string>
-    <string name="edit_child">Edición de niño(a)</string>
+    <string name="description">Descripción</string>
+    <string name="field_username">Nombre de usuario</string>
+    <string name="field_text">Texto</string>
+
+    <!-- Buttons / Actions -->
+    <string name="ok">Guardar</string>
+    <string name="back">Volver</string>
+    <string name="logoff">Salir</string>
+    <string name="deactivate_account">Desactivar cuenta</string>
+    <string name="add_child">Añadir niño(a)</string>
+    <string name="add_forum">Añadir foro</string>
+
+    <!-- Menu / Navigation -->
+    <string name="hello">¡Hola!</string>
+    <string name="greeting">¡Hola, %s!</string>
+    <string name="welcome_subtitle">Bienvenido a CRIApp</string>
     <string name="profile">Perfil</string>
-    <string name="faq">FAQ</string>
-    <string name="notifications">Notificaciones</string>
     <string name="questionnaires">Cuestionarios</string>
+    <string name="children">Niños(as)</string>
     <string name="forums">Foros</string>
     <string name="awards">Premios</string>
-    <string name="no_awards">Aún no tienes premios. ¡Sigue completando cuestionarios para ganarlos!</string>
     <string name="recommendations">Recomendaciones</string>
+    <string name="faq">FAQ</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="audiovisual_resources">Recursos Audiovisuales</string>
+    <string name="child_book">Libro de crianza</string>
+
+    <!-- Children -->
+    <string name="register_child">Registro de niño(a)</string>
+    <string name="edit_child">Edición de niño(a)</string>
+    <string name="premature">Prematuro</string>
+    <string name="months_of_breast_feeding">Numero de meses de lactancia</string>
+
+    <!-- Forum -->
+    <string name="forum_created_by">Creado por %s</string>
+
+    <!-- Questions / Answers -->
+    <string name="answer_questions">Responder preguntas</string>
+    <string name="answering_questions_for">Respondiendo preguntas para %s</string>
+    <string name="answer_scale_never">Nunca</string>
+    <string name="answer_scale_always">Siempre</string>
+    <string name="answer_scale_disagree">En desacuerdo</string>
+    <string name="answer_scale_agree">De acuerdo</string>
+    <string name="all_questions_answered_today">Ya contestaste todas las preguntas de %s hoy</string>
+
+    <!-- Empty states -->
+    <string name="no_awards">Aún no tienes premios. ¡Sigue completando cuestionarios para ganarlos!</string>
     <string name="no_recommendations">Aún no tienes recomendaciones. ¡Sigue completando cuestionarios para obtenerlas!</string>
+    <string name="empty_list">Aún no hay nada por aquí</string>
+
+    <!-- Dialog -->
+    <string name="dialog_error_title">Oops</string>
+    <string name="dialog_success_title">Enhorabuena</string>
+    <string name="dialog_accept_button">Aceptar</string>
+
+    <!-- Errors label -->
+    <string name="errors">Errores:</string>
+
+    <!-- Toast - Success -->
+    <string name="forum_created_success">Foro creado con éxito</string>
+    <string name="forum_updated_success">Foro actualizado con éxito</string>
+    <string name="child_created_success">Niño(a) creado con éxito</string>
+    <string name="child_updated_success">Niño(a) actualizado con éxito</string>
+    <string name="answer_saved_success">Respuesta guardada con éxito</string>
+    <string name="profile_updated_success">Perfil actualizado con éxito</string>
+    <string name="password_updated_success">Contraseña actualizada con éxito</string>
+
+    <!-- Toast - Error -->
+    <string name="error_save_forum">Hubo un error al guardar el foro, por favor inténtalo nuevamente</string>
+    <string name="error_save_answer">Hubo un error al guardar tu respuesta, inténtalo nuevamente</string>
+    <string name="error_load_questions">Hubo un error al buscar las preguntas, por favor inténtalo nuevamente</string>
+    <string name="error_load_comments">Hubo un error al buscar los comentarios, por favor inténtalo nuevamente</string>
+    <string name="error_load_awards">Hubo un error al buscar los premios, por favor inténtalo nuevamente</string>
+    <string name="error_load_recommendations">Hubo un error al buscar las recomendaciones, por favor inténtalo nuevamente</string>
+    <string name="error_load_resources">Hubo un error al buscar los recursos audiovisuales, por favor inténtalo nuevamente</string>
+
+    <!-- Validation -->
+    <string name="validation_required">%s es obligatorio</string>
+    <string name="validation_invalid">%s es inválido</string>
+    <string name="validation_invalid_feminine">%s es inválida</string>
+    <string name="validation_max_100">%s debe contener un máximo de 100 caracteres</string>
+
+    <!-- String arrays -->
+    <string-array name="welcome_messages">
+        <item>Te damos la bienvenida a CRIApp, una experiencia sobre la crianza y el desarrollo de los niños y niñas entre 0 y 6 años.</item>
+        <item>Nuestro objetivo es acompañarte en la tarea de la crianza y ayudarte a resolver las posibles dudas sobre situaciones del día a día.</item>
+        <item>Nuestro apoyo reforzará tus sentimientos de seguridad y confianza ante la crianza de los niños y las niñas y contribuirá a crear un clima familiar positivo.</item>
+        <item>Y lo más importante, con esta experiencia contribuirás a la mejora del desarrollo físico, cognitivo, social y emocional de tus hijos o hijas.</item>
+        <item>¡Empecemos!</item>
+    </string-array>
 
     <string-array name="award_names">
         <item>Primeros Pasos</item>
@@ -62,20 +145,5 @@
         <item>Contribuyes activamente a crear un ambiente seguro y afectuoso para el desarrollo de tus hijos.</item>
         <item>Cada pequeño avance cuenta. Tu perseverancia y dedicación son el motor del crecimiento de tu familia.</item>
     </string-array>
-    <string name="audiovisual_resources">Recursos Audiovisuales</string>
-    <string name="logoff">Salir</string>
-    <string name="deactivate_account">Desactivar cuenta</string>
-    <string name="errors">Errores:</string>
-    <string name="description">Descripción</string>
-    <string name="child_book">Libro de crianza</string>
 
-
-    <string-array name="welcome_messages">
-        <item>Te damos la bienvenida a CRIApp, una experiencia sobre la crianza y el desarrollo de los niños y niñas entre 0 y 6 años.</item>
-        <item>Nuestro objetivo es acompañarte en la tarea de la crianza y ayudarte a resolver las posibles dudas sobre situaciones del día a día.</item>
-        <item>Nuestro apoyo reforzará tus sentimientos de seguridad y confianza ante la crianza de los niños y las niñas y contribuirá a crear un clima familiar positivo.</item>
-        <item>Y lo más importante, con esta experiencia contribuirás a la mejora del desarrollo físico, cognitivo, social y emocional de tus hijos o hijas.</item>
-        <item>¡Empecemos!</item>
-    </string-array>
 </resources>
-

@@ -39,7 +39,7 @@ class AudioVisualResourcesActivity : AppCompatActivity() {
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Hubo un error al buscar los recursos audiovisuales, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.error_load_resources), Toast.LENGTH_SHORT).show()
                 }
                 else -> Unit
             }

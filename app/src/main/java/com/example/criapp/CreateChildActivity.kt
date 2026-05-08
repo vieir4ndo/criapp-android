@@ -56,7 +56,7 @@ class CreateChildActivity : AppCompatActivity() {
         )
 
         findViewById<Button>(R.id.button_create_child).setOnClickListener {
-            if (model.validate(errorTextView)) {
+            if (model.validate(errorTextView, this)) {
                 viewModel.createChild(model.toRequest())
             } else {
                 errorTextView.visibility = View.VISIBLE
@@ -68,7 +68,7 @@ class CreateChildActivity : AppCompatActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Niño(a) creado con exito", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.child_created_success), Toast.LENGTH_SHORT).show()
                     finish()
                 }
                 is UiState.Error -> {

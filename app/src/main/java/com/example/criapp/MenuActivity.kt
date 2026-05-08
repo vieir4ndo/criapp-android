@@ -15,7 +15,7 @@ class MenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_menu)
 
         val name = PreferencesManager(this).getUserName().split(" ")[0]
-        findViewById<TextView>(R.id.greeting).text = "¡Hola, $name!"
+        findViewById<TextView>(R.id.greeting).text = getString(R.string.greeting, name)
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() { }

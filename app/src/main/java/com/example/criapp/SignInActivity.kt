@@ -59,7 +59,7 @@ class SignInActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.button_login_user).setOnClickListener {
-            if (loginUserModel.validate(errorTextView)) {
+            if (loginUserModel.validate(errorTextView, this)) {
                 val username = editTextUsername.text.toString()
                 val password = editTextPassword.text.toString()
                 viewModel.login(username, password)

@@ -2,15 +2,16 @@ package com.example.criapp.services
 
 import android.app.Dialog
 import android.content.Context
+import com.example.criapp.R
 
 class DialogFactory {
     companion object {
         fun createErrorDialog(context : Context, message : String) : Dialog {
             return DialogBuilder(context)
                 .withCancelable()
-                .withTitle("Oops")
+                .withTitle(context.getString(R.string.dialog_error_title))
                 .withMessage(message)
-                .withSubmitButtonMessage("OK")
+                .withSubmitButtonMessage(context.getString(R.string.dialog_accept_button))
                 .withSubmitButtonDismissing()
                 .create()
         }
@@ -18,9 +19,9 @@ class DialogFactory {
         fun createSuccessDialog(context : Context, message : String) : Dialog {
             return DialogBuilder(context)
                 .withCancelable()
-                .withTitle("Enhorabuena")
+                .withTitle(context.getString(R.string.dialog_success_title))
                 .withMessage(message)
-                .withSubmitButtonMessage("OK")
+                .withSubmitButtonMessage(context.getString(R.string.dialog_accept_button))
                 .withSubmitButtonFinishingCurrentActivity()
                 .create()
         }
