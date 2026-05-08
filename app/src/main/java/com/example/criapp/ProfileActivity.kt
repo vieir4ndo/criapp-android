@@ -73,7 +73,7 @@ class ProfileActivity : AppCompatActivity() {
                     )
 
                     findViewById<Button>(R.id.button_update_user).setOnClickListener {
-                        if (updateUserModel.validate(errorTextView)) {
+                        if (updateUserModel.validate(errorTextView, this)) {
                             viewModel.updateProfile(updateUserModel.toRequest())
                         } else {
                             errorTextView.visibility = View.VISIBLE
@@ -93,7 +93,7 @@ class ProfileActivity : AppCompatActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Perfil actualizado con exito", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.profile_updated_success), Toast.LENGTH_SHORT).show()
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()

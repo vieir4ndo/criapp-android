@@ -61,7 +61,7 @@ class SignUpActivity : AppCompatActivity() {
         )
 
         findViewById<Button>(R.id.button_create_user).setOnClickListener {
-            if (createUserModel.validate(errorTextView)) {
+            if (createUserModel.validate(errorTextView, this)) {
                 viewModel.createUser(createUserModel.toRequest())
             } else {
                 errorTextView.visibility = View.VISIBLE

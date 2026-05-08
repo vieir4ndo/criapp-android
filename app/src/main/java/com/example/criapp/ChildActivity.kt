@@ -43,7 +43,7 @@ class ChildActivity : AppCompatActivity() {
                         view.addView(ViewFactory.generateButton(this, resources, child.name, child.toString(), UpdateChildActivity::class.java, "child"))
                     }
 
-                    view.addView(ViewFactory.generateAddButton(this, resources, "Añadir niño(a)", CreateChildActivity::class.java))
+                    view.addView(ViewFactory.generateAddButton(this, resources, getString(R.string.add_child), CreateChildActivity::class.java))
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()

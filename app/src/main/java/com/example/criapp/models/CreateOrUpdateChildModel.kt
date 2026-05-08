@@ -1,5 +1,6 @@
 package com.example.criapp.models
 
+import android.content.Context
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
@@ -16,8 +17,8 @@ class CreateOrUpdateChildModel(
     val editTextMonthsOfBreastFeeding: EditText,
     val spinnerIsPremature: Spinner,
 ) : IModel<CreateOrUpdateChildModel> {
-    override fun validate(errorTextView: TextView): Boolean {
-        return CreateOrUpdateChildModelValidator(this, errorTextView).isValid()
+    override fun validate(errorTextView: TextView, context: Context): Boolean {
+        return CreateOrUpdateChildModelValidator(this, errorTextView, context).isValid()
     }
 
     override fun toRequest(): String {

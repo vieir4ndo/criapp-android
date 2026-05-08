@@ -1,5 +1,6 @@
 package com.example.criapp.models
 
+import android.content.Context
 import android.widget.EditText
 import android.widget.TextView
 import com.example.criapp.abstractions.IModel
@@ -11,8 +12,8 @@ class ResetPasswordModel(
     val editTextNewPassword: EditText,
     val editTextCode: EditText
 ) : IModel<ResetPasswordRequest> {
-    override fun validate(errorTextView : TextView): Boolean {
-        return ResetPasswordModelValidator(this, errorTextView).isValid()
+    override fun validate(errorTextView : TextView, context: Context): Boolean {
+        return ResetPasswordModelValidator(this, errorTextView, context).isValid()
     }
 
     override fun toRequest(): String {

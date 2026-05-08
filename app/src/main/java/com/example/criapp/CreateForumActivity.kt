@@ -40,7 +40,7 @@ class CreateForumActivity : AppCompatActivity() {
         )
 
         findViewById<Button>(R.id.button_create).setOnClickListener {
-            if (model.validate(errorTextView)) {
+            if (model.validate(errorTextView, this)) {
                 viewModel.createForum(model.toRequest())
             } else {
                 errorTextView.visibility = View.VISIBLE
@@ -52,12 +52,12 @@ class CreateForumActivity : AppCompatActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Foro creado con exito", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.forum_created_success), Toast.LENGTH_SHORT).show()
                     finish()
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Hubo un error al guardar el foro, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.error_save_forum), Toast.LENGTH_SHORT).show()
                 }
                 else -> Unit
             }

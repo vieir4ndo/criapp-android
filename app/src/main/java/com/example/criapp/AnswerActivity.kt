@@ -43,7 +43,7 @@ class AnswerActivity : AppCompatActivity() {
 
         child = gson.fromJson(intent.getStringExtra("child"), ChildResponse::class.java)
 
-        findViewById<TextView>(R.id.text_child).text = "Respondendo preguntas para " + child.name
+        findViewById<TextView>(R.id.text_child).text = getString(R.string.answering_questions_for, child.name)
         textQuestion = findViewById(R.id.text_question)
         textQuestionTypeMin = findViewById(R.id.text_min)
         textQuestionTypeMax = findViewById(R.id.text_max)
@@ -55,14 +55,14 @@ class AnswerActivity : AppCompatActivity() {
                     aLoadingDialog?.cancel()
                     questions = state.data
                     if (questions.isEmpty()) {
-                        DialogFactory.createSuccessDialog(this, "Ya contestaste todas las preguntas de " + child.name + " hoy").show()
+                        DialogFactory.createSuccessDialog(this, getString(R.string.all_questions_answered_today, child.name)).show()
                     } else {
                         showNextQuestion()
                     }
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Hubo un error al buscar las preguntas, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.error_load_questions), Toast.LENGTH_SHORT).show()
                 }
                 else -> Unit
             }
@@ -73,16 +73,16 @@ class AnswerActivity : AppCompatActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Respuesta guardada con exito", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.answer_saved_success), Toast.LENGTH_SHORT).show()
                     if (currentQuestion == questions.lastIndex) {
-                        DialogFactory.createSuccessDialog(this, "Ya contestaste todas las preguntas de " + child.name + " hoy").show()
+                        DialogFactory.createSuccessDialog(this, getString(R.string.all_questions_answered_today, child.name)).show()
                     } else {
                         showNextQuestion()
                     }
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Hubo un error al guardar tu respuesta, inténtalo nuevamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.error_save_answer), Toast.LENGTH_SHORT).show()
                 }
                 else -> Unit
             }
@@ -95,11 +95,11 @@ class AnswerActivity : AppCompatActivity() {
         currentQuestion++
         textQuestion!!.text = questions[currentQuestion].text
         if (questions[currentQuestion].type == 1) {
-            textQuestionTypeMin!!.text = "Nunca"
-            textQuestionTypeMax!!.text = "Siempre"
+            textQuestionTypeMin!!.text = getString(R.string.answer_scale_never)
+            textQuestionTypeMax!!.text = getString(R.string.answer_scale_always)
         } else {
-            textQuestionTypeMin!!.text = "En desacuerdo"
-            textQuestionTypeMax!!.text = "De acuerdo"
+            textQuestionTypeMin!!.text = getString(R.string.answer_scale_disagree)
+            textQuestionTypeMax!!.text = getString(R.string.answer_scale_agree)
         }
     }
 
