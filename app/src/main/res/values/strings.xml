@@ -36,6 +36,8 @@
     <string name="forums">Foros</string>
     <string name="awards">Premios</string>
     <string name="no_awards">Aún no tienes premios. ¡Sigue completando cuestionarios para ganarlos!</string>
+    <string name="recommendations">Recomendaciones</string>
+    <string name="no_recommendations">Aún no tienes recomendaciones. ¡Sigue completando cuestionarios para obtenerlas!</string>
 
     <string-array name="award_names">
         <item>Primeros Pasos</item>
@@ -65,6 +67,7 @@
     <string name="deactivate_account">Desactivar cuenta</string>
     <string name="errors">Errores:</string>
     <string name="description">Descripción</string>
+    <string name="child_book">Libro de crianza</string>
 
 
     <string-array name="welcome_messages">
