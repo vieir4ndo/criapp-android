@@ -54,9 +54,8 @@
         <TextView
             android:id="@+id/txtNoRecommendations"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:gravity="top|center_horizontal"
             android:padding="20dp"
             android:text="@string/no_recommendations"
             android:textAlignment="center"
