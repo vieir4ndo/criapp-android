@@ -63,9 +63,9 @@ class ProfileActivity : AppCompatActivity() {
                     editTextName.setText(user.name)
                     editTextNumberOfChildren.setText(user.numberOfChildren.toString())
                     editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(birthDateYear, birthDateMonth, birthDateDay))
-                    mBinding.spinnerSex.setSelection(user.sex)
-                    mBinding.spinnerFamilyType.setSelection(user.familyType)
-                    mBinding.spinnerEducationalLevel.setSelection(user.educationalLevel)
+                    mBinding.spinnerSex.selectItem(user.sex)
+                    mBinding.spinnerFamilyType.selectItem(user.familyType)
+                    mBinding.spinnerEducationalLevel.selectItem(user.educationalLevel)
 
                     val updateUserModel = UpdateUserModel(
                         editTextName, editTextBirthDate, mBinding.spinnerSex,
@@ -107,9 +107,9 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun configSpinners() {
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerSex, SpinnerHelper.sexOptions)
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerEducationalLevel, SpinnerHelper.educationalLevelOptions)
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerFamilyType, SpinnerHelper.familyTypeOptions)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerSex, R.array.sex_options)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerEducationalLevel, R.array.educational_level_options)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerFamilyType, R.array.family_type_options)
     }
 
     fun showDatePickerForBirthDate(view: View) {

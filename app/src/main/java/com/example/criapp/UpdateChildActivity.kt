@@ -92,10 +92,10 @@ class UpdateChildActivity : AppCompatActivity() {
     }
 
     private fun configSpinners() {
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerSex, SpinnerHelper.sexOptions)
-        mBinding.spinnerSex.setSelection(child.sex)
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerPremature, SpinnerHelper.yesOrNoOptions)
-        mBinding.spinnerPremature.setSelection(if (child.isPremature) 1 else 2)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerSex, R.array.sex_options)
+        mBinding.spinnerSex.selectItem(child.sex)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerPremature, R.array.yes_no_options)
+        mBinding.spinnerPremature.selectItem(if (child.isPremature) 1 else 2)
     }
 
     fun showDatePickerForBirthDate(view: View) {

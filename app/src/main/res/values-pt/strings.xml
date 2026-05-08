@@ -115,6 +115,37 @@
     <string name="validation_max_100">%s deve ter no máximo 100 caracteres</string>
 
     <!-- String arrays -->
+    <string-array name="sex_options">
+        <item>Selecionar</item>
+        <item>Masculino</item>
+        <item>Feminino</item>
+        <item>Outro</item>
+    </string-array>
+
+    <string-array name="educational_level_options">
+        <item>Selecionar</item>
+        <item>Sem escolaridade</item>
+        <item>Ensino fundamental</item>
+        <item>Ensino médio</item>
+        <item>Ensino técnico</item>
+        <item>Ensino superior</item>
+    </string-array>
+
+    <string-array name="family_type_options">
+        <item>Selecionar</item>
+        <item>Monoparental feminina (mulher sozinha com filhos)</item>
+        <item>Monoparental masculina (homem sozinho com filhos)</item>
+        <item>Casal heterossexual com filhos</item>
+        <item>Casal de homens com filhos</item>
+        <item>Casal de mulheres com filhos</item>
+    </string-array>
+
+    <string-array name="yes_no_options">
+        <item>Selecionar</item>
+        <item>Sim</item>
+        <item>Não</item>
+    </string-array>
+
     <string-array name="welcome_messages">
         <item>Bem-vindo(a) ao CRIApp, uma experiência sobre criação e desenvolvimento de crianças entre 0 e 6 anos.</item>
         <item>Nosso objetivo é acompanhá-lo(a) na jornada da criação e ajudá-lo(a) a resolver dúvidas sobre situações do dia a dia.</item>

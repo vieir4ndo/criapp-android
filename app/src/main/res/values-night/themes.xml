@@ -5,4 +5,59 @@
         <item name="colorSecondary">@color/dark_blue</item>
         <item name="colorPrimary">@color/light_blue</item>
     </style>
+
+    <style name="CRIApp" />
+
+    <style name="CRIApp.EditText">
+        <item name="android:background">@drawable/edit_text</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">15dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColorHint">#808080</item>
+    </style>
+
+    <style name="CRIApp.Spinner">
+        <item name="android:background">@drawable/spinner_background</item>
+        <item name="android:popupBackground">@drawable/spinner_popup_background</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">40dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:spinnerMode">dropdown</item>
+    </style>
+
+    <style name="CRIApp.Dropdown">
+        <item name="android:background">@drawable/edit_text</item>
+        <item name="android:drawableEnd">@drawable/ic_spinner_arrow</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">15dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:ellipsize">none</item>
+    </style>
+
+    <style name="CRIApp_DatePickerDialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorPrimary">@color/purple</item>
+        <item name="colorAccent">@color/purple</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:colorBackground">@android:color/white</item>
+        <item name="colorSurface">@android:color/white</item>
+    </style>
+
+    <style name="CRIApp_MaterialDatePicker" parent="ThemeOverlay.Material3.MaterialCalendar">
+        <item name="colorSurface">@android:color/white</item>
+        <item name="android:colorBackground">@android:color/white</item>
+        <item name="colorOnSurface">@android:color/black</item>
+        <item name="elevationOverlayEnabled">false</item>
+        <item name="elevationOverlayColor">@android:color/transparent</item>
+    </style>
 </resources>

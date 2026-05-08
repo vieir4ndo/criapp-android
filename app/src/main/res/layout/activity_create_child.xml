@@ -62,6 +62,7 @@
                 android:textColor="@color/white" />
 
             <EditText
+                style="@style/CRIApp.EditText"
                 android:id="@+id/edit_text_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,9 +76,12 @@
                 android:textColor="@color/white" />
 
             <EditText
+                style="@style/CRIApp.EditText"
                 android:id="@+id/edit_text_birth_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:inputType="text"
                 android:onClick="showDatePickerForBirthDate" />
 
@@ -89,12 +93,12 @@
                 android:textColor="@color/white" />
 
 
-            <Spinner
+            <com.example.criapp.CriAppDropdown
+                style="@style/CRIApp.Dropdown"
                 android:id="@+id/spinner_sex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp" />
+                android:layout_marginTop="5dp" />
 
             <TextView
                 android:id="@+id/label_spinner_premature"
@@ -104,12 +108,12 @@
                 android:textColor="@color/white" />
 
 
-            <Spinner
+            <com.example.criapp.CriAppDropdown
+                style="@style/CRIApp.Dropdown"
                 android:id="@+id/spinner_premature"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp" />
+                android:layout_marginTop="5dp" />
 
             <TextView
                 android:id="@+id/label_edit_text_months_of_breast_feeding"
@@ -119,6 +123,7 @@
                 android:textColor="@color/white" />
 
             <EditText
+                style="@style/CRIApp.EditText"
                 android:id="@+id/edit_text_months_of_breast_feeding"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

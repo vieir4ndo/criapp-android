@@ -81,8 +81,8 @@ class CreateChildActivity : AppCompatActivity() {
     }
 
     private fun configSpinners() {
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerSex, SpinnerHelper.sexOptions)
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerPremature, SpinnerHelper.yesOrNoOptions)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerSex, R.array.sex_options)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerPremature, R.array.yes_no_options)
     }
 
     fun showDatePickerForBirthDate(view: View) {

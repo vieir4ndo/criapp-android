@@ -85,9 +85,9 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun configSpinners() {
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerSex, SpinnerHelper.sexOptions)
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerEducationalLevel, SpinnerHelper.educationalLevelOptions)
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerFamilyType, SpinnerHelper.familyTypeOptions)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerSex, R.array.sex_options)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerEducationalLevel, R.array.educational_level_options)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerFamilyType, R.array.family_type_options)
     }
 
     fun showDatePickerForBirthDate(view: View) {

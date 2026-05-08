@@ -26,4 +26,10 @@ class CriAppSpinnerAdapter(
         view.findViewById<TextView>(android.R.id.text1).text = data[position]
         return view
     }
+
+    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.criapp_spinner_dropdown_item, parent, false)
+        view.findViewById<TextView>(android.R.id.text1).text = data[position]
+        return view
+    }
 }
