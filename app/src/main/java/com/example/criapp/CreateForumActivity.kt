@@ -2,15 +2,14 @@ package com.example.criapp
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ForumRepositoryImpl
+import com.example.criapp.databinding.ActivityCreateForumBinding
+import com.example.criapp.helpers.markRequired
 import com.example.criapp.models.CreateForumModel
 import com.example.criapp.presentation.common.UiState
 import com.example.criapp.presentation.forum.ForumViewModel
@@ -23,27 +22,27 @@ class CreateForumActivity : AppCompatActivity() {
     }
     private var aLoadingDialog: ALoadingDialog? = null
     private lateinit var model: CreateForumModel
-    private lateinit var errorTextView: TextView
+    private lateinit var mBinding: ActivityCreateForumBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_forum)
+        mBinding = ActivityCreateForumBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
 
         aLoadingDialog = ALoadingDialog(this)
 
-        errorTextView = findViewById(R.id.text_view_errors)
-        errorTextView.visibility = View.GONE
+        mBinding.textViewErrors.visibility = View.GONE
 
-        model = CreateForumModel(
-            findViewById(R.id.edit_text_name),
-            findViewById(R.id.edit_text_description)
-        )
+        mBinding.labelEditTextName.markRequired()
+        mBinding.labelEditTextDescription.markRequired()
 
-        findViewById<Button>(R.id.button_create).setOnClickListener {
-            if (model.validate(errorTextView, this)) {
+        model = CreateForumModel(mBinding.editTextName, mBinding.editTextDescription)
+
+        mBinding.buttonCreate.setOnClickListener {
+            if (model.validate(mBinding.textViewErrors, this)) {
                 viewModel.createForum(model.toRequest())
             } else {
-                errorTextView.visibility = View.VISIBLE
+                mBinding.textViewErrors.visibility = View.VISIBLE
             }
         }
 

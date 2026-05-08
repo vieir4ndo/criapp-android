@@ -3,9 +3,6 @@ package com.example.criapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +10,7 @@ import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ProfileRepositoryImpl
 import com.example.criapp.databinding.ActivityProfileBinding
+import com.example.criapp.helpers.markRequired
 import com.example.criapp.models.UpdateUserModel
 import com.example.criapp.presentation.common.UiState
 import com.example.criapp.presentation.profile.ProfileViewModel
@@ -28,8 +26,6 @@ class ProfileActivity : AppCompatActivity() {
         ProfileViewModelFactory(ProfileRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
     }
     private var aLoadingDialog: ALoadingDialog? = null
-    private lateinit var editTextBirthDate: EditText
-    private lateinit var errorTextView: TextView
     private var birthDateDay = 0
     private var birthDateMonth = 0
     private var birthDateYear = 0
@@ -40,6 +36,10 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(mBinding.root)
 
         aLoadingDialog = ALoadingDialog(this)
+
+        mBinding.labelEditTextName.markRequired()
+        mBinding.labelEditTextBirthDate.markRequired()
+        mBinding.labelSpinnerSex.markRequired()
 
         viewModel.profileState.observe(this) { state ->
             when (state) {
@@ -54,29 +54,24 @@ class ProfileActivity : AppCompatActivity() {
 
                     configSpinners()
 
-                    errorTextView = findViewById(R.id.text_view_errors)
-                    errorTextView.visibility = View.GONE
-                    val editTextName = findViewById<EditText>(R.id.edit_text_name)
-                    val editTextNumberOfChildren = findViewById<EditText>(R.id.edit_text_number_of_children)
-                    editTextBirthDate = findViewById(R.id.edit_text_birth_date)
-
-                    editTextName.setText(user.name)
-                    editTextNumberOfChildren.setText(user.numberOfChildren.toString())
-                    editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(birthDateYear, birthDateMonth, birthDateDay))
+                    mBinding.textViewErrors.visibility = View.GONE
+                    mBinding.editTextName.setText(user.name)
+                    mBinding.editTextNumberOfChildren.setText(user.numberOfChildren.toString())
+                    mBinding.editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(birthDateYear, birthDateMonth, birthDateDay))
                     mBinding.spinnerSex.selectItem(user.sex)
                     mBinding.spinnerFamilyType.selectItem(user.familyType)
                     mBinding.spinnerEducationalLevel.selectItem(user.educationalLevel)
 
                     val updateUserModel = UpdateUserModel(
-                        editTextName, editTextBirthDate, mBinding.spinnerSex,
-                        mBinding.spinnerEducationalLevel, mBinding.spinnerFamilyType, editTextNumberOfChildren
+                        mBinding.editTextName, mBinding.editTextBirthDate, mBinding.spinnerSex,
+                        mBinding.spinnerEducationalLevel, mBinding.spinnerFamilyType, mBinding.editTextNumberOfChildren
                     )
 
-                    findViewById<Button>(R.id.button_update_user).setOnClickListener {
-                        if (updateUserModel.validate(errorTextView, this)) {
+                    mBinding.buttonUpdateUser.setOnClickListener {
+                        if (updateUserModel.validate(mBinding.textViewErrors, this)) {
                             viewModel.updateProfile(updateUserModel.toRequest())
                         } else {
-                            errorTextView.visibility = View.VISIBLE
+                            mBinding.textViewErrors.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -117,8 +112,8 @@ class ProfileActivity : AppCompatActivity() {
             birthDateDay = day
             birthDateMonth = month + 1
             birthDateYear = year
-            editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
-            editTextBirthDate.error = null
+            mBinding.editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
+            mBinding.editTextBirthDate.error = null
         }
         datePicker.show(supportFragmentManager, "datePicker")
     }
