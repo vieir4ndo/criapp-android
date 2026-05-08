@@ -23,6 +23,7 @@ class DialogFactory {
                 .withMessage(message)
                 .withSubmitButtonMessage(context.getString(R.string.dialog_accept_button))
                 .withSubmitButtonFinishingCurrentActivity()
+                .withOnDismissFinishingCurrentActivity()
                 .create()
         }
     }
