@@ -79,7 +79,7 @@ class SignInActivity : AppCompatActivity() {
                         state.data.user?.id,
                         state.data.user?.name
                     )
-                    val destination = if (prefsManager.hasCompletedOnboarding()) {
+                    val destination = if (prefsManager.hasCompletedOnboarding(state.data.user?.id ?: "")) {
                         MenuActivity::class.java
                     } else {
                         WelcomeMessagesActivity::class.java

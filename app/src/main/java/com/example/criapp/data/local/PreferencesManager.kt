@@ -41,11 +41,11 @@ class PreferencesManager(context: Context) {
         }
     }
 
-    fun hasCompletedOnboarding(): Boolean =
-        appStatePrefs.getBoolean(KEY_ONBOARDING_COMPLETED, false)
+    fun hasCompletedOnboarding(userId: String): Boolean =
+        appStatePrefs.getBoolean("${KEY_ONBOARDING_COMPLETED}_$userId", false)
 
-    fun markOnboardingCompleted() {
-        appStatePrefs.edit().putBoolean(KEY_ONBOARDING_COMPLETED, true).apply()
+    fun markOnboardingCompleted(userId: String) {
+        appStatePrefs.edit().putBoolean("${KEY_ONBOARDING_COMPLETED}_$userId", true).apply()
     }
 
     companion object {

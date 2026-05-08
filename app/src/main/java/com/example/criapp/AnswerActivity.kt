@@ -35,7 +35,7 @@ class AnswerActivity : AppCompatActivity() {
     private var questions: List<QuestionResponse> = emptyList()
     private var currentQuestion = -1
     private var value: Int = 3
-    private var aLoadingDialog: ALoadingDialog? = null
+    private var selectedIndex: Int = -1
     private var textQuestion: TextView? = null
     private var textQuestionTypeMin: TextView? = null
     private var textQuestionTypeMax: TextView? = null
@@ -57,8 +57,6 @@ class AnswerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_answer)
 
-        aLoadingDialog = ALoadingDialog(this)
-
         child = gson.fromJson(intent.getStringExtra("child"), ChildResponse::class.java)
 
         findViewById<TextView>(R.id.text_child).text = getString(R.string.answering_questions_for, child.name)
@@ -78,6 +76,7 @@ class AnswerActivity : AppCompatActivity() {
         likertButtons.forEachIndexed { index, btn ->
             btn.setOnClickListener {
                 value = index + 1
+                selectedIndex = index
                 val isReversed = currentQuestion >= 0 && questions[currentQuestion].scoringType == 2
                 updateLikertButtons(index, isReversed)
             }
@@ -85,18 +84,18 @@ class AnswerActivity : AppCompatActivity() {
 
         viewModel.questionsState.observe(this) { state ->
             when (state) {
-                is UiState.Loading -> aLoadingDialog?.show()
+                is UiState.Loading -> progressIndicator?.isIndeterminate = true
                 is UiState.Success -> {
-                    aLoadingDialog?.cancel()
+                    progressIndicator?.isIndeterminate = false
                     questions = state.data
                     if (questions.isEmpty()) {
                         DialogFactory.createSuccessDialog(this, getString(R.string.all_questions_answered_today, child.name)).show()
                     } else {
-                        showNextQuestion()
+                        showNextQuestion(animate = false)
                     }
                 }
                 is UiState.Error -> {
-                    aLoadingDialog?.cancel()
+                    progressIndicator?.isIndeterminate = false
                     Toast.makeText(this, getString(R.string.error_load_questions), Toast.LENGTH_SHORT).show()
                 }
                 else -> Unit
@@ -105,10 +104,8 @@ class AnswerActivity : AppCompatActivity() {
 
         viewModel.answerState.observe(this) { state ->
             when (state) {
-                is UiState.Loading -> aLoadingDialog?.show()
+                is UiState.Loading -> Unit
                 is UiState.Success -> {
-                    aLoadingDialog?.cancel()
-                    Toast.makeText(this, getString(R.string.answer_saved_success), Toast.LENGTH_SHORT).show()
                     if (currentQuestion == questions.lastIndex) {
                         DialogFactory.createSuccessDialog(this, getString(R.string.all_questions_answered_today, child.name)).show()
                     } else {
@@ -116,7 +113,6 @@ class AnswerActivity : AppCompatActivity() {
                     }
                 }
                 is UiState.Error -> {
-                    aLoadingDialog?.cancel()
                     Toast.makeText(this, getString(R.string.error_save_answer), Toast.LENGTH_SHORT).show()
                 }
                 else -> Unit
@@ -126,11 +122,12 @@ class AnswerActivity : AppCompatActivity() {
         viewModel.loadQuestions(child.id)
     }
 
-    private fun showNextQuestion() {
+    private fun showNextQuestion(animate: Boolean = true) {
         currentQuestion++
-        textQuestion!!.text = questions[currentQuestion].text
+        val newText = questions[currentQuestion].text
         progressIndicator?.setProgressCompat((currentQuestion + 1) * 100 / questions.size, true)
         value = 3
+        selectedIndex = -1
         val isReversed = questions[currentQuestion].scoringType == 2
         if (questions[currentQuestion].type == 1) {
             textQuestionTypeMin!!.text = getString(R.string.answer_scale_never)
@@ -140,12 +137,42 @@ class AnswerActivity : AppCompatActivity() {
             textQuestionTypeMax!!.text = getString(R.string.answer_scale_agree)
         }
         updateLikertButtons(-1, isReversed)
+
+        if (!animate) {
+            textQuestion!!.text = newText
+            textQuestion!!.alpha = 1f
+            return
+        }
+
+        textQuestion!!.animate()
+            .alpha(0f)
+            .translationX(-40f)
+            .setDuration(180)
+            .withEndAction {
+                textQuestion!!.text = newText
+                textQuestion!!.translationX = 40f
+                textQuestion!!.animate()
+                    .alpha(1f)
+                    .translationX(0f)
+                    .setDuration(220)
+                    .start()
+            }.start()
     }
 
     fun onArrowButtonClick(view: View?) {
         if (currentQuestion < 0) {
-            showNextQuestion()
+            showNextQuestion(animate = false)
         } else {
+            if (selectedIndex == -1) {
+                textQuestion!!.animate().translationX(12f).setDuration(50)
+                    .withEndAction {
+                        textQuestion!!.animate().translationX(-12f).setDuration(50)
+                            .withEndAction {
+                                textQuestion!!.animate().translationX(0f).setDuration(50).start()
+                            }.start()
+                    }.start()
+                return
+            }
             val requestBody = CreateAnswerModel(value, questions[currentQuestion].id, child.id).toString()
             viewModel.answerQuestion(requestBody)
         }

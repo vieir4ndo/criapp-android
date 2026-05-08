@@ -7,34 +7,64 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
+import com.google.android.material.progressindicator.LinearProgressIndicator
 
 class WelcomeMessagesActivity : AppCompatActivity() {
 
     private var welcomeMessages: Array<String>? = null
     private var currentMessage = -1
     private var textView: TextView? = null
+    private var textStep: TextView? = null
+    private var progressIndicator: LinearProgressIndicator? = null
     private val prefsManager by lazy { PreferencesManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome_messages)
         textView = findViewById(R.id.welcome_message)
+        textStep = findViewById(R.id.text_step)
+        progressIndicator = findViewById(R.id.progress_indicator)
         welcomeMessages = resources.getStringArray(R.array.welcome_messages)
-        showNextMessage()
+        showNextMessage(animate = false)
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() { }
         })
     }
 
-    private fun showNextMessage() {
+    private fun showNextMessage(animate: Boolean = true) {
         currentMessage++
-        textView!!.text = welcomeMessages!![currentMessage]
+        val total = welcomeMessages!!.size
+        val newText = welcomeMessages!![currentMessage]
+        val progress = ((currentMessage + 1) * 100 / total)
+
+        textStep!!.text = "${currentMessage + 1} / $total"
+        progressIndicator!!.setProgressCompat(progress, true)
+
+        if (!animate) {
+            textView!!.text = newText
+            textView!!.alpha = 1f
+            return
+        }
+
+        textView!!.animate()
+            .alpha(0f)
+            .translationX(-40f)
+            .setDuration(180)
+            .withEndAction {
+                textView!!.text = newText
+                textView!!.translationX = 40f
+                textView!!.animate()
+                    .alpha(1f)
+                    .translationX(0f)
+                    .setDuration(220)
+                    .start()
+            }.start()
     }
 
     fun onArrowButtonClick(view: View?) {
         if (currentMessage == welcomeMessages!!.lastIndex) {
-            prefsManager.markOnboardingCompleted()
+            prefsManager.markOnboardingCompleted(prefsManager.getUserId())
             startActivity(Intent(this, MenuActivity::class.java))
             finish()
         } else {
