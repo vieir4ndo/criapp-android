@@ -22,6 +22,7 @@ class DialogFactory {
                 .withMessage(message)
                 .withSubmitButtonMessage("OK")
                 .withSubmitButtonFinishingCurrentActivity()
+                .withOnDismissFinishingCurrentActivity()
                 .create()
         }
     }

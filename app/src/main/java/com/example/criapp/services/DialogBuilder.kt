@@ -76,6 +76,14 @@ class DialogBuilder {
         return this;
     }
 
+    fun withOnDismissFinishingCurrentActivity() : DialogBuilder{
+        dialog.setOnDismissListener {
+            (this.context as? android.app.Activity)?.finish()
+        }
+
+        return this;
+    }
+
     fun create() : Dialog{
         dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
