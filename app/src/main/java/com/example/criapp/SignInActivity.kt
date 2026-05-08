@@ -3,15 +3,14 @@ package com.example.criapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.AuthRepositoryImpl
+import com.example.criapp.databinding.ActivitySignInBinding
+import com.example.criapp.helpers.markRequired
 import com.example.criapp.models.LoginUserModel
 import com.example.criapp.presentation.auth.SignInViewModel
 import com.example.criapp.presentation.auth.SignInViewModelFactory
@@ -25,7 +24,7 @@ class SignInActivity : AppCompatActivity() {
         SignInViewModelFactory(AuthRepositoryImpl(RetrofitProvider.create(prefsManager)))
     }
     private var aLoadingDialog: ALoadingDialog? = null
-    private lateinit var errorTextView: TextView
+    private lateinit var mBinding: ActivitySignInBinding
     private lateinit var loginUserModel: LoginUserModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,34 +36,35 @@ class SignInActivity : AppCompatActivity() {
             return
         }
 
-        setContentView(R.layout.activity_sign_in)
+        mBinding = ActivitySignInBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
 
         window.setNavigationBarColor(resources.getColor(R.color.light_blue))
 
         aLoadingDialog = ALoadingDialog(this)
 
-        errorTextView = findViewById(R.id.text_view_errors)
-        errorTextView.visibility = View.GONE
+        mBinding.textViewErrors.visibility = View.GONE
 
-        val editTextUsername = findViewById<EditText>(R.id.edit_text_username)
-        val editTextPassword = findViewById<EditText>(R.id.edit_text_password)
-        loginUserModel = LoginUserModel(editTextUsername, editTextPassword)
+        mBinding.labelEditTextUsername.markRequired()
+        mBinding.labelEditTextPassword.markRequired()
 
-        findViewById<Button>(R.id.redirect_sign_up_button).setOnClickListener {
+        loginUserModel = LoginUserModel(mBinding.editTextUsername, mBinding.editTextPassword)
+
+        mBinding.redirectSignUpButton.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
 
-        findViewById<Button>(R.id.redirect_forgot_password_button).setOnClickListener {
+        mBinding.redirectForgotPasswordButton.setOnClickListener {
             startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
 
-        findViewById<Button>(R.id.button_login_user).setOnClickListener {
-            if (loginUserModel.validate(errorTextView)) {
-                val username = editTextUsername.text.toString()
-                val password = editTextPassword.text.toString()
+        mBinding.buttonLoginUser.setOnClickListener {
+            if (loginUserModel.validate(mBinding.textViewErrors, this)) {
+                val username = mBinding.editTextUsername.text.toString()
+                val password = mBinding.editTextPassword.text.toString()
                 viewModel.login(username, password)
             } else {
-                errorTextView.visibility = View.VISIBLE
+                mBinding.textViewErrors.visibility = View.VISIBLE
             }
         }
 
@@ -79,7 +79,7 @@ class SignInActivity : AppCompatActivity() {
                         state.data.user?.id,
                         state.data.user?.name
                     )
-                    val destination = if (prefsManager.hasCompletedOnboarding()) {
+                    val destination = if (prefsManager.hasCompletedOnboarding(state.data.user?.id ?: "")) {
                         MenuActivity::class.java
                     } else {
                         WelcomeMessagesActivity::class.java

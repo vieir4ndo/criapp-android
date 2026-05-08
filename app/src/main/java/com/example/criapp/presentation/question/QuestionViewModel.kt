@@ -50,6 +50,7 @@ class QuestionViewModel(
     }
 
     fun answerQuestion(requestBody: String) {
+        if (_answerState.value is UiState.Loading) return
         _answerState.value = UiState.Loading
         viewModelScope.launch {
             val result = questionRepository.answerQuestion(requestBody)

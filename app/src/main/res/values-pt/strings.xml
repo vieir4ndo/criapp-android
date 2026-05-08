@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App -->
+    <string name="app_name">CRIApp</string>
+
+    <!-- Auth - Sign In -->
+    <string name="sign_in">Entrar</string>
+    <string name="forgot_password">Esqueceu sua senha?</string>
+    <string name="dont_have_an_account">Não tem uma conta?</string>
+
+    <!-- Auth - Sign Up -->
+    <string name="sign_up">Cadastre-se</string>
+    <string name="sign_up_title">Cadastro de usuário</string>
+    <string name="more_information_about_the_app">Mais informações sobre o App</string>
+    <string name="sign_up_success_message1">Usuário cadastrado!</string>
+    <string name="sign_up_success_message2">Por favor, verifique seu e-mail ou celular.</string>
+
+    <!-- Auth - Forgot / Reset Password -->
+    <string name="forgot_password_page_title">Esqueceu sua senha?</string>
+    <string name="forgot_password_instruction">Insira seu nome de usuário (e-mail ou celular) e enviaremos um código para redefinir sua senha</string>
+    <string name="recover_password">Recuperar senha</string>
+
+    <!-- Form fields -->
+    <string name="name">Nome</string>
+    <string name="username">Nome de usuário (E-mail ou Celular)</string>
+    <string name="birth_date">Data de nascimento</string>
+    <string name="sex">Sexo</string>
+    <string name="educational_level">Nível educacional</string>
+    <string name="family_type">Tipo de família</string>
+    <string name="number_of_children">Número de filhos</string>
+    <string name="password">Senha</string>
+    <string name="new_password">Nova senha</string>
+    <string name="code">Código</string>
+    <string name="description">Descrição</string>
+    <string name="field_username">Nome de usuário</string>
+    <string name="field_text">Texto</string>
+
+    <!-- Buttons / Actions -->
+    <string name="ok">Salvar</string>
+    <string name="back">Voltar</string>
+    <string name="logoff">Sair</string>
+    <string name="deactivate_account">Desativar conta</string>
+    <string name="add_child">Adicionar criança</string>
+    <string name="add_forum">Adicionar fórum</string>
+
+    <!-- Menu / Navigation -->
+    <string name="hello">Olá!</string>
+    <string name="greeting">Olá, %s!</string>
+    <string name="welcome_subtitle">Bem-vindo(a) ao CRIApp</string>
+    <string name="profile">Perfil</string>
+    <string name="questionnaires">Questionários</string>
+    <string name="children">Crianças</string>
+    <string name="forums">Fóruns</string>
+    <string name="awards">Prêmios</string>
+    <string name="recommendations">Recomendações</string>
+    <string name="faq">FAQ</string>
+    <string name="notifications">Notificações</string>
+    <string name="audiovisual_resources">Recursos Audiovisuais</string>
+    <string name="child_book">Livro de criação</string>
+
+    <!-- Children -->
+    <string name="register_child">Cadastro de criança</string>
+    <string name="edit_child">Edição de criança</string>
+    <string name="premature">Prematuro</string>
+    <string name="months_of_breast_feeding">Número de meses de amamentação</string>
+
+    <!-- Forum -->
+    <string name="forum_created_by">Criado por %s</string>
+
+    <!-- Questions / Answers -->
+    <string name="answer_questions">Responder perguntas</string>
+    <string name="answering_questions_for">Respondendo perguntas para %s</string>
+    <string name="answer_scale_never">Nunca</string>
+    <string name="answer_scale_always">Sempre</string>
+    <string name="answer_scale_disagree">Discordo</string>
+    <string name="answer_scale_agree">Concordo</string>
+    <string name="all_questions_answered_today">Você já respondeu todas as perguntas de %s hoje</string>
+
+    <!-- Empty states -->
+    <string name="no_awards">Você ainda não tem prêmios. Continue completando questionários para ganhá-los!</string>
+    <string name="no_recommendations">Você ainda não tem recomendações. Continue completando questionários para obtê-las!</string>
+    <string name="empty_list">Ainda não há nada aqui</string>
+
+    <!-- Dialog -->
+    <string name="dialog_error_title">Ops</string>
+    <string name="dialog_success_title">Parabéns</string>
+    <string name="dialog_accept_button">OK</string>
+
+    <!-- Errors label -->
+    <string name="errors">Erros:</string>
+
+    <!-- Toast - Success -->
+    <string name="forum_created_success">Fórum criado com sucesso</string>
+    <string name="forum_updated_success">Fórum atualizado com sucesso</string>
+    <string name="child_created_success">Criança cadastrada com sucesso</string>
+    <string name="child_updated_success">Criança atualizada com sucesso</string>
+    <string name="answer_saved_success">Resposta salva com sucesso</string>
+    <string name="profile_updated_success">Perfil atualizado com sucesso</string>
+    <string name="password_updated_success">Senha atualizada com sucesso</string>
+
+    <!-- Toast - Error -->
+    <string name="error_save_forum">Ocorreu um erro ao salvar o fórum, por favor tente novamente</string>
+    <string name="error_save_answer">Ocorreu um erro ao salvar sua resposta, por favor tente novamente</string>
+    <string name="error_load_questions">Ocorreu um erro ao buscar as perguntas, por favor tente novamente</string>
+    <string name="error_load_comments">Ocorreu um erro ao buscar os comentários, por favor tente novamente</string>
+    <string name="error_load_awards">Ocorreu um erro ao buscar os prêmios, por favor tente novamente</string>
+    <string name="error_load_recommendations">Ocorreu um erro ao buscar as recomendações, por favor tente novamente</string>
+    <string name="error_load_resources">Ocorreu um erro ao buscar os recursos audiovisuais, por favor tente novamente</string>
+
+    <!-- Validation -->
+    <string name="validation_required">%s é obrigatório(a)</string>
+    <string name="validation_invalid">%s é inválido</string>
+    <string name="validation_invalid_feminine">%s é inválida</string>
+    <string name="validation_max_100">%s deve ter no máximo 100 caracteres</string>
+
+    <!-- String arrays -->
+    <string-array name="sex_options">
+        <item>Selecionar</item>
+        <item>Masculino</item>
+        <item>Feminino</item>
+        <item>Outro</item>
+    </string-array>
+
+    <string-array name="educational_level_options">
+        <item>Selecionar</item>
+        <item>Sem escolaridade</item>
+        <item>Ensino fundamental</item>
+        <item>Ensino médio</item>
+        <item>Ensino técnico</item>
+        <item>Ensino superior</item>
+    </string-array>
+
+    <string-array name="family_type_options">
+        <item>Selecionar</item>
+        <item>Monoparental feminina (mulher sozinha com filhos)</item>
+        <item>Monoparental masculina (homem sozinho com filhos)</item>
+        <item>Casal heterossexual com filhos</item>
+        <item>Casal de homens com filhos</item>
+        <item>Casal de mulheres com filhos</item>
+    </string-array>
+
+    <string-array name="yes_no_options">
+        <item>Selecionar</item>
+        <item>Sim</item>
+        <item>Não</item>
+    </string-array>
+
+    <string-array name="welcome_messages">
+        <item>Bem-vindo(a) ao CRIApp, uma experiência sobre criação e desenvolvimento de crianças entre 0 e 6 anos.</item>
+        <item>Nosso objetivo é acompanhá-lo(a) na jornada da criação e ajudá-lo(a) a resolver dúvidas sobre situações do dia a dia.</item>
+        <item>Nosso apoio fortalecerá seus sentimentos de segurança e confiança na criação dos filhos e contribuirá para um ambiente familiar positivo.</item>
+        <item>E o mais importante: com essa experiência você contribuirá para melhorar o desenvolvimento físico, cognitivo, social e emocional dos seus filhos.</item>
+        <item>Vamos começar!</item>
+    </string-array>
+
+    <string-array name="award_names">
+        <item>Primeiros Passos</item>
+        <item>Família Comprometida</item>
+        <item>Superação</item>
+        <item>Ambiente Positivo</item>
+        <item>Pequeno Grande Progresso</item>
+    </string-array>
+
+    <string-array name="award_categories">
+        <item>Início da jornada</item>
+        <item>Compromisso familiar</item>
+        <item>Resiliência</item>
+        <item>Clima familiar</item>
+        <item>Progresso contínuo</item>
+    </string-array>
+
+    <string-array name="award_descriptions">
+        <item>Você completou seu primeiro questionário. O início de uma grande jornada com seus filhos!</item>
+        <item>Seu envolvimento como família demonstra que a criação consciente faz a diferença. Vocês são uma equipe incrível!</item>
+        <item>Você demonstrou que com esforço e perseverança todos os desafios podem ser superados. Uma grande conquista na sua jornada de criação!</item>
+        <item>Você contribui ativamente para criar um ambiente seguro e afetuoso para o desenvolvimento dos seus filhos.</item>
+        <item>Cada pequeno avanço conta. Sua perseverança e dedicação são o motor do crescimento da sua família.</item>
+    </string-array>
+
+</resources>

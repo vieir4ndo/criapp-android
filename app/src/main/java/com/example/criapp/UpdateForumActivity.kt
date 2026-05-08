@@ -2,15 +2,14 @@ package com.example.criapp
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ForumRepositoryImpl
+import com.example.criapp.databinding.ActivityUpdateForumBinding
+import com.example.criapp.helpers.markRequired
 import com.example.criapp.models.CreateForumModel
 import com.example.criapp.models.responses.ForumResponse
 import com.example.criapp.presentation.common.UiState
@@ -27,31 +26,31 @@ class UpdateForumActivity : AppCompatActivity() {
     private val gson = Gson()
     private var aLoadingDialog: ALoadingDialog? = null
     private lateinit var model: CreateForumModel
-    private lateinit var errorTextView: TextView
+    private lateinit var mBinding: ActivityUpdateForumBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_update_forum)
+        mBinding = ActivityUpdateForumBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
 
         aLoadingDialog = ALoadingDialog(this)
         forum = gson.fromJson(intent.getStringExtra("forum"), ForumResponse::class.java)
 
-        errorTextView = findViewById(R.id.text_view_errors)
-        errorTextView.visibility = View.GONE
+        mBinding.textViewErrors.visibility = View.GONE
 
-        val editTextName = findViewById<EditText>(R.id.edit_text_name)
-        val editTextDescription = findViewById<EditText>(R.id.edit_text_description)
+        mBinding.labelEditTextName.markRequired()
+        mBinding.labelEditTextDescription.markRequired()
 
-        editTextName.setText(forum.name)
-        editTextDescription.setText(forum.description)
+        mBinding.editTextName.setText(forum.name)
+        mBinding.editTextDescription.setText(forum.description)
 
-        model = CreateForumModel(editTextName, editTextDescription)
+        model = CreateForumModel(mBinding.editTextName, mBinding.editTextDescription)
 
-        findViewById<Button>(R.id.button_update).setOnClickListener {
-            if (model.validate(errorTextView)) {
+        mBinding.buttonUpdate.setOnClickListener {
+            if (model.validate(mBinding.textViewErrors, this)) {
                 viewModel.updateForum(forum.id, model.toRequest())
             } else {
-                errorTextView.visibility = View.VISIBLE
+                mBinding.textViewErrors.visibility = View.VISIBLE
             }
         }
 
@@ -60,12 +59,12 @@ class UpdateForumActivity : AppCompatActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Foro actualizado con exito", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.forum_updated_success), Toast.LENGTH_SHORT).show()
                     finish()
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Hubo un error al guardar el foro, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.error_save_forum), Toast.LENGTH_SHORT).show()
                 }
                 else -> Unit
             }

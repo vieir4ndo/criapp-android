@@ -1,9 +1,9 @@
 package com.example.criapp.models
 
+import android.content.Context
 import android.widget.EditText
-import android.widget.Spinner
 import android.widget.TextView
-import com.example.criapp.abstractions.CriAppSpinnerAdapter
+import com.example.criapp.CriAppDropdown
 import com.example.criapp.abstractions.IModel
 import com.example.criapp.models.requests.CreateUserRequest
 import com.example.criapp.services.DateHelper
@@ -15,20 +15,16 @@ class CreateUserModel(
     val editTextUsername: EditText,
     val editTextPassword: EditText,
     val editTextNumberOfChildren: EditText,
-    val spinnerSex: Spinner,
-    val spinnerEducationalLevel: Spinner,
-    val spinnerFamilyType: Spinner,
+    val spinnerSex: CriAppDropdown,
+    val spinnerEducationalLevel: CriAppDropdown,
+    val spinnerFamilyType: CriAppDropdown,
 ) :IModel<CreateUserModel> {
 
-    override fun validate(errorTextView : TextView): Boolean {
-        return CreateUserModelValidator(this, errorTextView).isValid()
+    override fun validate(errorTextView : TextView, context: Context): Boolean {
+        return CreateUserModelValidator(this, errorTextView, context).isValid()
     }
 
     override fun toRequest(): String {
-        val sexAdapter = spinnerSex.getAdapter() as CriAppSpinnerAdapter;
-        val familyTypeAdapter = spinnerFamilyType.getAdapter() as CriAppSpinnerAdapter;
-        val educationalLevelAdapter = spinnerEducationalLevel.getAdapter() as CriAppSpinnerAdapter;
-
         return CreateUserRequest(
             editTextName.text.toString(),
             editTextUsername.text.toString(),
@@ -36,9 +32,9 @@ class CreateUserModel(
             DateHelper.convertDateFromMMDDYYYYtoYYYYMMDD(editTextBirthDate.text.toString()),
             if (editTextNumberOfChildren.text.toString() == "") 0 else editTextNumberOfChildren.text.toString()
                 .toInt(),
-            sexAdapter.position,
-            if (familyTypeAdapter.position == 0) null else familyTypeAdapter.position,
-            if (educationalLevelAdapter.position == 0) null else educationalLevelAdapter.position,
+            spinnerSex.selectedPosition,
+            if (spinnerFamilyType.selectedPosition == 0) null else spinnerFamilyType.selectedPosition,
+            if (spinnerEducationalLevel.selectedPosition == 0) null else spinnerEducationalLevel.selectedPosition,
         ).toString()
     }
 }

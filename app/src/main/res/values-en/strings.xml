@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App -->
+    <string name="app_name">CRIApp</string>
+
+    <!-- Auth - Sign In -->
+    <string name="sign_in">Sign In</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+
+    <!-- Auth - Sign Up -->
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_up_title">User Registration</string>
+    <string name="more_information_about_the_app">More information about the App</string>
+    <string name="sign_up_success_message1">Account created!</string>
+    <string name="sign_up_success_message2">Please check your email or phone.</string>
+
+    <!-- Auth - Forgot / Reset Password -->
+    <string name="forgot_password_page_title">Forgot your password?</string>
+    <string name="forgot_password_instruction">Enter your username (email or phone) and we will send you a code to reset your password</string>
+    <string name="recover_password">Recover password</string>
+
+    <!-- Form fields -->
+    <string name="name">Name</string>
+    <string name="username">Username (E-mail or Phone)</string>
+    <string name="birth_date">Date of birth</string>
+    <string name="sex">Gender</string>
+    <string name="educational_level">Educational level</string>
+    <string name="family_type">Family type</string>
+    <string name="number_of_children">Number of children</string>
+    <string name="password">Password</string>
+    <string name="new_password">New password</string>
+    <string name="code">Code</string>
+    <string name="description">Description</string>
+    <string name="field_username">Username</string>
+    <string name="field_text">Text</string>
+
+    <!-- Buttons / Actions -->
+    <string name="ok">Save</string>
+    <string name="back">Back</string>
+    <string name="logoff">Sign Out</string>
+    <string name="deactivate_account">Deactivate account</string>
+    <string name="add_child">Add child</string>
+    <string name="add_forum">Add forum</string>
+
+    <!-- Menu / Navigation -->
+    <string name="hello">Hello!</string>
+    <string name="greeting">Hello, %s!</string>
+    <string name="welcome_subtitle">Welcome to CRIApp</string>
+    <string name="profile">Profile</string>
+    <string name="questionnaires">Questionnaires</string>
+    <string name="children">Children</string>
+    <string name="forums">Forums</string>
+    <string name="awards">Awards</string>
+    <string name="recommendations">Recommendations</string>
+    <string name="faq">FAQ</string>
+    <string name="notifications">Notifications</string>
+    <string name="audiovisual_resources">Audiovisual Resources</string>
+    <string name="child_book">Parenting book</string>
+
+    <!-- Children -->
+    <string name="register_child">Register child</string>
+    <string name="edit_child">Edit child</string>
+    <string name="premature">Premature</string>
+    <string name="months_of_breast_feeding">Months of breastfeeding</string>
+
+    <!-- Forum -->
+    <string name="forum_created_by">Created by %s</string>
+
+    <!-- Questions / Answers -->
+    <string name="answer_questions">Answer questions</string>
+    <string name="answering_questions_for">Answering questions for %s</string>
+    <string name="answer_scale_never">Never</string>
+    <string name="answer_scale_always">Always</string>
+    <string name="answer_scale_disagree">Disagree</string>
+    <string name="answer_scale_agree">Agree</string>
+    <string name="all_questions_answered_today">You have already answered all questions for %s today</string>
+
+    <!-- Empty states -->
+    <string name="no_awards">You don\'t have any awards yet. Keep completing questionnaires to earn them!</string>
+    <string name="no_recommendations">You don\'t have any recommendations yet. Keep completing questionnaires to get them!</string>
+    <string name="empty_list">Nothing here yet</string>
+
+    <!-- Dialog -->
+    <string name="dialog_error_title">Oops</string>
+    <string name="dialog_success_title">Congratulations</string>
+    <string name="dialog_accept_button">Accept</string>
+
+    <!-- Errors label -->
+    <string name="errors">Errors:</string>
+
+    <!-- Toast - Success -->
+    <string name="forum_created_success">Forum created successfully</string>
+    <string name="forum_updated_success">Forum updated successfully</string>
+    <string name="child_created_success">Child created successfully</string>
+    <string name="child_updated_success">Child updated successfully</string>
+    <string name="answer_saved_success">Answer saved successfully</string>
+    <string name="profile_updated_success">Profile updated successfully</string>
+    <string name="password_updated_success">Password updated successfully</string>
+
+    <!-- Toast - Error -->
+    <string name="error_save_forum">An error occurred while saving the forum, please try again</string>
+    <string name="error_save_answer">An error occurred while saving your answer, please try again</string>
+    <string name="error_load_questions">An error occurred while loading the questions, please try again</string>
+    <string name="error_load_comments">An error occurred while loading the comments, please try again</string>
+    <string name="error_load_awards">An error occurred while loading the awards, please try again</string>
+    <string name="error_load_recommendations">An error occurred while loading the recommendations, please try again</string>
+    <string name="error_load_resources">An error occurred while loading the audiovisual resources, please try again</string>
+
+    <!-- Validation -->
+    <string name="validation_required">%s is required</string>
+    <string name="validation_invalid">%s is invalid</string>
+    <string name="validation_invalid_feminine">%s is invalid</string>
+    <string name="validation_max_100">%s must be at most 100 characters</string>
+
+    <!-- String arrays -->
+    <string-array name="sex_options">
+        <item>Select</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="educational_level_options">
+        <item>Select</item>
+        <item>No education</item>
+        <item>Primary / Secondary</item>
+        <item>High school</item>
+        <item>Vocational training</item>
+        <item>University studies</item>
+    </string-array>
+
+    <string-array name="family_type_options">
+        <item>Select</item>
+        <item>Female single-parent (woman alone with children)</item>
+        <item>Male single-parent (man alone with children)</item>
+        <item>Male-female couple with children</item>
+        <item>Male-male couple with children</item>
+        <item>Female-female couple with children</item>
+    </string-array>
+
+    <string-array name="yes_no_options">
+        <item>Select</item>
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="welcome_messages">
+        <item>Welcome to CRIApp, an experience about parenting and the development of children between 0 and 6 years old.</item>
+        <item>Our goal is to support you in the parenting journey and help you resolve any doubts about everyday situations.</item>
+        <item>Our support will strengthen your feelings of security and confidence in raising children and contribute to a positive family environment.</item>
+        <item>Most importantly, this experience will help improve the physical, cognitive, social and emotional development of your children.</item>
+        <item>Let\'s get started!</item>
+    </string-array>
+
+    <string-array name="award_names">
+        <item>First Steps</item>
+        <item>Committed Family</item>
+        <item>Overcoming</item>
+        <item>Positive Environment</item>
+        <item>Little Big Progress</item>
+    </string-array>
+
+    <string-array name="award_categories">
+        <item>Start of the journey</item>
+        <item>Family commitment</item>
+        <item>Resilience</item>
+        <item>Family climate</item>
+        <item>Continuous progress</item>
+    </string-array>
+
+    <string-array name="award_descriptions">
+        <item>You completed your first questionnaire. The beginning of a great journey with your children!</item>
+        <item>Your involvement as a family shows that conscious parenting makes a difference. You are an incredible team!</item>
+        <item>You have shown that with effort and perseverance all challenges can be overcome. A great achievement on your parenting journey!</item>
+        <item>You actively contribute to creating a safe and loving environment for the development of your children.</item>
+        <item>Every small step counts. Your perseverance and dedication are the driving force behind your family\'s growth.</item>
+    </string-array>
+
+</resources>

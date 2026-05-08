@@ -3,15 +3,14 @@ package com.example.criapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.AuthRepositoryImpl
+import com.example.criapp.databinding.ActivityResetPasswordBinding
+import com.example.criapp.helpers.markRequired
 import com.example.criapp.models.ResetPasswordModel
 import com.example.criapp.presentation.auth.ResetPasswordViewModel
 import com.example.criapp.presentation.auth.ResetPasswordViewModelFactory
@@ -25,30 +24,33 @@ class ResetPasswordActivity : AppCompatActivity() {
     }
     private var aLoadingDialog: ALoadingDialog? = null
     private lateinit var model: ResetPasswordModel
-    private lateinit var errorTextView: TextView
+    private lateinit var mBinding: ActivityResetPasswordBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reset_password)
+        mBinding = ActivityResetPasswordBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
 
         window.setNavigationBarColor(resources.getColor(R.color.light_blue))
 
         aLoadingDialog = ALoadingDialog(this)
 
-        errorTextView = findViewById(R.id.text_view_errors)
-        errorTextView.visibility = View.GONE
+        mBinding.textViewErrors.visibility = View.GONE
+
+        mBinding.labelEditTextNewPassword.markRequired()
+        mBinding.labelEditTextCode.markRequired()
 
         model = ResetPasswordModel(
             intent.getStringExtra("username").toString(),
-            findViewById(R.id.edit_text_new_password),
-            findViewById(R.id.edit_text_code)
+            mBinding.editTextNewPassword,
+            mBinding.editTextCode
         )
 
-        findViewById<Button>(R.id.button_reset_password).setOnClickListener {
-            if (model.validate(errorTextView)) {
+        mBinding.buttonResetPassword.setOnClickListener {
+            if (model.validate(mBinding.textViewErrors, this)) {
                 viewModel.resetPassword(model.toRequest())
             } else {
-                errorTextView.visibility = View.VISIBLE
+                mBinding.textViewErrors.visibility = View.VISIBLE
             }
         }
 
@@ -57,7 +59,7 @@ class ResetPasswordActivity : AppCompatActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Contraseña actualizada con exito", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.password_updated_success), Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, SignInActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     })

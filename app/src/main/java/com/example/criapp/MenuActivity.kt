@@ -1,6 +1,5 @@
 package com.example.criapp
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -16,7 +15,7 @@ class MenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_menu)
 
         val name = PreferencesManager(this).getUserName().split(" ")[0]
-        findViewById<TextView>(R.id.greeting).text = "¡Hola, $name!"
+        findViewById<TextView>(R.id.greeting).text = getString(R.string.greeting, name)
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() { }
@@ -29,4 +28,6 @@ class MenuActivity : AppCompatActivity() {
     fun onButtonFaqClick(view: View?) = startActivity(Intent(this, FaqActivity::class.java))
     fun onButtonAudioVisualResourcesClick(view: View?) = startActivity(Intent(this, AudioVisualResourcesActivity::class.java))
     fun onButtonForumClick(view: View?) = startActivity(Intent(this, ForumsActivity::class.java))
+    fun onButtonAwardClick(view: View?) = startActivity(Intent(this, AwardActivity::class.java))
+    fun onButtonChildBookClick(view: View?) = startActivity(Intent(this, RecommendationActivity::class.java))
 }

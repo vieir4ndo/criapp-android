@@ -3,14 +3,13 @@ package com.example.criapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.AuthRepositoryImpl
+import com.example.criapp.databinding.ActivityForgotPasswordBinding
+import com.example.criapp.helpers.markRequired
 import com.example.criapp.models.ForgotPasswordModel
 import com.example.criapp.presentation.auth.ForgotPasswordViewModel
 import com.example.criapp.presentation.auth.ForgotPasswordViewModelFactory
@@ -24,27 +23,28 @@ class ForgotPasswordActivity : AppCompatActivity() {
     }
     private var aLoadingDialog: ALoadingDialog? = null
     private lateinit var model: ForgotPasswordModel
-    private lateinit var errorTextView: TextView
+    private lateinit var mBinding: ActivityForgotPasswordBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_forgot_password)
+        mBinding = ActivityForgotPasswordBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
 
         window.setNavigationBarColor(resources.getColor(R.color.light_blue))
 
         aLoadingDialog = ALoadingDialog(this)
 
-        errorTextView = findViewById(R.id.text_view_errors)
-        errorTextView.visibility = View.GONE
+        mBinding.textViewErrors.visibility = View.GONE
 
-        val editTextUsername = findViewById<EditText>(R.id.edit_text_username)
-        model = ForgotPasswordModel(editTextUsername)
+        mBinding.labelEditTextUsername.markRequired()
 
-        findViewById<Button>(R.id.button_forgot_password).setOnClickListener {
-            if (model.validate(errorTextView)) {
+        model = ForgotPasswordModel(mBinding.editTextUsername)
+
+        mBinding.buttonForgotPassword.setOnClickListener {
+            if (model.validate(mBinding.textViewErrors, this)) {
                 viewModel.forgotPassword(model.toRequest())
             } else {
-                errorTextView.visibility = View.VISIBLE
+                mBinding.textViewErrors.visibility = View.VISIBLE
             }
         }
 

@@ -54,7 +54,7 @@ class ForumsActivity : AppCompatActivity() {
                         view.addView(recyclerView)
                     }
 
-                    view.addView(ViewFactory.generateAddButton(this, resources, "Añadir foro", CreateForumActivity::class.java))
+                    view.addView(ViewFactory.generateAddButton(this, resources, getString(R.string.add_forum), CreateForumActivity::class.java))
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()

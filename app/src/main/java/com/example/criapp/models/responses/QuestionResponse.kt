@@ -7,7 +7,8 @@ class QuestionResponse(
     val text: String,
     val active: Boolean,
     val adminId: String,
-    val type: Int
+    val type: Int,
+    val scoringType: Int
 ) {
     override fun toString(): String {
         val gson = Gson();

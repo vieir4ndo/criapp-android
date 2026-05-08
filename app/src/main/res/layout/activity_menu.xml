@@ -27,7 +27,7 @@
             android:id="@+id/profile_picture"
             android:layout_width="90sp"
             android:layout_height="80sp"
-            android:src="@drawable/ic_default_profile" />
+            android:src="@drawable/notifications_circle" />
 
         <Space
             android:layout_width="0dp"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAlignment="center"
-                android:text="¡Hola, usuario!"
+                android:text="@string/greeting"
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAlignment="center"
-                android:text="Bienvenido a CRIApp"
+                android:text="@string/welcome_subtitle"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -95,7 +95,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/card_holo_purple"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:onClick="onButtonChildBookClick">
 
                 <ImageView
                     android:layout_width="80dp"
@@ -103,13 +104,13 @@
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
                     android:gravity="start"
-                    android:src="@drawable/notifications" />
+                    android:src="@drawable/book" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/notifications"
+                    android:text="@string/child_book"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -129,7 +130,7 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="90dp"
+                    android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
@@ -163,7 +164,7 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="80dp"
+                    android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
@@ -194,7 +195,7 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="90dp"
+                    android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
@@ -227,7 +228,7 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="90dp"
+                    android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
@@ -252,14 +253,15 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/card_holo_purple"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:onClick="onButtonAwardClick">
 
                 <ImageView
-                    android:layout_width="90dp"
+                    android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/award" />
+                    android:src="@drawable/award"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -287,7 +289,7 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="90dp"
+                    android:layout_width="100dp"
                     android:layout_height="60dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/audiovisual_resource" />
@@ -317,7 +319,7 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="90dp"
+                    android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"

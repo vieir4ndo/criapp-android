@@ -1,5 +1,6 @@
 package com.example.criapp.models
 
+import android.content.Context
 import android.widget.EditText
 import android.widget.TextView
 import com.example.criapp.abstractions.IModel
@@ -10,8 +11,8 @@ class CreateCommentModel(
     val editTextText: EditText,
     val forumId: String,
 ) : IModel<CreateCommentModel> {
-    override fun validate(errorTextView: TextView): Boolean {
-        return CreateCommentModelValidator(this, errorTextView).isValid()
+    override fun validate(errorTextView: TextView, context: Context): Boolean {
+        return CreateCommentModelValidator(this, errorTextView, context).isValid()
     }
 
     override fun toRequest(): String {
