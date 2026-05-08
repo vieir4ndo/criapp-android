@@ -18,6 +18,7 @@ class DialogBuilder {
        dialog = Dialog(context);
        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
        dialog.setContentView(R.layout.criapp_dialog_layout)
+       dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
    }
     fun withCancelable() : DialogBuilder {
         dialog.setCancelable(true);
@@ -85,7 +86,8 @@ class DialogBuilder {
     }
 
     fun create() : Dialog{
-        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        val displayWidth = context.resources.displayMetrics.widthPixels
+        dialog.window?.setLayout((displayWidth * 0.75).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
 
         return dialog;
     }

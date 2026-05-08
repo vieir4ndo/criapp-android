@@ -1,11 +1,16 @@
 package com.example.criapp
 
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ChildRepositoryImpl
@@ -34,6 +39,19 @@ class AnswerActivity : AppCompatActivity() {
     private var textQuestion: TextView? = null
     private var textQuestionTypeMin: TextView? = null
     private var textQuestionTypeMax: TextView? = null
+    private var progressIndicator: LinearProgressIndicator? = null
+    private var gradientBar: View? = null
+    private lateinit var likertButtons: List<TextView>
+    private val likertColors: List<Int> by lazy {
+        listOf(
+            ContextCompat.getColor(this, R.color.likert_1),
+            ContextCompat.getColor(this, R.color.likert_2),
+            ContextCompat.getColor(this, R.color.likert_3),
+            ContextCompat.getColor(this, R.color.likert_4),
+            ContextCompat.getColor(this, R.color.likert_5),
+            ContextCompat.getColor(this, R.color.likert_6)
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +65,23 @@ class AnswerActivity : AppCompatActivity() {
         textQuestion = findViewById(R.id.text_question)
         textQuestionTypeMin = findViewById(R.id.text_min)
         textQuestionTypeMax = findViewById(R.id.text_max)
+        progressIndicator = findViewById(R.id.progress_indicator)
+        gradientBar = findViewById(R.id.gradient_bar)
+        likertButtons = listOf(
+            findViewById(R.id.likert_btn_1),
+            findViewById(R.id.likert_btn_2),
+            findViewById(R.id.likert_btn_3),
+            findViewById(R.id.likert_btn_4),
+            findViewById(R.id.likert_btn_5),
+            findViewById(R.id.likert_btn_6)
+        )
+        likertButtons.forEachIndexed { index, btn ->
+            btn.setOnClickListener {
+                value = index + 1
+                val isReversed = currentQuestion >= 0 && questions[currentQuestion].scoringType == 2
+                updateLikertButtons(index, isReversed)
+            }
+        }
 
         viewModel.questionsState.observe(this) { state ->
             when (state) {
@@ -94,6 +129,9 @@ class AnswerActivity : AppCompatActivity() {
     private fun showNextQuestion() {
         currentQuestion++
         textQuestion!!.text = questions[currentQuestion].text
+        progressIndicator?.setProgressCompat((currentQuestion + 1) * 100 / questions.size, true)
+        value = 3
+        val isReversed = questions[currentQuestion].scoringType == 2
         if (questions[currentQuestion].type == 1) {
             textQuestionTypeMin!!.text = getString(R.string.answer_scale_never)
             textQuestionTypeMax!!.text = getString(R.string.answer_scale_always)
@@ -101,6 +139,7 @@ class AnswerActivity : AppCompatActivity() {
             textQuestionTypeMin!!.text = getString(R.string.answer_scale_disagree)
             textQuestionTypeMax!!.text = getString(R.string.answer_scale_agree)
         }
+        updateLikertButtons(-1, isReversed)
     }
 
     fun onArrowButtonClick(view: View?) {
@@ -112,10 +151,26 @@ class AnswerActivity : AppCompatActivity() {
         }
     }
 
-    fun onRadioButton1Click(view: View?) { value = 1 }
-    fun onRadioButton2Click(view: View?) { value = 2 }
-    fun onRadioButton3Click(view: View?) { value = 3 }
-    fun onRadioButton4Click(view: View?) { value = 4 }
-    fun onRadioButton5Click(view: View?) { value = 5 }
-    fun onRadioButton6Click(view: View?) { value = 6 }
+    private fun updateLikertButtons(selectedIndex: Int, isReversed: Boolean) {
+        val strokePx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3f, resources.displayMetrics).toInt()
+        likertButtons.forEachIndexed { index, btn ->
+            val colorIndex = if (isReversed) index else (5 - index)
+            val drawable = GradientDrawable().apply {
+                shape = GradientDrawable.OVAL
+                setColor(likertColors[colorIndex])
+                if (index == selectedIndex) {
+                    setStroke(strokePx, Color.WHITE)
+                }
+            }
+            btn.background = drawable
+        }
+        val startColor = if (isReversed) likertColors[0] else likertColors[5]
+        val endColor = if (isReversed) likertColors[5] else likertColors[0]
+        gradientBar?.background = GradientDrawable(
+            GradientDrawable.Orientation.LEFT_RIGHT,
+            intArrayOf(startColor, likertColors[2], endColor)
+        ).apply {
+            cornerRadius = resources.getDimension(R.dimen.border_radius)
+        }
+    }
 }
