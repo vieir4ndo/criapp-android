@@ -55,6 +55,10 @@ class CriAppDropdown @JvmOverloads constructor(
     private fun showPopup() {
         if (options.isEmpty()) return
 
+        if (popup?.isShowing == true) return
+        popup?.dismiss()
+        popup = null
+
         val popupWidth = if (width > 0) {
             width
         } else {

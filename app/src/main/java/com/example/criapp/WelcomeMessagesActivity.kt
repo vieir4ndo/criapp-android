@@ -39,7 +39,7 @@ class WelcomeMessagesActivity : AppCompatActivity() {
         val progress = ((currentMessage + 1) * 100 / total)
 
         textStep!!.text = "${currentMessage + 1} / $total"
-        progressIndicator!!.setProgressCompat(progress, true)
+        progressIndicator!!.setProgressCompat(progress, animate)
 
         if (!animate) {
             textView!!.text = newText

@@ -41,6 +41,7 @@ class AnswerActivity : AppCompatActivity() {
     private var textQuestionTypeMax: TextView? = null
     private var progressIndicator: LinearProgressIndicator? = null
     private var gradientBar: View? = null
+    private var btnArrow: View? = null
     private lateinit var likertButtons: List<TextView>
     private val likertColors: List<Int> by lazy {
         listOf(
@@ -65,6 +66,7 @@ class AnswerActivity : AppCompatActivity() {
         textQuestionTypeMax = findViewById(R.id.text_max)
         progressIndicator = findViewById(R.id.progress_indicator)
         gradientBar = findViewById(R.id.gradient_bar)
+        btnArrow = findViewById(R.id.btnArrow)
         likertButtons = listOf(
             findViewById(R.id.likert_btn_1),
             findViewById(R.id.likert_btn_2),
@@ -103,6 +105,9 @@ class AnswerActivity : AppCompatActivity() {
         }
 
         viewModel.answerState.observe(this) { state ->
+            val isLoading = state is UiState.Loading
+            btnArrow?.isEnabled = !isLoading
+            likertButtons.forEach { it.isEnabled = !isLoading }
             when (state) {
                 is UiState.Loading -> Unit
                 is UiState.Success -> {
@@ -125,7 +130,7 @@ class AnswerActivity : AppCompatActivity() {
     private fun showNextQuestion(animate: Boolean = true) {
         currentQuestion++
         val newText = questions[currentQuestion].text
-        progressIndicator?.setProgressCompat((currentQuestion + 1) * 100 / questions.size, true)
+        progressIndicator?.setProgressCompat((currentQuestion + 1) * 100 / questions.size, animate)
         value = 3
         selectedIndex = -1
         val isReversed = questions[currentQuestion].scoringType == 2
