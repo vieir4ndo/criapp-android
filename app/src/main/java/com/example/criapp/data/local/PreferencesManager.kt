@@ -1,10 +1,14 @@
 package com.example.criapp.data.local
 
 import android.content.Context
+import java.time.OffsetDateTime
 
 class PreferencesManager(context: Context) {
 
+    val applicationContext: Context = context.applicationContext
+
     private val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    private val appStatePrefs = context.getSharedPreferences(APP_STATE_PREFS_NAME, Context.MODE_PRIVATE)
 
     fun getAuthorizationHeader(): String = "Bearer ${prefs.getString(KEY_TOKEN, "") ?: ""}"
 
@@ -26,11 +30,31 @@ class PreferencesManager(context: Context) {
         prefs.edit().clear().apply()
     }
 
+    fun isSessionActive(): Boolean {
+        val token = prefs.getString(KEY_TOKEN, "")
+        if (token.isNullOrEmpty()) return false
+        val expiresIn = prefs.getString(KEY_EXPIRES_IN, "") ?: return false
+        return try {
+            OffsetDateTime.parse(expiresIn).isAfter(OffsetDateTime.now())
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    fun hasCompletedOnboarding(): Boolean =
+        appStatePrefs.getBoolean(KEY_ONBOARDING_COMPLETED, false)
+
+    fun markOnboardingCompleted() {
+        appStatePrefs.edit().putBoolean(KEY_ONBOARDING_COMPLETED, true).apply()
+    }
+
     companion object {
         private const val PREFS_NAME = "ApiCredentials"
+        private const val APP_STATE_PREFS_NAME = "AppState"
         private const val KEY_TOKEN = "token"
         private const val KEY_EXPIRES_IN = "token_expires_in"
         private const val KEY_USER_ID = "user_id"
         private const val KEY_USER_NAME = "user_name"
+        private const val KEY_ONBOARDING_COMPLETED = "onboarding_completed"
     }
 }
