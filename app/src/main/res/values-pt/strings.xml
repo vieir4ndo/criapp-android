@@ -41,6 +41,7 @@
     <string name="back">Voltar</string>
     <string name="logoff">Sair</string>
     <string name="deactivate_account">Desativar conta</string>
+    <string name="deactivate_account_confirmation">Tem certeza de que quer desativar sua conta? Esta ação não pode ser desfeita.</string>
     <string name="add_child">Adicionar criança</string>
     <string name="add_forum">Adicionar fórum</string>
 

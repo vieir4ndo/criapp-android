@@ -1,8 +1,10 @@
 package com.example.criapp.data.repository
 
 import com.example.criapp.data.remote.CriAppApiService
+import com.example.criapp.data.remote.toErrorMessage
 import com.example.criapp.domain.repository.IAwardRepository
 import com.example.criapp.models.responses.AwardResponse
+import retrofit2.HttpException
 
 class AwardRepositoryImpl(private val apiService: CriAppApiService) : IAwardRepository {
 
@@ -18,6 +20,8 @@ class AwardRepositoryImpl(private val apiService: CriAppApiService) : IAwardRepo
                     )
                 )
             }
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
             Result.failure(e)
         }

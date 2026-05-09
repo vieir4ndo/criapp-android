@@ -44,6 +44,9 @@ interface CriAppApiService {
     @PATCH("user")
     suspend fun updateProfile(@Body body: RequestBody): ApiResponse<List<Any>>
 
+    @DELETE("user")
+    suspend fun deactivateAccount(): ApiResponse<List<Any>>
+
     // ── Child ───────────────────────────────────────────────────────────────
 
     @GET("child")

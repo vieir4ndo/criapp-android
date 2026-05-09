@@ -2,7 +2,6 @@ package com.example.criapp.services
 
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
@@ -47,17 +46,6 @@ class DialogBuilder {
         return this;
     }
 
-    fun <T> withSubmitButtonRedirectingToActivity(redirectTo: Class<T>) : DialogBuilder{
-        var submitButton = dialog.findViewById<Button>(R.id.submit_button);
-        submitButton.setOnClickListener{
-            val nextIntent = Intent(this.context, redirectTo);
-            this.context.startActivity(nextIntent);
-            (this.context as? android.app.Activity)?.finish();
-        }
-
-        return this;
-    }
-
     fun withSubmitButtonDismissing() : DialogBuilder{
         var submitButton = dialog.findViewById<Button>(R.id.submit_button);
         submitButton.setOnClickListener{
@@ -85,10 +73,19 @@ class DialogBuilder {
         return this;
     }
 
-    fun create() : Dialog{
+    fun create() : Dialog {
         val displayWidth = context.resources.displayMetrics.widthPixels
         dialog.window?.setLayout((displayWidth * 0.75).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
 
         return dialog;
+    }
+
+    fun withSubmitButtonCallback(callback : () -> Unit) : DialogBuilder {
+        var submitButton = dialog.findViewById<Button>(R.id.submit_button);
+        submitButton.setOnClickListener{
+            callback()
+        }
+
+        return this;
     }
 }

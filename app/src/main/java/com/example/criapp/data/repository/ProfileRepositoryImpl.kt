@@ -3,8 +3,10 @@ package com.example.criapp.data.repository
 import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.domain.repository.IProfileRepository
 import com.example.criapp.models.responses.UserResponse
+import com.example.criapp.data.remote.toErrorMessage
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.HttpException
 
 class ProfileRepositoryImpl(private val apiService: CriAppApiService) : IProfileRepository {
 
@@ -16,8 +18,14 @@ class ProfileRepositoryImpl(private val apiService: CriAppApiService) : IProfile
                     ?: return Result.failure(Exception("Respuesta vacía del servidor"))
                 Result.success(user)
             } else {
-                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+                Result.failure(
+                    Exception(
+                        response.Messages?.joinToString("\n") ?: "Error desconocido"
+                    )
+                )
             }
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -28,7 +36,29 @@ class ProfileRepositoryImpl(private val apiService: CriAppApiService) : IProfile
             val body = requestBody.toRequestBody("application/json".toMediaType())
             val response = apiService.updateProfile(body)
             if (response.success) Result.success(Unit)
-            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+            else Result.failure(
+                Exception(
+                    response.Messages?.joinToString("\n") ?: "Error desconocido"
+                )
+            )
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun deactivateAccount(): Result<Unit> {
+        return try {
+            val response = apiService.deactivateAccount()
+            if (response.success) Result.success(Unit)
+            else Result.failure(
+                Exception(
+                    response.Messages?.joinToString("\n") ?: "Error desconocido"
+                )
+            )
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
             Result.failure(e)
         }

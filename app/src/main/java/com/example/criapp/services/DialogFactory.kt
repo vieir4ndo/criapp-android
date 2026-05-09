@@ -26,5 +26,15 @@ class DialogFactory {
                 .withOnDismissFinishingCurrentActivity()
                 .create()
         }
+
+        fun createConfirmationDialog(context : Context, title : String, message : String, callback : () -> Unit) : Dialog {
+            return DialogBuilder(context)
+                .withCancelable()
+                .withTitle(title)
+                .withMessage(message)
+                .withSubmitButtonMessage(context.getString(R.string.dialog_accept_button))
+                .withSubmitButtonCallback(callback)
+                .create();
+        }
     }
 }

@@ -4,8 +4,10 @@ import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.domain.repository.IAuthRepository
 import com.example.criapp.models.requests.LoginUserRequest
 import com.example.criapp.models.responses.LoginUserResponse
+import com.example.criapp.data.remote.toErrorMessage
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.HttpException
 
 class AuthRepositoryImpl(private val apiService: CriAppApiService) : IAuthRepository {
 
@@ -19,6 +21,8 @@ class AuthRepositoryImpl(private val apiService: CriAppApiService) : IAuthReposi
             } else {
                 Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
             }
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -30,6 +34,8 @@ class AuthRepositoryImpl(private val apiService: CriAppApiService) : IAuthReposi
             val response = apiService.createUser(body)
             if (response.success) Result.success(Unit)
             else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -41,6 +47,8 @@ class AuthRepositoryImpl(private val apiService: CriAppApiService) : IAuthReposi
             val response = apiService.forgotPassword(body)
             if (response.success) Result.success(Unit)
             else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -52,6 +60,8 @@ class AuthRepositoryImpl(private val apiService: CriAppApiService) : IAuthReposi
             val response = apiService.resetPassword(body)
             if (response.success) Result.success(Unit)
             else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
             Result.failure(e)
         }

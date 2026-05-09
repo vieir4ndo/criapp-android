@@ -3,8 +3,10 @@ package com.example.criapp.data.repository
 import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.domain.repository.IChildRepository
 import com.example.criapp.models.responses.ChildResponse
+import com.example.criapp.data.remote.toErrorMessage
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.HttpException
 
 class ChildRepositoryImpl(private val apiService: CriAppApiService) : IChildRepository {
 
@@ -16,6 +18,8 @@ class ChildRepositoryImpl(private val apiService: CriAppApiService) : IChildRepo
             } else {
                 Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
             }
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -27,6 +31,8 @@ class ChildRepositoryImpl(private val apiService: CriAppApiService) : IChildRepo
             val response = apiService.createChild(body)
             if (response.success) Result.success(Unit)
             else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -38,6 +44,8 @@ class ChildRepositoryImpl(private val apiService: CriAppApiService) : IChildRepo
             val response = apiService.updateChild(childId, body)
             if (response.success) Result.success(Unit)
             else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
             Result.failure(e)
         }
