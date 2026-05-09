@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
-import com.example.criapp.data.remote.CriAppHttpClient
+import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ChildRepositoryImpl
 import com.example.criapp.databinding.ActivityCreateChildBinding
 import com.example.criapp.models.CreateOrUpdateChildModel
@@ -24,7 +24,7 @@ class CreateChildActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityCreateChildBinding
     private val viewModel: ChildViewModel by viewModels {
-        ChildViewModelFactory(ChildRepositoryImpl(CriAppHttpClient(PreferencesManager(this))))
+        ChildViewModelFactory(ChildRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
     }
     private var birthDateDay = 0
     private var birthDateMonth = 0
