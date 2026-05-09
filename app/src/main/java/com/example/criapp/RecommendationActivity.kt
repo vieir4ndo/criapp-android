@@ -58,7 +58,7 @@ class RecommendationActivity : AppCompatActivity() {
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, getString(R.string.error_load_recommendations), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Hubo un error al buscar las recomendaciones, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
                 }
                 else -> Unit
             }
