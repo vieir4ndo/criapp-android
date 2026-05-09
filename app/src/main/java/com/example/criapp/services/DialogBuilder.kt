@@ -66,6 +66,24 @@ class DialogBuilder {
         return this;
     }
 
+    fun withSubmitButtonFinishingCurrentActivity() : DialogBuilder{
+        var submitButton = dialog.findViewById<Button>(R.id.submit_button);
+        submitButton.setOnClickListener{
+            dialog.dismiss()
+            (this.context as? android.app.Activity)?.finish()
+        }
+
+        return this;
+    }
+
+    fun withOnDismissFinishingCurrentActivity() : DialogBuilder{
+        dialog.setOnDismissListener {
+            (this.context as? android.app.Activity)?.finish()
+        }
+
+        return this;
+    }
+
     fun create() : Dialog{
         dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 

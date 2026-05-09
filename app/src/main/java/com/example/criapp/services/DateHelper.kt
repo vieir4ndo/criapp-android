@@ -1,8 +1,8 @@
 package com.example.criapp.services
 
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.time.Instant
+import java.time.ZoneOffset
 import java.util.Locale
 
 class DateHelper {
@@ -21,10 +21,8 @@ class DateHelper {
         }
 
         fun getDayMonthAndYearFromFormattedDate(date: String): Triple<Int, Int, Int> {
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
-            val date = LocalDateTime.parse(date, formatter)
-
-            return Triple(date.dayOfMonth, date.monthValue, date.year)
+            val localDateTime = Instant.parse(date).atOffset(ZoneOffset.UTC).toLocalDateTime()
+            return Triple(localDateTime.dayOfMonth, localDateTime.monthValue, localDateTime.year)
         }
 
         fun convertDateFromMMDDYYYYtoYYYYMMDD(inputDate: String): String {
