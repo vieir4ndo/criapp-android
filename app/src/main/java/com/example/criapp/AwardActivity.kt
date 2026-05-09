@@ -36,6 +36,7 @@ class AwardActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.viewPager)
         txtNoAwards = findViewById(R.id.txtNoAwards)
         tabDots = findViewById(R.id.tabDots)
+        viewPager.adapter = AwardAdapter(emptyList())
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         viewModel.state.observe(this) { state ->
