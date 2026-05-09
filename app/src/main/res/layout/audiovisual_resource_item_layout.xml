@@ -30,8 +30,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"/>
 
-    <WebView
-        android:id="@+id/webview"
+    <ImageView
+        android:id="@+id/thumbnail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:background="@android:color/black"/>
 </LinearLayout>
