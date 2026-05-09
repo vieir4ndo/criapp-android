@@ -22,9 +22,6 @@
             android:name=".AwardActivity"
             android:exported="false" />
         <activity
-            android:name=".RecommendationActivity"
-            android:exported="false" />
-        <activity
             android:name=".ForumActivity"
             android:exported="false" />
         <activity
@@ -40,9 +37,6 @@
             android:name=".AudioVisualResourcesActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".AudioVisualResourcesActivity"
-            android:exported="false" />
         <activity
             android:name=".FaqActivity"
             android:exported="false"

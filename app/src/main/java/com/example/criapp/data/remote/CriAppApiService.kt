@@ -4,7 +4,6 @@ import com.example.criapp.models.requests.LoginUserRequest
 import com.example.criapp.models.responses.AudiovisualResourceResponse
 import com.example.criapp.models.responses.AwardResponse
 import com.example.criapp.models.responses.ChildResponse
-import com.example.criapp.models.responses.RecommendationResponse
 import com.example.criapp.models.responses.CommentResponse
 import com.example.criapp.models.responses.FaqResponse
 import com.example.criapp.models.responses.ForumResponse
@@ -102,8 +101,4 @@ interface CriAppApiService {
     // ── Awards ──────────────────────────────────────────────────────
     @GET("user/awards")
     suspend fun getAwards(): ApiResponse<List<AwardResponse>>
-
-    // ── Recommendations ─────────────────────────────────────────────
-    @GET("user/recommendations")
-    suspend fun getRecommendations(): ApiResponse<List<RecommendationResponse>>
 }

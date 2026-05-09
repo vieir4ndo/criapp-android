@@ -15,7 +15,7 @@ class MenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_menu)
 
         val name = PreferencesManager(this).getUserName().split(" ")[0]
-        findViewById<TextView>(R.id.greeting).text = getString(R.string.greeting, name)
+        findViewById<TextView>(R.id.greeting).text = "¡Hola, $name!"
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() { }
@@ -29,5 +29,4 @@ class MenuActivity : AppCompatActivity() {
     fun onButtonAudioVisualResourcesClick(view: View?) = startActivity(Intent(this, AudioVisualResourcesActivity::class.java))
     fun onButtonForumClick(view: View?) = startActivity(Intent(this, ForumsActivity::class.java))
     fun onButtonAwardClick(view: View?) = startActivity(Intent(this, AwardActivity::class.java))
-    fun onButtonChildBookClick(view: View?) = startActivity(Intent(this, RecommendationActivity::class.java))
 }
