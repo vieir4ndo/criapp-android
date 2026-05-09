@@ -3,8 +3,10 @@ package com.example.criapp.data.repository
 import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.domain.repository.IProfileRepository
 import com.example.criapp.models.responses.UserResponse
+import com.example.criapp.data.remote.toErrorMessage
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.HttpException
 
 class ProfileRepositoryImpl(private val apiService: CriAppApiService) : IProfileRepository {
 
@@ -22,6 +24,8 @@ class ProfileRepositoryImpl(private val apiService: CriAppApiService) : IProfile
                     )
                 )
             }
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -37,6 +41,8 @@ class ProfileRepositoryImpl(private val apiService: CriAppApiService) : IProfile
                     response.Messages?.joinToString("\n") ?: "Error desconocido"
                 )
             )
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -51,6 +57,8 @@ class ProfileRepositoryImpl(private val apiService: CriAppApiService) : IProfile
                     response.Messages?.joinToString("\n") ?: "Error desconocido"
                 )
             )
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
             Result.failure(e)
         }
