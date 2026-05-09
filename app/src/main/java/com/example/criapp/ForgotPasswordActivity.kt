@@ -41,7 +41,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         model = ForgotPasswordModel(editTextUsername)
 
         findViewById<Button>(R.id.button_forgot_password).setOnClickListener {
-            if (model.validate(errorTextView)) {
+            if (model.validate(errorTextView, this)) {
                 viewModel.forgotPassword(model.toRequest())
             } else {
                 errorTextView.visibility = View.VISIBLE

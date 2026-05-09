@@ -1,24 +1,26 @@
 package com.example.criapp.models.validators
 
+import android.content.Context
 import android.widget.TextView
+import com.example.criapp.R
 import com.example.criapp.abstractions.AbstractValidator
 import com.example.criapp.models.CreateUserModel
 
 class CreateUserModelValidator(
-    createUserModel: CreateUserModel, errorTextView : TextView
-) : AbstractValidator(errorTextView) {
+    createUserModel: CreateUserModel, errorTextView : TextView, context: Context
+) : AbstractValidator(errorTextView, context) {
     init {
-        ruleFor("Nombre", createUserModel.editTextName, this::isNotEmpty)
-        ruleFor("Nombre", createUserModel.editTextName, this::hasMaxLength100Char)
+        ruleFor(R.string.name, createUserModel.editTextName, this::isNotEmpty)
+        ruleFor(R.string.name, createUserModel.editTextName, this::hasMaxLength100Char)
 
-        ruleFor("Nombre de usuario", createUserModel.editTextUsername, this::isNotEmpty)
-        ruleFor("Nombre de usuario", createUserModel.editTextUsername, this::isValidUsername)
+        ruleFor(R.string.field_username, createUserModel.editTextUsername, this::isNotEmpty)
+        ruleFor(R.string.field_username, createUserModel.editTextUsername, this::isValidUsername)
 
-        ruleFor("Fecha de nacimiento", createUserModel.editTextBirthDate, this::isNotEmpty)
-        ruleFor("Fecha de nacimiento", createUserModel.editTextBirthDate, this::isValidDate)
+        ruleFor(R.string.birth_date, createUserModel.editTextBirthDate, this::isNotEmpty)
+        ruleFor(R.string.birth_date, createUserModel.editTextBirthDate, this::isValidDate)
 
-        ruleFor("Contraseña", createUserModel.editTextPassword, this::isNotEmpty)
+        ruleFor(R.string.password, createUserModel.editTextPassword, this::isNotEmpty)
 
-        ruleFor("Sexo", createUserModel.spinnerSex, this::isSpinnerNotEmpty)
+        ruleFor(R.string.sex, createUserModel.spinnerSex, this::isSpinnerNotEmpty)
     }
 }

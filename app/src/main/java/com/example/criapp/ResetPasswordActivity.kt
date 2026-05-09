@@ -45,7 +45,7 @@ class ResetPasswordActivity : AppCompatActivity() {
         )
 
         findViewById<Button>(R.id.button_reset_password).setOnClickListener {
-            if (model.validate(errorTextView)) {
+            if (model.validate(errorTextView, this)) {
                 viewModel.resetPassword(model.toRequest())
             } else {
                 errorTextView.visibility = View.VISIBLE
@@ -57,7 +57,7 @@ class ResetPasswordActivity : AppCompatActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Contraseña actualizada con exito", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.password_updated_success), Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, SignInActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     })

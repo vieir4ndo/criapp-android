@@ -53,7 +53,7 @@ class ViewFactory {
             return button;
         }
 
-        fun generateEmptyTextMessage(context: Context, resources: Resources, message : String = "Aún no hay nada por aquí") : TextView {
+        fun generateEmptyTextMessage(context: Context, resources: Resources, message : String = context.getString(R.string.empty_list)) : TextView {
             val text = TextView(context);
 
             text.text = message;

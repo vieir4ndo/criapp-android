@@ -5,12 +5,15 @@ import com.example.criapp.SignInActivity
 import com.example.criapp.data.local.PreferencesManager
 import okhttp3.Interceptor
 import okhttp3.Response
+import java.util.Locale
 
 class AuthInterceptor(private val prefsManager: PreferencesManager) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
+        val locale = Locale.getDefault().language
         val request = chain.request().newBuilder()
             .addHeader("Authorization", prefsManager.getAuthorizationHeader())
+            .addHeader("Accept-Language", locale)
             .build()
         val response = chain.proceed(request)
         if (response.code == 401) {

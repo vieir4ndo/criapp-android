@@ -46,7 +46,7 @@ class ForumActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.forum_name).text = forum.name
         findViewById<TextView>(R.id.forum_description).text = forum.description
-        findViewById<TextView>(R.id.forum_owner).text = "Creado por " + forum.prcName
+        findViewById<TextView>(R.id.forum_owner).text = getString(R.string.forum_created_by, forum.prcName)
 
         errorTextView = findViewById(R.id.text_view_errors)
         errorTextView.visibility = View.GONE
@@ -54,7 +54,7 @@ class ForumActivity : AppCompatActivity() {
         model = CreateCommentModel(editTextText, forum.id)
 
         findViewById<ImageButton>(R.id.comment_button).setOnClickListener {
-            if (model.validate(errorTextView)) {
+            if (model.validate(errorTextView, this)) {
                 viewModel.createComment(model.toRequest())
             } else {
                 errorTextView.visibility = View.VISIBLE
@@ -71,7 +71,7 @@ class ForumActivity : AppCompatActivity() {
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Hubo un error al buscar los comentarios, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.error_load_comments), Toast.LENGTH_SHORT).show()
                 }
                 else -> Unit
             }

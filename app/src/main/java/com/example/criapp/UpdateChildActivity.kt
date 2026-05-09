@@ -67,7 +67,7 @@ class UpdateChildActivity : AppCompatActivity() {
         model = CreateOrUpdateChildModel(editTextName, editTextBirthDate, mBinding.spinnerSex, editTextMonthsOfBreastFeeding, mBinding.spinnerPremature)
 
         findViewById<Button>(R.id.button_update_child).setOnClickListener {
-            if (model.validate(errorTextView)) {
+            if (model.validate(errorTextView, this)) {
                 viewModel.updateChild(child.id, model.toRequest())
             } else {
                 errorTextView.visibility = View.VISIBLE
@@ -79,7 +79,7 @@ class UpdateChildActivity : AppCompatActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Niño(a) actualizado con exito", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.child_updated_success), Toast.LENGTH_SHORT).show()
                     finish()
                 }
                 is UiState.Error -> {
