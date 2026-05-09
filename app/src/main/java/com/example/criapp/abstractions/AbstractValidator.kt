@@ -3,7 +3,6 @@ package com.example.criapp.abstractions
 import android.content.Context
 import android.util.Patterns
 import android.view.View
-import android.widget.Spinner
 import android.widget.TextView
 import com.example.criapp.R
 
@@ -17,6 +16,7 @@ abstract class AbstractValidator(var errorTextView: TextView, var context: Conte
     }
 
     fun isValid(): Boolean {
+        errorTextView.text = ""
         var isValid = true;
         rules.forEach {
             val fieldNameRes = it.first
@@ -31,29 +31,33 @@ abstract class AbstractValidator(var errorTextView: TextView, var context: Conte
         return isValid;
     }
 
+    private fun addError(message: String) {
+        val current = errorTextView.text.toString()
+        errorTextView.text = if (current.isEmpty()) message else "$current\n$message"
+    }
+
     fun isNotEmpty(input: View, inputNameRes: Int): Boolean {
         input as TextView
         if (input.text.toString().isEmpty() || input.text.toString().isBlank()) {
-            errorTextView.text = errorTextView.text.toString().plus("\n" + context.getString(R.string.validation_required, context.getString(inputNameRes)));
+            addError(context.getString(R.string.validation_required, context.getString(inputNameRes)));
             return false;
         }
         return true;
     }
 
     fun isSpinnerNotEmpty(input: View, inputNameRes: Int): Boolean {
-        input as Spinner
-        val adapter = input.getAdapter() as CriAppSpinnerAdapter;
-        if (adapter.position == 0) {
-            errorTextView.text = errorTextView.text.toString().plus("\n" + context.getString(R.string.validation_required, context.getString(inputNameRes)));
-            return false;
+        input as com.example.criapp.CriAppDropdown
+        if (input.selectedPosition == 0) {
+            addError(context.getString(R.string.validation_required, context.getString(inputNameRes)))
+            return false
         }
-        return true;
+        return true
     }
 
     fun hasMaxLength100Char(input: View, inputNameRes: Int): Boolean {
         input as TextView
         if (input.text.toString().length > 100) {
-            errorTextView.text = errorTextView.text.toString().plus("\n" + context.getString(R.string.validation_max_100, context.getString(inputNameRes)));
+            addError(context.getString(R.string.validation_max_100, context.getString(inputNameRes)));
             return false;
         }
         return true;
@@ -71,7 +75,7 @@ abstract class AbstractValidator(var errorTextView: TextView, var context: Conte
             return true
         }
 
-        errorTextView.text = errorTextView.text.toString().plus("\n" + context.getString(R.string.validation_invalid, context.getString(inputNameRes)));
+        addError(context.getString(R.string.validation_invalid, context.getString(inputNameRes)));
 
         return false;
     }
@@ -81,7 +85,7 @@ abstract class AbstractValidator(var errorTextView: TextView, var context: Conte
         input as TextView
         val pattern = Regex("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}")
         if (!pattern.matches(input.text.toString())) {
-            errorTextView.text = errorTextView.text.toString().plus("\n" + context.getString(R.string.validation_invalid_feminine, context.getString(inputNameRes)));
+            addError(context.getString(R.string.validation_invalid_feminine, context.getString(inputNameRes)));
             return false;
         }
 

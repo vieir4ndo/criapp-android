@@ -1,30 +1,28 @@
 package com.example.criapp
 
-import android.app.DatePickerDialog
-import android.app.Dialog
-import android.content.Context
-import android.os.Bundle
-import android.widget.DatePicker
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
+import com.google.android.material.datepicker.MaterialDatePicker
 import java.util.Calendar
+import java.util.TimeZone
 
-class DatePickerFragment (val listener : (day : Int, month : Int, year : Int) -> Unit) : DialogFragment(), DatePickerDialog.OnDateSetListener {
-    override fun onDateSet(p0: DatePicker?, year: Int, month: Int, day: Int) {
-        listener(day, month, year)
-    }
+class DatePickerFragment(private val listener: (day: Int, month: Int, year: Int) -> Unit) {
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val calendar = Calendar.getInstance();
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-        val month = calendar.get(Calendar.MONTH)
-        val year = calendar.get(Calendar.YEAR)
+    fun show(fragmentManager: FragmentManager, tag: String) {
+        val picker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText(R.string.birth_date)
+            .setTheme(R.style.CRIApp_MaterialDatePicker)
+            .build()
 
-        return DatePickerDialog(
-            activity as Context,
-            this,
-            year,
-            month,
-            day
-        );
+        picker.addOnPositiveButtonClickListener { selection ->
+            val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+            calendar.timeInMillis = selection
+            listener(
+                calendar.get(Calendar.DAY_OF_MONTH),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.YEAR)
+            )
+        }
+
+        picker.show(fragmentManager, tag)
     }
 }

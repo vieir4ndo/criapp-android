@@ -58,7 +58,7 @@ class AwardActivity : AppCompatActivity() {
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, "Hubo un error al buscar los premios, por favor intentalo nuevamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.error_load_awards), Toast.LENGTH_SHORT).show()
                 }
                 else -> Unit
             }

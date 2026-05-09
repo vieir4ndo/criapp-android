@@ -3,15 +3,13 @@ package com.example.criapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.AuthRepositoryImpl
 import com.example.criapp.databinding.ActivitySignUpBinding
+import com.example.criapp.helpers.markRequired
 import com.example.criapp.models.CreateUserModel
 import com.example.criapp.presentation.auth.SignUpViewModel
 import com.example.criapp.presentation.auth.SignUpViewModelFactory
@@ -31,8 +29,6 @@ class SignUpActivity : AppCompatActivity() {
     private var birthDateMonth = 0
     private var birthDateYear = 0
     private var aLoadingDialog: ALoadingDialog? = null
-    private lateinit var editTextBirthDate: EditText
-    private lateinit var errorTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,26 +41,30 @@ class SignUpActivity : AppCompatActivity() {
 
         configSpinners()
 
-        errorTextView = findViewById(R.id.text_view_errors)
-        errorTextView.visibility = View.GONE
-        editTextBirthDate = findViewById(R.id.edit_text_birth_date)
+        mBinding.textViewErrors.visibility = View.GONE
+
+        mBinding.labelEditTextName.markRequired()
+        mBinding.labelEditTextCreateUsername.markRequired()
+        mBinding.labelEditTextBirthDate.markRequired()
+        mBinding.labelSpinnerSex.markRequired()
+        mBinding.labelEditTextPassword.markRequired()
 
         createUserModel = CreateUserModel(
-            findViewById(R.id.edit_text_name),
-            editTextBirthDate,
-            findViewById(R.id.edit_text_create_username),
-            findViewById(R.id.edit_text_password),
-            findViewById(R.id.edit_text_number_of_children),
+            mBinding.editTextName,
+            mBinding.editTextBirthDate,
+            mBinding.editTextCreateUsername,
+            mBinding.editTextPassword,
+            mBinding.editTextNumberOfChildren,
             mBinding.spinnerSex,
             mBinding.spinnerEducationalLevel,
             mBinding.spinnerFamilyType
         )
 
-        findViewById<Button>(R.id.button_create_user).setOnClickListener {
-            if (createUserModel.validate(errorTextView, this)) {
+        mBinding.buttonCreateUser.setOnClickListener {
+            if (createUserModel.validate(mBinding.textViewErrors, this)) {
                 viewModel.createUser(createUserModel.toRequest())
             } else {
-                errorTextView.visibility = View.VISIBLE
+                mBinding.textViewErrors.visibility = View.VISIBLE
             }
         }
 
@@ -85,9 +85,9 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun configSpinners() {
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerSex, SpinnerHelper.sexOptions)
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerEducationalLevel, SpinnerHelper.educationalLevelOptions)
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerFamilyType, SpinnerHelper.familyTypeOptions)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerSex, R.array.sex_options)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerEducationalLevel, R.array.educational_level_options)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerFamilyType, R.array.family_type_options)
     }
 
     fun showDatePickerForBirthDate(view: View) {
@@ -95,8 +95,8 @@ class SignUpActivity : AppCompatActivity() {
             birthDateDay = day
             birthDateMonth = month + 1
             birthDateYear = year
-            editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
-            editTextBirthDate.error = null
+            mBinding.editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
+            mBinding.editTextBirthDate.error = null
         }
         datePicker.show(supportFragmentManager, "datePicker")
     }

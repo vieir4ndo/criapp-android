@@ -2,9 +2,6 @@ package com.example.criapp
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +9,7 @@ import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ChildRepositoryImpl
 import com.example.criapp.databinding.ActivityCreateChildBinding
+import com.example.criapp.helpers.markRequired
 import com.example.criapp.models.CreateOrUpdateChildModel
 import com.example.criapp.presentation.child.ChildViewModel
 import com.example.criapp.presentation.child.ChildViewModelFactory
@@ -31,8 +29,6 @@ class CreateChildActivity : AppCompatActivity() {
     private var birthDateYear = 0
     private lateinit var model: CreateOrUpdateChildModel
     private var aLoadingDialog: ALoadingDialog? = null
-    private lateinit var editTextBirthDate: EditText
-    private lateinit var errorTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,23 +39,27 @@ class CreateChildActivity : AppCompatActivity() {
 
         configSpinners()
 
-        errorTextView = findViewById(R.id.text_view_errors)
-        errorTextView.visibility = View.GONE
-        editTextBirthDate = findViewById(R.id.edit_text_birth_date)
+        mBinding.textViewErrors.visibility = View.GONE
+
+        mBinding.labelEditTextName.markRequired()
+        mBinding.labelEditTextBirthDate.markRequired()
+        mBinding.labelSpinnerSex.markRequired()
+        mBinding.labelSpinnerPremature.markRequired()
+        mBinding.labelEditTextMonthsOfBreastFeeding.markRequired()
 
         model = CreateOrUpdateChildModel(
-            findViewById(R.id.edit_text_name),
-            editTextBirthDate,
+            mBinding.editTextName,
+            mBinding.editTextBirthDate,
             mBinding.spinnerSex,
-            findViewById(R.id.edit_text_months_of_breast_feeding),
+            mBinding.editTextMonthsOfBreastFeeding,
             mBinding.spinnerPremature
         )
 
-        findViewById<Button>(R.id.button_create_child).setOnClickListener {
-            if (model.validate(errorTextView, this)) {
+        mBinding.buttonCreateChild.setOnClickListener {
+            if (model.validate(mBinding.textViewErrors, this)) {
                 viewModel.createChild(model.toRequest())
             } else {
-                errorTextView.visibility = View.VISIBLE
+                mBinding.textViewErrors.visibility = View.VISIBLE
             }
         }
 
@@ -81,8 +81,8 @@ class CreateChildActivity : AppCompatActivity() {
     }
 
     private fun configSpinners() {
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerSex, SpinnerHelper.sexOptions)
-        SpinnerHelper.configCriAppSpinner(this, mBinding.spinnerPremature, SpinnerHelper.yesOrNoOptions)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerSex, R.array.sex_options)
+        SpinnerHelper.configCriAppSpinner(mBinding.spinnerPremature, R.array.yes_no_options)
     }
 
     fun showDatePickerForBirthDate(view: View) {
@@ -90,8 +90,8 @@ class CreateChildActivity : AppCompatActivity() {
             birthDateDay = day
             birthDateMonth = month + 1
             birthDateYear = year
-            editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
-            editTextBirthDate.error = null
+            mBinding.editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(year, month + 1, day))
+            mBinding.editTextBirthDate.error = null
         }
         datePicker.show(supportFragmentManager, "datePicker")
     }

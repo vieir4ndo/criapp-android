@@ -116,8 +116,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         >
         <EditText
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
+            style="@style/CRIApp.EditText"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:id="@+id/text_comment"
             android:layout_height="50dp"
             android:layout_width="0dp"
