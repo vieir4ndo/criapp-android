@@ -36,6 +36,7 @@ class RecommendationActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.viewPager)
         txtNoRecommendations = findViewById(R.id.txtNoRecommendations)
         tabDots = findViewById(R.id.tabDots)
+        viewPager.adapter = RecommendationAdapter(emptyList())
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         viewModel.state.observe(this) { state ->
