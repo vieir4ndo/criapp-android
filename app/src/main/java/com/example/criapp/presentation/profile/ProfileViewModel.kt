@@ -40,4 +40,16 @@ class ProfileViewModel(private val repository: IProfileRepository) : ViewModel()
             }
         }
     }
+
+    fun deactivateAccount() {
+        _updateState.value = UiState.Loading
+        viewModelScope.launch {
+            val result = repository.deactivateAccount()
+            _updateState.value = if (result.isSuccess) {
+                UiState.Success(Unit)
+            } else {
+                UiState.Error(result.exceptionOrNull()?.message ?: "Error desconocido")
+            }
+        }
+    }
 }

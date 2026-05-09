@@ -41,6 +41,7 @@
     <string name="back">Back</string>
     <string name="logoff">Sign Out</string>
     <string name="deactivate_account">Deactivate account</string>
+    <string name="deactivate_account_confirmation">Are you sure you want to deactivate your account? This action cannot be undone.</string>
     <string name="add_child">Add child</string>
     <string name="add_forum">Add forum</string>
 

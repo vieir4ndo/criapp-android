@@ -74,6 +74,17 @@ class ProfileActivity : AppCompatActivity() {
                             mBinding.textViewErrors.visibility = View.VISIBLE
                         }
                     }
+
+                    mBinding.deactivateAccountButton.setOnClickListener {
+                        DialogFactory.createConfirmationDialog(
+                            this,
+                            getString(R.string.deactivate_account),
+                            getString(R.string.deactivate_account_confirmation)
+                        ) {
+                            viewModel.deactivateAccount()
+                            onButtonLogoffClick(null)
+                        }.show()
+                    }
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()

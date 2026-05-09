@@ -16,7 +16,11 @@ class ProfileRepositoryImpl(private val apiService: CriAppApiService) : IProfile
                     ?: return Result.failure(Exception("Respuesta vacía del servidor"))
                 Result.success(user)
             } else {
-                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+                Result.failure(
+                    Exception(
+                        response.Messages?.joinToString("\n") ?: "Error desconocido"
+                    )
+                )
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -28,7 +32,25 @@ class ProfileRepositoryImpl(private val apiService: CriAppApiService) : IProfile
             val body = requestBody.toRequestBody("application/json".toMediaType())
             val response = apiService.updateProfile(body)
             if (response.success) Result.success(Unit)
-            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+            else Result.failure(
+                Exception(
+                    response.Messages?.joinToString("\n") ?: "Error desconocido"
+                )
+            )
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun deactivateAccount(): Result<Unit> {
+        return try {
+            val response = apiService.deactivateAccount()
+            if (response.success) Result.success(Unit)
+            else Result.failure(
+                Exception(
+                    response.Messages?.joinToString("\n") ?: "Error desconocido"
+                )
+            )
         } catch (e: Exception) {
             Result.failure(e)
         }
