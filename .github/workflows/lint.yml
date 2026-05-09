@@ -1,0 +1,77 @@
+name: Lint
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  branch-lint:
+    name: Branch Name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch name
+        run: |
+          BRANCH="${{ github.head_ref || github.ref_name }}"
+          echo "Branch: $BRANCH"
+          if ! echo "$BRANCH" | grep -qE '^(main|issue#[0-9]+|hotfix/.+|release/[0-9]+\.[0-9]+\.[0-9]+)$'; then
+            echo "::error::Branch '$BRANCH' does not follow the naming convention."
+            echo "Allowed patterns:"
+            echo "  main"
+            echo "  dev"
+            echo "  issue#<number>        e.g. issue#35"
+            echo "  hotfix/<description>  e.g. hotfix/auth-crash"
+            echo "  release/<semver>      e.g. release/1.2.0"
+            exit 1
+          fi
+          echo "Branch name is valid."
+
+  commit-lint:
+    name: Commit Messages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate commit messages
+        run: |
+          FORMAT_PATTERN='^(feat|fix|docs|style|refactor|test|chore|perf|ci|build|revert)(\([a-zA-Z0-9_/-]+\))?: .+$'
+          REF_PATTERN='vieir4ndo/criapp#[0-9]+'
+          FAILED=0
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+            HEAD="${{ github.event.pull_request.head.sha }}"
+            HASHES=$(git log --format="%H" "${BASE}..${HEAD}")
+          else
+            HASHES=$(git log -1 --format="%H")
+          fi
+
+          while IFS= read -r HASH; do
+            [ -z "$HASH" ] && continue
+            SUBJECT=$(git log -1 --format="%s" "$HASH")
+            BODY=$(git log -1 --format="%B" "$HASH")
+
+            if echo "$SUBJECT" | grep -qE "$FORMAT_PATTERN"; then
+              echo "  OK format: $SUBJECT"
+            else
+              echo "::error::Invalid commit message format: '$SUBJECT'"
+              echo "  Expected: <type>(<scope>): <description>"
+              echo "  Types: feat | fix | docs | style | refactor | test | chore | perf | ci | build | revert"
+              FAILED=1
+            fi
+
+            if echo "$BODY" | grep -qE "$REF_PATTERN"; then
+              echo "  OK reference: task reference found"
+            else
+              echo "::error::Missing task reference in commit: '$SUBJECT'"
+              echo "  Add 'vieir4ndo/criapp#<number>' in the commit message body"
+              FAILED=1
+            fi
+          done <<< "$HASHES"
+
+          exit $FAILED
