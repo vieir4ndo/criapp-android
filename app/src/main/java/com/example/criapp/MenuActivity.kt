@@ -1,32 +1,38 @@
 package com.example.criapp
 
-import android.content.Context
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AppCompatActivity
-import com.example.criapp.data.local.PreferencesManager
 
 class MenuActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
-
-        val name = PreferencesManager(this).getUserName().split(" ")[0]
-        findViewById<TextView>(R.id.greeting).text = "¡Hola, $name!"
-
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() { }
-        })
     }
 
-    fun onButtonChildClick(view: View?) = startActivity(Intent(this, ChildActivity::class.java))
-    fun onButtonProfileClick(view: View?) = startActivity(Intent(this, ProfileActivity::class.java))
-    fun onButtonQuestionsClick(view: View?) = startActivity(Intent(this, QuestionsActivity::class.java))
-    fun onButtonFaqClick(view: View?) = startActivity(Intent(this, FaqActivity::class.java))
-    fun onButtonAudioVisualResourcesClick(view: View?) = startActivity(Intent(this, AudioVisualResourcesActivity::class.java))
-    fun onButtonForumClick(view: View?) = startActivity(Intent(this, ForumsActivity::class.java))
+    fun onButtonChildClick(view: View?) {
+        val nextIntent = Intent(this, ChildActivity::class.java);
+        startActivity(nextIntent);
+    }
+
+    fun onButtonProfileClick(view: View?) {
+        val nextIntent = Intent(this, ProfileActivity::class.java);
+        startActivity(nextIntent);
+    }
+
+    fun onButtonChildQuestions(view: View?) {
+        val nextIntent = Intent(this, QuestionsActivity::class.java);
+        startActivity(nextIntent);
+    }
+
+    fun onButtonFaqClick(view: View?){
+        val nextIntent = Intent(this, FaqActivity::class.java);
+        startActivity(nextIntent);
+    }
+
+    fun onButtonAudioVisualResourcesClick(view: View?){
+        val nextIntent = Intent(this, AudioVisualResourcesActivity::class.java);
+        startActivity(nextIntent);
+    }
 }

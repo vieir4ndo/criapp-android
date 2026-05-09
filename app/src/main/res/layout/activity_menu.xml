@@ -45,7 +45,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="center"
                 android:text="¡Hola, usuario!"
                 android:textColor="@color/white"
                 android:textSize="22sp"
@@ -56,7 +55,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="center"
                 android:text="Bienvenido a CRIApp"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -158,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/card_holo_purple"
-                android:onClick="onButtonQuestionsClick"
+                android:onClick="onButtonChildQuestions"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -222,7 +220,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/card_holo_purple"
-                android:onClick="onButtonForumClick"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -237,7 +234,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/forums"
+                    android:text="@string/foruns"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -282,7 +279,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/card_holo_purple"
-                android:onClick="onButtonAudioVisualResourcesClick"
+                android:onClick="onButtonFaqClick"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -290,7 +287,7 @@
                     android:layout_width="90dp"
                     android:layout_height="60dp"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/audiovisual_resource" />
+                    android:src="@drawable/audiovisualresource" />
 
                 <TextView
                     android:layout_width="match_parent"

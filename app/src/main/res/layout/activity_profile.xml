@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_purple_to_holo_purple_background"
     android:orientation="vertical"
-    tools:context=".ProfileActivity">
+    tools:context=".SignUpActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,8 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:background="@drawable/card_purple"
             android:orientation="vertical"
             android:paddingStart="10dp"
@@ -53,9 +53,9 @@
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/red"
                 android:textStyle="bold"
+                android:text="Errors"
                 android:padding="10dp"
-                android:text="@string/errors"
-                android:background="@drawable/card_red"
+                android:background="@drawable/card_gray"
                 />
 
             <TextView
@@ -143,17 +143,16 @@
 
             <Button
                 android:id="@+id/button_update_user"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:text="@string/ok"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/dark_blue"
                 android:textSize="20sp"
                 android:textStyle="bold" />
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:backgroundTint="@android:color/holo_purple"
@@ -163,7 +162,7 @@
                 android:textStyle="bold"/>
             <Button
                 android:id="@+id/button_logout"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:backgroundTint="@android:color/holo_purple"
