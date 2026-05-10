@@ -25,6 +25,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             buildConfigField("String", "BASE_URL", "\"https://criapp-api-a0fef0esc6h6dxe5.spaincentral-01.azurewebsites.net/\"")
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 

@@ -44,7 +44,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           DATE=$(date +'%Y%m%d')
-          mv app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/criapp_${DATE}.apk
+          mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/criapp_${DATE}.apk
 
       - name: Upload APK artifact
         if: github.ref == 'refs/heads/main'
