@@ -1,5 +1,7 @@
 package com.example.criapp.adapters
 
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.R
-import com.example.criapp.models.AdviceResources
 import com.example.criapp.models.responses.AdviceResponse
 
 class AdviceAdapter(
@@ -29,8 +30,15 @@ class AdviceAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
-        val index = (item.id - 1).coerceIn(0, AdviceResources.drawables.lastIndex) % AdviceResources.drawables.size
-        holder.image.setImageResource(AdviceResources.drawables[index])
         holder.text.text = item.text
+
+        val b64 = item.image
+        if (!b64.isNullOrBlank()) {
+            val bytes = Base64.decode(b64, Base64.DEFAULT)
+            val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+            holder.image.setImageBitmap(bitmap)
+        } else {
+            holder.image.setImageDrawable(null)
+        }
     }
 }
