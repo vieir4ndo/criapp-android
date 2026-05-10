@@ -13,10 +13,10 @@ class AdviceViewModel(private val repository: IAdviceRepository) : ViewModel() {
     private val _state = MutableLiveData<UiState<List<AdviceResponse>>>()
     val state: LiveData<UiState<List<AdviceResponse>>> = _state
 
-    fun loadAdvices() {
+    fun loadAdvices(childId: String) {
         _state.value = UiState.Loading
         viewModelScope.launch {
-            val result = repository.getAdvices()
+            val result = repository.getAdvices(childId)
             _state.value = if (result.isSuccess) {
                 UiState.Success(result.getOrThrow())
             } else {

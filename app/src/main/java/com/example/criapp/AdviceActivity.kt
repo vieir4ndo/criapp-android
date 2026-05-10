@@ -39,6 +39,7 @@ class AdviceActivity : AppCompatActivity() {
         viewPager.adapter = AdviceAdapter(emptyList())
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
+        val childId = intent.getStringExtra("childId") ?: return
         viewModel.state.observe(this) { state ->
             when (state) {
                 is UiState.Loading -> aLoadingDialog?.show()
@@ -65,7 +66,7 @@ class AdviceActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.loadAdvices()
+        viewModel.loadAdvices(childId)
     }
 
     private fun setupDots(count: Int) {

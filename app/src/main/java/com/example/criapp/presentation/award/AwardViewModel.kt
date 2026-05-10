@@ -13,10 +13,10 @@ class AwardViewModel(private val repository: IAwardRepository) : ViewModel() {
     private val _state = MutableLiveData<UiState<List<AwardResponse>>>()
     val state: LiveData<UiState<List<AwardResponse>>> = _state
 
-    fun loadAwards(){
+    fun loadAwards(childId: String) {
         _state.value = UiState.Loading
         viewModelScope.launch {
-            val result = repository.getAwards()
+            val result = repository.getAwards(childId)
             _state.value = if (result.isSuccess) {
                 UiState.Success(result.getOrThrow())
             } else {

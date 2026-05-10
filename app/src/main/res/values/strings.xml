@@ -56,6 +56,8 @@
     <string name="advices">Consejos</string>
     <string name="faq">FAQ</string>
     <string name="notifications">Notificaciones</string>
+    <string name="recommendations">Recomendaciones</string>
+    <string name="coming_soon">Próximamente</string>
     <string name="audiovisual_resources">Recursos Audiovisuales</string>
     <string name="child_book">Libro de crianza</string>
 
@@ -113,6 +115,7 @@
     <string name="validation_invalid">%s es inválido</string>
     <string name="validation_invalid_feminine">%s es inválida</string>
     <string name="validation_max_100">%s debe contener un máximo de 100 caracteres</string>
+    <string name="book_of">Libro de %s</string>
 
     <!-- String arrays -->
     <string-array name="sex_options">

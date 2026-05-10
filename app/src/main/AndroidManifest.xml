@@ -25,6 +25,14 @@
             android:name=".AdviceActivity"
             android:exported="false" />
         <activity
+            android:name=".ChildBookListActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChildBookActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ForumActivity"
             android:exported="false" />
         <activity

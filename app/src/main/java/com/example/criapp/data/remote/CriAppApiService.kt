@@ -3,6 +3,7 @@ package com.example.criapp.data.remote
 import com.example.criapp.models.requests.LoginUserRequest
 import com.example.criapp.models.responses.AudiovisualResourceResponse
 import com.example.criapp.models.responses.AwardResponse
+import com.example.criapp.models.responses.ChildBookResponse
 import com.example.criapp.models.responses.ChildResponse
 import com.example.criapp.models.responses.AdviceResponse
 import com.example.criapp.models.responses.CommentResponse
@@ -101,6 +102,10 @@ interface CriAppApiService {
 
     @DELETE("comment/{id}")
     suspend fun deleteComment(@Path("id") id: String): ApiResponse<List<Any>>
+
+    // ── Child Book ──────────────────────────────────────────────────────
+    @GET("child/{childId}/book")
+    suspend fun getChildBook(@Path("childId") childId: String): ApiResponse<List<ChildBookResponse>>
 
     // ── Awards ──────────────────────────────────────────────────────
     @GET("user/awards")

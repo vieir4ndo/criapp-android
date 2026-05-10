@@ -28,6 +28,6 @@ class MenuActivity : AppCompatActivity() {
     fun onButtonFaqClick(view: View?) = startActivity(Intent(this, FaqActivity::class.java))
     fun onButtonAudioVisualResourcesClick(view: View?) = startActivity(Intent(this, AudioVisualResourcesActivity::class.java))
     fun onButtonForumClick(view: View?) = startActivity(Intent(this, ForumsActivity::class.java))
-    fun onButtonAwardClick(view: View?) = startActivity(Intent(this, AwardActivity::class.java))
-    fun onButtonChildBookClick(view: View?) = startActivity(Intent(this, AdviceActivity::class.java))
+    fun onButtonNotificationsClick(view: View?) = Unit
+    fun onButtonChildBookClick(view: View?) = startActivity(Intent(this, ChildBookListActivity::class.java))
 }
