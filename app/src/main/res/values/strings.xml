@@ -161,4 +161,7 @@
         <item>¡Empecemos!</item>
     </string-array>
 
+    <string name="notification_channel_name">CRIApp</string>
+    <string name="notification_channel_description">Notificaciones de actividad y seguimiento</string>
+
 </resources>

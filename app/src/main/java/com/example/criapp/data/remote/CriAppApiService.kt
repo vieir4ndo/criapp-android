@@ -7,6 +7,7 @@ import com.example.criapp.models.responses.AwardResponse
 import com.example.criapp.models.responses.ChildBookResponse
 import com.example.criapp.models.responses.ChildResponse
 import com.example.criapp.models.responses.RecommendationResponse
+import com.example.criapp.models.responses.NotificationResponse
 import com.example.criapp.models.responses.CommentResponse
 import com.example.criapp.models.responses.FaqResponse
 import com.example.criapp.models.responses.ForumResponse
@@ -122,4 +123,15 @@ interface CriAppApiService {
         @Path("recommendationId") recommendationId: Int,
         @Body request: CreateCheckpointRequest
     ): ApiResponse<List<Any>>
+
+    // ── Notifications ─────────────────────────────────────────────────────
+
+    @GET("notifications/pending")
+    suspend fun getPendingNotifications(): ApiResponse<List<NotificationResponse>>
+
+    @PATCH("notifications/{id}/delivered")
+    suspend fun markNotificationDelivered(@Path("id") id: String): ApiResponse<List<Any>>
+
+    @PATCH("notifications/{id}/read")
+    suspend fun markNotificationRead(@Path("id") id: String): ApiResponse<List<Any>>
 }

@@ -63,5 +63,6 @@ dependencies {
     implementation("com.airbnb.android:lottie:5.2.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
 
 }
