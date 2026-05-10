@@ -81,8 +81,10 @@
 
     <!-- Empty states -->
     <string name="no_awards">You don\'t have any awards yet. Keep completing questionnaires to earn them!</string>
-    <string name="no_recommendations">You don\'t have any recommendations yet. Keep completing questionnaires to get them!</string>
-    <string name="empty_list">Nothing here yet</string>
+    <string name="no_recommendations">You don\'t have any recommendations yet. Keep completing questionnaires to get them!</string>    <string name="routine_question">Have you done this routine today?</string>
+    <string name="routine_yes">Yes, I did it</string>
+    <string name="routine_no">Not yet</string>
+    <string name="checkpoint_saved">Routine registered!</string>    <string name="empty_list">Nothing here yet</string>
 
     <!-- Dialog -->
     <string name="dialog_error_title">Oops</string>
@@ -109,6 +111,7 @@
     <string name="error_load_awards">An error occurred while loading the awards, please try again</string>
     <string name="error_load_recommendations">An error occurred while loading the recommendations, please try again</string>
     <string name="error_load_resources">An error occurred while loading the audiovisual resources, please try again</string>
+    <string name="error_save_checkpoint">An error occurred while saving your routine, please try again</string>
 
     <!-- Validation -->
     <string name="validation_required">%s is required</string>
