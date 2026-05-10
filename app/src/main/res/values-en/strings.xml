@@ -54,10 +54,9 @@
     <string name="children">Children</string>
     <string name="forums">Forums</string>
     <string name="awards">Awards</string>
-    <string name="advices">Advices</string>
+    <string name="recommendations">Recommendations</string>
     <string name="faq">FAQ</string>
     <string name="notifications">Notifications</string>
-    <string name="recommendations">Recommendations</string>
     <string name="coming_soon">Coming soon</string>
     <string name="audiovisual_resources">Audiovisual Resources</string>
     <string name="child_book">Parenting book</string>
@@ -82,7 +81,7 @@
 
     <!-- Empty states -->
     <string name="no_awards">You don\'t have any awards yet. Keep completing questionnaires to earn them!</string>
-    <string name="no_advices">You don\'t have any advices yet. Keep completing questionnaires to get them!</string>
+    <string name="no_recommendations">You don\'t have any recommendations yet. Keep completing questionnaires to get them!</string>
     <string name="empty_list">Nothing here yet</string>
 
     <!-- Dialog -->
@@ -108,7 +107,7 @@
     <string name="error_load_questions">An error occurred while loading the questions, please try again</string>
     <string name="error_load_comments">An error occurred while loading the comments, please try again</string>
     <string name="error_load_awards">An error occurred while loading the awards, please try again</string>
-    <string name="error_load_advices">An error occurred while loading the advices, please try again</string>
+    <string name="error_load_recommendations">An error occurred while loading the recommendations, please try again</string>
     <string name="error_load_resources">An error occurred while loading the audiovisual resources, please try again</string>
 
     <!-- Validation -->

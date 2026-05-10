@@ -14,14 +14,14 @@
         android:paddingEnd="20dp">
 
         <ImageView
-            android:id="@+id/imgAdvice"
+            android:id="@+id/imgRecommendation"
             android:layout_width="match_parent"
             android:layout_height="280dp"
             android:scaleType="fitCenter"
             android:elevation="4dp" />
 
         <TextView
-            android:id="@+id/txtAdviceText"
+            android:id="@+id/txtRecommendationText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"

@@ -9,20 +9,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.R
-import com.example.criapp.models.responses.AdviceResponse
+import com.example.criapp.models.responses.RecommendationResponse
 
-class AdviceAdapter(
-    private val list: List<AdviceResponse>
-) : RecyclerView.Adapter<AdviceAdapter.ViewHolder>() {
+class RecommendationAdapter(
+    private val list: List<RecommendationResponse>
+) : RecyclerView.Adapter<RecommendationAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val image: ImageView = view.findViewById(R.id.imgAdvice)
-        val text: TextView = view.findViewById(R.id.txtAdviceText)
+        val image: ImageView = view.findViewById(R.id.imgRecommendation)
+        val text: TextView = view.findViewById(R.id.txtRecommendationText)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.advice_item_layout, parent, false)
+            .inflate(R.layout.recommendation_item_layout, parent, false)
         return ViewHolder(view)
     }
 

@@ -6,5 +6,5 @@ data class ChildBookResponse(
     val score: Int,
     val scoreLastUpdatedAt: String,
     val awards: List<AwardResponse>,
-    val advices: List<AdviceResponse>
+    val recommendations: List<RecommendationResponse>
 )
