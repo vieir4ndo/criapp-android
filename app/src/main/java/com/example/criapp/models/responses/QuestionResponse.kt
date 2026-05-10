@@ -6,7 +6,6 @@ class QuestionResponse(
     val id : String,
     val text: String,
     val active: Boolean,
-    val adminId: String,
     val type: Int,
     val scoringType: Int
 ) {
