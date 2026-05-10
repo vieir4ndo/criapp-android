@@ -23,6 +23,21 @@ class NotificationRepositoryImpl(private val apiService: CriAppApiService) : INo
         }
     }
 
+    override suspend fun getNotificationHistory(): Result<List<NotificationResponse>> {
+        return try {
+            val response = apiService.getNotificationHistory()
+            if (response.success) {
+                Result.success(response.data ?: emptyList())
+            } else {
+                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Unknown error"))
+            }
+        } catch (e: HttpException) {
+            Result.failure(Exception(e.toErrorMessage()))
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     override suspend fun markAsDelivered(id: String): Result<Unit> {
         return try {
             val response = apiService.markNotificationDelivered(id)

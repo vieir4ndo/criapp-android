@@ -160,4 +160,15 @@
         <item>Let\'s get started!</item>
     </string-array>
 
+    <string name="notification_channel_name">CRIApp</string>
+    <string name="notification_channel_description">Activity and tracking notifications</string>
+    <string name="no_notifications">You have no notifications yet</string>
+    <string name="error_load_notifications">There was an error loading your notifications, please try again</string>
+    <string name="notification_marked_as_read">Notification marked as read</string>
+    <string name="notification_type_motivational">Motivation</string>
+    <string name="notification_type_points_risk">Points at risk</string>
+    <string name="notification_type_reevaluation">Re-evaluation</string>
+    <string name="notification_type_new_award">New award</string>
+    <string name="notification_type_new_recommendations">New recommendations</string>
+
 </resources>
