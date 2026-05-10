@@ -1,6 +1,6 @@
 package com.example.criapp.models.responses
 
-data class RecommendationResponse(
+data class AdviceResponse(
     val id: Int,
     val text: String
 )

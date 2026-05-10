@@ -1,22 +1,22 @@
-package com.example.criapp.presentation.recommendation
+package com.example.criapp.presentation.advice
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.criapp.domain.repository.IRecommendationRepository
-import com.example.criapp.models.responses.RecommendationResponse
+import com.example.criapp.domain.repository.IAdviceRepository
+import com.example.criapp.models.responses.AdviceResponse
 import com.example.criapp.presentation.common.UiState
 import kotlinx.coroutines.launch
 
-class RecommendationViewModel(private val repository: IRecommendationRepository) : ViewModel() {
-    private val _state = MutableLiveData<UiState<List<RecommendationResponse>>>()
-    val state: LiveData<UiState<List<RecommendationResponse>>> = _state
+class AdviceViewModel(private val repository: IAdviceRepository) : ViewModel() {
+    private val _state = MutableLiveData<UiState<List<AdviceResponse>>>()
+    val state: LiveData<UiState<List<AdviceResponse>>> = _state
 
-    fun loadRecommendations() {
+    fun loadAdvices() {
         _state.value = UiState.Loading
         viewModelScope.launch {
-            val result = repository.getRecommendations()
+            val result = repository.getAdvices()
             _state.value = if (result.isSuccess) {
                 UiState.Success(result.getOrThrow())
             } else {

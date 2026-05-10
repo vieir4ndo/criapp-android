@@ -5,21 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_purple_to_holo_purple_background"
-    tools:context=".RecommendationActivity">
+    tools:context=".AdviceActivity">
 
     <ImageView
-        android:id="@+id/image_recommendation"
+        android:id="@+id/image_advice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:src="@drawable/book"
-        app:layout_constraintBottom_toTopOf="@id/title_recommendation"
+        app:layout_constraintBottom_toTopOf="@id/title_advice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/title_recommendation"
+        android:id="@+id/title_advice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toTopOf="@+id/cardContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_recommendation" />
+        app:layout_constraintTop_toBottomOf="@+id/image_advice" />
 
     <LinearLayout
         android:id="@+id/cardContainer"
@@ -43,7 +43,7 @@
         android:background="@drawable/card_purple"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/tabDots"
-        app:layout_constraintTop_toBottomOf="@id/title_recommendation">
+        app:layout_constraintTop_toBottomOf="@id/title_advice">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
@@ -52,12 +52,12 @@
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/txtNoRecommendations"
+            android:id="@+id/txtNoAdvices"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|center_horizontal"
             android:padding="20dp"
-            android:text="@string/no_recommendations"
+            android:text="@string/no_advices"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="18sp"

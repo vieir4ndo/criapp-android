@@ -22,7 +22,7 @@
             android:name=".AwardActivity"
             android:exported="false" />
         <activity
-            android:name=".RecommendationActivity"
+            android:name=".AdviceActivity"
             android:exported="false" />
         <activity
             android:name=".ForumActivity"
