@@ -57,6 +57,7 @@ class CreateChildActivity : AppCompatActivity() {
 
         mBinding.buttonCreateChild.setOnClickListener {
             if (model.validate(mBinding.textViewErrors, this)) {
+                mBinding.textViewErrors.visibility = View.GONE
                 viewModel.createChild(model.toRequest())
             } else {
                 mBinding.textViewErrors.visibility = View.VISIBLE

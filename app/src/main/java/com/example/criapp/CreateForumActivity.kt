@@ -40,6 +40,7 @@ class CreateForumActivity : AppCompatActivity() {
 
         mBinding.buttonCreate.setOnClickListener {
             if (model.validate(mBinding.textViewErrors, this)) {
+                mBinding.textViewErrors.visibility = View.GONE
                 viewModel.createForum(model.toRequest())
             } else {
                 mBinding.textViewErrors.visibility = View.VISIBLE

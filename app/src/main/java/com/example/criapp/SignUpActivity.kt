@@ -62,6 +62,7 @@ class SignUpActivity : AppCompatActivity() {
 
         mBinding.buttonCreateUser.setOnClickListener {
             if (createUserModel.validate(mBinding.textViewErrors, this)) {
+                mBinding.textViewErrors.visibility = View.GONE
                 viewModel.createUser(createUserModel.toRequest())
             } else {
                 mBinding.textViewErrors.visibility = View.VISIBLE
