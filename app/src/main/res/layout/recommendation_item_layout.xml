@@ -29,5 +29,49 @@
             android:textAlignment="center"
             android:textColor="#EEFFFFFF"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txtRoutineQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="@string/routine_question"
+            android:textAlignment="center"
+            android:textColor="#CCFFFFFF"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btnYes"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="@string/routine_yes"
+                android:textSize="13sp"
+                android:backgroundTint="#2E7D32"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnNo"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="@string/routine_no"
+                android:textSize="13sp"
+                android:backgroundTint="#B71C1C"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

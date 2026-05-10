@@ -14,4 +14,6 @@
     <color name="likert_4">#FFA726</color>
     <color name="likert_5">#EF5350</color>
     <color name="likert_6">#B71C1C</color>
+    <color name="checkpoint_done">#555555</color>
+    <color name="checkpoint_pending">#333333</color>
 </resources>

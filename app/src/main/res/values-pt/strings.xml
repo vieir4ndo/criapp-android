@@ -82,6 +82,10 @@
     <!-- Empty states -->
     <string name="no_awards">Você ainda não tem prêmios. Continue completando questionários para ganhá-los!</string>
     <string name="no_recommendations">Você ainda não tem recomendações. Continue completando questionários para obtê-las!</string>
+    <string name="routine_question">Você realizou esta rotina hoje?</string>
+    <string name="routine_yes">Sim, fiz!</string>
+    <string name="routine_no">Ainda não</string>
+    <string name="checkpoint_saved">Rotina registrada!</string>
     <string name="empty_list">Ainda não há nada aqui</string>
 
     <!-- Dialog -->
@@ -109,6 +113,7 @@
     <string name="error_load_awards">Ocorreu um erro ao buscar os prêmios, por favor tente novamente</string>
     <string name="error_load_recommendations">Ocorreu um erro ao buscar as recomendações, por favor tente novamente</string>
     <string name="error_load_resources">Ocorreu um erro ao buscar os recursos audiovisuais, por favor tente novamente</string>
+    <string name="error_save_checkpoint">Ocorreu um erro ao registrar sua rotina, por favor tente novamente</string>
 
     <!-- Validation -->
     <string name="validation_required">%s é obrigatório(a)</string>

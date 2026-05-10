@@ -1,5 +1,6 @@
 package com.example.criapp.data.remote
 
+import com.example.criapp.models.requests.CreateCheckpointRequest
 import com.example.criapp.models.requests.LoginUserRequest
 import com.example.criapp.models.responses.AudiovisualResourceResponse
 import com.example.criapp.models.responses.AwardResponse
@@ -114,4 +115,11 @@ interface CriAppApiService {
     // ── Recommendations ──────────────────────────────────────────────
     @GET("user/recommendations")
     suspend fun getRecommendations(): ApiResponse<List<RecommendationResponse>>
+
+    @POST("child/{childId}/book/recommendations/{recommendationId}/checkpoint")
+    suspend fun registerCheckpoint(
+        @Path("childId") childId: String,
+        @Path("recommendationId") recommendationId: Int,
+        @Body request: CreateCheckpointRequest
+    ): ApiResponse<List<Any>>
 }

@@ -14,6 +14,7 @@ import com.example.criapp.adapters.RecommendationAdapter
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.RecommendationRepositoryImpl
+import com.example.criapp.models.responses.RecommendationResponse
 import com.example.criapp.presentation.common.UiState
 import com.example.criapp.presentation.recommendation.RecommendationViewModel
 import com.example.criapp.presentation.recommendation.RecommendationViewModelFactory
@@ -28,6 +29,9 @@ class RecommendationActivity : AppCompatActivity() {
     private lateinit var txtNoRecommendations: TextView
     private lateinit var tabDots: LinearLayout
 
+    private var currentList: MutableList<RecommendationResponse> = mutableListOf()
+    private lateinit var childId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recommendation)
@@ -36,10 +40,10 @@ class RecommendationActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.viewPager)
         txtNoRecommendations = findViewById(R.id.txtNoRecommendations)
         tabDots = findViewById(R.id.tabDots)
-        viewPager.adapter = RecommendationAdapter(emptyList())
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
-        val childId = intent.getStringExtra("childId") ?: return
+        childId = intent.getStringExtra("childId") ?: return
+
         viewModel.state.observe(this) { state ->
             when (state) {
                 is UiState.Loading -> aLoadingDialog?.show()
@@ -50,12 +54,8 @@ class RecommendationActivity : AppCompatActivity() {
                         tabDots.visibility = View.GONE
                         txtNoRecommendations.visibility = View.VISIBLE
                     } else {
-                        val adapter = RecommendationAdapter(state.data)
-                        viewPager.adapter = adapter
-                        setupDots(state.data.size)
-                        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                            override fun onPageSelected(position: Int) = updateDots(position)
-                        })
+                        currentList = state.data.toMutableList()
+                        renderAdapter(currentList)
                     }
                 }
                 is UiState.Error -> {
@@ -66,7 +66,40 @@ class RecommendationActivity : AppCompatActivity() {
             }
         }
 
+        viewModel.checkpointState.observe(this) { state ->
+            when (state) {
+                is UiState.Loading -> {
+                    setAdapterButtonsEnabled(false)
+                }
+                is UiState.Success -> {
+                    setAdapterButtonsEnabled(true)
+                    Toast.makeText(this, getString(R.string.checkpoint_saved), Toast.LENGTH_SHORT).show()
+                    viewModel.loadRecommendations(childId)
+                }
+                is UiState.Error -> {
+                    setAdapterButtonsEnabled(true)
+                    Toast.makeText(this, getString(R.string.error_save_checkpoint), Toast.LENGTH_SHORT).show()
+                }
+                else -> Unit
+            }
+        }
+
         viewModel.loadRecommendations(childId)
+    }
+
+    private fun renderAdapter(list: List<RecommendationResponse>) {
+        val adapter = RecommendationAdapter(list) { recommendationId, completed ->
+            viewModel.registerCheckpoint(childId, recommendationId, completed)
+        }
+        viewPager.adapter = adapter
+        setupDots(list.size)
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) = updateDots(position)
+        })
+    }
+
+    private fun setAdapterButtonsEnabled(enabled: Boolean) {
+        (viewPager.adapter as? RecommendationAdapter)?.setButtonsEnabled(enabled)
     }
 
     private fun setupDots(count: Int) {
