@@ -32,16 +32,10 @@ class AwardAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
-        val ctx = holder.itemView.context
-        val index = (item.type - 1).coerceIn(0, 4)
 
-        val names = ctx.resources.getStringArray(R.array.award_names)
-        val categories = ctx.resources.getStringArray(R.array.award_categories)
-        val descriptions = ctx.resources.getStringArray(R.array.award_descriptions)
-
-        holder.title.text = names[index]
-        holder.category.text = categories[index]
-        holder.description.text = descriptions[index]
+        holder.title.text = item.text
+        holder.category.visibility = android.view.View.GONE
+        holder.description.text = item.description ?: ""
 
         val b64 = item.image
         if (!b64.isNullOrBlank()) {

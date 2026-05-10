@@ -162,28 +162,4 @@
         <item>Vamos começar!</item>
     </string-array>
 
-    <string-array name="award_names">
-        <item>Primeiros Passos</item>
-        <item>Família Comprometida</item>
-        <item>Superação</item>
-        <item>Ambiente Positivo</item>
-        <item>Pequeno Grande Progresso</item>
-    </string-array>
-
-    <string-array name="award_categories">
-        <item>Início da jornada</item>
-        <item>Compromisso familiar</item>
-        <item>Resiliência</item>
-        <item>Clima familiar</item>
-        <item>Progresso contínuo</item>
-    </string-array>
-
-    <string-array name="award_descriptions">
-        <item>Você completou seu primeiro questionário. O início de uma grande jornada com seus filhos!</item>
-        <item>Seu envolvimento como família demonstra que a criação consciente faz a diferença. Vocês são uma equipe incrível!</item>
-        <item>Você demonstrou que com esforço e perseverança todos os desafios podem ser superados. Uma grande conquista na sua jornada de criação!</item>
-        <item>Você contribui ativamente para criar um ambiente seguro e afetuoso para o desenvolvimento dos seus filhos.</item>
-        <item>Cada pequeno avanço conta. Sua perseverança e dedicação são o motor do crescimento da sua família.</item>
-    </string-array>
-
 </resources>

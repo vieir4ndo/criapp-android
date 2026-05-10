@@ -161,28 +161,4 @@
         <item>¡Empecemos!</item>
     </string-array>
 
-    <string-array name="award_names">
-        <item>Primeros Pasos</item>
-        <item>Familia Comprometida</item>
-        <item>Superación</item>
-        <item>Entorno Positivo</item>
-        <item>Pequeño Gran Progreso</item>
-    </string-array>
-
-    <string-array name="award_categories">
-        <item>Inicio del camino</item>
-        <item>Compromiso familiar</item>
-        <item>Resiliencia</item>
-        <item>Clima familiar</item>
-        <item>Progreso continuo</item>
-    </string-array>
-
-    <string-array name="award_descriptions">
-        <item>Completaste tu primer cuestionario. ¡El inicio de un gran camino junto a tus hijos!</item>
-        <item>Tu implicación como familia demuestra que la crianza consciente marca la diferencia. ¡Sois un equipo increíble!</item>
-        <item>Has demostrado que con esfuerzo y constancia se superan todos los retos. ¡Un gran logro en tu camino de crianza!</item>
-        <item>Contribuyes activamente a crear un ambiente seguro y afectuoso para el desarrollo de tus hijos.</item>
-        <item>Cada pequeño avance cuenta. Tu perseverancia y dedicación son el motor del crecimiento de tu familia.</item>
-    </string-array>
-
 </resources>

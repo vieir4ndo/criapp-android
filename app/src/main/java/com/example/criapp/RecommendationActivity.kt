@@ -31,6 +31,7 @@ class RecommendationActivity : AppCompatActivity() {
 
     private var currentList: MutableList<RecommendationResponse> = mutableListOf()
     private lateinit var childId: String
+    private var pendingPage = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +57,9 @@ class RecommendationActivity : AppCompatActivity() {
                     } else {
                         currentList = state.data.toMutableList()
                         renderAdapter(currentList)
+                        val targetPage = pendingPage.coerceAtMost(currentList.size - 1)
+                        viewPager.setCurrentItem(targetPage, false)
+                        pendingPage = 0
                     }
                 }
                 is UiState.Error -> {
@@ -74,6 +78,7 @@ class RecommendationActivity : AppCompatActivity() {
                 is UiState.Success -> {
                     setAdapterButtonsEnabled(true)
                     Toast.makeText(this, getString(R.string.checkpoint_saved), Toast.LENGTH_SHORT).show()
+                    pendingPage = viewPager.currentItem
                     viewModel.loadRecommendations(childId)
                 }
                 is UiState.Error -> {
