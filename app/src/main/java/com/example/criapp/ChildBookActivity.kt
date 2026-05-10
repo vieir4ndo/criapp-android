@@ -40,8 +40,8 @@ class ChildBookActivity : AppCompatActivity() {
             startActivity(Intent(this, AwardActivity::class.java).putExtra("childId", childId))
         }
 
-        findViewById<LinearLayout>(R.id.btnAdvices).setOnClickListener {
-            startActivity(Intent(this, AdviceActivity::class.java).putExtra("childId", childId))
+        findViewById<LinearLayout>(R.id.btnRecommendations).setOnClickListener {
+            startActivity(Intent(this, RecommendationActivity::class.java).putExtra("childId", childId))
         }
     }
 }

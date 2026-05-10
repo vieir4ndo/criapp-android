@@ -54,10 +54,9 @@
     <string name="children">Crianças</string>
     <string name="forums">Fóruns</string>
     <string name="awards">Prêmios</string>
-    <string name="advices">Conselhos</string>
+    <string name="recommendations">Recomendações</string>
     <string name="faq">FAQ</string>
     <string name="notifications">Notificações</string>
-    <string name="recommendations">Recomendações</string>
     <string name="coming_soon">Em breve</string>
     <string name="audiovisual_resources">Recursos Audiovisuais</string>
     <string name="child_book">Livro de criação</string>
@@ -82,7 +81,7 @@
 
     <!-- Empty states -->
     <string name="no_awards">Você ainda não tem prêmios. Continue completando questionários para ganhá-los!</string>
-    <string name="no_advices">Você ainda não tem conselhos. Continue completando questionários para obtê-las!</string>
+    <string name="no_recommendations">Você ainda não tem recomendações. Continue completando questionários para obtê-las!</string>
     <string name="empty_list">Ainda não há nada aqui</string>
 
     <!-- Dialog -->
@@ -108,7 +107,7 @@
     <string name="error_load_questions">Ocorreu um erro ao buscar as perguntas, por favor tente novamente</string>
     <string name="error_load_comments">Ocorreu um erro ao buscar os comentários, por favor tente novamente</string>
     <string name="error_load_awards">Ocorreu um erro ao buscar os prêmios, por favor tente novamente</string>
-    <string name="error_load_advices">Ocorreu um erro ao buscar os conselhos, por favor tente novamente</string>
+    <string name="error_load_recommendations">Ocorreu um erro ao buscar as recomendações, por favor tente novamente</string>
     <string name="error_load_resources">Ocorreu um erro ao buscar os recursos audiovisuais, por favor tente novamente</string>
 
     <!-- Validation -->
