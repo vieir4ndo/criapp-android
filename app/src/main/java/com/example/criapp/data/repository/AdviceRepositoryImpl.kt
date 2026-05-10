@@ -8,11 +8,11 @@ import retrofit2.HttpException
 
 class AdviceRepositoryImpl(private val apiService: CriAppApiService) : IAdviceRepository {
 
-    override suspend fun getAdvices(): Result<List<AdviceResponse>> {
+    override suspend fun getAdvices(childId: String): Result<List<AdviceResponse>> {
         return try {
-            val response = apiService.getAdvices()
+            val response = apiService.getChildBook(childId)
             if (response.success) {
-                Result.success(response.data ?: emptyList())
+                Result.success(response.data?.firstOrNull()?.advices ?: emptyList())
             } else {
                 Result.failure(
                     Exception(response.Messages?.joinToString("\n") ?: "Error desconocido")

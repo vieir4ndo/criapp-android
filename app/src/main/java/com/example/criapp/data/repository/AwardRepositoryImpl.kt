@@ -8,11 +8,11 @@ import retrofit2.HttpException
 
 class AwardRepositoryImpl(private val apiService: CriAppApiService) : IAwardRepository {
 
-    override suspend fun getAwards(): Result<List<AwardResponse>> {
+    override suspend fun getAwards(childId: String): Result<List<AwardResponse>> {
         return try {
-            val response = apiService.getAwards()
+            val response = apiService.getChildBook(childId)
             if (response.success) {
-                Result.success(response.data ?: emptyList())
+                Result.success(response.data?.firstOrNull()?.awards ?: emptyList())
             } else {
                 Result.failure(
                     Exception(

@@ -27,7 +27,7 @@
             android:id="@+id/profile_picture"
             android:layout_width="90sp"
             android:layout_height="80sp"
-            android:src="@drawable/notifications_circle" />
+            android:src="@drawable/ic_default_profile" />
 
         <Space
             android:layout_width="0dp"
@@ -99,21 +99,21 @@
                 android:orientation="vertical"
                 android:gravity="center"
                 android:padding="8dp"
-                android:onClick="onButtonChildBookClick">
+                android:onClick="onButtonNotificationsClick">
 
                 <ImageView
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/book"
+                    android:src="@drawable/notifications"
                     android:scaleType="fitCenter"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/child_book"
+                    android:text="@string/notifications"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="12sp"/>
@@ -264,21 +264,21 @@
                 android:orientation="vertical"
                 android:gravity="center"
                 android:padding="8dp"
-                android:onClick="onButtonAwardClick">
+                android:onClick="onButtonChildBookClick">
 
                 <ImageView
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/award"
+                    android:src="@drawable/book"
                     android:scaleType="fitCenter"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/awards"
+                    android:text="@string/child_book"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="12sp"/>
