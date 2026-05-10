@@ -59,7 +59,7 @@
     <string name="notifications">Notificações</string>
     <string name="coming_soon">Em breve</string>
     <string name="audiovisual_resources">Recursos Audiovisuais</string>
-    <string name="child_book">Livro de criação</string>
+    <string name="child_book">Livro da criança</string>
 
     <!-- Children -->
     <string name="register_child">Cadastro de criança</string>
