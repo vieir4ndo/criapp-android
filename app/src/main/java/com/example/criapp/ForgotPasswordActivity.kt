@@ -42,6 +42,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         mBinding.buttonForgotPassword.setOnClickListener {
             if (model.validate(mBinding.textViewErrors, this)) {
+                mBinding.textViewErrors.visibility = View.GONE
                 viewModel.forgotPassword(model.toRequest())
             } else {
                 mBinding.textViewErrors.visibility = View.VISIBLE

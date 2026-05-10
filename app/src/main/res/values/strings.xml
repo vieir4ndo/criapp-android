@@ -79,8 +79,6 @@
     <string name="all_questions_answered_today">Ya contestaste todas las preguntas de %s hoy</string>
 
     <!-- Empty states -->
-    <string name="no_awards">Aún no tienes premios. ¡Sigue completando cuestionarios para ganarlos!</string>
-    <string name="no_recommendations">Aún no tienes recomendaciones. ¡Sigue completando cuestionarios para obtenerlas!</string>
     <string name="routine_question">¿Has realizado esta rutina hoy?</string>
     <string name="routine_yes">Sí, lo hice</string>
     <string name="routine_no">Todavía no</string>
@@ -163,5 +161,12 @@
 
     <string name="notification_channel_name">CRIApp</string>
     <string name="notification_channel_description">Notificaciones de actividad y seguimiento</string>
+    <string name="error_load_notifications">Hubo un error al cargar las notificaciones, por favor inténtalo nuevamente</string>
+    <string name="notification_marked_as_read">Notificación marcada como leída</string>
+    <string name="notification_type_motivational">Motivación</string>
+    <string name="notification_type_points_risk">Riesgo de puntos</string>
+    <string name="notification_type_reevaluation">Re-evaluación</string>
+    <string name="notification_type_new_award">Nuevo premio</string>
+    <string name="notification_type_new_recommendations">Nuevas recomendaciones</string>
 
 </resources>

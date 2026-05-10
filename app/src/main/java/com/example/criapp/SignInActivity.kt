@@ -60,6 +60,7 @@ class SignInActivity : AppCompatActivity() {
 
         mBinding.buttonLoginUser.setOnClickListener {
             if (loginUserModel.validate(mBinding.textViewErrors, this)) {
+                mBinding.textViewErrors.visibility = View.GONE
                 val username = mBinding.editTextUsername.text.toString()
                 val password = mBinding.editTextPassword.text.toString()
                 viewModel.login(username, password)

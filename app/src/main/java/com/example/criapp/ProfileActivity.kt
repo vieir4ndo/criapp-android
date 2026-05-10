@@ -69,6 +69,7 @@ class ProfileActivity : AppCompatActivity() {
 
                     mBinding.buttonUpdateUser.setOnClickListener {
                         if (updateUserModel.validate(mBinding.textViewErrors, this)) {
+                            mBinding.textViewErrors.visibility = View.GONE
                             viewModel.updateProfile(updateUserModel.toRequest())
                         } else {
                             mBinding.textViewErrors.visibility = View.VISIBLE

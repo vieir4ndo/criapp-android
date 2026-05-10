@@ -32,5 +32,15 @@ class DateHelper {
             val date = inputFormat.parse(inputDate)
             return outputFormat.format(date!!)
         }
+
+        fun formatForDisplay(isoDate: String): String {
+            return try {
+                val instant = Instant.parse(isoDate)
+                val localDate = instant.atOffset(ZoneOffset.UTC).toLocalDateTime()
+                "${formatNumber(localDate.dayOfMonth)}/${formatNumber(localDate.monthValue)}/${localDate.year}"
+            } catch (e: Exception) {
+                isoDate
+            }
+        }
     }
 }

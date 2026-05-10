@@ -80,8 +80,7 @@
     <string name="all_questions_answered_today">You have already answered all questions for %s today</string>
 
     <!-- Empty states -->
-    <string name="no_awards">You don\'t have any awards yet. Keep completing questionnaires to earn them!</string>
-    <string name="no_recommendations">You don\'t have any recommendations yet. Keep completing questionnaires to get them!</string>    <string name="routine_question">Have you done this routine today?</string>
+    <string name="routine_question">Have you done this routine today?</string>
     <string name="routine_yes">Yes, I did it</string>
     <string name="routine_no">Not yet</string>
     <string name="checkpoint_saved">Routine registered!</string>    <string name="empty_list">Nothing here yet</string>
@@ -159,5 +158,15 @@
         <item>Most importantly, this experience will help improve the physical, cognitive, social and emotional development of your children.</item>
         <item>Let\'s get started!</item>
     </string-array>
+
+    <string name="notification_channel_name">CRIApp</string>
+    <string name="notification_channel_description">Activity and tracking notifications</string>
+    <string name="error_load_notifications">There was an error loading your notifications, please try again</string>
+    <string name="notification_marked_as_read">Notification marked as read</string>
+    <string name="notification_type_motivational">Motivation</string>
+    <string name="notification_type_points_risk">Points at risk</string>
+    <string name="notification_type_reevaluation">Re-evaluation</string>
+    <string name="notification_type_new_award">New award</string>
+    <string name="notification_type_new_recommendations">New recommendations</string>
 
 </resources>

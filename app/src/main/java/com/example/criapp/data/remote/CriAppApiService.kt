@@ -129,6 +129,9 @@ interface CriAppApiService {
     @GET("notifications/pending")
     suspend fun getPendingNotifications(): ApiResponse<List<NotificationResponse>>
 
+    @GET("notifications/history")
+    suspend fun getNotificationHistory(): ApiResponse<List<NotificationResponse>>
+
     @PATCH("notifications/{id}/delivered")
     suspend fun markNotificationDelivered(@Path("id") id: String): ApiResponse<List<Any>>
 

@@ -48,6 +48,7 @@ class UpdateForumActivity : AppCompatActivity() {
 
         mBinding.buttonUpdate.setOnClickListener {
             if (model.validate(mBinding.textViewErrors, this)) {
+                mBinding.textViewErrors.visibility = View.GONE
                 viewModel.updateForum(forum.id, model.toRequest())
             } else {
                 mBinding.textViewErrors.visibility = View.VISIBLE
