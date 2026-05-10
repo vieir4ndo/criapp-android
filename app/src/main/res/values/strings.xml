@@ -53,7 +53,7 @@
     <string name="children">Niños(as)</string>
     <string name="forums">Foros</string>
     <string name="awards">Premios</string>
-    <string name="recommendations">Recomendaciones</string>
+    <string name="advices">Consejos</string>
     <string name="faq">FAQ</string>
     <string name="notifications">Notificaciones</string>
     <string name="audiovisual_resources">Recursos Audiovisuales</string>
@@ -79,7 +79,7 @@
 
     <!-- Empty states -->
     <string name="no_awards">Aún no tienes premios. ¡Sigue completando cuestionarios para ganarlos!</string>
-    <string name="no_recommendations">Aún no tienes recomendaciones. ¡Sigue completando cuestionarios para obtenerlas!</string>
+    <string name="no_advices">Aún no tienes consejos. ¡Sigue completando cuestionarios para obtenerlas!</string>
     <string name="empty_list">Aún no hay nada por aquí</string>
 
     <!-- Dialog -->
@@ -105,7 +105,7 @@
     <string name="error_load_questions">Hubo un error al buscar las preguntas, por favor inténtalo nuevamente</string>
     <string name="error_load_comments">Hubo un error al buscar los comentarios, por favor inténtalo nuevamente</string>
     <string name="error_load_awards">Hubo un error al buscar los premios, por favor inténtalo nuevamente</string>
-    <string name="error_load_recommendations">Hubo un error al buscar las recomendaciones, por favor inténtalo nuevamente</string>
+    <string name="error_load_advices">Hubo un error al buscar los consejos, por favor inténtalo nuevamente</string>
     <string name="error_load_resources">Hubo un error al buscar los recursos audiovisuales, por favor inténtalo nuevamente</string>
 
     <!-- Validation -->

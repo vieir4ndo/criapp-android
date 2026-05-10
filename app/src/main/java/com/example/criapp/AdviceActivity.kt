@@ -10,33 +10,33 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
-import com.example.criapp.adapters.RecommendationAdapter
+import com.example.criapp.adapters.AdviceAdapter
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
-import com.example.criapp.data.repository.RecommendationRepositoryImpl
+import com.example.criapp.data.repository.AdviceRepositoryImpl
 import com.example.criapp.presentation.common.UiState
-import com.example.criapp.presentation.recommendation.RecommendationViewModel
-import com.example.criapp.presentation.recommendation.RecommendationViewModelFactory
+import com.example.criapp.presentation.advice.AdviceViewModel
+import com.example.criapp.presentation.advice.AdviceViewModelFactory
 
-class RecommendationActivity : AppCompatActivity() {
+class AdviceActivity : AppCompatActivity() {
 
-    private val viewModel: RecommendationViewModel by viewModels {
-        RecommendationViewModelFactory(RecommendationRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
+    private val viewModel: AdviceViewModel by viewModels {
+        AdviceViewModelFactory(AdviceRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
     }
     private var aLoadingDialog: ALoadingDialog? = null
     private lateinit var viewPager: ViewPager2
-    private lateinit var txtNoRecommendations: TextView
+    private lateinit var txtNoAdvices: TextView
     private lateinit var tabDots: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recommendation)
+        setContentView(R.layout.activity_advice)
 
         aLoadingDialog = ALoadingDialog(this)
         viewPager = findViewById(R.id.viewPager)
-        txtNoRecommendations = findViewById(R.id.txtNoRecommendations)
+        txtNoAdvices = findViewById(R.id.txtNoAdvices)
         tabDots = findViewById(R.id.tabDots)
-        viewPager.adapter = RecommendationAdapter(emptyList())
+        viewPager.adapter = AdviceAdapter(emptyList())
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         viewModel.state.observe(this) { state ->
@@ -47,9 +47,9 @@ class RecommendationActivity : AppCompatActivity() {
                     if (state.data.isEmpty()) {
                         viewPager.visibility = View.GONE
                         tabDots.visibility = View.GONE
-                        txtNoRecommendations.visibility = View.VISIBLE
+                        txtNoAdvices.visibility = View.VISIBLE
                     } else {
-                        val adapter = RecommendationAdapter(state.data)
+                        val adapter = AdviceAdapter(state.data)
                         viewPager.adapter = adapter
                         setupDots(state.data.size)
                         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -59,13 +59,13 @@ class RecommendationActivity : AppCompatActivity() {
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, getString(R.string.error_load_recommendations), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.error_load_advices), Toast.LENGTH_SHORT).show()
                 }
                 else -> Unit
             }
         }
 
-        viewModel.loadRecommendations()
+        viewModel.loadAdvices()
     }
 
     private fun setupDots(count: Int) {
@@ -75,7 +75,7 @@ class RecommendationActivity : AppCompatActivity() {
         repeat(count) { i ->
             val dot = View(this).apply {
                 background = ContextCompat.getDrawable(
-                    this@RecommendationActivity,
+                    this@AdviceActivity,
                     if (i == 0) R.drawable.dot_active else R.drawable.dot_inactive
                 )
             }

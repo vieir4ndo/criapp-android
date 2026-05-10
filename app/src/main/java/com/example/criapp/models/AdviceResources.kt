@@ -2,7 +2,7 @@ package com.example.criapp.models
 
 import com.example.criapp.R
 
-object RecommendationResources {
+object AdviceResources {
     val drawables = listOf(
         R.drawable.rec_01, R.drawable.rec_02, R.drawable.rec_03, R.drawable.rec_04, R.drawable.rec_05,
         R.drawable.rec_06, R.drawable.rec_07, R.drawable.rec_08, R.drawable.rec_09, R.drawable.rec_10,
