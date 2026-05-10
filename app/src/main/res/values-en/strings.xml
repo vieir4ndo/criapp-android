@@ -160,28 +160,4 @@
         <item>Let\'s get started!</item>
     </string-array>
 
-    <string-array name="award_names">
-        <item>First Steps</item>
-        <item>Committed Family</item>
-        <item>Overcoming</item>
-        <item>Positive Environment</item>
-        <item>Little Big Progress</item>
-    </string-array>
-
-    <string-array name="award_categories">
-        <item>Start of the journey</item>
-        <item>Family commitment</item>
-        <item>Resilience</item>
-        <item>Family climate</item>
-        <item>Continuous progress</item>
-    </string-array>
-
-    <string-array name="award_descriptions">
-        <item>You completed your first questionnaire. The beginning of a great journey with your children!</item>
-        <item>Your involvement as a family shows that conscious parenting makes a difference. You are an incredible team!</item>
-        <item>You have shown that with effort and perseverance all challenges can be overcome. A great achievement on your parenting journey!</item>
-        <item>You actively contribute to creating a safe and loving environment for the development of your children.</item>
-        <item>Every small step counts. Your perseverance and dedication are the driving force behind your family\'s growth.</item>
-    </string-array>
-
 </resources>
