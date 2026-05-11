@@ -61,6 +61,7 @@
     <string name="coming_soon">Próximamente</string>
     <string name="audiovisual_resources">Recursos Audiovisuales</string>
     <string name="child_book">Libro de crianza</string>
+    <string name="wellbeing_score_label">Bienestar del niño</string>
 
     <!-- Children -->
     <string name="register_child">Registro de niño(a)</string>

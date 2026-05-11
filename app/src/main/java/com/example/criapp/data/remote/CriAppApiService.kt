@@ -4,7 +4,7 @@ import com.example.criapp.models.requests.CreateCheckpointRequest
 import com.example.criapp.models.requests.LoginUserRequest
 import com.example.criapp.models.responses.AudiovisualResourceResponse
 import com.example.criapp.models.responses.AwardResponse
-import com.example.criapp.models.responses.ChildBookResponse
+import com.example.criapp.models.responses.ChildBookSummaryResponse
 import com.example.criapp.models.responses.ChildResponse
 import com.example.criapp.models.responses.RecommendationResponse
 import com.example.criapp.models.responses.NotificationResponse
@@ -112,16 +112,16 @@ interface CriAppApiService {
     suspend fun deleteComment(@Path("id") id: String): ApiResponse<List<Any>>
 
     // ── Child Book ──────────────────────────────────────────────────────
-    @GET("child/{childId}/book")
-    suspend fun getChildBook(@Path("childId") childId: String): ApiResponse<List<ChildBookResponse>>
+    @GET("child/{childId}/book/score")
+    suspend fun getChildBookScore(@Path("childId") childId: String): ApiResponse<List<ChildBookSummaryResponse>>
 
     // ── Awards ──────────────────────────────────────────────────────
-    @GET("user/awards")
-    suspend fun getAwards(): ApiResponse<List<AwardResponse>>
+    @GET("child/{childId}/book/awards")
+    suspend fun getAwards(@Path("childId") childId: String): ApiResponse<List<AwardResponse>>
 
     // ── Recommendations ──────────────────────────────────────────────
-    @GET("user/recommendations")
-    suspend fun getRecommendations(): ApiResponse<List<RecommendationResponse>>
+    @GET("child/{childId}/book/recommendations")
+    suspend fun getRecommendations(@Path("childId") childId: String): ApiResponse<List<RecommendationResponse>>
 
     @POST("child/{childId}/book/recommendations/{recommendationId}/checkpoint")
     suspend fun registerCheckpoint(

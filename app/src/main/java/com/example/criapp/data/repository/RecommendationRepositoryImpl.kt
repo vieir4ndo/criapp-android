@@ -11,9 +11,9 @@ class RecommendationRepositoryImpl(private val apiService: CriAppApiService) : I
 
     override suspend fun getRecommendations(childId: String): Result<List<RecommendationResponse>> {
         return try {
-            val response = apiService.getChildBook(childId)
+            val response = apiService.getRecommendations(childId)
             if (response.success) {
-                Result.success(response.data?.firstOrNull()?.recommendations ?: emptyList())
+                Result.success(response.data ?: emptyList())
             } else {
                 Result.failure(
                     Exception(response.Messages?.joinToString("\n") ?: "Error desconocido")

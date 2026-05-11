@@ -62,6 +62,7 @@
     <string name="coming_soon">Coming soon</string>
     <string name="audiovisual_resources">Audiovisual Resources</string>
     <string name="child_book">Parenting book</string>
+    <string name="wellbeing_score_label">Child wellbeing</string>
 
     <!-- Children -->
     <string name="register_child">Register child</string>

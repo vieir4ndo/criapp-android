@@ -10,9 +10,9 @@ class AwardRepositoryImpl(private val apiService: CriAppApiService) : IAwardRepo
 
     override suspend fun getAwards(childId: String): Result<List<AwardResponse>> {
         return try {
-            val response = apiService.getChildBook(childId)
+            val response = apiService.getAwards(childId)
             if (response.success) {
-                Result.success(response.data?.firstOrNull()?.awards ?: emptyList())
+                Result.success(response.data ?: emptyList())
             } else {
                 Result.failure(
                     Exception(
