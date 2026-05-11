@@ -13,11 +13,12 @@
         android:id="@+id/header_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="12dp"
         android:orientation="horizontal"
-        android:paddingStart="65dp"
-        android:paddingEnd="65dp"
+        android:gravity="center"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         app:layout_constraintBottom_toTopOf="@id/main_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,9 +31,8 @@
             android:src="@drawable/ic_default_profile" />
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10sp"
             android:orientation="vertical"
             android:gravity="center_vertical">
@@ -46,7 +46,10 @@
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:maxLines="1"
-                android:ellipsize="end" />
+                android:ellipsize="none"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="14sp"
+                app:autoSizeMaxTextSize="22sp" />
 
             <TextView
                 android:id="@+id/textView37"
@@ -56,7 +59,10 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:maxLines="1"
-                android:ellipsize="end" />
+                android:ellipsize="none"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="10sp"
+                app:autoSizeMaxTextSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -64,8 +70,8 @@
         android:id="@+id/main_menu"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/card_purple"
         android:orientation="vertical"
@@ -94,15 +100,15 @@
                 android:layout_marginEnd="6dp"
                 android:background="@drawable/card_holo_purple"
                 android:orientation="vertical"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:padding="8dp"
                 android:onClick="onButtonNotificationsClick">
 
                 <ImageView
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:src="@drawable/notifications"
                     android:scaleType="fitCenter"/>
 
@@ -113,7 +119,9 @@
                     android:text="@string/notifications"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:maxLines="2"
+                    android:textAlignment="center"/>
             </LinearLayout>
 
             <LinearLayout
@@ -123,15 +131,15 @@
                 android:layout_marginStart="6dp"
                 android:background="@drawable/card_holo_purple"
                 android:orientation="vertical"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:padding="8dp"
                 android:onClick="onButtonProfileClick">
 
                 <ImageView
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:src="@drawable/profile"
                     android:scaleType="fitCenter"/>
 
@@ -142,7 +150,9 @@
                     android:text="@string/profile"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:maxLines="2"
+                    android:textAlignment="center"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -162,15 +172,15 @@
                 android:layout_marginEnd="6dp"
                 android:background="@drawable/card_holo_purple"
                 android:orientation="vertical"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:padding="8dp"
                 android:onClick="onButtonQuestionsClick">
 
                 <ImageView
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:src="@drawable/questions"
                     android:scaleType="fitCenter"/>
 
@@ -181,7 +191,9 @@
                     android:text="@string/questionnaires"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:maxLines="2"
+                    android:textAlignment="center"/>
             </LinearLayout>
 
             <LinearLayout
@@ -191,15 +203,15 @@
                 android:layout_marginStart="6dp"
                 android:background="@drawable/card_holo_purple"
                 android:orientation="vertical"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:padding="8dp"
                 android:onClick="onButtonChildClick">
 
                 <ImageView
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:src="@drawable/child"
                     android:scaleType="fitCenter"/>
 
@@ -210,7 +222,9 @@
                     android:text="@string/children"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:maxLines="2"
+                    android:textAlignment="center"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -230,15 +244,15 @@
                 android:layout_marginEnd="6dp"
                 android:background="@drawable/card_holo_purple"
                 android:orientation="vertical"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:padding="8dp"
                 android:onClick="onButtonForumClick">
 
                 <ImageView
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:src="@drawable/forum"
                     android:scaleType="fitCenter"/>
 
@@ -249,7 +263,9 @@
                     android:text="@string/forums"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:maxLines="2"
+                    android:textAlignment="center"/>
             </LinearLayout>
 
             <LinearLayout
@@ -259,15 +275,15 @@
                 android:layout_marginStart="6dp"
                 android:background="@drawable/card_holo_purple"
                 android:orientation="vertical"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:padding="8dp"
                 android:onClick="onButtonChildBookClick">
 
                 <ImageView
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:src="@drawable/book"
                     android:scaleType="fitCenter"/>
 
@@ -278,7 +294,9 @@
                     android:text="@string/child_book"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:maxLines="2"
+                    android:textAlignment="center"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -297,15 +315,15 @@
                 android:layout_marginEnd="6dp"
                 android:background="@drawable/card_holo_purple"
                 android:orientation="vertical"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:padding="8dp"
                 android:onClick="onButtonAudioVisualResourcesClick">
 
                 <ImageView
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:src="@drawable/audiovisual_resource"
                     android:scaleType="fitCenter"/>
 
@@ -317,7 +335,8 @@
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:maxLines="2"/>
             </LinearLayout>
 
             <LinearLayout
@@ -327,15 +346,15 @@
                 android:layout_marginStart="6dp"
                 android:background="@drawable/card_holo_purple"
                 android:orientation="vertical"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:padding="8dp"
                 android:onClick="onButtonFaqClick">
 
                 <ImageView
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:src="@drawable/faq"
                     android:scaleType="fitCenter"/>
 
@@ -346,7 +365,9 @@
                     android:text="@string/faq"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:maxLines="2"
+                    android:textAlignment="center"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

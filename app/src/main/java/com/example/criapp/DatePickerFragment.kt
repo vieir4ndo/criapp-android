@@ -8,6 +8,7 @@ import java.util.TimeZone
 class DatePickerFragment(private val listener: (day: Int, month: Int, year: Int) -> Unit) {
 
     fun show(fragmentManager: FragmentManager, tag: String) {
+        if (fragmentManager.findFragmentByTag(tag) != null) return
         val picker = MaterialDatePicker.Builder.datePicker()
             .setTitleText(R.string.birth_date)
             .setTheme(R.style.CRIApp_MaterialDatePicker)

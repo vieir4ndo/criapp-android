@@ -44,7 +44,7 @@ class ForumActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        findViewById<TextView>(R.id.forum_name).text = forum.name
+        findViewById<TextView>(R.id.forum_name).text = "Fórum: ${forum.name}"
         findViewById<TextView>(R.id.forum_description).text = forum.description
         findViewById<TextView>(R.id.forum_owner).text = getString(R.string.forum_created_by, forum.prcName)
 

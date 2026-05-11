@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/award"
         app:layout_constraintBottom_toTopOf="@id/title_award"
         app:layout_constraintEnd_toEndOf="parent"

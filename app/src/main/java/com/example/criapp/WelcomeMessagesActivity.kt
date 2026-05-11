@@ -13,6 +13,7 @@ class WelcomeMessagesActivity : AppCompatActivity() {
 
     private var welcomeMessages: Array<String>? = null
     private var currentMessage = -1
+    private var isAnimating = false
     private var textView: TextView? = null
     private var textStep: TextView? = null
     private var progressIndicator: LinearProgressIndicator? = null
@@ -33,6 +34,7 @@ class WelcomeMessagesActivity : AppCompatActivity() {
     }
 
     private fun showNextMessage(animate: Boolean = true) {
+        if (animate && isAnimating) return
         currentMessage++
         val total = welcomeMessages!!.size
         val newText = welcomeMessages!![currentMessage]
@@ -44,9 +46,11 @@ class WelcomeMessagesActivity : AppCompatActivity() {
         if (!animate) {
             textView!!.text = newText
             textView!!.alpha = 1f
+            textView!!.translationX = 0f
             return
         }
 
+        isAnimating = true
         textView!!.animate()
             .alpha(0f)
             .translationX(-40f)
@@ -58,6 +62,7 @@ class WelcomeMessagesActivity : AppCompatActivity() {
                     .alpha(1f)
                     .translationX(0f)
                     .setDuration(220)
+                    .withEndAction { isAnimating = false }
                     .start()
             }.start()
     }

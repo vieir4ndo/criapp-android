@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/forum"
         app:layout_constraintBottom_toTopOf="@id/title"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/forums"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -62,7 +62,7 @@
             android:background="@drawable/card_red"
             android:padding="10dp"
             android:text="@string/errors"
-            android:textColor="@color/red"
+            android:textColor="@color/white"
             android:textStyle="bold" />
 
         <TextView

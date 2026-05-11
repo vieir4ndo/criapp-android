@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="16dp"
             android:src="@drawable/profile" />
 
         <TextView
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginBottom="10dp"
-                android:textColor="@color/red"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:padding="10dp"
                 android:text="@string/errors"

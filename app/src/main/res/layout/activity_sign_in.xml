@@ -20,12 +20,6 @@
         android:paddingTop="30dp"
         android:paddingBottom="30dp">
 
-        <ImageView
-            android:layout_width="250dp"
-            android:layout_height="175dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/logo" />
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -33,7 +27,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/card_white_translucent"
+            android:padding="20dp">
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="175dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/logo" />
 
             <TextView
                 android:id="@+id/text_view_errors"
@@ -41,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginBottom="10dp"
-                android:textColor="@color/red"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:padding="10dp"
 
