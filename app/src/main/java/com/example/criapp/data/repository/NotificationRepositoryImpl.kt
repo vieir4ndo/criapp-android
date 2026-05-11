@@ -23,9 +23,9 @@ class NotificationRepositoryImpl(private val apiService: CriAppApiService) : INo
         }
     }
 
-    override suspend fun getNotificationHistory(): Result<List<NotificationResponse>> {
+    override suspend fun getNotificationHistory(page: Int, pageSize: Int): Result<List<NotificationResponse>> {
         return try {
-            val response = apiService.getNotificationHistory()
+            val response = apiService.getNotificationHistory(page, pageSize)
             if (response.success) {
                 Result.success(response.data ?: emptyList())
             } else {

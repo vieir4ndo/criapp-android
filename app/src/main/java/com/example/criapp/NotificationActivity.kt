@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.adapters.NotificationAdapter
+import com.example.criapp.adapters.NotificationAdapter.FooterState
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.NotificationRepositoryImpl
@@ -46,16 +47,34 @@ class NotificationActivity : AppCompatActivity() {
                     } else {
                         recyclerView.visibility = View.VISIBLE
                         txtNoNotifications.visibility = View.GONE
-                        adapter = NotificationAdapter(state.data) { notification ->
-                            if (!notification.read) {
-                                viewModel.markAsRead(notification.id)
-                            }
-                        }
+                        adapter = NotificationAdapter(
+                            list = state.data,
+                            onItemClick = { notification ->
+                                if (!notification.read) viewModel.markAsRead(notification.id)
+                            },
+                            onLoadMoreClick = { viewModel.loadNextPage() }
+                        )
                         recyclerView.adapter = adapter
+                        adapter?.setFooterState(if (viewModel.isLastPage) FooterState.HIDDEN else FooterState.BUTTON)
                     }
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
+                    Toast.makeText(this, getString(R.string.error_load_notifications), Toast.LENGTH_SHORT).show()
+                }
+                else -> Unit
+            }
+        }
+
+        viewModel.loadMoreState.observe(this) { state ->
+            when (state) {
+                is UiState.Loading -> adapter?.setFooterState(FooterState.LOADING)
+                is UiState.Success -> {
+                    adapter?.appendItems(state.data)
+                    adapter?.setFooterState(if (viewModel.isLastPage) FooterState.HIDDEN else FooterState.BUTTON)
+                }
+                is UiState.Error -> {
+                    adapter?.setFooterState(if (viewModel.isLastPage) FooterState.HIDDEN else FooterState.BUTTON)
                     Toast.makeText(this, getString(R.string.error_load_notifications), Toast.LENGTH_SHORT).show()
                 }
                 else -> Unit

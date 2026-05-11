@@ -163,6 +163,7 @@
     <string name="notification_channel_description">Notificaciones de actividad y seguimiento</string>
     <string name="error_load_notifications">Hubo un error al cargar las notificaciones, por favor inténtalo nuevamente</string>
     <string name="notification_marked_as_read">Notificación marcada como leída</string>
+    <string name="load_more">Cargar más</string>
     <string name="notification_type_motivational">Motivación</string>
     <string name="notification_type_points_risk">Riesgo de puntos</string>
     <string name="notification_type_reevaluation">Re-evaluación</string>

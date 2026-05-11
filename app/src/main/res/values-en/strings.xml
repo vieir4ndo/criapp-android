@@ -163,6 +163,7 @@
     <string name="notification_channel_description">Activity and tracking notifications</string>
     <string name="error_load_notifications">There was an error loading your notifications, please try again</string>
     <string name="notification_marked_as_read">Notification marked as read</string>
+    <string name="load_more">Load more</string>
     <string name="notification_type_motivational">Motivation</string>
     <string name="notification_type_points_risk">Points at risk</string>
     <string name="notification_type_reevaluation">Re-evaluation</string>
