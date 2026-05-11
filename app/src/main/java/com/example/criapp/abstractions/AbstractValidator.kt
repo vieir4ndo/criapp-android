@@ -5,6 +5,7 @@ import android.util.Patterns
 import android.view.View
 import android.widget.TextView
 import com.example.criapp.R
+import com.example.criapp.services.FeatureFlagsManager
 
 abstract class AbstractValidator(var errorTextView: TextView, var context: Context) {
 
@@ -69,10 +70,11 @@ abstract class AbstractValidator(var errorTextView: TextView, var context: Conte
             return true;
         }
 
-        //TODO: Verify validation for phone number
-        val pattern = Regex("^\\+?[1-9]\\d{7,14}$")
-        if (pattern.matches(input.text.toString())) {
-            return true
+        if (FeatureFlagsManager.phoneNumberUsernameEnabled) {
+            val pattern = Regex("^\\+?[1-9]\\d{7,14}$")
+            if (pattern.matches(input.text.toString())) {
+                return true
+            }
         }
 
         addError(context.getString(R.string.validation_invalid, context.getString(inputNameRes)));

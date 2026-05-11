@@ -23,6 +23,8 @@
     <!-- Form fields -->
     <string name="name">Nombre</string>
     <string name="username">Nombre de usuario (E-mail o Móvil)</string>
+    <string name="username_with_phone">Nombre de usuario (E-mail o Móvil)</string>
+    <string name="username_email_only">Nombre de usuario (E-mail)</string>
     <string name="birth_date">Fecha de nacimiento</string>
     <string name="sex">Sexo</string>
     <string name="educational_level">Nivel educativo</string>

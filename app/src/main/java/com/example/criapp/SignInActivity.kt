@@ -16,6 +16,7 @@ import com.example.criapp.presentation.auth.SignInViewModel
 import com.example.criapp.presentation.auth.SignInViewModelFactory
 import com.example.criapp.presentation.common.UiState
 import com.example.criapp.services.DialogFactory
+import com.example.criapp.services.FeatureFlagsManager
 
 class SignInActivity : AppCompatActivity() {
 
@@ -47,6 +48,14 @@ class SignInActivity : AppCompatActivity() {
 
         mBinding.labelEditTextUsername.markRequired()
         mBinding.labelEditTextPassword.markRequired()
+
+        viewModel.loadFeatureFlags()
+
+        viewModel.featureFlagsState.observe(this) {
+            val labelRes = if (FeatureFlagsManager.phoneNumberUsernameEnabled) R.string.username_with_phone else R.string.username_email_only
+            mBinding.labelEditTextUsername.text = getString(labelRes)
+            mBinding.labelEditTextUsername.markRequired()
+        }
 
         loginUserModel = LoginUserModel(mBinding.editTextUsername, mBinding.editTextPassword)
 

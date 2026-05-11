@@ -15,6 +15,7 @@ import com.example.criapp.presentation.auth.ForgotPasswordViewModel
 import com.example.criapp.presentation.auth.ForgotPasswordViewModelFactory
 import com.example.criapp.presentation.common.UiState
 import com.example.criapp.services.DialogFactory
+import com.example.criapp.services.FeatureFlagsManager
 
 class ForgotPasswordActivity : AppCompatActivity() {
 
@@ -36,6 +37,10 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         mBinding.textViewErrors.visibility = View.GONE
 
+        mBinding.labelEditTextUsername.markRequired()
+
+        val usernameLabel = if (FeatureFlagsManager.phoneNumberUsernameEnabled) R.string.username_with_phone else R.string.username_email_only
+        mBinding.labelEditTextUsername.text = getString(usernameLabel)
         mBinding.labelEditTextUsername.markRequired()
 
         model = ForgotPasswordModel(mBinding.editTextUsername)

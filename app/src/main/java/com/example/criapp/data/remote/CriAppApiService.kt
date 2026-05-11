@@ -9,6 +9,7 @@ import com.example.criapp.models.responses.ChildResponse
 import com.example.criapp.models.responses.RecommendationResponse
 import com.example.criapp.models.responses.NotificationResponse
 import com.example.criapp.models.responses.CommentResponse
+import com.example.criapp.models.responses.FeatureFlagsResponse
 import com.example.criapp.models.responses.FaqResponse
 import com.example.criapp.models.responses.ForumResponse
 import com.example.criapp.models.responses.LoginUserResponse
@@ -24,6 +25,11 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface CriAppApiService {
+
+    // ── Feature Flags ────────────────────────────────────────────────────────
+
+    @GET("feature-flags")
+    suspend fun getFeatureFlags(): ApiResponse<List<FeatureFlagsResponse>>
 
     // ── Authentication ──────────────────────────────────────────────────────
 

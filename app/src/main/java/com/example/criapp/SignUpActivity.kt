@@ -16,6 +16,7 @@ import com.example.criapp.presentation.auth.SignUpViewModelFactory
 import com.example.criapp.presentation.common.UiState
 import com.example.criapp.services.DateHelper
 import com.example.criapp.services.DialogFactory
+import com.example.criapp.services.FeatureFlagsManager
 import com.example.criapp.services.SpinnerHelper
 
 class SignUpActivity : AppCompatActivity() {
@@ -48,6 +49,10 @@ class SignUpActivity : AppCompatActivity() {
         mBinding.labelEditTextBirthDate.markRequired()
         mBinding.labelSpinnerSex.markRequired()
         mBinding.labelEditTextPassword.markRequired()
+
+        val usernameLabel = if (FeatureFlagsManager.phoneNumberUsernameEnabled) R.string.username_with_phone else R.string.username_email_only
+        mBinding.labelEditTextCreateUsername.text = getString(usernameLabel)
+        mBinding.labelEditTextCreateUsername.markRequired()
 
         createUserModel = CreateUserModel(
             mBinding.editTextName,

@@ -24,6 +24,8 @@
     <!-- Form fields -->
     <string name="name">Nome</string>
     <string name="username">Nome de usuário (E-mail ou Celular)</string>
+    <string name="username_with_phone">Nome de usuário (E-mail ou Celular)</string>
+    <string name="username_email_only">Nome de usuário (E-mail)</string>
     <string name="birth_date">Data de nascimento</string>
     <string name="sex">Sexo</string>
     <string name="educational_level">Nível educacional</string>
