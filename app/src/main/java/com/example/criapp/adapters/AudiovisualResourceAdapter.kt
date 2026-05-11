@@ -16,6 +16,8 @@ class AudiovisualResourceAdapter(
     private val data: Array<AudiovisualResourceResponse>
 ) : RecyclerView.Adapter<AudiovisualResourceAdapter.ViewHolder>() {
 
+    private val expandedStates = BooleanArray(data.size) { false }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.audiovisual_resource_item_layout, parent, false)
         return ViewHolder(view)
@@ -26,6 +28,12 @@ class AudiovisualResourceAdapter(
         holder.name.text = item.name
         holder.description.text = item.description
 
+        val isExpanded = expandedStates[position]
+        holder.description.visibility = if (isExpanded) View.VISIBLE else View.GONE
+        holder.thumbnailContainer.visibility = if (isExpanded) View.VISIBLE else View.GONE
+        holder.divider.visibility = if (isExpanded) View.VISIBLE else View.GONE
+        holder.chevron.rotation = if (isExpanded) 180f else 0f
+
         val videoId = Uri.parse(item.iframe).getQueryParameter("v")
         if (videoId != null) {
             Glide.with(holder.thumbnail)
@@ -33,9 +41,16 @@ class AudiovisualResourceAdapter(
                 .into(holder.thumbnail)
         }
 
-        holder.thumbnail.setOnClickListener {
+        holder.thumbnailContainer.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.iframe))
             it.context.startActivity(intent)
+        }
+
+        holder.itemView.setOnClickListener {
+            val pos = holder.adapterPosition
+            if (pos == RecyclerView.NO_ID.toInt()) return@setOnClickListener
+            expandedStates[pos] = !expandedStates[pos]
+            notifyItemChanged(pos)
         }
     }
 
@@ -45,5 +60,8 @@ class AudiovisualResourceAdapter(
         val name: TextView = itemView.findViewById(R.id.text_name)
         val description: TextView = itemView.findViewById(R.id.text_description)
         val thumbnail: ImageView = itemView.findViewById(R.id.thumbnail)
+        val thumbnailContainer: View = itemView.findViewById(R.id.thumbnail_container)
+        val chevron: ImageView = itemView.findViewById(R.id.chevron)
+        val divider: View = itemView.findViewById(R.id.divider)
     }
 }
