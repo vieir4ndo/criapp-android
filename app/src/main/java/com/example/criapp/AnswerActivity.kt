@@ -93,7 +93,7 @@ class AnswerActivity : AppCompatActivity() {
                     if (questions.isEmpty()) {
                         DialogFactory.createSuccessDialog(this, getString(R.string.all_questions_answered_today, child.name)).show()
                     } else {
-                        showNextQuestion(animate = false)
+                        showNextQuestion()
                     }
                 }
                 is UiState.Error -> {
@@ -127,10 +127,10 @@ class AnswerActivity : AppCompatActivity() {
         viewModel.loadQuestions(child.id)
     }
 
-    private fun showNextQuestion(animate: Boolean = true) {
+    private fun showNextQuestion() {
         currentQuestion++
         val newText = questions[currentQuestion].text
-        progressIndicator?.setProgressCompat((currentQuestion + 1) * 100 / questions.size, animate)
+        progressIndicator?.setProgressCompat((currentQuestion + 1) * 100 / questions.size, true)
         value = 3
         selectedIndex = -1
         val isReversed = questions[currentQuestion].scoringType == 2
@@ -143,30 +143,12 @@ class AnswerActivity : AppCompatActivity() {
         }
         updateLikertButtons(-1, isReversed)
 
-        if (!animate) {
-            textQuestion!!.text = newText
-            textQuestion!!.alpha = 1f
-            return
-        }
-
-        textQuestion!!.animate()
-            .alpha(0f)
-            .translationX(-40f)
-            .setDuration(180)
-            .withEndAction {
-                textQuestion!!.text = newText
-                textQuestion!!.translationX = 40f
-                textQuestion!!.animate()
-                    .alpha(1f)
-                    .translationX(0f)
-                    .setDuration(220)
-                    .start()
-            }.start()
+        textQuestion!!.text = newText
     }
 
     fun onArrowButtonClick(view: View?) {
         if (currentQuestion < 0) {
-            showNextQuestion(animate = false)
+            showNextQuestion()
         } else {
             if (selectedIndex == -1) {
                 textQuestion!!.animate().translationX(12f).setDuration(50)
