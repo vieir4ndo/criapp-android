@@ -11,7 +11,7 @@ import com.example.criapp.models.responses.FaqResponse
 
 class FaqAdapter(private val data: Array<FaqResponse>) : RecyclerView.Adapter<FaqAdapter.ViewHolder>() {
 
-    private val expandedStates = BooleanArray(data.size) { false }
+    private var expandedPosition = RecyclerView.NO_ID.toInt()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.faq_item_layout, parent, false)
@@ -23,7 +23,7 @@ class FaqAdapter(private val data: Array<FaqResponse>) : RecyclerView.Adapter<Fa
         holder.question.text = item.question
         holder.answer.text = item.answer
 
-        val isExpanded = expandedStates[position]
+        val isExpanded = position == expandedPosition
         holder.answer.visibility = if (isExpanded) View.VISIBLE else View.GONE
         holder.divider.visibility = if (isExpanded) View.VISIBLE else View.GONE
         holder.chevron.rotation = if (isExpanded) 180f else 0f
@@ -31,7 +31,9 @@ class FaqAdapter(private val data: Array<FaqResponse>) : RecyclerView.Adapter<Fa
         holder.itemView.setOnClickListener {
             val pos = holder.adapterPosition
             if (pos == RecyclerView.NO_ID.toInt()) return@setOnClickListener
-            expandedStates[pos] = !expandedStates[pos]
+            val previousExpanded = expandedPosition
+            expandedPosition = if (pos == expandedPosition) RecyclerView.NO_ID.toInt() else pos
+            if (previousExpanded != RecyclerView.NO_ID.toInt()) notifyItemChanged(previousExpanded)
             notifyItemChanged(pos)
         }
     }

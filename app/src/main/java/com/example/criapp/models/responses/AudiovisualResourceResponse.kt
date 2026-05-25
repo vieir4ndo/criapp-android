@@ -6,7 +6,7 @@ class AudiovisualResourceResponse(
     val id : String,
     val name: String,
     val description: String,
-    val iframe: String,
+    val link: String,
 ) {
     override fun toString(): String {
         val gson = Gson();

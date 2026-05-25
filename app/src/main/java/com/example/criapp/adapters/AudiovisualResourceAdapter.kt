@@ -16,7 +16,7 @@ class AudiovisualResourceAdapter(
     private val data: Array<AudiovisualResourceResponse>
 ) : RecyclerView.Adapter<AudiovisualResourceAdapter.ViewHolder>() {
 
-    private val expandedStates = BooleanArray(data.size) { false }
+    private var expandedPosition = RecyclerView.NO_ID.toInt()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.audiovisual_resource_item_layout, parent, false)
@@ -28,13 +28,13 @@ class AudiovisualResourceAdapter(
         holder.name.text = item.name
         holder.description.text = item.description
 
-        val isExpanded = expandedStates[position]
+        val isExpanded = position == expandedPosition
         holder.description.visibility = if (isExpanded) View.VISIBLE else View.GONE
         holder.thumbnailContainer.visibility = if (isExpanded) View.VISIBLE else View.GONE
         holder.divider.visibility = if (isExpanded) View.VISIBLE else View.GONE
         holder.chevron.rotation = if (isExpanded) 180f else 0f
 
-        val videoId = Uri.parse(item.iframe).getQueryParameter("v")
+        val videoId = Uri.parse(item.link).getQueryParameter("v")
         if (videoId != null) {
             Glide.with(holder.thumbnail)
                 .load("https://img.youtube.com/vi/$videoId/hqdefault.jpg")
@@ -42,14 +42,16 @@ class AudiovisualResourceAdapter(
         }
 
         holder.thumbnailContainer.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.iframe))
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.link))
             it.context.startActivity(intent)
         }
 
         holder.itemView.setOnClickListener {
             val pos = holder.adapterPosition
             if (pos == RecyclerView.NO_ID.toInt()) return@setOnClickListener
-            expandedStates[pos] = !expandedStates[pos]
+            val previousExpanded = expandedPosition
+            expandedPosition = if (pos == expandedPosition) RecyclerView.NO_ID.toInt() else pos
+            if (previousExpanded != RecyclerView.NO_ID.toInt()) notifyItemChanged(previousExpanded)
             notifyItemChanged(pos)
         }
     }
