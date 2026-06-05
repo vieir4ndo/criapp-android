@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.criapp.R
+import com.example.criapp.services.DialogBuilder
 
 class ViewFactory {
 
@@ -108,6 +109,47 @@ class ViewFactory {
             button.layoutParams = params
 
             return button;
+        }
+
+        fun generateDoneButton(context: Context, resources: Resources, childName: String): Button {
+            val button = Button(context)
+            button.gravity = Gravity.CENTER_HORIZONTAL
+            button.textSize = 20f
+            button.isAllCaps = false
+            button.setTypeface(null, Typeface.BOLD)
+            button.setTextColor(ContextCompat.getColor(context, R.color.white))
+            button.alpha = 0.7f
+
+            val shape = GradientDrawable()
+            shape.shape = GradientDrawable.RECTANGLE
+            shape.cornerRadius = resources.getDimension(R.dimen.border_radius)
+            shape.setColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
+            button.background = shape
+
+            button.text = "\u2713 Para $childName"
+
+            button.setOnClickListener {
+                val msg = context.getString(R.string.child_answered_today_info, childName)
+                DialogBuilder(context)
+                    .withCancelable()
+                    .withTitle("\u2713 $childName")
+                    .withMessage(msg)
+                    .withSubmitButtonMessage(context.getString(R.string.dialog_accept_button))
+                    .withSubmitButtonDismissing()
+                    .create()
+                    .show()
+            }
+
+            val params = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.topMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
+            params.marginEnd = resources.getDimensionPixelSize(R.dimen.margin_top)
+            params.marginStart = resources.getDimensionPixelSize(R.dimen.margin_top)
+            button.layoutParams = params
+
+            return button
         }
     }
 

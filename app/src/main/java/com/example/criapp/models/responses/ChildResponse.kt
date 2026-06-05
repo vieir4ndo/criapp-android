@@ -9,7 +9,8 @@ class ChildResponse(
     val sex: Int,
     val monthsOfBreastFeeding : Int,
     val prcId : String,
-    val isPremature : Boolean
+    val isPremature : Boolean,
+    val answeredToday: Boolean = false
 ) {
     override fun toString(): String {
         val gson = Gson();

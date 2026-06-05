@@ -172,5 +172,6 @@
     <string name="notification_type_reevaluation">Re-evaluación</string>
     <string name="notification_type_new_award">Nuevo premio</string>
     <string name="notification_type_new_recommendations">Nuevas recomendaciones</string>
+    <string name="child_answered_today_info">¡Ya respondiste las preguntas de %s hoy! Vuelve mañana para continuar.</string>
 
 </resources>

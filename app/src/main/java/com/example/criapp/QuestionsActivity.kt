@@ -42,7 +42,11 @@ class QuestionsActivity : AppCompatActivity() {
                     }
 
                     for (child in children) {
-                        view.addView(ViewFactory.generateButton(this, resources, "Para " + child.name, child.toString(), AnswerActivity::class.java, "child"))
+                        if (child.answeredToday) {
+                            view.addView(ViewFactory.generateDoneButton(this, resources, child.name))
+                        } else {
+                            view.addView(ViewFactory.generateButton(this, resources, "Para " + child.name, child.toString(), AnswerActivity::class.java, "child"))
+                        }
                     }
                 }
                 is UiState.Error -> {
