@@ -1,4 +1,6 @@
 package com.example.criapp.data.repository
+import com.example.criapp.CRIAppApplication
+import com.example.criapp.R
 
 import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.domain.repository.IForumRepository
@@ -17,7 +19,7 @@ class ForumRepositoryImpl(private val apiService: CriAppApiService) : IForumRepo
             if (response.success) {
                 Result.success(response.data ?: emptyList())
             } else {
-                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+                Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
             }
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))
@@ -31,7 +33,7 @@ class ForumRepositoryImpl(private val apiService: CriAppApiService) : IForumRepo
             val body = requestBody.toRequestBody("application/json".toMediaType())
             val response = apiService.createForum(body)
             if (response.success) Result.success(Unit)
-            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
@@ -44,7 +46,7 @@ class ForumRepositoryImpl(private val apiService: CriAppApiService) : IForumRepo
             val body = requestBody.toRequestBody("application/json".toMediaType())
             val response = apiService.updateForum(forumId, body)
             if (response.success) Result.success(Unit)
-            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
@@ -58,7 +60,7 @@ class ForumRepositoryImpl(private val apiService: CriAppApiService) : IForumRepo
             if (response.success) {
                 Result.success(response.data ?: emptyList())
             } else {
-                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+                Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
             }
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))
@@ -72,7 +74,7 @@ class ForumRepositoryImpl(private val apiService: CriAppApiService) : IForumRepo
             val body = requestBody.toRequestBody("application/json".toMediaType())
             val response = apiService.createComment(body)
             if (response.success) Result.success(Unit)
-            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
@@ -84,7 +86,7 @@ class ForumRepositoryImpl(private val apiService: CriAppApiService) : IForumRepo
         return try {
             val response = apiService.deleteComment(commentId)
             if (response.success) Result.success(Unit)
-            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {

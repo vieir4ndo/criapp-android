@@ -43,8 +43,6 @@ class SignUpActivity : BaseActivity() {
 
         configSpinners()
 
-        mBinding.textViewErrors.visibility = View.GONE
-
         mBinding.labelEditTextName.markRequired()
         mBinding.labelEditTextCreateUsername.markRequired()
         mBinding.labelEditTextBirthDate.markRequired()
@@ -68,10 +66,7 @@ class SignUpActivity : BaseActivity() {
 
         mBinding.buttonCreateUser.setOnClickListener {
             if (createUserModel.validate(mBinding.textViewErrors, this)) {
-                mBinding.textViewErrors.visibility = View.GONE
                 viewModel.createUser(createUserModel.toRequest())
-            } else {
-                mBinding.textViewErrors.visibility = View.VISIBLE
             }
         }
 

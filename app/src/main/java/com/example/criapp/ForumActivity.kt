@@ -57,8 +57,6 @@ class ForumActivity : BaseActivity() {
         findViewById<ImageButton>(R.id.comment_button).setOnClickListener {
             if (model.validate(errorTextView, this)) {
                 viewModel.createComment(model.toRequest())
-            } else {
-                errorTextView.visibility = View.VISIBLE
             }
         }
 

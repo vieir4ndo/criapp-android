@@ -126,7 +126,7 @@ class ViewFactory {
             shape.setColor(ContextCompat.getColor(context, android.R.color.holo_purple))
             button.background = shape
 
-            button.text = "Para $childName"
+            button.text = context.getString(R.string.for_child, childName)
 
             button.setOnClickListener {
                 val msg = context.getString(R.string.child_answered_today_info, childName)

@@ -1,4 +1,6 @@
 package com.example.criapp.presentation.forum
+import com.example.criapp.CRIAppApplication
+import com.example.criapp.R
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -34,7 +36,7 @@ class ForumViewModel(private val repository: IForumRepository) : ViewModel() {
             _forumsState.value = if (result.isSuccess) {
                 UiState.Success(result.getOrThrow())
             } else {
-                UiState.Error(result.exceptionOrNull()?.message ?: "Error desconocido")
+                UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))
             }
         }
     }
@@ -46,7 +48,7 @@ class ForumViewModel(private val repository: IForumRepository) : ViewModel() {
             _createForumState.value = if (result.isSuccess) {
                 UiState.Success(Unit)
             } else {
-                UiState.Error(result.exceptionOrNull()?.message ?: "Error desconocido")
+                UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))
             }
         }
     }
@@ -58,7 +60,7 @@ class ForumViewModel(private val repository: IForumRepository) : ViewModel() {
             _updateForumState.value = if (result.isSuccess) {
                 UiState.Success(Unit)
             } else {
-                UiState.Error(result.exceptionOrNull()?.message ?: "Error desconocido")
+                UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))
             }
         }
     }
@@ -70,7 +72,7 @@ class ForumViewModel(private val repository: IForumRepository) : ViewModel() {
             _commentsState.value = if (result.isSuccess) {
                 UiState.Success(result.getOrThrow())
             } else {
-                UiState.Error(result.exceptionOrNull()?.message ?: "Error desconocido")
+                UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))
             }
         }
     }
@@ -82,7 +84,7 @@ class ForumViewModel(private val repository: IForumRepository) : ViewModel() {
             _commentActionState.value = if (result.isSuccess) {
                 UiState.Success(Unit)
             } else {
-                UiState.Error(result.exceptionOrNull()?.message ?: "Error desconocido")
+                UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))
             }
         }
     }
@@ -94,7 +96,7 @@ class ForumViewModel(private val repository: IForumRepository) : ViewModel() {
             _commentActionState.value = if (result.isSuccess) {
                 UiState.Success(Unit)
             } else {
-                UiState.Error(result.exceptionOrNull()?.message ?: "Error desconocido")
+                UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))
             }
         }
     }

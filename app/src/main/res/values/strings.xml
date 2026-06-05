@@ -173,5 +173,9 @@
     <string name="notification_type_new_award">Nuevo premio</string>
     <string name="notification_type_new_recommendations">Nuevas recomendaciones</string>
     <string name="child_answered_today_info">¡Ya respondiste las preguntas de %s hoy! Vuelve mañana para continuar.</string>
+    <string name="for_child">Para %s</string>
+    <string name="reset_password_hint_email_only">El código fue enviado a tu correo electrónico. Introdúcelo junto con tu nueva contraseña.</string>
+    <string name="reset_password_hint_with_phone">El código fue enviado a tu correo electrónico o móvil. Introdúcelo junto con tu nueva contraseña.</string>
+    <string name="error_unknown">Error desconocido</string>
 
 </resources>

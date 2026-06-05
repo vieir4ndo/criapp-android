@@ -55,7 +55,6 @@ class ProfileActivity : BaseActivity() {
 
                     configSpinners()
 
-                    mBinding.textViewErrors.visibility = View.GONE
                     mBinding.editTextName.setText(user.name)
                     mBinding.editTextNumberOfChildren.setText(user.numberOfChildren.toString())
                     mBinding.editTextBirthDate.setText(DateHelper.formatDateDDMMYYYY(birthDateYear, birthDateMonth, birthDateDay))
@@ -70,10 +69,7 @@ class ProfileActivity : BaseActivity() {
 
                     mBinding.buttonUpdateUser.setOnClickListener {
                         if (updateUserModel.validate(mBinding.textViewErrors, this)) {
-                            mBinding.textViewErrors.visibility = View.GONE
                             viewModel.updateProfile(updateUserModel.toRequest())
-                        } else {
-                            mBinding.textViewErrors.visibility = View.VISIBLE
                         }
                     }
 

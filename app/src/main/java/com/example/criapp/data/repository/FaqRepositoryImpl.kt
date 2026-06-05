@@ -1,4 +1,6 @@
 package com.example.criapp.data.repository
+import com.example.criapp.CRIAppApplication
+import com.example.criapp.R
 
 import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.data.remote.toErrorMessage
@@ -14,7 +16,7 @@ class FaqRepositoryImpl(private val apiService: CriAppApiService) : IFaqReposito
             if (response.success) {
                 Result.success(response.data ?: emptyList())
             } else {
-                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+                Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
             }
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))

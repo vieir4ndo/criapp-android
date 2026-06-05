@@ -1,4 +1,6 @@
 package com.example.criapp.data.repository
+import com.example.criapp.CRIAppApplication
+import com.example.criapp.R
 
 import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.domain.repository.IAuthRepository
@@ -21,7 +23,7 @@ class AuthRepositoryImpl(private val apiService: CriAppApiService) : IAuthReposi
                     ?: return Result.failure(Exception("Respuesta vacía del servidor"))
                 Result.success(flags)
             } else {
-                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+                Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
             }
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))
@@ -38,7 +40,7 @@ class AuthRepositoryImpl(private val apiService: CriAppApiService) : IAuthReposi
                     ?: return Result.failure(Exception("Respuesta vacía del servidor"))
                 Result.success(loginData)
             } else {
-                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+                Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
             }
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))
@@ -55,7 +57,7 @@ class AuthRepositoryImpl(private val apiService: CriAppApiService) : IAuthReposi
                     ?: return Result.failure(Exception("Respuesta vacía del servidor"))
                 Result.success(data)
             } else {
-                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+                Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
             }
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))
@@ -69,7 +71,7 @@ class AuthRepositoryImpl(private val apiService: CriAppApiService) : IAuthReposi
             val body = requestBody.toRequestBody("application/json".toMediaType())
             val response = apiService.createUser(body)
             if (response.success) Result.success(Unit)
-            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
@@ -82,7 +84,7 @@ class AuthRepositoryImpl(private val apiService: CriAppApiService) : IAuthReposi
             val body = requestBody.toRequestBody("application/json".toMediaType())
             val response = apiService.forgotPassword(body)
             if (response.success) Result.success(Unit)
-            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {
@@ -95,7 +97,7 @@ class AuthRepositoryImpl(private val apiService: CriAppApiService) : IAuthReposi
             val body = requestBody.toRequestBody("application/json".toMediaType())
             val response = apiService.resetPassword(body)
             if (response.success) Result.success(Unit)
-            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {

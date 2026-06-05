@@ -32,8 +32,6 @@ class CreateForumActivity : BaseActivity() {
 
         aLoadingDialog = ALoadingDialog(this)
 
-        mBinding.textViewErrors.visibility = View.GONE
-
         mBinding.labelEditTextName.markRequired()
         mBinding.labelEditTextDescription.markRequired()
 
@@ -41,10 +39,7 @@ class CreateForumActivity : BaseActivity() {
 
         mBinding.buttonCreate.setOnClickListener {
             if (model.validate(mBinding.textViewErrors, this)) {
-                mBinding.textViewErrors.visibility = View.GONE
                 viewModel.createForum(model.toRequest())
-            } else {
-                mBinding.textViewErrors.visibility = View.VISIBLE
             }
         }
 

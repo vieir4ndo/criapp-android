@@ -36,8 +36,6 @@ class ForgotPasswordActivity : BaseActivity() {
 
         aLoadingDialog = ALoadingDialog(this)
 
-        mBinding.textViewErrors.visibility = View.GONE
-
         mBinding.labelEditTextUsername.markRequired()
 
         val usernameLabel = if (FeatureFlagsManager.phoneNumberUsernameEnabled) R.string.username_with_phone else R.string.username_email_only
@@ -48,10 +46,7 @@ class ForgotPasswordActivity : BaseActivity() {
 
         mBinding.buttonForgotPassword.setOnClickListener {
             if (model.validate(mBinding.textViewErrors, this)) {
-                mBinding.textViewErrors.visibility = View.GONE
                 viewModel.forgotPassword(model.toRequest())
-            } else {
-                mBinding.textViewErrors.visibility = View.VISIBLE
             }
         }
 

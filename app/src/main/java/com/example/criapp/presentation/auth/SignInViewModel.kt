@@ -1,4 +1,6 @@
 package com.example.criapp.presentation.auth
+import com.example.criapp.CRIAppApplication
+import com.example.criapp.R
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -37,7 +39,7 @@ class SignInViewModel(private val repository: IAuthRepository) : ViewModel() {
             _loginState.value = if (result.isSuccess) {
                 UiState.Success(result.getOrThrow())
             } else {
-                UiState.Error(result.exceptionOrNull()?.message ?: "Error desconocido")
+                UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))
             }
         }
     }

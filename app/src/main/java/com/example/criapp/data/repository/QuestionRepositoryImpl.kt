@@ -1,4 +1,6 @@
 package com.example.criapp.data.repository
+import com.example.criapp.CRIAppApplication
+import com.example.criapp.R
 
 import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.domain.repository.IQuestionRepository
@@ -16,7 +18,7 @@ class QuestionRepositoryImpl(private val apiService: CriAppApiService) : IQuesti
             if (response.success) {
                 Result.success(response.data ?: emptyList())
             } else {
-                Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+                Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
             }
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))
@@ -30,7 +32,7 @@ class QuestionRepositoryImpl(private val apiService: CriAppApiService) : IQuesti
             val body = requestBody.toRequestBody("application/json".toMediaType())
             val response = apiService.answerQuestion(body)
             if (response.success) Result.success(Unit)
-            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Error desconocido"))
+            else Result.failure(Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)))
         } catch (e: HttpException) {
             Result.failure(Exception(e.toErrorMessage()))
         } catch (e: Exception) {

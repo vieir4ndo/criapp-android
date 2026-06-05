@@ -29,6 +29,7 @@ abstract class AbstractValidator(var errorTextView: TextView, var context: Conte
             }
         }
 
+        errorTextView.visibility = if (isValid) View.GONE else View.VISIBLE
         return isValid;
     }
 

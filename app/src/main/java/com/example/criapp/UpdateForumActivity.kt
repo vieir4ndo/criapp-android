@@ -37,8 +37,6 @@ class UpdateForumActivity : BaseActivity() {
         aLoadingDialog = ALoadingDialog(this)
         forum = gson.fromJson(intent.getStringExtra("forum"), ForumResponse::class.java)
 
-        mBinding.textViewErrors.visibility = View.GONE
-
         mBinding.labelEditTextName.markRequired()
         mBinding.labelEditTextDescription.markRequired()
 
@@ -49,10 +47,7 @@ class UpdateForumActivity : BaseActivity() {
 
         mBinding.buttonUpdate.setOnClickListener {
             if (model.validate(mBinding.textViewErrors, this)) {
-                mBinding.textViewErrors.visibility = View.GONE
                 viewModel.updateForum(forum.id, model.toRequest())
-            } else {
-                mBinding.textViewErrors.visibility = View.VISIBLE
             }
         }
 

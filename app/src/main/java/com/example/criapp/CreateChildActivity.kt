@@ -40,8 +40,6 @@ class CreateChildActivity : BaseActivity() {
 
         configSpinners()
 
-        mBinding.textViewErrors.visibility = View.GONE
-
         mBinding.labelEditTextName.markRequired()
         mBinding.labelEditTextBirthDate.markRequired()
         mBinding.labelSpinnerSex.markRequired()
@@ -58,10 +56,7 @@ class CreateChildActivity : BaseActivity() {
 
         mBinding.buttonCreateChild.setOnClickListener {
             if (model.validate(mBinding.textViewErrors, this)) {
-                mBinding.textViewErrors.visibility = View.GONE
                 viewModel.createChild(model.toRequest())
-            } else {
-                mBinding.textViewErrors.visibility = View.VISIBLE
             }
         }
 

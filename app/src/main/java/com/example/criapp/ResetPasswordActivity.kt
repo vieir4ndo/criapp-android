@@ -17,6 +17,7 @@ import com.example.criapp.presentation.auth.ResetPasswordViewModel
 import com.example.criapp.presentation.auth.ResetPasswordViewModelFactory
 import com.example.criapp.presentation.common.UiState
 import com.example.criapp.services.DialogFactory
+import com.example.criapp.services.FeatureFlagsManager
 
 class ResetPasswordActivity : BaseActivity() {
 
@@ -36,7 +37,11 @@ class ResetPasswordActivity : BaseActivity() {
 
         aLoadingDialog = ALoadingDialog(this)
 
-        mBinding.textViewErrors.visibility = View.GONE
+        val hintRes = if (FeatureFlagsManager.phoneNumberUsernameEnabled)
+            R.string.reset_password_hint_with_phone
+        else
+            R.string.reset_password_hint_email_only
+        mBinding.textViewResetHint.setText(hintRes)
 
         mBinding.labelEditTextNewPassword.markRequired()
         mBinding.labelEditTextCode.markRequired()
@@ -50,8 +55,6 @@ class ResetPasswordActivity : BaseActivity() {
         mBinding.buttonResetPassword.setOnClickListener {
             if (model.validate(mBinding.textViewErrors, this)) {
                 viewModel.resetPassword(model.toRequest())
-            } else {
-                mBinding.textViewErrors.visibility = View.VISIBLE
             }
         }
 

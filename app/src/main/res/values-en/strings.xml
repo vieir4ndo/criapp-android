@@ -173,5 +173,9 @@
     <string name="notification_type_new_award">New award</string>
     <string name="notification_type_new_recommendations">New recommendations</string>
     <string name="child_answered_today_info">You already answered the questions for %s today! Come back tomorrow to continue.</string>
+    <string name="for_child">For %s</string>
+    <string name="reset_password_hint_email_only">The code was sent to your email. Enter it along with your new password.</string>
+    <string name="reset_password_hint_with_phone">The code was sent to your email or phone. Enter it along with your new password.</string>
+    <string name="error_unknown">Unknown error</string>
 
 </resources>

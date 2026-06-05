@@ -46,7 +46,7 @@ class QuestionsActivity : BaseActivity() {
                         if (child.answeredToday) {
                             view.addView(ViewFactory.generateDoneButton(this, resources, child.name))
                         } else {
-                            view.addView(ViewFactory.generateButton(this, resources, "Para ${child.name}", child.toString(), AnswerActivity::class.java, "child"))
+                            view.addView(ViewFactory.generateButton(this, resources, getString(R.string.for_child, child.name), child.toString(), AnswerActivity::class.java, "child"))
                         }
                     }
                 }

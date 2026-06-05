@@ -1,4 +1,6 @@
 package com.example.criapp.presentation.faq
+import com.example.criapp.CRIAppApplication
+import com.example.criapp.R
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,7 +23,7 @@ class FaqViewModel(private val repository: IFaqRepository) : ViewModel() {
             _state.value = if (result.isSuccess) {
                 UiState.Success(result.getOrThrow())
             } else {
-                UiState.Error(result.exceptionOrNull()?.message ?: "Error desconocido")
+                UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))
             }
         }
     }

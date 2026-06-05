@@ -45,8 +45,6 @@ class SignInActivity : BaseActivity() {
 
         aLoadingDialog = ALoadingDialog(this)
 
-        mBinding.textViewErrors.visibility = View.GONE
-
         mBinding.labelEditTextUsername.markRequired()
         mBinding.labelEditTextPassword.markRequired()
 
@@ -70,12 +68,9 @@ class SignInActivity : BaseActivity() {
 
         mBinding.buttonLoginUser.setOnClickListener {
             if (loginUserModel.validate(mBinding.textViewErrors, this)) {
-                mBinding.textViewErrors.visibility = View.GONE
                 val username = mBinding.editTextUsername.text.toString()
                 val password = mBinding.editTextPassword.text.toString()
                 viewModel.login(username, password)
-            } else {
-                mBinding.textViewErrors.visibility = View.VISIBLE
             }
         }
 

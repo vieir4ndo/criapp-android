@@ -1,4 +1,6 @@
 package com.example.criapp.data.repository
+import com.example.criapp.CRIAppApplication
+import com.example.criapp.R
 
 import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.data.remote.toErrorMessage
@@ -16,7 +18,7 @@ class AwardRepositoryImpl(private val apiService: CriAppApiService) : IAwardRepo
             } else {
                 Result.failure(
                     Exception(
-                        response.Messages?.joinToString("\n") ?: "Error desconocido"
+                        response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown)
                     )
                 )
             }

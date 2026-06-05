@@ -1,4 +1,6 @@
 package com.example.criapp.presentation.notification
+import com.example.criapp.CRIAppApplication
+import com.example.criapp.R
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -41,7 +43,7 @@ class NotificationViewModel(private val repository: INotificationRepository) : V
                 if (data.size < PAGE_SIZE) isLastPage = true
                 _state.value = UiState.Success(data)
             } else {
-                _state.value = UiState.Error(result.exceptionOrNull()?.message ?: "Error desconocido")
+                _state.value = UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))
             }
         }
     }
@@ -61,7 +63,7 @@ class NotificationViewModel(private val repository: INotificationRepository) : V
                     _loadMoreState.value = UiState.Success(data)
                 }
             } else {
-                _loadMoreState.value = UiState.Error(result.exceptionOrNull()?.message ?: "Error desconocido")
+                _loadMoreState.value = UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))
             }
         }
     }
