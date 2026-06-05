@@ -52,6 +52,9 @@ class SignUpActivity : BaseActivity() {
         val usernameLabel = if (FeatureFlagsManager.phoneNumberUsernameEnabled) R.string.username_with_phone else R.string.username_email_only
         mBinding.labelEditTextCreateUsername.text = getString(usernameLabel)
         mBinding.labelEditTextCreateUsername.markRequired()
+        mBinding.editTextCreateUsername.hint = getString(
+            if (FeatureFlagsManager.phoneNumberUsernameEnabled) R.string.hint_username_with_phone else R.string.hint_username
+        )
 
         createUserModel = CreateUserModel(
             mBinding.editTextName,

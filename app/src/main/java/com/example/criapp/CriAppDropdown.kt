@@ -42,6 +42,7 @@ class CriAppDropdown @JvmOverloads constructor(
         options = opts
         if (opts.isNotEmpty()) {
             text = opts[0]
+            applySelectionStyle(0)
         }
         popup?.dismiss()
         popup = null
@@ -50,6 +51,7 @@ class CriAppDropdown @JvmOverloads constructor(
     fun selectItem(position: Int) {
         selectedPosition = position
         text = options.getOrElse(position) { "" }
+        applySelectionStyle(position)
     }
 
     private fun showPopup() {
@@ -146,10 +148,18 @@ class CriAppDropdown @JvmOverloads constructor(
         tv.setOnClickListener {
             selectedPosition = index
             text = itemText
+            applySelectionStyle(index)
             popup?.dismiss()
         }
 
         return tv
+    }
+
+    private fun applySelectionStyle(position: Int) {
+        val color = if (position == 0) android.graphics.Color.parseColor("#808080")
+                    else android.graphics.Color.BLACK
+        setTextColor(color)
+        compoundDrawableTintList = android.content.res.ColorStateList.valueOf(color)
     }
 }
 

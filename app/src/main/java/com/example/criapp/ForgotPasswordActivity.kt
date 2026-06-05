@@ -41,6 +41,9 @@ class ForgotPasswordActivity : BaseActivity() {
         val usernameLabel = if (FeatureFlagsManager.phoneNumberUsernameEnabled) R.string.username_with_phone else R.string.username_email_only
         mBinding.labelEditTextUsername.text = getString(usernameLabel)
         mBinding.labelEditTextUsername.markRequired()
+        mBinding.editTextUsername.hint = getString(
+            if (FeatureFlagsManager.phoneNumberUsernameEnabled) R.string.hint_username_with_phone else R.string.hint_username
+        )
 
         model = ForgotPasswordModel(mBinding.editTextUsername)
 

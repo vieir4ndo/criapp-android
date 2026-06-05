@@ -178,4 +178,16 @@
     <string name="reset_password_hint_with_phone">El código fue enviado a tu correo electrónico o móvil. Introdúcelo junto con tu nueva contraseña.</string>
     <string name="error_unknown">Error desconocido</string>
 
+    <string name="hint_username">correo@ejemplo.com</string>
+    <string name="hint_username_with_phone">correo@ejemplo.com / +34 600 000 000</string>
+    <string name="hint_password">********</string>
+    <string name="hint_full_name">Nombre completo</string>
+    <string name="hint_birth_date">DD/MM/AAAA</string>
+    <string name="hint_number_of_children">0</string>
+    <string name="hint_verification_code">A1B2C3</string>
+    <string name="hint_months_breast_feeding">0</string>
+    <string name="hint_forum_name">Nombre del foro</string>
+    <string name="hint_forum_description">Describe tu foro</string>
+    <string name="hint_comment">Escribe un comentario</string>
+
 </resources>

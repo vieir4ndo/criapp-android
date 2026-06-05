@@ -178,4 +178,16 @@
     <string name="reset_password_hint_with_phone">The code was sent to your email or phone. Enter it along with your new password.</string>
     <string name="error_unknown">Unknown error</string>
 
+    <string name="hint_username">email@example.com</string>
+    <string name="hint_username_with_phone">email@example.com / +1 555 000 0000</string>
+    <string name="hint_password">********</string>
+    <string name="hint_full_name">Full name</string>
+    <string name="hint_birth_date">DD/MM/YYYY</string>
+    <string name="hint_number_of_children">0</string>
+    <string name="hint_verification_code">A1B2C3</string>
+    <string name="hint_months_breast_feeding">0</string>
+    <string name="hint_forum_name">Forum name</string>
+    <string name="hint_forum_description">Describe your forum</string>
+    <string name="hint_comment">Write a comment</string>
+
 </resources>

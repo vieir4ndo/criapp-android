@@ -75,6 +75,7 @@
                     android:id="@+id/edit_text_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/hint_full_name"
                     android:inputType="textPersonName" />
 
                 <TextView
@@ -89,6 +90,7 @@
                     android:id="@+id/edit_text_create_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/hint_username"
                     android:inputType="text" />
 
                 <TextView
@@ -105,6 +107,7 @@
                     android:layout_height="wrap_content"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
+                    android:hint="@string/hint_birth_date"
                     android:inputType="text"
                     android:onClick="showDatePickerForBirthDate" />
 
@@ -162,6 +165,7 @@
                     android:id="@+id/edit_text_number_of_children"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/hint_number_of_children"
                     android:inputType="number" />
 
                 <TextView
@@ -186,6 +190,7 @@
                         android:paddingEnd="15dp"
                         android:paddingTop="12dp"
                         android:paddingBottom="12dp"
+                        android:hint="@string/hint_password"
                         android:textColor="@android:color/black"
                         android:textColorHint="#808080"
                         android:inputType="textPassword" />

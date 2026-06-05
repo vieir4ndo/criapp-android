@@ -54,6 +54,9 @@ class SignInActivity : BaseActivity() {
             val labelRes = if (FeatureFlagsManager.phoneNumberUsernameEnabled) R.string.username_with_phone else R.string.username_email_only
             mBinding.labelEditTextUsername.text = getString(labelRes)
             mBinding.labelEditTextUsername.markRequired()
+            mBinding.editTextUsername.hint = getString(
+                if (FeatureFlagsManager.phoneNumberUsernameEnabled) R.string.hint_username_with_phone else R.string.hint_username
+            )
         }
 
         loginUserModel = LoginUserModel(mBinding.editTextUsername, mBinding.editTextPassword)
