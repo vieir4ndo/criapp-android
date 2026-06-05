@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         tools:text="Title"
         android:text=""
-        android:textSize="30dp"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center"/>
