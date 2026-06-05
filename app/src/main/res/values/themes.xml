@@ -22,6 +22,20 @@
         <item name="android:textColorHint">#808080</item>
     </style>
 
+    <style name="CRIApp.PasswordField" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@android:color/white</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="hintEnabled">false</item>
+        <item name="shapeAppearance">@style/CRIApp.RoundedCorner</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="CRIApp.RoundedCorner">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15dp</item>
+    </style>
+
     <style name="CRIApp.Spinner">
         <item name="android:background">@drawable/spinner_background</item>
         <item name="android:popupBackground">@drawable/spinner_popup_background</item>
