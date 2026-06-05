@@ -123,16 +123,16 @@ class ViewFactory {
             val shape = GradientDrawable()
             shape.shape = GradientDrawable.RECTANGLE
             shape.cornerRadius = resources.getDimension(R.dimen.border_radius)
-            shape.setColor(ContextCompat.getColor(context, android.R.color.holo_green_dark))
+            shape.setColor(ContextCompat.getColor(context, android.R.color.holo_purple))
             button.background = shape
 
-            button.text = "\u2713 Para $childName"
+            button.text = "Para $childName"
 
             button.setOnClickListener {
                 val msg = context.getString(R.string.child_answered_today_info, childName)
                 DialogBuilder(context)
                     .withCancelable()
-                    .withTitle("\u2713 $childName")
+                    .withTitle(context.getString(R.string.dialog_success_title))
                     .withMessage(msg)
                     .withSubmitButtonMessage(context.getString(R.string.dialog_accept_button))
                     .withSubmitButtonDismissing()

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ChildRepositoryImpl
@@ -13,7 +14,7 @@ import com.example.criapp.presentation.child.ChildViewModelFactory
 import com.example.criapp.presentation.common.UiState
 import com.example.criapp.services.DialogFactory
 
-class ChildActivity : AppCompatActivity() {
+class ChildActivity : BaseActivity() {
 
     private val viewModel: ChildViewModel by viewModels {
         ChildViewModelFactory(ChildRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))

@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.example.criapp.data.local.PreferencesManager
@@ -24,7 +25,7 @@ import com.example.criapp.presentation.question.QuestionViewModelFactory
 import com.example.criapp.services.DialogFactory
 import com.google.gson.Gson
 
-class AnswerActivity : AppCompatActivity() {
+class AnswerActivity : BaseActivity() {
 
     private val viewModel: QuestionViewModel by viewModels {
         val service = RetrofitProvider.create(PreferencesManager(this))

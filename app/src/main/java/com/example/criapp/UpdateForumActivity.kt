@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ForumRepositoryImpl
@@ -17,7 +18,7 @@ import com.example.criapp.presentation.forum.ForumViewModel
 import com.example.criapp.presentation.forum.ForumViewModelFactory
 import com.google.gson.Gson
 
-class UpdateForumActivity : AppCompatActivity() {
+class UpdateForumActivity : BaseActivity() {
 
     private val viewModel: ForumViewModel by viewModels {
         ForumViewModelFactory(ForumRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))

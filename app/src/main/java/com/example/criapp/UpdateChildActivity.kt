@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ChildRepositoryImpl
@@ -20,7 +21,7 @@ import com.example.criapp.services.DialogFactory
 import com.example.criapp.services.SpinnerHelper
 import com.google.gson.Gson
 
-class UpdateChildActivity : AppCompatActivity() {
+class UpdateChildActivity : BaseActivity() {
 
     private lateinit var mBinding: ActivityUpdateChildBinding
     private val viewModel: ChildViewModel by viewModels {

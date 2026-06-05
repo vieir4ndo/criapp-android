@@ -7,6 +7,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ChildBookRepositoryImpl
@@ -18,7 +19,7 @@ import com.example.criapp.presentation.childbook.ChildBookViewModelFactory
 import com.example.criapp.presentation.common.UiState
 import com.example.criapp.services.DialogFactory
 
-class ChildBookActivity : AppCompatActivity() {
+class ChildBookActivity : BaseActivity() {
 
     private val childViewModel: ChildViewModel by viewModels {
         ChildViewModelFactory(ChildRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))

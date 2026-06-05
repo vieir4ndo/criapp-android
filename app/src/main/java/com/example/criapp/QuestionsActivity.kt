@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ChildRepositoryImpl
@@ -14,7 +15,7 @@ import com.example.criapp.presentation.question.QuestionViewModel
 import com.example.criapp.presentation.question.QuestionViewModelFactory
 import com.example.criapp.services.DialogFactory
 
-class QuestionsActivity : AppCompatActivity() {
+class QuestionsActivity : BaseActivity() {
 
     private val viewModel: QuestionViewModel by viewModels {
         val service = RetrofitProvider.create(PreferencesManager(this))
@@ -45,7 +46,7 @@ class QuestionsActivity : AppCompatActivity() {
                         if (child.answeredToday) {
                             view.addView(ViewFactory.generateDoneButton(this, resources, child.name))
                         } else {
-                            view.addView(ViewFactory.generateButton(this, resources, "Para " + child.name, child.toString(), AnswerActivity::class.java, "child"))
+                            view.addView(ViewFactory.generateButton(this, resources, "Para ${child.name}", child.toString(), AnswerActivity::class.java, "child"))
                         }
                     }
                 }

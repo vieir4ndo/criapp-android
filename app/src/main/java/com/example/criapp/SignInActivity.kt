@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.AuthRepositoryImpl
@@ -18,7 +19,7 @@ import com.example.criapp.presentation.common.UiState
 import com.example.criapp.services.DialogFactory
 import com.example.criapp.services.FeatureFlagsManager
 
-class SignInActivity : AppCompatActivity() {
+class SignInActivity : BaseActivity() {
 
     private val prefsManager by lazy { PreferencesManager(this) }
     private val viewModel: SignInViewModel by viewModels {

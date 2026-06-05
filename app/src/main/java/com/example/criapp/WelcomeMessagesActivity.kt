@@ -6,10 +6,11 @@ import android.view.View
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.google.android.material.progressindicator.LinearProgressIndicator
 
-class WelcomeMessagesActivity : AppCompatActivity() {
+class WelcomeMessagesActivity : BaseActivity() {
 
     private var welcomeMessages: Array<String>? = null
     private var currentMessage = -1

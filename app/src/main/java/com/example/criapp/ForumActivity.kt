@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.adapters.CommentAdapter
@@ -22,7 +23,7 @@ import com.example.criapp.presentation.forum.ForumViewModelFactory
 import com.example.criapp.services.DialogFactory
 import com.google.gson.Gson
 
-class ForumActivity : AppCompatActivity() {
+class ForumActivity : BaseActivity() {
 
     private val viewModel: ForumViewModel by viewModels {
         ForumViewModelFactory(ForumRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))

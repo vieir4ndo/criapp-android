@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.adapters.ForumAdapter
@@ -17,7 +18,7 @@ import com.example.criapp.presentation.forum.ForumViewModel
 import com.example.criapp.presentation.forum.ForumViewModelFactory
 import com.example.criapp.services.DialogFactory
 
-class ForumsActivity : AppCompatActivity() {
+class ForumsActivity : BaseActivity() {
 
     private val viewModel: ForumViewModel by viewModels {
         ForumViewModelFactory(ForumRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))

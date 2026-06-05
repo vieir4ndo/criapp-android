@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.ProfileRepositoryImpl
@@ -19,7 +20,7 @@ import com.example.criapp.services.DateHelper
 import com.example.criapp.services.DialogFactory
 import com.example.criapp.services.SpinnerHelper
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : BaseActivity() {
 
     private lateinit var mBinding: ActivityProfileBinding
     private val viewModel: ProfileViewModel by viewModels {

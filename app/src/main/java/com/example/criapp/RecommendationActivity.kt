@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.criapp.adapters.RecommendationAdapter
@@ -19,7 +20,7 @@ import com.example.criapp.presentation.common.UiState
 import com.example.criapp.presentation.recommendation.RecommendationViewModel
 import com.example.criapp.presentation.recommendation.RecommendationViewModelFactory
 
-class RecommendationActivity : AppCompatActivity() {
+class RecommendationActivity : BaseActivity() {
 
     private val viewModel: RecommendationViewModel by viewModels {
         RecommendationViewModelFactory(RecommendationRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))

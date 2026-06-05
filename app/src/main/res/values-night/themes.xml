@@ -4,6 +4,9 @@
         <item name="colorAccent">@color/purple</item>
         <item name="colorSecondary">@color/dark_blue</item>
         <item name="colorPrimary">@color/light_blue</item>
+        <item name="android:statusBarColor">@color/purple</item>
+        <item name="android:navigationBarColor">@color/dark_purple</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="CRIApp" />

@@ -6,6 +6,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.adapters.NotificationAdapter
@@ -17,7 +18,7 @@ import com.example.criapp.presentation.common.UiState
 import com.example.criapp.presentation.notification.NotificationViewModel
 import com.example.criapp.presentation.notification.NotificationViewModelFactory
 
-class NotificationActivity : AppCompatActivity() {
+class NotificationActivity : BaseActivity() {
 
     private val viewModel: NotificationViewModel by viewModels {
         NotificationViewModelFactory(NotificationRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))

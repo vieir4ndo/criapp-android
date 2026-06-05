@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.adapters.AudiovisualResourceAdapter
@@ -14,7 +15,7 @@ import com.example.criapp.presentation.common.UiState
 import com.example.criapp.presentation.resource.ResourceViewModel
 import com.example.criapp.presentation.resource.ResourceViewModelFactory
 
-class AudioVisualResourcesActivity : AppCompatActivity() {
+class AudioVisualResourcesActivity : BaseActivity() {
 
     private val viewModel: ResourceViewModel by viewModels {
         ResourceViewModelFactory(ResourceRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))

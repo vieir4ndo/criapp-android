@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import com.example.criapp.data.local.PreferencesManager
 import com.example.criapp.data.remote.RetrofitProvider
 import com.example.criapp.data.repository.AuthRepositoryImpl
@@ -19,7 +20,7 @@ import com.example.criapp.services.DialogFactory
 import com.example.criapp.services.FeatureFlagsManager
 import com.example.criapp.services.SpinnerHelper
 
-class SignUpActivity : AppCompatActivity() {
+class SignUpActivity : BaseActivity() {
 
     private lateinit var mBinding: ActivitySignUpBinding
     private val viewModel: SignUpViewModel by viewModels {

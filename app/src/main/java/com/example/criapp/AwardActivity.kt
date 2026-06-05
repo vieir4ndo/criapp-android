@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.criapp.adapters.AwardAdapter
@@ -18,7 +19,7 @@ import com.example.criapp.presentation.award.AwardViewModel
 import com.example.criapp.presentation.award.AwardViewModelFactory
 import com.example.criapp.presentation.common.UiState
 
-class AwardActivity : AppCompatActivity() {
+class AwardActivity : BaseActivity() {
 
     private val viewModel: AwardViewModel by viewModels {
         AwardViewModelFactory(AwardRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))

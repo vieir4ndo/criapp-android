@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.criapp.base.BaseActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.adapters.FaqAdapter
@@ -14,7 +15,7 @@ import com.example.criapp.presentation.common.UiState
 import com.example.criapp.presentation.faq.FaqViewModel
 import com.example.criapp.presentation.faq.FaqViewModelFactory
 
-class FaqActivity : AppCompatActivity() {
+class FaqActivity : BaseActivity() {
 
     private val viewModel: FaqViewModel by viewModels {
         FaqViewModelFactory(FaqRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
