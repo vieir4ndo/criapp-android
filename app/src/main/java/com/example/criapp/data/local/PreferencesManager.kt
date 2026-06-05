@@ -16,12 +16,33 @@ class PreferencesManager(context: Context) {
 
     fun getUserName(): String = prefs.getString(KEY_USER_NAME, "") ?: ""
 
-    fun saveAuthData(token: String, expiresIn: String, userId: String?, userName: String?) {
+    fun getRefreshToken(): String = prefs.getString(KEY_REFRESH_TOKEN, "") ?: ""
+
+    fun saveAuthData(
+        token: String,
+        expiresIn: String,
+        userId: String?,
+        userName: String?,
+        refreshToken: String,
+        refreshTokenExpiresIn: String
+    ) {
         prefs.edit().apply {
             putString(KEY_TOKEN, token)
             putString(KEY_EXPIRES_IN, expiresIn)
             putString(KEY_USER_ID, userId)
             putString(KEY_USER_NAME, userName)
+            putString(KEY_REFRESH_TOKEN, refreshToken)
+            putString(KEY_REFRESH_TOKEN_EXPIRES_IN, refreshTokenExpiresIn)
+            apply()
+        }
+    }
+
+    fun updateTokens(token: String, expiresIn: String, refreshToken: String, refreshTokenExpiresIn: String) {
+        prefs.edit().apply {
+            putString(KEY_TOKEN, token)
+            putString(KEY_EXPIRES_IN, expiresIn)
+            putString(KEY_REFRESH_TOKEN, refreshToken)
+            putString(KEY_REFRESH_TOKEN_EXPIRES_IN, refreshTokenExpiresIn)
             apply()
         }
     }
@@ -53,6 +74,8 @@ class PreferencesManager(context: Context) {
         private const val APP_STATE_PREFS_NAME = "AppState"
         private const val KEY_TOKEN = "token"
         private const val KEY_EXPIRES_IN = "token_expires_in"
+        private const val KEY_REFRESH_TOKEN = "refresh_token"
+        private const val KEY_REFRESH_TOKEN_EXPIRES_IN = "refresh_token_expires_in"
         private const val KEY_USER_ID = "user_id"
         private const val KEY_USER_NAME = "user_name"
         private const val KEY_ONBOARDING_COMPLETED = "onboarding_completed"

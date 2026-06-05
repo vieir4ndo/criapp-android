@@ -10,7 +10,7 @@ object RetrofitProvider {
 
     fun create(prefsManager: PreferencesManager): CriAppApiService {
         val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(AuthInterceptor(prefsManager))
+            .addInterceptor(AuthInterceptor(prefsManager, BuildConfig.BASE_URL))
             .build()
 
         return Retrofit.Builder()

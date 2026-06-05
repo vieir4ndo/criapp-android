@@ -87,7 +87,9 @@ class SignInActivity : AppCompatActivity() {
                         state.data.token,
                         state.data.expiresIn,
                         state.data.user?.id,
-                        state.data.user?.name
+                        state.data.user?.name,
+                        state.data.refreshToken,
+                        state.data.refreshTokenExpiresIn
                     )
                     val destination = if (prefsManager.hasCompletedOnboarding(state.data.user?.id ?: "")) {
                         MenuActivity::class.java

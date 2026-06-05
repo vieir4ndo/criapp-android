@@ -2,6 +2,7 @@ package com.example.criapp.data.remote
 
 import com.example.criapp.models.requests.CreateCheckpointRequest
 import com.example.criapp.models.requests.LoginUserRequest
+import com.example.criapp.models.requests.RefreshTokenRequest
 import com.example.criapp.models.responses.AudiovisualResourceResponse
 import com.example.criapp.models.responses.AwardResponse
 import com.example.criapp.models.responses.ChildBookSummaryResponse
@@ -33,16 +34,19 @@ interface CriAppApiService {
 
     // ── Authentication ──────────────────────────────────────────────────────
 
-    @POST("user/login")
+    @POST("auth/login")
     suspend fun login(@Body request: LoginUserRequest): ApiResponse<List<LoginUserResponse>>
+
+    @POST("auth/refresh-token")
+    suspend fun refreshToken(@Body request: RefreshTokenRequest): ApiResponse<List<LoginUserResponse>>
 
     @POST("user")
     suspend fun createUser(@Body body: RequestBody): ApiResponse<List<Any>>
 
-    @POST("user/forgot-password")
+    @POST("auth/forgot-password")
     suspend fun forgotPassword(@Body body: RequestBody): ApiResponse<List<Any>>
 
-    @POST("user/reset-password")
+    @POST("auth/reset-password")
     suspend fun resetPassword(@Body body: RequestBody): ApiResponse<List<Any>>
 
     // ── Profile ─────────────────────────────────────────────────────────────
