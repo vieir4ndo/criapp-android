@@ -62,6 +62,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
     implementation("com.airbnb.android:lottie:5.2.0")
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("androidx.work:work-runtime-ktx:2.8.1")

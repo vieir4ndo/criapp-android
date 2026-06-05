@@ -64,6 +64,7 @@
                 android:padding="10dp"
                 android:text="@string/errors"
                 android:background="@drawable/card_red"
+                android:visibility="gone"
                 />
 
             <TextView
