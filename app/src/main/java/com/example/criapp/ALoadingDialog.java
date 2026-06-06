@@ -1,5 +1,6 @@
 package com.example.criapp;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -12,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.facebook.shimmer.Shimmer;
@@ -28,9 +30,11 @@ public class ALoadingDialog extends Dialog {
     private ShimmerFrameLayout shimmerBar;
     private View fullScreenLoader;
     private LottieAnimationView lottieView;
+    private final Activity activity;
 
     public ALoadingDialog(@NonNull Context context) {
         super(context);
+        activity = context instanceof Activity ? (Activity) context : null;
         Window window = getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -95,6 +99,29 @@ public class ALoadingDialog extends Dialog {
                 .setDuration(400)
                 .withEndAction(() -> shimmerBar.setVisibility(View.GONE))
                 .start();
+        applyLoadingSystemBarsStyle();
+    }
+
+    private void applyLoadingSystemBarsStyle() {
+        if (activity == null) return;
+        Window activityWindow = activity.getWindow();
+        activityWindow.setStatusBarColor(Color.parseColor("#CCFFFFFF"));
+        activityWindow.setNavigationBarColor(Color.parseColor("#CCFFFFFF"));
+        WindowInsetsControllerCompat insetsController =
+                new WindowInsetsControllerCompat(activityWindow, activityWindow.getDecorView());
+        insetsController.setAppearanceLightStatusBars(true);
+        insetsController.setAppearanceLightNavigationBars(true);
+    }
+
+    private void restoreSystemBarsStyle() {
+        if (activity == null) return;
+        Window activityWindow = activity.getWindow();
+        activityWindow.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.purple));
+        activityWindow.setNavigationBarColor(ContextCompat.getColor(getContext(), R.color.dark_purple));
+        WindowInsetsControllerCompat insetsController =
+                new WindowInsetsControllerCompat(activityWindow, activityWindow.getDecorView());
+        insetsController.setAppearanceLightStatusBars(false);
+        insetsController.setAppearanceLightNavigationBars(false);
     }
 
     @Override
@@ -104,6 +131,7 @@ public class ALoadingDialog extends Dialog {
         if (isShowing()) {
             shimmerBar.stopShimmer();
             lottieView.cancelAnimation();
+            restoreSystemBarsStyle();
             super.cancel();
         }
     }
