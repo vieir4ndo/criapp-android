@@ -22,7 +22,7 @@
         android:id="@+id/full_screen_loader"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient_purple_to_holo_purple_background"
+        android:background="@drawable/card_white_translucent"
         android:visibility="gone">
 
         <com.airbnb.lottie.LottieAnimationView
