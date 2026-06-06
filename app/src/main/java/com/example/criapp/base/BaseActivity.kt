@@ -1,6 +1,5 @@
 package com.example.criapp.base
 
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
@@ -9,6 +8,10 @@ import com.example.criapp.R
 
 open class BaseActivity : AppCompatActivity() {
 
+    open val statusBarColorRes: Int get() = R.color.purple
+    open val navigationBarColorRes: Int get() = R.color.dark_purple
+    open val lightStatusBars: Boolean get() = false
+    open val lightNavigationBars: Boolean get() = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         applySystemBarsColors()
@@ -16,13 +19,11 @@ open class BaseActivity : AppCompatActivity() {
 
     private fun applySystemBarsColors() {
         WindowCompat.setDecorFitsSystemWindows(window, true)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.statusBarColor = getColor(R.color.purple)
-            window.navigationBarColor = getColor(R.color.dark_purple)
-        }
+        window.statusBarColor = getColor(statusBarColorRes)
+        window.navigationBarColor = getColor(navigationBarColorRes)
         WindowInsetsControllerCompat(window, window.decorView).apply {
-            isAppearanceLightStatusBars = false
-            isAppearanceLightNavigationBars = false
+            isAppearanceLightStatusBars = lightStatusBars
+            isAppearanceLightNavigationBars = lightNavigationBars
         }
     }
 }

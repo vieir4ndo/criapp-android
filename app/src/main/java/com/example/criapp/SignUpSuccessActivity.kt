@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.base.BaseActivity
 
 class SignUpSuccessActivity : BaseActivity() {
+
+    override val navigationBarColorRes: Int get() = R.color.light_blue
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up_success)
-        window.setNavigationBarColor(resources.getColor(R.color.light_blue))
     }
 
     fun onButtonClick(view: View?) {

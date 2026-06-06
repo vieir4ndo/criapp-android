@@ -21,6 +21,8 @@ import com.example.criapp.services.FeatureFlagsManager
 
 class SignInActivity : BaseActivity() {
 
+    override val navigationBarColorRes: Int get() = R.color.light_blue
+
     private val prefsManager by lazy { PreferencesManager(this) }
     private val viewModel: SignInViewModel by viewModels {
         SignInViewModelFactory(AuthRepositoryImpl(RetrofitProvider.create(prefsManager)))
@@ -40,8 +42,6 @@ class SignInActivity : BaseActivity() {
 
         mBinding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-
-        window.setNavigationBarColor(resources.getColor(R.color.light_blue))
 
         aLoadingDialog = ALoadingDialog(this)
 

@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
+import com.example.criapp.base.BaseActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.facebook.shimmer.Shimmer;
@@ -105,8 +106,8 @@ public class ALoadingDialog extends Dialog {
     private void applyLoadingSystemBarsStyle() {
         if (activity == null) return;
         Window activityWindow = activity.getWindow();
-        activityWindow.setStatusBarColor(Color.parseColor("#CCFFFFFF"));
-        activityWindow.setNavigationBarColor(Color.parseColor("#CCFFFFFF"));
+        activityWindow.setStatusBarColor(Color.parseColor("#E6FFFFFF"));
+        activityWindow.setNavigationBarColor(Color.parseColor("#E6FFFFFF"));
         WindowInsetsControllerCompat insetsController =
                 new WindowInsetsControllerCompat(activityWindow, activityWindow.getDecorView());
         insetsController.setAppearanceLightStatusBars(true);
@@ -116,12 +117,15 @@ public class ALoadingDialog extends Dialog {
     private void restoreSystemBarsStyle() {
         if (activity == null) return;
         Window activityWindow = activity.getWindow();
-        activityWindow.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.purple));
-        activityWindow.setNavigationBarColor(ContextCompat.getColor(getContext(), R.color.dark_purple));
-        WindowInsetsControllerCompat insetsController =
-                new WindowInsetsControllerCompat(activityWindow, activityWindow.getDecorView());
-        insetsController.setAppearanceLightStatusBars(false);
-        insetsController.setAppearanceLightNavigationBars(false);
+        if (activity instanceof BaseActivity) {
+            BaseActivity base = (BaseActivity) activity;
+            activityWindow.setStatusBarColor(ContextCompat.getColor(activity, base.getStatusBarColorRes()));
+            activityWindow.setNavigationBarColor(ContextCompat.getColor(activity, base.getNavigationBarColorRes()));
+            WindowInsetsControllerCompat insetsController =
+                    new WindowInsetsControllerCompat(activityWindow, activityWindow.getDecorView());
+            insetsController.setAppearanceLightStatusBars(base.getLightStatusBars());
+            insetsController.setAppearanceLightNavigationBars(base.getLightNavigationBars());
+        }
     }
 
     @Override

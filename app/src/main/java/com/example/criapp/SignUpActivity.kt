@@ -22,6 +22,8 @@ import com.example.criapp.services.SpinnerHelper
 
 class SignUpActivity : BaseActivity() {
 
+    override val navigationBarColorRes: Int get() = R.color.light_blue
+
     private lateinit var mBinding: ActivitySignUpBinding
     private val viewModel: SignUpViewModel by viewModels {
         SignUpViewModelFactory(AuthRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
@@ -36,8 +38,6 @@ class SignUpActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-
-        window.setNavigationBarColor(resources.getColor(R.color.light_blue))
 
         aLoadingDialog = ALoadingDialog(this)
 

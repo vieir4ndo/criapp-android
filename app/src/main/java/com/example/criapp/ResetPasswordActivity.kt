@@ -21,6 +21,8 @@ import com.example.criapp.services.FeatureFlagsManager
 
 class ResetPasswordActivity : BaseActivity() {
 
+    override val navigationBarColorRes: Int get() = R.color.light_blue
+
     private val viewModel: ResetPasswordViewModel by viewModels {
         ResetPasswordViewModelFactory(AuthRepositoryImpl(RetrofitProvider.create(PreferencesManager(this))))
     }
@@ -32,8 +34,6 @@ class ResetPasswordActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityResetPasswordBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-
-        window.setNavigationBarColor(resources.getColor(R.color.light_blue))
 
         aLoadingDialog = ALoadingDialog(this)
 
