@@ -1,7 +1,10 @@
 package com.example.criapp
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.DecelerateInterpolator
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -47,8 +50,21 @@ class ChildBookActivity : BaseActivity() {
         childBookViewModel.childBookState.observe(this) { state ->
             if (state is UiState.Success) {
                 val score = state.data?.score ?: 0
-                findViewById<TextView>(R.id.scoreValue).text = "$score%"
-                findViewById<ProgressBar>(R.id.scoreProgressBar).progress = score
+                val progressBar = findViewById<ProgressBar>(R.id.scoreProgressBar)
+                val scoreValueView = findViewById<TextView>(R.id.scoreValue)
+
+                ObjectAnimator.ofInt(progressBar, "progress", 0, score).apply {
+                    duration = 1200
+                    interpolator = DecelerateInterpolator()
+                    start()
+                }
+
+                ValueAnimator.ofInt(0, score).apply {
+                    duration = 1200
+                    interpolator = DecelerateInterpolator()
+                    addUpdateListener { scoreValueView.text = "${it.animatedValue}%" }
+                    start()
+                }
             }
         }
 
