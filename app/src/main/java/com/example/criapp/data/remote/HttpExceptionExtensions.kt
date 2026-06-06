@@ -7,6 +7,9 @@ import com.google.gson.JsonParser
 import retrofit2.HttpException
 
 fun HttpException.toErrorMessage(fallback: String = CRIAppApplication.context.getString(R.string.error_unknown)): String {
+    if (code() in 500..599) {
+        return CRIAppApplication.context.getString(R.string.error_server)
+    }
     return try {
         val body = response()?.errorBody()?.string()?.takeIf { it.isNotBlank() } ?: return fallback
         @Suppress("DEPRECATION")

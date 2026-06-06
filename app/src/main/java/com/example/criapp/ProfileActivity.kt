@@ -86,7 +86,7 @@ class ProfileActivity : BaseActivity() {
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                    DialogFactory.createErrorDialog(this, state.message) { finish() }.show()
                 }
                 else -> Unit
             }

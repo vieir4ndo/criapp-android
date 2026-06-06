@@ -70,7 +70,7 @@ class ForumActivity : BaseActivity() {
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, getString(R.string.error_load_comments), Toast.LENGTH_SHORT).show()
+                    DialogFactory.createErrorDialog(this, getString(R.string.error_load_comments)) { finish() }.show()
                 }
                 else -> Unit
             }

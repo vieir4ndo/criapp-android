@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import com.example.criapp.services.DialogFactory
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.base.BaseActivity
@@ -61,7 +62,7 @@ class AwardActivity : BaseActivity() {
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, getString(R.string.error_load_awards), Toast.LENGTH_SHORT).show()
+                    DialogFactory.createErrorDialog(this, getString(R.string.error_load_awards)) { finish() }.show()
                 }
                 else -> Unit
             }

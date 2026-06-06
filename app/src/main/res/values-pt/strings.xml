@@ -178,6 +178,7 @@
     <string name="reset_password_hint_email_only">O código foi enviado para o seu e-mail. Insira-o junto com a sua nova senha.</string>
     <string name="reset_password_hint_with_phone">O código foi enviado para o seu e-mail ou celular. Insira-o junto com a sua nova senha.</string>
     <string name="error_unknown">Erro desconhecido</string>
+    <string name="error_server">Oops, algo deu errado. Por favor, tente novamente mais tarde</string>
 
     <string name="hint_username">email@exemplo.com</string>
     <string name="hint_username_with_phone">email@exemplo.com / +55 11 00000-0000</string>

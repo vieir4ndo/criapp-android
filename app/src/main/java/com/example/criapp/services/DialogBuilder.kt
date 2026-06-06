@@ -73,6 +73,11 @@ class DialogBuilder {
         return this;
     }
 
+    fun withOnDismissCallback(onDismiss: () -> Unit): DialogBuilder {
+        dialog.setOnDismissListener { onDismiss() }
+        return this
+    }
+
     fun create() : Dialog {
         val displayWidth = context.resources.displayMetrics.widthPixels
         dialog.window?.setLayout((displayWidth * 0.75).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)

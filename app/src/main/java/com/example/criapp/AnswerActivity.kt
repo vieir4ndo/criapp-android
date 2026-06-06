@@ -99,7 +99,7 @@ class AnswerActivity : BaseActivity() {
                 }
                 is UiState.Error -> {
                     progressIndicator?.isIndeterminate = false
-                    Toast.makeText(this, getString(R.string.error_load_questions), Toast.LENGTH_SHORT).show()
+                    DialogFactory.createErrorDialog(this, getString(R.string.error_load_questions)) { finish() }.show()
                 }
                 else -> Unit
             }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import com.example.criapp.services.DialogFactory
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.base.BaseActivity
@@ -61,7 +62,7 @@ class NotificationActivity : BaseActivity() {
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, getString(R.string.error_load_notifications), Toast.LENGTH_SHORT).show()
+                    DialogFactory.createErrorDialog(this, getString(R.string.error_load_notifications)) { finish() }.show()
                 }
                 else -> Unit
             }

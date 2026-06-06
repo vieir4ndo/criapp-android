@@ -2,6 +2,7 @@ package com.example.criapp
 
 import android.os.Bundle
 import android.widget.Toast
+import com.example.criapp.services.DialogFactory
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.base.BaseActivity
@@ -40,7 +41,7 @@ class FaqActivity : BaseActivity() {
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, getString(R.string.error_load_questions), Toast.LENGTH_SHORT).show()
+                    DialogFactory.createErrorDialog(this, getString(R.string.error_load_questions)) { finish() }.show()
                 }
                 else -> Unit
             }

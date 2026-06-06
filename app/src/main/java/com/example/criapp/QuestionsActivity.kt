@@ -52,7 +52,7 @@ class QuestionsActivity : BaseActivity() {
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    DialogFactory.createErrorDialog(this, state.message).show()
+                    DialogFactory.createErrorDialog(this, state.message) { finish() }.show()
                 }
                 else -> Unit
             }

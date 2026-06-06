@@ -6,14 +6,19 @@ import com.example.criapp.R
 
 class DialogFactory {
     companion object {
-        fun createErrorDialog(context : Context, message : String) : Dialog {
-            return DialogBuilder(context)
+        fun createErrorDialog(context: Context, message: String): Dialog {
+            return createErrorDialog(context, message, onDismiss = null)
+        }
+
+        fun createErrorDialog(context: Context, message: String, onDismiss: (() -> Unit)?): Dialog {
+            val builder = DialogBuilder(context)
                 .withCancelable()
                 .withTitle(context.getString(R.string.dialog_error_title))
                 .withMessage(message)
                 .withSubmitButtonMessage(context.getString(R.string.dialog_accept_button))
                 .withSubmitButtonDismissing()
-                .create()
+            if (onDismiss != null) builder.withOnDismissCallback(onDismiss)
+            return builder.create()
         }
 
         fun createSuccessDialog(context : Context, message : String) : Dialog {
