@@ -58,10 +58,8 @@ class NotificationViewModel(private val repository: INotificationRepository) : V
             if (result.isSuccess) {
                 val data = result.getOrThrow()
                 if (data.size < PAGE_SIZE) isLastPage = true
-                if (data.isNotEmpty()) {
-                    currentPage++
-                    _loadMoreState.value = UiState.Success(data)
-                }
+                if (data.isNotEmpty()) currentPage++
+                _loadMoreState.value = UiState.Success(data)
             } else {
                 _loadMoreState.value = UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))
             }

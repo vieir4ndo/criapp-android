@@ -73,6 +73,7 @@ class NotificationAdapter(
     }
 
     fun setFooterState(state: FooterState) {
+        if (footerState == state) return
         val wasHidden = footerState == FooterState.HIDDEN
         val isHidden = state == FooterState.HIDDEN
         footerState = state
