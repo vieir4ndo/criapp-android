@@ -86,9 +86,8 @@ class AnswerActivity : BaseActivity() {
 
         viewModel.questionsState.observe(this) { state ->
             when (state) {
-                is UiState.Loading -> progressIndicator?.isIndeterminate = true
+                is UiState.Loading -> Unit
                 is UiState.Success -> {
-                    progressIndicator?.isIndeterminate = false
                     questions = state.data
                     if (questions.isEmpty()) {
                         DialogFactory.createSuccessDialog(this, getString(R.string.all_questions_answered_today, child.name)).show()
@@ -97,7 +96,6 @@ class AnswerActivity : BaseActivity() {
                     }
                 }
                 is UiState.Error -> {
-                    progressIndicator?.isIndeterminate = false
                     DialogFactory.createErrorDialog(this, getString(R.string.error_load_questions)) { finish() }.show()
                 }
                 else -> Unit

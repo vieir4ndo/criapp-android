@@ -38,7 +38,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:indeterminate="false"
-        android:progress="20"
+        android:progress="0"
         app:trackThickness="6dp"
         app:indicatorColor="@color/white"
         app:trackColor="#44FFFFFF"
