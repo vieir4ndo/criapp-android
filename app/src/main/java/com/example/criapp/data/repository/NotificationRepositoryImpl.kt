@@ -3,6 +3,7 @@ package com.example.criapp.data.repository
 import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.data.remote.toErrorMessage
 import com.example.criapp.domain.repository.INotificationRepository
+import com.example.criapp.models.responses.NotificationHistoryResponse
 import com.example.criapp.models.responses.NotificationResponse
 import retrofit2.HttpException
 
@@ -23,11 +24,13 @@ class NotificationRepositoryImpl(private val apiService: CriAppApiService) : INo
         }
     }
 
-    override suspend fun getNotificationHistory(page: Int, pageSize: Int): Result<List<NotificationResponse>> {
+    override suspend fun getNotificationHistory(page: Int, pageSize: Int): Result<NotificationHistoryResponse> {
         return try {
             val response = apiService.getNotificationHistory(page, pageSize)
             if (response.success) {
-                Result.success(response.data ?: emptyList())
+                val history = response.data?.firstOrNull()
+                    ?: return Result.failure(Exception("Unknown error"))
+                Result.success(history)
             } else {
                 Result.failure(Exception(response.Messages?.joinToString("\n") ?: "Unknown error"))
             }

@@ -3,7 +3,6 @@ package com.example.criapp
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import com.example.criapp.services.DialogFactory
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -77,7 +76,7 @@ class NotificationActivity : BaseActivity() {
                 }
                 is UiState.Error -> {
                     adapter?.setFooterState(if (viewModel.isLastPage) FooterState.HIDDEN else FooterState.BUTTON)
-                    Toast.makeText(this, getString(R.string.error_load_notifications), Toast.LENGTH_SHORT).show()
+                    showErrorSnackbar(getString(R.string.error_load_notifications))
                 }
                 else -> Unit
             }
@@ -86,7 +85,7 @@ class NotificationActivity : BaseActivity() {
         viewModel.markReadState.observe(this) { state ->
             if (state is UiState.Success) {
                 adapter?.updateItem(state.data)
-                Toast.makeText(this, getString(R.string.notification_marked_as_read), Toast.LENGTH_SHORT).show()
+                showSuccessSnackbar(getString(R.string.notification_marked_as_read))
             }
         }
 

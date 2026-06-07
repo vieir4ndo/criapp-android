@@ -2,7 +2,6 @@ package com.example.criapp
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.base.BaseActivity
@@ -56,12 +55,11 @@ class UpdateForumActivity : BaseActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, getString(R.string.forum_updated_success), Toast.LENGTH_SHORT).show()
                     finish()
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, getString(R.string.error_save_forum), Toast.LENGTH_SHORT).show()
+                    showErrorSnackbar(getString(R.string.error_save_forum))
                 }
                 else -> Unit
             }

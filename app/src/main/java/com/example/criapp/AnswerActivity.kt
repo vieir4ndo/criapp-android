@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.base.BaseActivity
@@ -119,7 +118,7 @@ class AnswerActivity : BaseActivity() {
                     }
                 }
                 is UiState.Error -> {
-                    Toast.makeText(this, getString(R.string.error_save_answer), Toast.LENGTH_SHORT).show()
+                    showErrorSnackbar(getString(R.string.error_save_answer))
                 }
                 else -> Unit
             }

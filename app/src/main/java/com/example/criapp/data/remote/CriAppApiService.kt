@@ -8,6 +8,7 @@ import com.example.criapp.models.responses.AwardResponse
 import com.example.criapp.models.responses.ChildBookSummaryResponse
 import com.example.criapp.models.responses.ChildResponse
 import com.example.criapp.models.responses.RecommendationResponse
+import com.example.criapp.models.responses.NotificationHistoryResponse
 import com.example.criapp.models.responses.NotificationResponse
 import com.example.criapp.models.responses.CommentResponse
 import com.example.criapp.models.responses.FeatureFlagsResponse
@@ -116,7 +117,7 @@ interface CriAppApiService {
     suspend fun deleteComment(@Path("id") id: String): ApiResponse<List<Any>>
 
     // ── Child Book ──────────────────────────────────────────────────────
-    @GET("child/{childId}/book/score")
+    @GET("child/{childId}/book")
     suspend fun getChildBookScore(@Path("childId") childId: String): ApiResponse<List<ChildBookSummaryResponse>>
 
     // ── Awards ──────────────────────────────────────────────────────
@@ -143,7 +144,7 @@ interface CriAppApiService {
     suspend fun getNotificationHistory(
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
-    ): ApiResponse<List<NotificationResponse>>
+    ): ApiResponse<List<NotificationHistoryResponse>>
 
     @PATCH("notifications/{id}/delivered")
     suspend fun markNotificationDelivered(@Path("id") id: String): ApiResponse<List<Any>>

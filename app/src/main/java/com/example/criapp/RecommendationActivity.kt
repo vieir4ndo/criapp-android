@@ -5,7 +5,6 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import com.example.criapp.services.DialogFactory
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -79,13 +78,13 @@ class RecommendationActivity : BaseActivity() {
                 }
                 is UiState.Success -> {
                     setAdapterButtonsEnabled(true)
-                    Toast.makeText(this, getString(R.string.checkpoint_saved), Toast.LENGTH_SHORT).show()
+                    showSuccessSnackbar(getString(R.string.checkpoint_saved))
                     pendingPage = viewPager.currentItem
                     viewModel.loadRecommendations(childId)
                 }
                 is UiState.Error -> {
                     setAdapterButtonsEnabled(true)
-                    Toast.makeText(this, getString(R.string.error_save_checkpoint), Toast.LENGTH_SHORT).show()
+                    showErrorSnackbar(getString(R.string.error_save_checkpoint))
                 }
                 else -> Unit
             }

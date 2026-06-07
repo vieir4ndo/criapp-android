@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.criapp.domain.repository.INotificationRepository
+import com.example.criapp.models.responses.NotificationHistoryResponse
 import com.example.criapp.models.responses.NotificationResponse
 import com.example.criapp.presentation.common.UiState
 import kotlinx.coroutines.launch
@@ -39,9 +40,9 @@ class NotificationViewModel(private val repository: INotificationRepository) : V
         viewModelScope.launch {
             val result = repository.getNotificationHistory(currentPage, PAGE_SIZE)
             if (result.isSuccess) {
-                val data = result.getOrThrow()
-                if (data.size < PAGE_SIZE) isLastPage = true
-                _state.value = UiState.Success(data)
+                val history = result.getOrThrow()
+                isLastPage = history.page * history.pageSize >= history.totalCount
+                _state.value = UiState.Success(history.items)
             } else {
                 _state.value = UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))
             }
@@ -56,10 +57,10 @@ class NotificationViewModel(private val repository: INotificationRepository) : V
             val result = repository.getNotificationHistory(currentPage + 1, PAGE_SIZE)
             isLoadingMore = false
             if (result.isSuccess) {
-                val data = result.getOrThrow()
-                if (data.size < PAGE_SIZE) isLastPage = true
-                if (data.isNotEmpty()) currentPage++
-                _loadMoreState.value = UiState.Success(data)
+                val history = result.getOrThrow()
+                isLastPage = history.page * history.pageSize >= history.totalCount
+                if (history.items.isNotEmpty()) currentPage++
+                _loadMoreState.value = UiState.Success(history.items)
             } else {
                 _loadMoreState.value = UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))
             }

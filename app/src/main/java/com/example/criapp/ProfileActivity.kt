@@ -3,7 +3,6 @@ package com.example.criapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.base.BaseActivity
@@ -97,7 +96,7 @@ class ProfileActivity : BaseActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, getString(R.string.profile_updated_success), Toast.LENGTH_SHORT).show()
+                    showSuccessSnackbar(getString(R.string.profile_updated_success))
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()

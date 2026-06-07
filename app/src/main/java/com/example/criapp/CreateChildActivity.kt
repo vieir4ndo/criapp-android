@@ -2,7 +2,6 @@ package com.example.criapp
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.base.BaseActivity
@@ -65,7 +64,6 @@ class CreateChildActivity : BaseActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, getString(R.string.child_created_success), Toast.LENGTH_SHORT).show()
                     finish()
                 }
                 is UiState.Error -> {

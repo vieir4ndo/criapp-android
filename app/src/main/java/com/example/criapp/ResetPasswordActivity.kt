@@ -3,7 +3,6 @@ package com.example.criapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.criapp.base.BaseActivity
@@ -63,10 +62,15 @@ class ResetPasswordActivity : BaseActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    Toast.makeText(this, getString(R.string.password_updated_success), Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, SignInActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    })
+                    DialogFactory.createConfirmationDialog(
+                        this,
+                        getString(R.string.dialog_success_title),
+                        getString(R.string.password_updated_success)
+                    ) {
+                        startActivity(Intent(this, SignInActivity::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        })
+                    }.show()
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
