@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -52,6 +53,8 @@ class ChildBookActivity : BaseActivity() {
                 val score = state.data?.score ?: 0
                 val progressBar = findViewById<ProgressBar>(R.id.scoreProgressBar)
                 val scoreValueView = findViewById<TextView>(R.id.scoreValue)
+                val heartFill = findViewById<ImageView>(R.id.heartFill)
+                val clipDrawable = heartFill.drawable as android.graphics.drawable.ClipDrawable
 
                 ObjectAnimator.ofInt(progressBar, "progress", 0, score).apply {
                     duration = 1200
@@ -62,7 +65,11 @@ class ChildBookActivity : BaseActivity() {
                 ValueAnimator.ofInt(0, score).apply {
                     duration = 1200
                     interpolator = DecelerateInterpolator()
-                    addUpdateListener { scoreValueView.text = "${it.animatedValue}%" }
+                    addUpdateListener {
+                        val v = it.animatedValue as Int
+                        scoreValueView.text = "$v%"
+                        clipDrawable.level = v * 100
+                    }
                     start()
                 }
             }
