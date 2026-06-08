@@ -7,6 +7,17 @@
         <item name="android:statusBarColor">@color/purple</item>
         <item name="android:navigationBarColor">@color/dark_purple</item>
         <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Dark surface tokens -->
+        <item name="colorSurface">#1A0D2E</item>
+        <item name="colorOnSurface">#F0EEFF</item>
+        <item name="colorSurfaceVariant">#2B1A40</item>
+        <item name="colorOnSurfaceVariant">#C8BFDD</item>
+        <item name="colorOnBackground">#F0EEFF</item>
+        <item name="android:windowBackground">#120921</item>
+
+        <!-- Evitar flash branco no arranque -->
+        <item name="android:windowIsTranslucent">false</item>
     </style>
 
     <style name="CRIApp" />
@@ -62,18 +73,20 @@
         <item name="android:ellipsize">end</item>
     </style>
 
-    <style name="CRIApp_DatePickerDialog" parent="Theme.MaterialComponents.Light.Dialog">
+    <style name="CRIApp_DatePickerDialog" parent="Theme.MaterialComponents.Dialog">
         <item name="colorPrimary">@color/purple</item>
         <item name="colorAccent">@color/purple</item>
-        <item name="android:windowBackground">@android:color/white</item>
-        <item name="android:colorBackground">@android:color/white</item>
-        <item name="colorSurface">@android:color/white</item>
+        <item name="android:windowBackground">#1A0D2E</item>
+        <item name="android:colorBackground">#1A0D2E</item>
+        <item name="colorSurface">#1A0D2E</item>
+        <item name="colorOnSurface">#F0EEFF</item>
     </style>
 
     <style name="CRIApp_MaterialDatePicker" parent="ThemeOverlay.Material3.MaterialCalendar">
-        <item name="colorSurface">@android:color/white</item>
-        <item name="android:colorBackground">@android:color/white</item>
-        <item name="colorOnSurface">@android:color/black</item>
+        <item name="colorSurface">#1A0D2E</item>
+        <item name="android:colorBackground">#1A0D2E</item>
+        <item name="colorOnSurface">#F0EEFF</item>
+        <item name="colorOnSurfaceVariant">#C8BFDD</item>
         <item name="elevationOverlayEnabled">false</item>
         <item name="elevationOverlayColor">@android:color/transparent</item>
     </style>
