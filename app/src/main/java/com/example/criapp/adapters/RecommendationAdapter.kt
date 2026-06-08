@@ -72,10 +72,18 @@ class RecommendationAdapter(
         }
 
         holder.btnYes.setOnClickListener {
-            if (!alreadyChecked) onCheckpoint(item.id, true)
+            if (!alreadyChecked && globalEnabled) {
+                globalEnabled = false
+                notifyDataSetChanged()
+                onCheckpoint(item.id, true)
+            }
         }
         holder.btnNo.setOnClickListener {
-            if (!alreadyChecked) onCheckpoint(item.id, false)
+            if (!alreadyChecked && globalEnabled) {
+                globalEnabled = false
+                notifyDataSetChanged()
+                onCheckpoint(item.id, false)
+            }
         }
     }
 }

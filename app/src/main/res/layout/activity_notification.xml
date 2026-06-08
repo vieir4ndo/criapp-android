@@ -63,6 +63,11 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp"
+            android:background="@drawable/card_white_translucent"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:visibility="gone" />
 
     </LinearLayout>

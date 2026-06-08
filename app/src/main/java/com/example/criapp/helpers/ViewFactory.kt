@@ -55,12 +55,15 @@ class ViewFactory {
         }
 
         fun generateEmptyTextMessage(context: Context, resources: Resources, message : String = context.getString(R.string.empty_list)) : TextView {
-            val text = TextView(context);
+            val text = TextView(context)
 
-            text.text = message;
-            text.gravity = Gravity.CENTER_HORIZONTAL;
+            text.text = message
+            text.gravity = Gravity.CENTER_HORIZONTAL
             text.textSize = 20f
             text.setTextColor(ContextCompat.getColor(context, R.color.white))
+            text.background = ContextCompat.getDrawable(context, R.drawable.card_white_translucent)
+            val padding = resources.getDimensionPixelSize(R.dimen.margin_top)
+            text.setPadding(padding, padding, padding, padding)
 
             val params = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -68,10 +71,12 @@ class ViewFactory {
             )
 
             params.topMargin = resources.getDimensionPixelSize(R.dimen.margin_top)
+            params.marginStart = resources.getDimensionPixelSize(R.dimen.margin_top)
+            params.marginEnd = resources.getDimensionPixelSize(R.dimen.margin_top)
 
             text.layoutParams = params
 
-            return text;
+            return text
         }
 
         fun <T> generateAddButton(context: Context, resources: Resources, message : String, redirectTo : Class<T>) : Button {
