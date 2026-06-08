@@ -8,6 +8,20 @@
     android:paddingTop="16dp"
     android:paddingBottom="16dp">
 
+    <TextView
+        android:id="@+id/txtRecDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#CCFFFFFF"
+        android:textSize="15sp"
+        android:letterSpacing="0.04"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/imgRecommendation" />
+
     <ImageView
         android:id="@+id/imgRecommendation"
         android:layout_width="0dp"
@@ -15,7 +29,7 @@
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:elevation="4dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtRecDate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/txtRecommendationText"
@@ -31,8 +45,9 @@
         android:textAlignment="center"
         android:textColor="#EEFFFFFF"
         app:autoSizeTextType="uniform"
-        app:autoSizeMinTextSize="11sp"
-        app:autoSizeMaxTextSize="15sp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="20sp"
+        app:autoSizeStepGranularity="1sp"
         app:layout_constraintTop_toBottomOf="@id/imgRecommendation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,11 +59,43 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/txtRecommendationText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/checkpointRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/check1"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_checkpoint_unchecked"
+                android:layout_marginEnd="12dp" />
+
+            <ImageView
+                android:id="@+id/check2"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_checkpoint_unchecked"
+                android:layout_marginEnd="12dp" />
+
+            <ImageView
+                android:id="@+id/check3"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_checkpoint_unchecked" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/txtRoutineQuestion"
@@ -57,9 +104,9 @@
             android:text="@string/routine_question"
             android:textAlignment="center"
             android:textColor="#CCFFFFFF"
-            android:textSize="13sp"
+            android:textSize="15sp"
             android:fontFamily="sans-serif-medium"
-            android:layout_marginBottom="6dp" />
+            android:layout_marginBottom="10dp" />
 
         <LinearLayout
             android:id="@+id/btnRow"

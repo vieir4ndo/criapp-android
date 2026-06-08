@@ -42,5 +42,15 @@ class DateHelper {
                 isoDate
             }
         }
+
+        fun formatForDisplayWithTime(isoDate: String): String {
+            return try {
+                val instant = Instant.parse(isoDate)
+                val dt = instant.atOffset(ZoneOffset.UTC).toLocalDateTime()
+                "${formatNumber(dt.dayOfMonth)}/${formatNumber(dt.monthValue)}/${dt.year} ${formatNumber(dt.hour)}:${formatNumber(dt.minute)}"
+            } catch (e: Exception) {
+                isoDate
+            }
+        }
     }
 }

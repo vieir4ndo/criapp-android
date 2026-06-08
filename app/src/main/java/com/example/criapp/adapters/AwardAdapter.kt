@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criapp.R
 import com.example.criapp.models.responses.AwardResponse
+import com.example.criapp.services.DateHelper
 
 class AwardAdapter(
     private val list: List<AwardResponse>
@@ -20,6 +21,7 @@ class AwardAdapter(
         val category = view.findViewById<TextView>(R.id.txtCategory)
         val description = view.findViewById<TextView>(R.id.txtDescription)
         val image = view.findViewById<ImageView>(R.id.imgAward)
+        val date = view.findViewById<TextView>(R.id.txtAwardDate)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,6 +38,7 @@ class AwardAdapter(
         holder.title.text = item.text
         holder.category.visibility = android.view.View.GONE
         holder.description.text = item.description ?: ""
+        holder.date.text = item.createdAt?.let { DateHelper.formatForDisplay(it) } ?: ""
 
         val b64 = item.image
         if (!b64.isNullOrBlank()) {

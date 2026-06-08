@@ -14,6 +14,16 @@
         android:paddingStart="24dp"
         android:paddingEnd="24dp">
 
+        <TextView
+            android:id="@+id/txtAwardDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:textAlignment="center"
+            android:textColor="#CCFFFFFF"
+            android:textSize="15sp"
+            android:letterSpacing="0.04" />
+
         <ImageView
             android:id="@+id/imgAward"
             android:layout_width="match_parent"

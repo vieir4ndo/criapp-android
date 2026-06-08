@@ -6,11 +6,11 @@ class CommentResponse(
     val id : String,
     val text: String,
     val prcName: String,
-    val prcId: String
+    val prcId: String,
+    val createdAt: String?
 ) {
     override fun toString(): String {
-        val gson = Gson();
-
-        return gson.toJson(this);
+        val gson = Gson()
+        return gson.toJson(this)
     }
 }

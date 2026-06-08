@@ -190,5 +190,6 @@
     <string name="hint_forum_name">Nombre del foro</string>
     <string name="hint_forum_description">Describe tu foro</string>
     <string name="hint_comment">Escribe un comentario</string>
+    <string name="commented_colon">comentó:</string>
 
 </resources>
