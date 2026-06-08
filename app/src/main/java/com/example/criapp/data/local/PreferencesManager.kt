@@ -62,6 +62,15 @@ class PreferencesManager(context: Context) {
         }
     }
 
+    fun isRefreshTokenExpired(): Boolean {
+        val expiresIn = prefs.getString(KEY_REFRESH_TOKEN_EXPIRES_IN, "") ?: return true
+        return try {
+            !OffsetDateTime.parse(expiresIn).isAfter(OffsetDateTime.now())
+        } catch (e: Exception) {
+            true
+        }
+    }
+
     fun hasCompletedOnboarding(userId: String): Boolean =
         appStatePrefs.getBoolean("${KEY_ONBOARDING_COMPLETED}_$userId", false)
 
