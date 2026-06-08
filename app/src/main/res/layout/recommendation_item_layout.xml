@@ -93,6 +93,13 @@
                 android:id="@+id/check3"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
+                android:src="@drawable/ic_checkpoint_unchecked"
+                android:layout_marginEnd="12dp" />
+
+            <ImageView
+                android:id="@+id/check4"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:src="@drawable/ic_checkpoint_unchecked" />
 
         </LinearLayout>

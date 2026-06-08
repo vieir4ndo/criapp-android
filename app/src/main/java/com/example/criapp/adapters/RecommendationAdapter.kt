@@ -32,6 +32,7 @@ class RecommendationAdapter(
         val check1: ImageView = view.findViewById(R.id.check1)
         val check2: ImageView = view.findViewById(R.id.check2)
         val check3: ImageView = view.findViewById(R.id.check3)
+        val check4: ImageView = view.findViewById(R.id.check4)
         val date: TextView = view.findViewById(R.id.txtRecDate)
         val btnYes: Button = view.findViewById(R.id.btnYes)
         val btnNo: Button = view.findViewById(R.id.btnNo)
@@ -49,10 +50,11 @@ class RecommendationAdapter(
         val item = list[position]
         holder.text.text = item.text
 
-        val completed = item.completedCheckpoints.coerceIn(0, 3)
+        val completed = item.completedCheckpoints.coerceIn(0, 4)
         holder.check1.setImageResource(if (completed >= 1) R.drawable.ic_checkpoint_checked else R.drawable.ic_checkpoint_unchecked)
         holder.check2.setImageResource(if (completed >= 2) R.drawable.ic_checkpoint_checked else R.drawable.ic_checkpoint_unchecked)
         holder.check3.setImageResource(if (completed >= 3) R.drawable.ic_checkpoint_checked else R.drawable.ic_checkpoint_unchecked)
+        holder.check4.setImageResource(if (completed >= 4) R.drawable.ic_checkpoint_checked else R.drawable.ic_checkpoint_unchecked)
 
         holder.date.text = item.createdAt?.let { DateHelper.formatForDisplay(it) } ?: ""
 
