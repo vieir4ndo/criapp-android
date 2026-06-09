@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- === BRAND COLORS === -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_blue">#00CCE5</color>
@@ -9,12 +11,32 @@
     <color name="gray">#DDDDDD</color>
     <color name="red">#B60D00</color>
     <color name="green">#2E7D32</color>
+
+    <!-- === GAMIFICATION (Likert Scale) === -->
     <color name="likert_1">#26C6DA</color>
     <color name="likert_2">#9CCC65</color>
     <color name="likert_3">#E6A800</color>
     <color name="likert_4">#FFA726</color>
     <color name="likert_5">#EF5350</color>
     <color name="likert_6">#B71C1C</color>
+
+    <!-- === CHECKPOINT BUTTONS === -->
+    <color name="btn_yes_active">#2E7D32</color>
+    <color name="btn_yes_inactive">#0D2610</color>
+    <color name="btn_no_active">#B71C1C</color>
+    <color name="btn_no_inactive">#3D0808</color>
     <color name="checkpoint_done">#555555</color>
     <color name="checkpoint_pending">#333333</color>
+
+    <!-- === SEMANTIC UI === -->
+    <color name="hint_text">#808080</color>
+    <color name="card_item">#A966CC</color>
+    <color name="btn_destructive">#A966CC</color>
+
+    <!-- === SYSTEM BARS === -->
+    <color name="nav_bar_anonymous">#00CCE5</color>
+    <color name="nav_bar_default">#A966CC</color>
+    <color name="status_bar_anonymous">#CB6CE6</color>
+    <color name="status_bar_default">#CB6CE6</color>
+
 </resources>

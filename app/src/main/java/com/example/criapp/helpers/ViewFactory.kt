@@ -19,7 +19,7 @@ class ViewFactory {
         fun <T> generateButton(context : Context, resources : Resources, text: String, content : String, redirectTo : Class<T>, key : String) : Button {
             val button = Button(context)
             button.gravity = Gravity.CENTER_HORIZONTAL
-            button.setBackgroundColor(ContextCompat.getColor(context, android.R.color.holo_purple))
+            button.setBackgroundColor(ContextCompat.getColor(context, R.color.card_item))
             button.textSize = 20f
             button.isAllCaps = false
             button.setTypeface(null, Typeface.BOLD)
@@ -28,7 +28,7 @@ class ViewFactory {
             val shape = GradientDrawable()
             shape.shape = GradientDrawable.RECTANGLE
             shape.cornerRadius = resources.getDimension(R.dimen.border_radius)
-            shape.setColor(ContextCompat.getColor(context, android.R.color.holo_purple))
+            shape.setColor(ContextCompat.getColor(context, R.color.card_item))
 
             button.background = shape
 
@@ -128,7 +128,7 @@ class ViewFactory {
             val shape = GradientDrawable()
             shape.shape = GradientDrawable.RECTANGLE
             shape.cornerRadius = resources.getDimension(R.dimen.border_radius)
-            shape.setColor(ContextCompat.getColor(context, android.R.color.holo_purple))
+            shape.setColor(ContextCompat.getColor(context, R.color.card_item))
             button.background = shape
 
             button.text = context.getString(R.string.for_child, childName)

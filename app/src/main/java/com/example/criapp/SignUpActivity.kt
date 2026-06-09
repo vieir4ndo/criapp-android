@@ -22,7 +22,8 @@ import com.example.criapp.services.SpinnerHelper
 
 class SignUpActivity : BaseActivity() {
 
-    override val navigationBarColorRes: Int get() = R.color.light_blue
+    override val statusBarColorRes: Int get() = R.color.status_bar_anonymous
+    override val navigationBarColorRes: Int get() = R.color.nav_bar_anonymous
 
     private lateinit var mBinding: ActivitySignUpBinding
     private val viewModel: SignUpViewModel by viewModels {

@@ -153,7 +153,8 @@
                 android:text="@string/ok"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:shapeAppearance="@style/CRIApp.RoundedCorner" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

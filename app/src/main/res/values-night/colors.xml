@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- === BRAND COLORS (night overrides) === -->
+    <color name="dark_blue">#182F7C</color>
+    <color name="dark_purple">#692C83</color>
+    <color name="green">#1B5E20</color>
+    <color name="red">#7B0000</color>
+
+    <!-- === SEMANTIC UI (night overrides) === -->
+    <color name="hint_text">#88C8BFDD</color>
+    <color name="card_item">#231438</color>
+    <color name="btn_destructive">#3D1A5A</color>
+
+    <!-- === SYSTEM BARS (night overrides) === -->
+    <color name="nav_bar_anonymous">#0D1B2A</color>
+    <color name="nav_bar_default">#1A0D2E</color>
+    <color name="status_bar_anonymous">#1A0D2E</color>
+    <color name="status_bar_default">#120921</color>
+
+</resources>

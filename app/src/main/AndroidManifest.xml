@@ -85,11 +85,13 @@
             android:name=".ResetPasswordActivity"
             android:exported="false"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.CRIApp.Anonymous"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ForgotPasswordActivity"
             android:exported="false"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.CRIApp.Anonymous"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".AnswerActivity"
@@ -111,7 +113,8 @@
         <activity
             android:name=".SignUpSuccessActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.CRIApp.Anonymous" />
         <activity
             android:name=".MenuActivity"
             android:exported="false"
@@ -120,11 +123,13 @@
             android:name=".SignUpActivity"
             android:exported="false"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.CRIApp.Anonymous"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".SignInActivity"
             android:exported="true"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.CRIApp.Anonymous"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

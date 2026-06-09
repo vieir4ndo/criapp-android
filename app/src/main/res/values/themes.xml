@@ -11,6 +11,10 @@
 
     <style name="Theme.CRIApp" parent="Base.Theme.CRIApp" />
 
+    <style name="Theme.CRIApp.Anonymous" parent="Theme.CRIApp">
+        <item name="android:navigationBarColor">@color/dark_blue</item>
+    </style>
+
     <style name="CRIApp" />
 
     <style name="CRIApp.EditText">

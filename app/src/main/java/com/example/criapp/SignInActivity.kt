@@ -21,7 +21,8 @@ import com.example.criapp.services.FeatureFlagsManager
 
 class SignInActivity : BaseActivity() {
 
-    override val navigationBarColorRes: Int get() = R.color.light_blue
+    override val statusBarColorRes: Int get() = R.color.status_bar_anonymous
+    override val navigationBarColorRes: Int get() = R.color.nav_bar_anonymous
 
     private val prefsManager by lazy { PreferencesManager(this) }
     private val viewModel: SignInViewModel by viewModels {

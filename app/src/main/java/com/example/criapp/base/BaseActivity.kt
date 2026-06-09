@@ -17,8 +17,8 @@ import com.example.criapp.R
 
 open class BaseActivity : AppCompatActivity() {
 
-    open val statusBarColorRes: Int get() = R.color.purple
-    open val navigationBarColorRes: Int get() = R.color.dark_purple
+    open val statusBarColorRes: Int get() = R.color.status_bar_default
+    open val navigationBarColorRes: Int get() = R.color.nav_bar_default
     open val lightStatusBars: Boolean get() = false
     open val lightNavigationBars: Boolean get() = false
 

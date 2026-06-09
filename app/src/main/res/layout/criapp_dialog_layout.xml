@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,7 +15,7 @@
         android:text=""
         android:textSize="22sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:textAlignment="center"
         android:layout_marginBottom="10dp" />
     <TextView
@@ -24,7 +25,7 @@
         tools:text="Message"
         android:text=""
         android:textSize="16sp"
-        android:textColor="@android:color/black"
+        android:textColor="?android:attr/textColorSecondary"
         android:textAlignment="center"
         android:layout_marginBottom="10dp"/>
     <Button
@@ -38,5 +39,6 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:shapeAppearance="@style/CRIApp.RoundedCorner" />
 </LinearLayout>

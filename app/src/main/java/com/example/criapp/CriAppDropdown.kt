@@ -156,12 +156,12 @@ class CriAppDropdown @JvmOverloads constructor(
     }
 
     private fun applySelectionStyle(position: Int) {
-        val color = if (position == 0) android.graphics.Color.parseColor("#808080")
-                    else android.graphics.Color.BLACK
+        val typedValue = TypedValue()
+        context.theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true)
+        val primaryColor = ContextCompat.getColor(context, typedValue.resourceId)
+        val placeholderColor = ContextCompat.getColor(context, R.color.hint_text)
+        val color = if (position == 0) placeholderColor else primaryColor
         setTextColor(color)
         compoundDrawableTintList = android.content.res.ColorStateList.valueOf(color)
     }
 }
-
-
-

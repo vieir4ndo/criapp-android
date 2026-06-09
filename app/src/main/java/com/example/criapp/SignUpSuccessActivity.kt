@@ -8,7 +8,8 @@ import com.example.criapp.base.BaseActivity
 
 class SignUpSuccessActivity : BaseActivity() {
 
-    override val navigationBarColorRes: Int get() = R.color.light_blue
+    override val statusBarColorRes: Int get() = R.color.status_bar_anonymous
+    override val navigationBarColorRes: Int get() = R.color.nav_bar_anonymous
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -4,8 +4,8 @@
         <item name="colorAccent">@color/purple</item>
         <item name="colorSecondary">@color/dark_blue</item>
         <item name="colorPrimary">@color/light_blue</item>
-        <item name="android:statusBarColor">@color/purple</item>
-        <item name="android:navigationBarColor">@color/dark_purple</item>
+        <item name="android:statusBarColor">#1E1030</item>
+        <item name="android:navigationBarColor">#1E1030</item>
         <item name="android:windowLightStatusBar">false</item>
 
         <!-- Dark surface tokens -->
@@ -16,8 +16,20 @@
         <item name="colorOnBackground">#F0EEFF</item>
         <item name="android:windowBackground">#120921</item>
 
+        <!-- Botões Material -->
+        <item name="materialButtonStyle">@style/CRIApp.Button.Night</item>
+
         <!-- Evitar flash branco no arranque -->
         <item name="android:windowIsTranslucent">false</item>
+    </style>
+
+    <style name="CRIApp.Button.Night" parent="Widget.Material3.Button">
+        <item name="backgroundTint">#2B1A40</item>
+        <item name="android:textColor">#F0EEFF</item>
+    </style>
+
+    <style name="Theme.CRIApp.Anonymous" parent="Theme.CRIApp">
+        <item name="android:navigationBarColor">#0D1B2A</item>
     </style>
 
     <style name="CRIApp" />
@@ -29,12 +41,12 @@
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
         <item name="android:layout_marginBottom">10dp</item>
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:textColorHint">#808080</item>
+        <item name="android:textColor">#F0EEFF</item>
+        <item name="android:textColorHint">#88C8BFDD</item>
     </style>
 
     <style name="CRIApp.PasswordField" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="boxBackgroundColor">@android:color/white</item>
+        <item name="boxBackgroundColor">#1E1030</item>
         <item name="boxStrokeWidth">0dp</item>
         <item name="boxStrokeWidthFocused">0dp</item>
         <item name="hintEnabled">false</item>

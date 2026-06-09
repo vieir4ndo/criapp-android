@@ -74,14 +74,12 @@ class RecommendationAdapter(
 
         if (alreadyChecked) {
             val ctx = holder.itemView.context
-            val completedColor = ContextCompat.getColor(ctx, R.color.checkpoint_done)
-            val pendingColor = ContextCompat.getColor(ctx, R.color.checkpoint_pending)
             if (item.todayCompleted == true) {
-                holder.btnYes.backgroundTintList = android.content.res.ColorStateList.valueOf(completedColor)
-                holder.btnNo.backgroundTintList = android.content.res.ColorStateList.valueOf(pendingColor)
+                holder.btnYes.backgroundTintList = android.content.res.ColorStateList.valueOf(ContextCompat.getColor(ctx, R.color.btn_yes_active))
+                holder.btnNo.backgroundTintList = android.content.res.ColorStateList.valueOf(ContextCompat.getColor(ctx, R.color.btn_no_inactive))
             } else {
-                holder.btnYes.backgroundTintList = android.content.res.ColorStateList.valueOf(pendingColor)
-                holder.btnNo.backgroundTintList = android.content.res.ColorStateList.valueOf(completedColor)
+                holder.btnYes.backgroundTintList = android.content.res.ColorStateList.valueOf(ContextCompat.getColor(ctx, R.color.btn_yes_inactive))
+                holder.btnNo.backgroundTintList = android.content.res.ColorStateList.valueOf(ContextCompat.getColor(ctx, R.color.btn_no_active))
             }
         }
 
