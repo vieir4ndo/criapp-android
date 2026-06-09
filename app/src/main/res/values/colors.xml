@@ -11,6 +11,7 @@
     <color name="gray">#DDDDDD</color>
     <color name="red">#B60D00</color>
     <color name="green">#2E7D32</color>
+    <color name="warning">#F57C00</color>
 
     <!-- === GAMIFICATION (Likert Scale) === -->
     <color name="likert_1">#26C6DA</color>
@@ -32,6 +33,9 @@
     <color name="hint_text">#808080</color>
     <color name="card_item">#A966CC</color>
     <color name="btn_destructive">#A966CC</color>
+    <color name="text_on_card_primary">#EEFFFFFF</color>
+    <color name="text_on_card_secondary">#CCFFFFFF</color>
+    <color name="text_on_card_tertiary">#99FFFFFF</color>
 
     <!-- === SYSTEM BARS === -->
     <color name="nav_bar_anonymous">#00CCE5</color>

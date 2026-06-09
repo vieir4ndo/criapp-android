@@ -16,7 +16,8 @@ import com.example.criapp.services.DateHelper
 
 class RecommendationAdapter(
     private val list: List<RecommendationResponse>,
-    private val onCheckpoint: (recommendationId: Int, completed: Boolean) -> Unit
+    private val onCheckpoint: (recommendationId: Int, completed: Boolean) -> Unit,
+    private val onAlreadyAnswered: () -> Unit = {}
 ) : RecyclerView.Adapter<RecommendationAdapter.ViewHolder>() {
 
     private var globalEnabled: Boolean = true
@@ -68,19 +69,23 @@ class RecommendationAdapter(
         }
 
         val alreadyChecked = item.todayCompleted != null
-        val interactive = globalEnabled && !alreadyChecked
-        holder.btnYes.isEnabled = interactive
-        holder.btnNo.isEnabled = interactive
 
         if (alreadyChecked) {
             val ctx = holder.itemView.context
             if (item.todayCompleted == true) {
+                holder.btnYes.isEnabled = true
+                holder.btnNo.isEnabled = false
                 holder.btnYes.backgroundTintList = android.content.res.ColorStateList.valueOf(ContextCompat.getColor(ctx, R.color.btn_yes_active))
                 holder.btnNo.backgroundTintList = android.content.res.ColorStateList.valueOf(ContextCompat.getColor(ctx, R.color.btn_no_inactive))
             } else {
+                holder.btnYes.isEnabled = false
+                holder.btnNo.isEnabled = true
                 holder.btnYes.backgroundTintList = android.content.res.ColorStateList.valueOf(ContextCompat.getColor(ctx, R.color.btn_yes_inactive))
                 holder.btnNo.backgroundTintList = android.content.res.ColorStateList.valueOf(ContextCompat.getColor(ctx, R.color.btn_no_active))
             }
+        } else {
+            holder.btnYes.isEnabled = globalEnabled
+            holder.btnNo.isEnabled = globalEnabled
         }
 
         holder.btnYes.setOnClickListener {
@@ -88,6 +93,8 @@ class RecommendationAdapter(
                 globalEnabled = false
                 notifyDataSetChanged()
                 onCheckpoint(item.id, true)
+            } else if (alreadyChecked) {
+                onAlreadyAnswered()
             }
         }
         holder.btnNo.setOnClickListener {
@@ -95,6 +102,8 @@ class RecommendationAdapter(
                 globalEnabled = false
                 notifyDataSetChanged()
                 onCheckpoint(item.id, false)
+            } else if (alreadyChecked) {
+                onAlreadyAnswered()
             }
         }
     }

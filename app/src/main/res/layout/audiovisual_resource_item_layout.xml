@@ -44,12 +44,12 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="12dp"
-        android:background="#33ffffff"
+        android:background="@color/text_on_card_tertiary"
         android:visibility="gone" />
 
     <TextView
         android:id="@+id/text_description"
-        android:textColor="#CCffffff"
+        android:textColor="@color/text_on_card_secondary"
         android:textSize="14sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

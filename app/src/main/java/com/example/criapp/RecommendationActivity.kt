@@ -33,6 +33,7 @@ class RecommendationActivity : BaseActivity() {
     private var currentList: MutableList<RecommendationResponse> = mutableListOf()
     private lateinit var childId: String
     private var pendingPage = 0
+    private var silentReload = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +49,9 @@ class RecommendationActivity : BaseActivity() {
 
         viewModel.state.observe(this) { state ->
             when (state) {
-                is UiState.Loading -> aLoadingDialog?.show()
+                is UiState.Loading -> if (!silentReload) aLoadingDialog?.show()
                 is UiState.Success -> {
+                    silentReload = false
                     aLoadingDialog?.cancel()
                     if (state.data.isEmpty()) {
                         viewPager.visibility = View.GONE
@@ -64,6 +66,7 @@ class RecommendationActivity : BaseActivity() {
                     }
                 }
                 is UiState.Error -> {
+                    silentReload = false
                     aLoadingDialog?.cancel()
                     DialogFactory.createErrorDialog(this, getString(R.string.error_load_recommendations)) { finish() }.show()
                 }
@@ -80,6 +83,7 @@ class RecommendationActivity : BaseActivity() {
                     setAdapterButtonsEnabled(true)
                     showSuccessSnackbar(getString(R.string.checkpoint_saved))
                     pendingPage = viewPager.currentItem
+                    silentReload = true
                     viewModel.loadRecommendations(childId)
                 }
                 is UiState.Error -> {
@@ -94,9 +98,11 @@ class RecommendationActivity : BaseActivity() {
     }
 
     private fun renderAdapter(list: List<RecommendationResponse>) {
-        val adapter = RecommendationAdapter(list) { recommendationId, completed ->
+        val adapter = RecommendationAdapter(list, { recommendationId, completed ->
             viewModel.registerCheckpoint(childId, recommendationId, completed)
-        }
+        }, {
+            showInfoSnackbar(getString(R.string.checkpoint_already_answered))
+        })
         viewPager.adapter = adapter
         setupDots(list.size)
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

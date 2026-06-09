@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:textAlignment="center"
-            android:textColor="#CCFFFFFF"
+            android:textColor="@color/text_on_card_secondary"
             android:textSize="15sp"
             android:letterSpacing="0.04" />
 
@@ -66,7 +66,7 @@
             android:layout_marginTop="20dp"
             android:lineSpacingMultiplier="1.5"
             android:textAlignment="center"
-            android:textColor="#CCFFFFFF"
+            android:textColor="@color/text_on_card_secondary"
             android:textSize="15sp" />
 
     </LinearLayout>

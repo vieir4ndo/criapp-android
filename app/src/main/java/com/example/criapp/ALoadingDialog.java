@@ -106,12 +106,20 @@ public class ALoadingDialog extends Dialog {
     private void applyLoadingSystemBarsStyle() {
         if (activity == null) return;
         Window activityWindow = activity.getWindow();
-        activityWindow.setStatusBarColor(Color.parseColor("#E6FFFFFF"));
-        activityWindow.setNavigationBarColor(Color.parseColor("#E6FFFFFF"));
+        boolean isDark = (activity.getResources().getConfiguration().uiMode &
+                android.content.res.Configuration.UI_MODE_NIGHT_MASK) ==
+                android.content.res.Configuration.UI_MODE_NIGHT_YES;
+        if (isDark) {
+            activityWindow.setStatusBarColor(ContextCompat.getColor(activity, R.color.status_bar_default));
+            activityWindow.setNavigationBarColor(ContextCompat.getColor(activity, R.color.nav_bar_default));
+        } else {
+            activityWindow.setStatusBarColor(Color.parseColor("#E6FFFFFF"));
+            activityWindow.setNavigationBarColor(Color.parseColor("#E6FFFFFF"));
+        }
         WindowInsetsControllerCompat insetsController =
                 new WindowInsetsControllerCompat(activityWindow, activityWindow.getDecorView());
-        insetsController.setAppearanceLightStatusBars(true);
-        insetsController.setAppearanceLightNavigationBars(true);
+        insetsController.setAppearanceLightStatusBars(!isDark);
+        insetsController.setAppearanceLightNavigationBars(!isDark);
     }
 
     private void restoreSystemBarsStyle() {

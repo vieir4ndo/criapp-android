@@ -38,6 +38,10 @@ open class BaseActivity : AppCompatActivity() {
         showBanner(message, R.color.red, R.drawable.ic_error_circle)
     }
 
+    fun showInfoSnackbar(message: String) {
+        showBanner(message, R.color.warning, R.drawable.ic_warning)
+    }
+
     private fun showBanner(message: String, colorRes: Int, iconRes: Int) {
         val decor = window.decorView as ViewGroup
 

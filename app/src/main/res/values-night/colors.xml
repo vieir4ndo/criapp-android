@@ -6,6 +6,7 @@
     <color name="dark_purple">#692C83</color>
     <color name="green">#1B5E20</color>
     <color name="red">#7B0000</color>
+    <color name="warning">#BF360C</color>
 
     <!-- === SEMANTIC UI (night overrides) === -->
     <color name="hint_text">#88C8BFDD</color>

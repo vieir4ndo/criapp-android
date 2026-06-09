@@ -20,7 +20,7 @@
             android:id="@+id/text_owner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#BBFFFFFF"
+            android:textColor="@color/text_on_card_tertiary"
             android:textSize="11sp"
             android:textStyle="bold"
             android:maxLines="1"
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:textColor="#EEFFFFFF"
+            android:textColor="@color/text_on_card_primary"
             android:textSize="13sp"
             android:lineSpacingMultiplier="1.4" />
 
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:textColor="#88FFFFFF"
+            android:textColor="@color/text_on_card_tertiary"
             android:textSize="10sp" />
 
     </LinearLayout>

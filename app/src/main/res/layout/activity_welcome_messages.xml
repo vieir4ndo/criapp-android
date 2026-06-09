@@ -23,7 +23,7 @@
         android:id="@+id/text_step"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#AAFFFFFF"
+        android:textColor="@color/text_on_card_secondary"
         android:textSize="12sp"
         android:letterSpacing="0.12"
         android:layout_marginTop="16dp"

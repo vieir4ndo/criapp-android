@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="#BBFFFFFF"
+            android:textColor="@color/text_on_card_tertiary"
             android:textSize="11sp"
             android:textStyle="italic"
             android:maxLines="1"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textColor="#99FFFFFF"
+            android:textColor="@color/text_on_card_tertiary"
             android:textSize="11sp" />
 
         <View
@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:textColor="#EEFFFFFF"
+        android:textColor="@color/text_on_card_primary"
         android:textSize="13sp"
         android:lineSpacingMultiplier="1.4" />
 

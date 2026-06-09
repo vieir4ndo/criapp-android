@@ -43,7 +43,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="8dp"
-        app:cardBackgroundColor="#33FFFFFF"
+        app:cardBackgroundColor="@android:color/transparent"
+        android:background="@drawable/card_white_translucent"
         app:cardCornerRadius="@dimen/border_radius"
         app:cardElevation="0dp"
         app:layout_constraintTop_toBottomOf="@+id/forum_name"
@@ -63,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/forum_created_by"
                 android:textAlignment="center"
-                android:textColor="#BBFFFFFF"
+                android:textColor="@color/text_on_card_tertiary"
                 android:textSize="12sp"
                 android:textStyle="italic" />
 
@@ -80,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/description"
                 android:textAlignment="center"
-                android:textColor="#EEFFFFFF"
+                android:textColor="@color/text_on_card_primary"
                 android:textSize="13sp"
                 android:lineSpacingMultiplier="1.4" />
         </LinearLayout>
