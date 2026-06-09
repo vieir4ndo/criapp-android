@@ -73,11 +73,11 @@ class UpdateChildActivity : BaseActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    finish()
+                    showSuccessSnackbar(getString(R.string.child_updated_success))
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    DialogFactory.createErrorDialog(this, state.message).show()
+                    showErrorSnackbar(state.message)
                 }
                 else -> Unit
             }

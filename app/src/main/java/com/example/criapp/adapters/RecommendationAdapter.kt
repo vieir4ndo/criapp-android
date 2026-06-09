@@ -24,7 +24,7 @@ class RecommendationAdapter(
 
     fun setButtonsEnabled(enabled: Boolean) {
         globalEnabled = enabled
-        notifyDataSetChanged()
+        notifyItemRangeChanged(0, itemCount)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

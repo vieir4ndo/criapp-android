@@ -55,7 +55,7 @@ class UpdateForumActivity : BaseActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    finish()
+                    showSuccessSnackbar(getString(R.string.forum_updated_success))
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()

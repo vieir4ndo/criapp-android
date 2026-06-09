@@ -13,6 +13,14 @@
     <color name="card_item">#231438</color>
     <color name="btn_destructive">#3D1A5A</color>
 
+    <!-- === WIDGET (dark mode) === -->
+    <color name="widget_background">#EE1A0D2E</color>
+    <color name="widget_card_bg">#33FFFFFF</color>
+    <color name="widget_text_primary">#FFFFFFFF</color>
+    <color name="widget_text_secondary">#99FFFFFF</color>
+    <color name="widget_divider">#33FFFFFF</color>
+    <color name="widget_heart_inactive">#66FFFFFF</color>
+
     <!-- === SYSTEM BARS (night overrides) === -->
     <color name="nav_bar_anonymous">#0D1B2A</color>
     <color name="nav_bar_default">#1A0D2E</color>

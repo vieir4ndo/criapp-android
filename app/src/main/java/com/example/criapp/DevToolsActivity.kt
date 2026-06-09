@@ -18,8 +18,6 @@ class DevToolsActivity : BaseActivity() {
 
         aLoadingDialog = ALoadingDialog(this)
 
-        findViewById<View>(R.id.btnBack).setOnClickListener { finish() }
-
         findViewById<View>(R.id.btnShowLoader).setOnClickListener {
             aLoadingDialog?.show()
             Handler(Looper.getMainLooper()).postDelayed({

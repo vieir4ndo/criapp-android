@@ -34,16 +34,20 @@ class AudiovisualResourceAdapter(
         holder.divider.visibility = if (isExpanded) View.VISIBLE else View.GONE
         holder.chevron.rotation = if (isExpanded) 180f else 0f
 
-        val videoId = Uri.parse(item.link).getQueryParameter("v")
-        if (videoId != null) {
-            Glide.with(holder.thumbnail)
-                .load("https://img.youtube.com/vi/$videoId/hqdefault.jpg")
-                .into(holder.thumbnail)
-        }
-
-        holder.thumbnailContainer.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.link))
-            it.context.startActivity(intent)
+        val link = item.link
+        if (!link.isNullOrEmpty()) {
+            val videoId = Uri.parse(link).getQueryParameter("v")
+            if (videoId != null) {
+                Glide.with(holder.thumbnail)
+                    .load("https://img.youtube.com/vi/$videoId/hqdefault.jpg")
+                    .into(holder.thumbnail)
+            }
+            holder.thumbnailContainer.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                it.context.startActivity(intent)
+            }
+        } else {
+            holder.thumbnailContainer.setOnClickListener(null)
         }
 
         holder.itemView.setOnClickListener {

@@ -21,6 +21,14 @@
     <color name="likert_5">#EF5350</color>
     <color name="likert_6">#B71C1C</color>
 
+    <!-- === WIDGET (light mode) === -->
+    <color name="widget_background">#CB6CE6</color>
+    <color name="widget_card_bg">#33FFFFFF</color>
+    <color name="widget_text_primary">#FFFFFFFF</color>
+    <color name="widget_text_secondary">#99FFFFFF</color>
+    <color name="widget_divider">#44FFFFFF</color>
+    <color name="widget_heart_inactive">#66FFFFFF</color>
+
     <!-- === CHECKPOINT BUTTONS === -->
     <color name="btn_yes_active">#2E7D32</color>
     <color name="btn_yes_inactive">#0D2610</color>

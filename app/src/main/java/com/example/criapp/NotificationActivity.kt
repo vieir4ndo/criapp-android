@@ -42,7 +42,7 @@ class NotificationActivity : BaseActivity() {
                 is UiState.Loading -> aLoadingDialog?.show()
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
-                    if (state.data.isEmpty()) {
+                    if (state.data.isNullOrEmpty()) {
                         recyclerView.visibility = View.GONE
                         txtNoNotifications.visibility = View.VISIBLE
                     } else {

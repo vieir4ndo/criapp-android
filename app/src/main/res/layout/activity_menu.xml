@@ -39,8 +39,9 @@
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:layout_gravity="bottom|end"
-                android:src="@drawable/ic_admin_shield"
-                android:padding="2dp"
+                android:src="@drawable/ic_dev_tools"
+                android:background="@drawable/card_holo_purple"
+                android:padding="6dp"
                 android:visibility="gone"
                 android:contentDescription="Admin" />
 
