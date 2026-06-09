@@ -64,6 +64,11 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".YoutubePlayerActivity"
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="fullSensor" />
+        <activity
             android:name=".FaqActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

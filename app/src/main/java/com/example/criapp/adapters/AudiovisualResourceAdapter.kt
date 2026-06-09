@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.criapp.R
+import com.example.criapp.YoutubePlayerActivity
 import com.example.criapp.models.responses.AudiovisualResourceResponse
 
 class AudiovisualResourceAdapter(
@@ -42,7 +43,9 @@ class AudiovisualResourceAdapter(
         }
 
         holder.thumbnailContainer.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.link))
+            val intent = Intent(it.context, YoutubePlayerActivity::class.java).apply {
+                putExtra(YoutubePlayerActivity.EXTRA_VIDEO_URL, item.link)
+            }
             it.context.startActivity(intent)
         }
 
