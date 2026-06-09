@@ -24,11 +24,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_picture"
+        <FrameLayout
             android:layout_width="90sp"
-            android:layout_height="80sp"
-            android:src="@drawable/ic_default_profile" />
+            android:layout_height="80sp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_default_profile" />
+
+            <ImageView
+                android:id="@+id/btnAdminMenu"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="bottom|end"
+                android:src="@drawable/ic_admin_shield"
+                android:padding="2dp"
+                android:visibility="gone"
+                android:contentDescription="Admin" />
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -64,6 +80,7 @@
                 app:autoSizeMinTextSize="10sp"
                 app:autoSizeMaxTextSize="16sp" />
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -371,4 +388,5 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -111,7 +111,7 @@ public class ALoadingDialog extends Dialog {
                 android.content.res.Configuration.UI_MODE_NIGHT_YES;
         if (isDark) {
             activityWindow.setStatusBarColor(ContextCompat.getColor(activity, R.color.status_bar_default));
-            activityWindow.setNavigationBarColor(ContextCompat.getColor(activity, R.color.nav_bar_default));
+            activityWindow.setNavigationBarColor(ContextCompat.getColor(activity, R.color.status_bar_default));
         } else {
             activityWindow.setStatusBarColor(Color.parseColor("#E6FFFFFF"));
             activityWindow.setNavigationBarColor(Color.parseColor("#E6FFFFFF"));

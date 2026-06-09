@@ -29,6 +29,14 @@ class MenuActivity : BaseActivity() {
         val name = PreferencesManager(this).getUserName().split(" ")[0]
         findViewById<TextView>(R.id.greeting).text = getString(R.string.greeting, name)
 
+        val prefs = PreferencesManager(this)
+        if (prefs.isAdmin()) {
+            findViewById<View>(R.id.btnAdminMenu).visibility = View.VISIBLE
+            findViewById<View>(R.id.btnAdminMenu).setOnClickListener {
+                startActivity(Intent(this, DevToolsActivity::class.java))
+            }
+        }
+
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() { }
         })

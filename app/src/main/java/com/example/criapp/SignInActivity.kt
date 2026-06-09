@@ -35,16 +35,19 @@ class SignInActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (prefsManager.isSessionActive()) {
+        if (prefsManager.isSessionActive() || !prefsManager.isRefreshTokenExpired()) {
             startActivity(Intent(this, MenuActivity::class.java))
             finish()
             return
         }
 
+        setupLoginScreen()
+    }
+
+    private fun setupLoginScreen() {
         mBinding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-
-        aLoadingDialog = ALoadingDialog(this)
+        if (aLoadingDialog == null) aLoadingDialog = ALoadingDialog(this)
 
         mBinding.labelEditTextUsername.markRequired()
         mBinding.labelEditTextPassword.markRequired()
@@ -89,7 +92,8 @@ class SignInActivity : BaseActivity() {
                         state.data.user?.id,
                         state.data.user?.name,
                         state.data.refreshToken,
-                        state.data.refreshTokenExpiresIn
+                        state.data.refreshTokenExpiresIn,
+                        state.data.user?.isAdmin ?: false
                     )
                     val destination = if (prefsManager.hasCompletedOnboarding(state.data.user?.id ?: "")) {
                         MenuActivity::class.java

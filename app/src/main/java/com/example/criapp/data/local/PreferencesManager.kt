@@ -16,7 +16,15 @@ class PreferencesManager(context: Context) {
 
     fun getUserName(): String = prefs.getString(KEY_USER_NAME, "") ?: ""
 
+    fun isAdmin(): Boolean = prefs.getBoolean(KEY_IS_ADMIN, false)
+
     fun getRefreshToken(): String = prefs.getString(KEY_REFRESH_TOKEN, "") ?: ""
+
+    fun getToken(): String = prefs.getString(KEY_TOKEN, "") ?: ""
+
+    fun getTokenExpiresIn(): String = prefs.getString(KEY_EXPIRES_IN, "") ?: ""
+
+    fun getRefreshTokenExpiresIn(): String = prefs.getString(KEY_REFRESH_TOKEN_EXPIRES_IN, "") ?: ""
 
     fun saveAuthData(
         token: String,
@@ -24,7 +32,8 @@ class PreferencesManager(context: Context) {
         userId: String?,
         userName: String?,
         refreshToken: String,
-        refreshTokenExpiresIn: String
+        refreshTokenExpiresIn: String,
+        isAdmin: Boolean = false
     ) {
         prefs.edit().apply {
             putString(KEY_TOKEN, token)
@@ -33,6 +42,7 @@ class PreferencesManager(context: Context) {
             putString(KEY_USER_NAME, userName)
             putString(KEY_REFRESH_TOKEN, refreshToken)
             putString(KEY_REFRESH_TOKEN_EXPIRES_IN, refreshTokenExpiresIn)
+            putBoolean(KEY_IS_ADMIN, isAdmin)
             apply()
         }
     }
@@ -87,6 +97,7 @@ class PreferencesManager(context: Context) {
         private const val KEY_REFRESH_TOKEN_EXPIRES_IN = "refresh_token_expires_in"
         private const val KEY_USER_ID = "user_id"
         private const val KEY_USER_NAME = "user_name"
+        private const val KEY_IS_ADMIN = "is_admin"
         private const val KEY_ONBOARDING_COMPLETED = "onboarding_completed"
     }
 }
