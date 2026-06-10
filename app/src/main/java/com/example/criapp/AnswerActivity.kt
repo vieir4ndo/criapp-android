@@ -96,7 +96,7 @@ class AnswerActivity : BaseActivity() {
                     }
                 }
                 is UiState.Error -> {
-                    DialogFactory.createErrorDialog(this, getString(R.string.error_load_questions)) { finish() }.show()
+                    DialogFactory.createErrorDialog(this, state.message) { finish() }.show()
                 }
                 else -> Unit
             }
@@ -116,7 +116,7 @@ class AnswerActivity : BaseActivity() {
                     }
                 }
                 is UiState.Error -> {
-                    showErrorSnackbar(getString(R.string.error_save_answer))
+                    showErrorSnackbar(state.message)
                 }
                 else -> Unit
             }

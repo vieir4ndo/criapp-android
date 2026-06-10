@@ -12,6 +12,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.HttpException
 import retrofit2.Retrofit
+import java.io.IOException
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.Locale
 import java.util.concurrent.TimeUnit
@@ -32,6 +33,7 @@ private class CriAppWidgetItemFactory(private val context: Context) : RemoteView
 
     private var items = listOf<WidgetChildItem>()
     private var isAuthError = false
+    private var isNetworkError = false
 
     private fun buildApi(prefs: PreferencesManager): CriAppApiService {
         val client = OkHttpClient.Builder()
@@ -61,10 +63,12 @@ private class CriAppWidgetItemFactory(private val context: Context) : RemoteView
             val prefs = PreferencesManager(context)
             if (prefs.isRefreshTokenExpired() || prefs.getToken().isEmpty()) {
                 isAuthError = true
+                isNetworkError = false
                 items = emptyList()
                 return
             }
             isAuthError = false
+            isNetworkError = false
             runBlocking {
                 try {
                     val api = buildApi(prefs)
@@ -79,6 +83,9 @@ private class CriAppWidgetItemFactory(private val context: Context) : RemoteView
                 } catch (e: HttpException) {
                     if (e.code() == 401) isAuthError = true
                     items = emptyList()
+                } catch (e: IOException) {
+                    isNetworkError = true
+                    items = emptyList()
                 } catch (e: Exception) {
                     items = emptyList()
                 }
@@ -90,11 +97,15 @@ private class CriAppWidgetItemFactory(private val context: Context) : RemoteView
 
     override fun onDestroy() {}
 
-    override fun getCount(): Int = if (isAuthError) 1 else items.size
+    override fun getCount(): Int = if (isAuthError || isNetworkError) 1 else items.size
 
     override fun getViewAt(position: Int): RemoteViews {
-        if (isAuthError) {
+        if (isAuthError || isNetworkError) {
             val rv = RemoteViews(context.packageName, R.layout.widget_auth_error_item)
+            rv.setTextViewText(
+                R.id.widget_auth_message,
+                context.getString(if (isNetworkError) R.string.widget_no_internet else R.string.widget_not_logged_in)
+            )
             rv.setOnClickFillInIntent(R.id.widget_item_root, Intent())
             return rv
         }

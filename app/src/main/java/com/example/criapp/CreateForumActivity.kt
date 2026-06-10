@@ -51,7 +51,7 @@ class CreateForumActivity : BaseActivity() {
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    showErrorSnackbar(getString(R.string.error_save_forum))
+                    showErrorSnackbar(state.message)
                 }
                 else -> Unit
             }

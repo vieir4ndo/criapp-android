@@ -2,6 +2,7 @@
 <resources>
 
     <!-- === BRAND COLORS (night overrides) === -->
+    <color name="dialog_bg">#2D2D3A</color>
     <color name="dark_blue">#182F7C</color>
     <color name="dark_purple">#692C83</color>
     <color name="green">#1B5E20</color>

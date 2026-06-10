@@ -179,6 +179,8 @@
     <string name="reset_password_hint_with_phone">El código fue enviado a tu correo electrónico o móvil. Introdúcelo junto con tu nueva contraseña.</string>
     <string name="error_unknown">Error desconocido</string>
     <string name="error_server">Oops, algo salió mal. Por favor, inténtalo de nuevo más tarde</string>
+    <string name="error_no_internet">Sin conexión a Internet. Por favor, revisa tu red e inténtalo de nuevo</string>
+    <string name="widget_no_internet">Sin conexión a Internet</string>
 
     <string name="hint_username">correo@ejemplo.com</string>
     <string name="hint_username_with_phone">correo@ejemplo.com / +34 600 000 000</string>

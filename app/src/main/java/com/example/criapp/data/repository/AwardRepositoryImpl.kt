@@ -4,14 +4,14 @@ import com.example.criapp.R
 
 import com.example.criapp.data.remote.CriAppApiService
 import com.example.criapp.data.remote.toErrorMessage
+import com.example.criapp.data.remote.safeApiCall
 import com.example.criapp.domain.repository.IAwardRepository
 import com.example.criapp.models.responses.AwardResponse
-import retrofit2.HttpException
 
 class AwardRepositoryImpl(private val apiService: CriAppApiService) : IAwardRepository {
 
     override suspend fun getAwards(childId: String): Result<List<AwardResponse>> {
-        return try {
+        return safeApiCall("AwardRepositoryImpl") {
             val response = apiService.getAwards(childId)
             if (response.success) {
                 Result.success(response.data ?: emptyList())
@@ -22,10 +22,6 @@ class AwardRepositoryImpl(private val apiService: CriAppApiService) : IAwardRepo
                     )
                 )
             }
-        } catch (e: HttpException) {
-            Result.failure(Exception(e.toErrorMessage()))
-        } catch (e: Exception) {
-            Result.failure(e)
         }
     }
 }

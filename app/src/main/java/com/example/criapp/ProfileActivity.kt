@@ -100,7 +100,7 @@ class ProfileActivity : BaseActivity() {
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    DialogFactory.createErrorDialog(this, state.message).show()
+                    showErrorSnackbar(state.message)
                 }
                 else -> Unit
             }

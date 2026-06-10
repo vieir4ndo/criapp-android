@@ -68,7 +68,7 @@ class RecommendationActivity : BaseActivity() {
                 is UiState.Error -> {
                     silentReload = false
                     aLoadingDialog?.cancel()
-                    DialogFactory.createErrorDialog(this, getString(R.string.error_load_recommendations)) { finish() }.show()
+                    DialogFactory.createErrorDialog(this, state.message) { finish() }.show()
                 }
                 else -> Unit
             }
@@ -88,7 +88,7 @@ class RecommendationActivity : BaseActivity() {
                 }
                 is UiState.Error -> {
                     setAdapterButtonsEnabled(true)
-                    showErrorSnackbar(getString(R.string.error_save_checkpoint))
+                    showErrorSnackbar(state.message)
                 }
                 else -> Unit
             }

@@ -61,7 +61,7 @@ class NotificationActivity : BaseActivity() {
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
-                    DialogFactory.createErrorDialog(this, getString(R.string.error_load_notifications)) { finish() }.show()
+                    DialogFactory.createErrorDialog(this, state.message) { finish() }.show()
                 }
                 else -> Unit
             }
@@ -76,7 +76,7 @@ class NotificationActivity : BaseActivity() {
                 }
                 is UiState.Error -> {
                     adapter?.setFooterState(if (viewModel.isLastPage) FooterState.HIDDEN else FooterState.BUTTON)
-                    showErrorSnackbar(getString(R.string.error_load_notifications))
+                    showErrorSnackbar(state.message)
                 }
                 else -> Unit
             }
