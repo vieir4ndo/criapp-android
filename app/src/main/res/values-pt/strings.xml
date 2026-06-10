@@ -12,7 +12,6 @@
     <!-- Auth - Sign Up -->
     <string name="sign_up">Cadastre-se</string>
     <string name="sign_up_title">Cadastro de usuário</string>
-    <string name="more_information_about_the_app">Mais informações sobre o App</string>
     <string name="sign_up_success_message1">Usuário cadastrado!</string>
     <string name="sign_up_success_message2">Por favor, verifique seu e-mail ou celular.</string>
 
@@ -48,7 +47,6 @@
     <string name="add_forum">Adicionar fórum</string>
 
     <!-- Menu / Navigation -->
-    <string name="hello">Olá!</string>
     <string name="greeting">Olá, %s!</string>
     <string name="welcome_subtitle">Bem-vindo(a) ao CRIApp</string>
     <string name="profile">Perfil</string>
@@ -59,7 +57,6 @@
     <string name="recommendations">Recomendações</string>
     <string name="faq">FAQ</string>
     <string name="notifications">Notificações</string>
-    <string name="coming_soon">Em breve</string>
     <string name="audiovisual_resources">Recursos Audiovisuais</string>
     <string name="child_book">Livro da criança</string>
     <string name="wellbeing_score_label">Bem-estar da criança</string>
@@ -99,23 +96,11 @@
     <string name="errors">Erros:</string>
 
     <!-- Toast - Success -->
-    <string name="forum_created_success">Fórum criado com sucesso</string>
     <string name="forum_updated_success">Fórum atualizado com sucesso</string>
-    <string name="child_created_success">Criança cadastrada com sucesso</string>
     <string name="child_updated_success">Criança atualizada com sucesso</string>
-    <string name="answer_saved_success">Resposta salva com sucesso</string>
     <string name="profile_updated_success">Perfil atualizado com sucesso</string>
     <string name="password_updated_success">Senha atualizada com sucesso</string>
 
-    <!-- Toast - Error -->
-    <string name="error_save_forum">Ocorreu um erro ao salvar o fórum, por favor tente novamente</string>
-    <string name="error_save_answer">Ocorreu um erro ao salvar sua resposta, por favor tente novamente</string>
-    <string name="error_load_questions">Ocorreu um erro ao buscar as perguntas, por favor tente novamente</string>
-    <string name="error_load_comments">Ocorreu um erro ao buscar os comentários, por favor tente novamente</string>
-    <string name="error_load_awards">Ocorreu um erro ao buscar os prêmios, por favor tente novamente</string>
-    <string name="error_load_recommendations">Ocorreu um erro ao buscar as recomendações, por favor tente novamente</string>
-    <string name="error_load_resources">Ocorreu um erro ao buscar os recursos audiovisuais, por favor tente novamente</string>
-    <string name="error_save_checkpoint">Ocorreu um erro ao registrar sua rotina, por favor tente novamente</string>
 
     <!-- Validation -->
     <string name="validation_required">%s é obrigatório(a)</string>
@@ -166,7 +151,6 @@
 
     <string name="notification_channel_name">CRIApp</string>
     <string name="notification_channel_description">Notificações de atividade e acompanhamento</string>
-    <string name="error_load_notifications">Houve um erro ao carregar as notificações, por favor tente novamente</string>
     <string name="notification_marked_as_read">Notificação marcada como lida</string>
     <string name="load_more">Carregar mais</string>
     <string name="notification_type_motivational">Motivação</string>

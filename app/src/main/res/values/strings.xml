@@ -11,7 +11,6 @@
     <!-- Auth - Sign Up -->
     <string name="sign_up">Registrate</string>
     <string name="sign_up_title">Registro de usuario</string>
-    <string name="more_information_about_the_app">Más información sobre la App</string>
     <string name="sign_up_success_message1">¡Usuario dado de alta!</string>
     <string name="sign_up_success_message2">Por favor, consulte su correo o móvil.</string>
 
@@ -98,23 +97,10 @@
     <string name="errors">Errores:</string>
 
     <!-- Toast - Success -->
-    <string name="forum_created_success">Foro creado con éxito</string>
     <string name="forum_updated_success">Foro actualizado con éxito</string>
-    <string name="child_created_success">Niño(a) creado con éxito</string>
     <string name="child_updated_success">Niño(a) actualizado con éxito</string>
-    <string name="answer_saved_success">Respuesta guardada con éxito</string>
     <string name="profile_updated_success">Perfil actualizado con éxito</string>
     <string name="password_updated_success">Contraseña actualizada con éxito</string>
-
-    <!-- Toast - Error -->
-    <string name="error_save_forum">Hubo un error al guardar el foro, por favor inténtalo nuevamente</string>
-    <string name="error_save_answer">Hubo un error al guardar tu respuesta, inténtalo nuevamente</string>
-    <string name="error_load_questions">Hubo un error al buscar las preguntas, por favor inténtalo nuevamente</string>
-    <string name="error_load_comments">Hubo un error al buscar los comentarios, por favor inténtalo nuevamente</string>
-    <string name="error_load_awards">Hubo un error al buscar los premios, por favor inténtalo nuevamente</string>
-    <string name="error_load_recommendations">Hubo un error al buscar las recomendaciones, por favor inténtalo nuevamente</string>
-    <string name="error_load_resources">Hubo un error al buscar los recursos audiovisuales, por favor inténtalo nuevamente</string>
-    <string name="error_save_checkpoint">Hubo un error al registrar tu rutina, por favor inténtalo nuevamente</string>
 
     <!-- Validation -->
     <string name="validation_required">%s es obligatorio</string>
@@ -165,7 +151,6 @@
 
     <string name="notification_channel_name">CRIApp</string>
     <string name="notification_channel_description">Notificaciones de actividad y seguimiento</string>
-    <string name="error_load_notifications">Hubo un error al cargar las notificaciones, por favor inténtalo nuevamente</string>
     <string name="notification_marked_as_read">Notificación marcada como leída</string>
     <string name="load_more">Cargar más</string>
     <string name="notification_type_motivational">Motivación</string>

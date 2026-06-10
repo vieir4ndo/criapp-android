@@ -12,7 +12,6 @@
     <!-- Auth - Sign Up -->
     <string name="sign_up">Sign Up</string>
     <string name="sign_up_title">User Registration</string>
-    <string name="more_information_about_the_app">More information about the App</string>
     <string name="sign_up_success_message1">Account created!</string>
     <string name="sign_up_success_message2">Please check your email or phone.</string>
 
@@ -48,7 +47,6 @@
     <string name="add_forum">Add forum</string>
 
     <!-- Menu / Navigation -->
-    <string name="hello">Hello!</string>
     <string name="greeting">Hello, %s!</string>
     <string name="welcome_subtitle">Welcome to CRIApp</string>
     <string name="profile">Profile</string>
@@ -59,7 +57,6 @@
     <string name="recommendations">Recommendations</string>
     <string name="faq">FAQ</string>
     <string name="notifications">Notifications</string>
-    <string name="coming_soon">Coming soon</string>
     <string name="audiovisual_resources">Audiovisual Resources</string>
     <string name="child_book">Parenting book</string>
     <string name="wellbeing_score_label">Child wellbeing</string>
@@ -98,23 +95,11 @@
     <string name="errors">Errors:</string>
 
     <!-- Toast - Success -->
-    <string name="forum_created_success">Forum created successfully</string>
     <string name="forum_updated_success">Forum updated successfully</string>
-    <string name="child_created_success">Child created successfully</string>
     <string name="child_updated_success">Child updated successfully</string>
-    <string name="answer_saved_success">Answer saved successfully</string>
     <string name="profile_updated_success">Profile updated successfully</string>
     <string name="password_updated_success">Password updated successfully</string>
 
-    <!-- Toast - Error -->
-    <string name="error_save_forum">An error occurred while saving the forum, please try again</string>
-    <string name="error_save_answer">An error occurred while saving your answer, please try again</string>
-    <string name="error_load_questions">An error occurred while loading the questions, please try again</string>
-    <string name="error_load_comments">An error occurred while loading the comments, please try again</string>
-    <string name="error_load_awards">An error occurred while loading the awards, please try again</string>
-    <string name="error_load_recommendations">An error occurred while loading the recommendations, please try again</string>
-    <string name="error_load_resources">An error occurred while loading the audiovisual resources, please try again</string>
-    <string name="error_save_checkpoint">An error occurred while saving your routine, please try again</string>
 
     <!-- Validation -->
     <string name="validation_required">%s is required</string>
@@ -165,7 +150,6 @@
 
     <string name="notification_channel_name">CRIApp</string>
     <string name="notification_channel_description">Activity and tracking notifications</string>
-    <string name="error_load_notifications">There was an error loading your notifications, please try again</string>
     <string name="notification_marked_as_read">Notification marked as read</string>
     <string name="load_more">Load more</string>
     <string name="notification_type_motivational">Motivation</string>
