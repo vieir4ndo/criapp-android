@@ -38,6 +38,7 @@ private class CriAppWidgetItemFactory(private val context: Context) : RemoteView
     private var isAuthError = false
     private var isNetworkError = false
     private var isBlockedError = false
+    private var isEmptyState = false
 
     private fun buildApi(prefs: PreferencesManager): CriAppApiService {
         val client = OkHttpClient.Builder()
@@ -87,6 +88,7 @@ private class CriAppWidgetItemFactory(private val context: Context) : RemoteView
         isAuthError = false
         isNetworkError = false
         isBlockedError = false
+        isEmptyState = false
         items = emptyList()
         try {
             val prefs = PreferencesManager(context)
@@ -109,6 +111,7 @@ private class CriAppWidgetItemFactory(private val context: Context) : RemoteView
                         } catch (e: Exception) { 0 }
                         WidgetChildItem(child.name, child.answeredToday, score)
                     } ?: emptyList()
+                    if (items.isEmpty()) isEmptyState = true
                 } catch (e: HttpException) {
                     if (e.code() == 401 && tryRefreshToken(prefs)) {
                         try {
@@ -121,6 +124,7 @@ private class CriAppWidgetItemFactory(private val context: Context) : RemoteView
                                     } catch (e2: Exception) { 0 }
                                     WidgetChildItem(child.name, child.answeredToday, score)
                                 } ?: emptyList()
+                                if (items.isEmpty()) isEmptyState = true
                             }
                         } catch (e2: Exception) {
                             isAuthError = true
@@ -145,14 +149,15 @@ private class CriAppWidgetItemFactory(private val context: Context) : RemoteView
 
     override fun onDestroy() {}
 
-    override fun getCount(): Int = if (isAuthError || isNetworkError || isBlockedError) 1 else items.size
+    override fun getCount(): Int = if (isAuthError || isNetworkError || isBlockedError || isEmptyState) 1 else items.size
 
     override fun getViewAt(position: Int): RemoteViews {
-        if (isAuthError || isNetworkError || isBlockedError) {
+        if (isAuthError || isNetworkError || isBlockedError || isEmptyState) {
             val rv = RemoteViews(context.packageName, R.layout.widget_auth_error_item)
             val msg = when {
                 isNetworkError -> R.string.widget_no_internet
                 isBlockedError -> R.string.widget_tap_to_refresh
+                isEmptyState -> R.string.widget_no_children
                 else -> R.string.widget_not_logged_in
             }
             rv.setTextViewText(R.id.widget_auth_message, context.getString(msg))
@@ -173,6 +178,6 @@ private class CriAppWidgetItemFactory(private val context: Context) : RemoteView
 
     override fun getLoadingView(): RemoteViews? = null
     override fun getViewTypeCount(): Int = 2
-    override fun getItemId(position: Int): Long = if (isAuthError || isBlockedError) -1L else position.toLong()
+    override fun getItemId(position: Int): Long = if (isAuthError || isBlockedError || isEmptyState) -1L else position.toLong()
     override fun hasStableIds(): Boolean = true
 }
