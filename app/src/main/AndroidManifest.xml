@@ -152,6 +152,9 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/criapp_widget_info" />
+            <meta-data
+                android:name="com.samsung.android.app.coverwidget.provider"
+                android:resource="@xml/criapp_widget_cover_info" />
         </receiver>
 
         <service

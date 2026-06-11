@@ -182,5 +182,6 @@
     <string name="widget_no_children">No children registered</string>
     <string name="widget_not_logged_in">Sign in to the app to see your children</string>
     <string name="widget_refresh">Refresh</string>
+    <string name="widget_tap_to_refresh">Could not load. Tap ↻ to retry</string>
 
 </resources>

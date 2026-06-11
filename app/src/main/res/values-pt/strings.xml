@@ -183,5 +183,6 @@
     <string name="widget_no_children">Sem crianças registadas</string>
     <string name="widget_not_logged_in">Inicie sessão na app para ver os seus filhos</string>
     <string name="widget_refresh">Atualizar</string>
+    <string name="widget_tap_to_refresh">Não foi possível carregar. Toca em ↻ para tentar novamente</string>
 
 </resources>
