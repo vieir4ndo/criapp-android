@@ -165,7 +165,6 @@
     <string name="error_unknown">Erro desconhecido</string>
     <string name="error_server">Oops, algo deu errado. Por favor, tente novamente mais tarde</string>
     <string name="error_no_internet">Sem ligação à Internet. Por favor, verifique a sua rede e tente novamente</string>
-    <string name="widget_no_internet">Sem ligação à Internet</string>
 
     <string name="hint_username">email@exemplo.com</string>
     <string name="hint_username_with_phone">email@exemplo.com / +55 11 00000-0000</string>
@@ -179,10 +178,5 @@
     <string name="hint_forum_description">Descreva seu fórum</string>
     <string name="hint_comment">Escreva um comentário</string>
     <string name="commented_colon">comentou:</string>
-    <string name="widget_description">Mostra as suas crianças e o progresso diário</string>
-    <string name="widget_no_children">Sem crianças registadas</string>
-    <string name="widget_not_logged_in">Inicie sessão na app para ver os seus filhos</string>
-    <string name="widget_refresh">Atualizar</string>
-    <string name="widget_tap_to_refresh">Não foi possível carregar. Toca em ↻ para tentar novamente</string>
 
 </resources>

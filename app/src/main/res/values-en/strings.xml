@@ -164,7 +164,6 @@
     <string name="error_unknown">Unknown error</string>
     <string name="error_server">Oops, something went wrong. Please try again later</string>
     <string name="error_no_internet">No Internet connection. Please check your network and try again</string>
-    <string name="widget_no_internet">No Internet connection</string>
 
     <string name="hint_username">email@example.com</string>
     <string name="hint_username_with_phone">email@example.com / +1 555 000 0000</string>
@@ -178,10 +177,5 @@
     <string name="hint_forum_description">Describe your forum</string>
     <string name="hint_comment">Write a comment</string>
     <string name="commented_colon">commented:</string>
-    <string name="widget_description">Shows your children and their daily progress</string>
-    <string name="widget_no_children">No children registered</string>
-    <string name="widget_not_logged_in">Sign in to the app to see your children</string>
-    <string name="widget_refresh">Refresh</string>
-    <string name="widget_tap_to_refresh">Could not load. Tap ↻ to retry</string>
 
 </resources>

@@ -165,7 +165,6 @@
     <string name="error_unknown">Error desconocido</string>
     <string name="error_server">Oops, algo salió mal. Por favor, inténtalo de nuevo más tarde</string>
     <string name="error_no_internet">Sin conexión a Internet. Por favor, revisa tu red e inténtalo de nuevo</string>
-    <string name="widget_no_internet">Sin conexión a Internet</string>
 
     <string name="hint_username">correo@ejemplo.com</string>
     <string name="hint_username_with_phone">correo@ejemplo.com / +34 600 000 000</string>
@@ -179,10 +178,5 @@
     <string name="hint_forum_description">Describe tu foro</string>
     <string name="hint_comment">Escribe un comentario</string>
     <string name="commented_colon">comentó:</string>
-    <string name="widget_description">Muestra tus hijos y su progreso diario</string>
-    <string name="widget_no_children">Sin hijos registrados</string>
-    <string name="widget_not_logged_in">Inicia sesión en la app para ver a tus hijos</string>
-    <string name="widget_refresh">Actualizar</string>
-    <string name="widget_tap_to_refresh">No se pudo cargar. Pulsa ↻ para reintentar</string>
 
 </resources>

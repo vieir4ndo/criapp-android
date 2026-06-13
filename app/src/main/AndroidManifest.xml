@@ -142,23 +142,6 @@
             </intent-filter>
         </activity>
 
-        <receiver
-            android:name=".CriAppWidgetProvider"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/criapp_widget_info" />
-        </receiver>
-
-        <service
-            android:name=".CriAppWidgetService"
-            android:exported="false"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
     </application>
 
 </manifest>
