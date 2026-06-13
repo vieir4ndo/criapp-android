@@ -84,6 +84,7 @@
     <string name="routine_yes">Sim, fiz!</string>
     <string name="routine_no">Ainda não</string>
     <string name="checkpoint_saved">Rotina registrada!</string>
+    <string name="recommendation_assimilated">Parabéns! Você completou esta rotina dias suficientes. Ela não vai aparecer mais nas suas recomendações.</string>
     <string name="checkpoint_already_answered">Você já respondeu essa rotina hoje</string>
     <string name="empty_list">Ainda não há nada aqui</string>
 

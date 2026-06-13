@@ -24,11 +24,12 @@ class RecommendationRepositoryImpl(private val apiService: CriAppApiService) : I
         }
     }
 
-    override suspend fun registerCheckpoint(childId: String, recommendationId: Int, completed: Boolean): Result<Unit> {
+    override suspend fun registerCheckpoint(childId: String, recommendationId: Int, completed: Boolean): Result<Boolean> {
         return safeApiCall("RecommendationRepositoryImpl") {
             val response = apiService.registerCheckpoint(childId, recommendationId, CreateCheckpointRequest(completed))
             if (response.success) {
-                Result.success(Unit)
+                val assimilated = response.data?.firstOrNull()?.assimilated ?: false
+                Result.success(assimilated)
             } else {
                 Result.failure(
                     Exception(response.Messages?.joinToString("\n") ?: CRIAppApplication.context.getString(R.string.error_unknown))

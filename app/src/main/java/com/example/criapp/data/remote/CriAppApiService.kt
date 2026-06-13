@@ -8,6 +8,7 @@ import com.example.criapp.models.responses.AwardResponse
 import com.example.criapp.models.responses.ChildBookSummaryResponse
 import com.example.criapp.models.responses.ChildResponse
 import com.example.criapp.models.responses.RecommendationResponse
+import com.example.criapp.models.responses.SaveCheckpointResultResponse
 import com.example.criapp.models.responses.NotificationHistoryResponse
 import com.example.criapp.models.responses.NotificationResponse
 import com.example.criapp.models.responses.CommentResponse
@@ -133,7 +134,7 @@ interface CriAppApiService {
         @Path("childId") childId: String,
         @Path("recommendationId") recommendationId: Int,
         @Body request: CreateCheckpointRequest
-    ): ApiResponse<List<Any>>
+    ): ApiResponse<List<SaveCheckpointResultResponse>>
 
     // ── Notifications ─────────────────────────────────────────────────────
 

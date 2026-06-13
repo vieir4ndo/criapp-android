@@ -15,8 +15,8 @@ class RecommendationViewModel(private val repository: IRecommendationRepository)
     private val _state = MutableLiveData<UiState<List<RecommendationResponse>>>()
     val state: LiveData<UiState<List<RecommendationResponse>>> = _state
 
-    private val _checkpointState = MutableLiveData<UiState<Int>>()
-    val checkpointState: LiveData<UiState<Int>> = _checkpointState
+    private val _checkpointState = MutableLiveData<UiState<Boolean>>()
+    val checkpointState: LiveData<UiState<Boolean>> = _checkpointState
 
     fun loadRecommendations(childId: String) {
         _state.value = UiState.Loading
@@ -35,7 +35,7 @@ class RecommendationViewModel(private val repository: IRecommendationRepository)
         viewModelScope.launch {
             val result = repository.registerCheckpoint(childId, recommendationId, completed)
             _checkpointState.value = if (result.isSuccess) {
-                UiState.Success(recommendationId)
+                UiState.Success(result.getOrDefault(false))
             } else {
                 UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))
             }

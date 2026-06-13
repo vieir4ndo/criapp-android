@@ -81,10 +81,19 @@ class RecommendationActivity : BaseActivity() {
                 }
                 is UiState.Success -> {
                     setAdapterButtonsEnabled(true)
-                    showSuccessSnackbar(getString(R.string.checkpoint_saved))
-                    pendingPage = viewPager.currentItem
-                    silentReload = true
-                    viewModel.loadRecommendations(childId)
+                    val assimilated = state.data
+                    if (assimilated) {
+                        DialogFactory.createSuccessDialog(this, getString(R.string.recommendation_assimilated)) {
+                            pendingPage = (viewPager.currentItem - 1).coerceAtLeast(0)
+                            silentReload = true
+                            viewModel.loadRecommendations(childId)
+                        }.show()
+                    } else {
+                        showSuccessSnackbar(getString(R.string.checkpoint_saved))
+                        pendingPage = viewPager.currentItem
+                        silentReload = true
+                        viewModel.loadRecommendations(childId)
+                    }
                 }
                 is UiState.Error -> {
                     setAdapterButtonsEnabled(true)

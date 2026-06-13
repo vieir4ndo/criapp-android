@@ -83,7 +83,8 @@
     <string name="routine_question">Have you done this routine today?</string>
     <string name="routine_yes">Yes, I did it</string>
     <string name="routine_no">Not yet</string>
-    <string name="checkpoint_saved">Routine registered!</string>    <string name="empty_list">Nothing here yet</string>
+    <string name="checkpoint_saved">Routine registered!</string>
+    <string name="recommendation_assimilated">Congratulations! You have completed this routine enough days. It will no longer appear in your recommendations.</string>    <string name="empty_list">Nothing here yet</string>
     <string name="checkpoint_already_answered">You have already answered this routine today</string>
 
     <!-- Dialog -->
