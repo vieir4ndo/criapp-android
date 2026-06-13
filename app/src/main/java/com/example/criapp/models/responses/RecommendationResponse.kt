@@ -2,9 +2,10 @@ package com.example.criapp.models.responses
 
 data class RecommendationResponse(
     val id: Int,
+    val childBookRecommendationId: String,
     val text: String,
     val image: String?,
-    val todayCompleted: Boolean?,
+    val isCompletedToday: Boolean?,
     val createdAt: String?,
-    val completedCheckpoints: Int
+    val completedCountInWindow: Int
 )

@@ -18,10 +18,10 @@ class RecommendationViewModel(private val repository: IRecommendationRepository)
     private val _checkpointState = MutableLiveData<UiState<Boolean>>()
     val checkpointState: LiveData<UiState<Boolean>> = _checkpointState
 
-    fun loadRecommendations(childId: String) {
+    fun loadRecommendationsByChildBookId(childBookId: String) {
         _state.value = UiState.Loading
         viewModelScope.launch {
-            val result = repository.getRecommendations(childId)
+            val result = repository.getRecommendationsByChildBookId(childBookId)
             _state.value = if (result.isSuccess) {
                 UiState.Success(result.getOrThrow())
             } else {
@@ -30,10 +30,10 @@ class RecommendationViewModel(private val repository: IRecommendationRepository)
         }
     }
 
-    fun registerCheckpoint(childId: String, recommendationId: Int, completed: Boolean) {
+    fun registerCheckpoint(childBookId: String, childBookRecommendationId: String, completed: Boolean) {
         _checkpointState.value = UiState.Loading
         viewModelScope.launch {
-            val result = repository.registerCheckpoint(childId, recommendationId, completed)
+            val result = repository.registerCheckpoint(childBookId, childBookRecommendationId, completed)
             _checkpointState.value = if (result.isSuccess) {
                 UiState.Success(result.getOrDefault(false))
             } else {

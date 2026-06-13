@@ -4,6 +4,7 @@ import com.google.gson.Gson
 
 class ChildResponse(
     val id : String,
+    val childBookId: String,
     val name: String,
     val birthDate: String,
     val sex: Int,

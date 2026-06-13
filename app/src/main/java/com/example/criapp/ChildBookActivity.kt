@@ -43,47 +43,51 @@ class ChildBookActivity : BaseActivity() {
             if (state is UiState.Success) {
                 val child = state.data.firstOrNull { it.id == childId }
                 if (child != null) {
+                    val childBookId = child.childBookId
                     findViewById<TextView>(R.id.childName).text = this.getString(R.string.book_of, child.name)
-                }
-            }
-        }
+                    childBookViewModel.loadChildBook(childBookId)
 
-        childBookViewModel.childBookState.observe(this) { state ->
-            if (state is UiState.Success) {
-                val score = state.data?.score ?: 0
-                val progressBar = findViewById<ProgressBar>(R.id.scoreProgressBar)
-                val scoreValueView = findViewById<TextView>(R.id.scoreValue)
-                val heartFill = findViewById<ImageView>(R.id.heartFill)
-                val clipDrawable = heartFill.drawable as android.graphics.drawable.ClipDrawable
+                    childBookViewModel.childBookState.observe(this) { bookState ->
+                        if (bookState is UiState.Success) {
+                            val score = bookState.data?.score ?: 0
+                            val progressBar = findViewById<ProgressBar>(R.id.scoreProgressBar)
+                            val scoreValueView = findViewById<TextView>(R.id.scoreValue)
+                            val heartFill = findViewById<ImageView>(R.id.heartFill)
+                            val clipDrawable = heartFill.drawable as android.graphics.drawable.ClipDrawable
 
-                ObjectAnimator.ofInt(progressBar, "progress", 0, score).apply {
-                    duration = 1200
-                    interpolator = DecelerateInterpolator()
-                    start()
-                }
+                            ObjectAnimator.ofInt(progressBar, "progress", 0, score).apply {
+                                duration = 1200
+                                interpolator = DecelerateInterpolator()
+                                start()
+                            }
 
-                ValueAnimator.ofInt(0, score).apply {
-                    duration = 1200
-                    interpolator = DecelerateInterpolator()
-                    addUpdateListener {
-                        val v = it.animatedValue as Int
-                        scoreValueView.text = "$v%"
-                        clipDrawable.level = v * 100
+                            ValueAnimator.ofInt(0, score).apply {
+                                duration = 1200
+                                interpolator = DecelerateInterpolator()
+                                addUpdateListener {
+                                    val v = it.animatedValue as Int
+                                    scoreValueView.text = "$v%"
+                                    clipDrawable.level = v * 100
+                                }
+                                start()
+                            }
+                        }
                     }
-                    start()
+
+                    findViewById<LinearLayout>(R.id.btnAwards).setOnClickListener {
+                        startActivity(Intent(this, AwardActivity::class.java).putExtra("childBookId", childBookId))
+                    }
+
+                    findViewById<LinearLayout>(R.id.btnRecommendations).setOnClickListener {
+                        startActivity(
+                            Intent(this, RecommendationActivity::class.java)
+                                .putExtra("childBookId", childBookId)
+                        )
+                    }
                 }
             }
         }
 
         childViewModel.loadChildren()
-        childBookViewModel.loadChildBook(childId)
-
-        findViewById<LinearLayout>(R.id.btnAwards).setOnClickListener {
-            startActivity(Intent(this, AwardActivity::class.java).putExtra("childId", childId))
-        }
-
-        findViewById<LinearLayout>(R.id.btnRecommendations).setOnClickListener {
-            startActivity(Intent(this, RecommendationActivity::class.java).putExtra("childId", childId))
-        }
     }
 }

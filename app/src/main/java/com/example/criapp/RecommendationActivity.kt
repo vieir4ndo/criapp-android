@@ -31,7 +31,7 @@ class RecommendationActivity : BaseActivity() {
     private lateinit var tabDots: LinearLayout
 
     private var currentList: MutableList<RecommendationResponse> = mutableListOf()
-    private lateinit var childId: String
+    private lateinit var childBookId: String
     private var pendingPage = 0
     private var silentReload = false
 
@@ -45,7 +45,7 @@ class RecommendationActivity : BaseActivity() {
         tabDots = findViewById(R.id.tabDots)
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
-        childId = intent.getStringExtra("childId") ?: return
+        childBookId = intent.getStringExtra("childBookId") ?: return
 
         viewModel.state.observe(this) { state ->
             when (state) {
@@ -86,13 +86,13 @@ class RecommendationActivity : BaseActivity() {
                         DialogFactory.createSuccessDialog(this, getString(R.string.recommendation_assimilated)) {
                             pendingPage = (viewPager.currentItem - 1).coerceAtLeast(0)
                             silentReload = true
-                            viewModel.loadRecommendations(childId)
+                            viewModel.loadRecommendationsByChildBookId(childBookId)
                         }.show()
                     } else {
                         showSuccessSnackbar(getString(R.string.checkpoint_saved))
                         pendingPage = viewPager.currentItem
                         silentReload = true
-                        viewModel.loadRecommendations(childId)
+                        viewModel.loadRecommendationsByChildBookId(childBookId)
                     }
                 }
                 is UiState.Error -> {
@@ -103,12 +103,12 @@ class RecommendationActivity : BaseActivity() {
             }
         }
 
-        viewModel.loadRecommendations(childId)
+        viewModel.loadRecommendationsByChildBookId(childBookId)
     }
 
     private fun renderAdapter(list: List<RecommendationResponse>) {
-        val adapter = RecommendationAdapter(list, { recommendationId, completed ->
-            viewModel.registerCheckpoint(childId, recommendationId, completed)
+        val adapter = RecommendationAdapter(list, { childBookRecommendationId, completed ->
+            viewModel.registerCheckpoint(childBookId, childBookRecommendationId, completed)
         }, {
             showInfoSnackbar(getString(R.string.checkpoint_already_answered))
         })

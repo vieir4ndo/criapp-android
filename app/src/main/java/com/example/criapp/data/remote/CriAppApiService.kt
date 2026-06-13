@@ -118,21 +118,21 @@ interface CriAppApiService {
     suspend fun deleteComment(@Path("id") id: String): ApiResponse<List<Any>>
 
     // ── Child Book ──────────────────────────────────────────────────────
-    @GET("child/{childId}/book")
-    suspend fun getChildBookScore(@Path("childId") childId: String): ApiResponse<List<ChildBookSummaryResponse>>
+    @GET("child-book/{childBookId}")
+    suspend fun getChildBookScore(@Path("childBookId") childBookId: String): ApiResponse<List<ChildBookSummaryResponse>>
 
     // ── Awards ──────────────────────────────────────────────────────
-    @GET("child/{childId}/book/awards")
-    suspend fun getAwards(@Path("childId") childId: String): ApiResponse<List<AwardResponse>>
+    @GET("child-book/{childBookId}/awards")
+    suspend fun getAwardsByChildBookId(@Path("childBookId") childBookId: String): ApiResponse<List<AwardResponse>>
 
     // ── Recommendations ──────────────────────────────────────────────
-    @GET("child/{childId}/book/recommendations")
-    suspend fun getRecommendations(@Path("childId") childId: String): ApiResponse<List<RecommendationResponse>>
+    @GET("child-book/{childBookId}/recommendations")
+    suspend fun getRecommendationsByChildBookId(@Path("childBookId") childBookId: String): ApiResponse<List<RecommendationResponse>>
 
-    @POST("child/{childId}/book/recommendations/{recommendationId}/checkpoint")
+    @POST("child-book/{childBookId}/recommendations/{childBookRecommendationId}/checkpoint")
     suspend fun registerCheckpoint(
-        @Path("childId") childId: String,
-        @Path("recommendationId") recommendationId: Int,
+        @Path("childBookId") childBookId: String,
+        @Path("childBookRecommendationId") childBookRecommendationId: String,
         @Body request: CreateCheckpointRequest
     ): ApiResponse<List<SaveCheckpointResultResponse>>
 

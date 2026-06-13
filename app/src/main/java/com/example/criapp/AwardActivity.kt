@@ -41,7 +41,7 @@ class AwardActivity : BaseActivity() {
         viewPager.adapter = AwardAdapter(emptyList())
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
-        val childId = intent.getStringExtra("childId") ?: return
+        val childBookId = intent.getStringExtra("childBookId") ?: return
         viewModel.state.observe(this) { state ->
             when (state) {
                 is UiState.Loading -> aLoadingDialog?.show()
@@ -68,7 +68,7 @@ class AwardActivity : BaseActivity() {
             }
         }
 
-        viewModel.loadAwards(childId)
+        viewModel.loadAwardsByChildBookId(childBookId)
     }
 
     private fun setupDots(count: Int) {

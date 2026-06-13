@@ -10,9 +10,9 @@ import com.example.criapp.models.responses.ChildBookSummaryResponse
 
 class ChildBookRepositoryImpl(private val apiService: CriAppApiService) : IChildBookRepository {
 
-    override suspend fun getChildBookScore(childId: String): Result<ChildBookSummaryResponse?> {
+    override suspend fun getChildBookScore(childBookId: String): Result<ChildBookSummaryResponse?> {
         return safeApiCall("ChildBookRepositoryImpl") {
-            val response = apiService.getChildBookScore(childId)
+            val response = apiService.getChildBookScore(childBookId)
             if (response.success) {
                 Result.success(response.data?.firstOrNull())
             } else {

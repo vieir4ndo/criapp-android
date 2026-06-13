@@ -16,7 +16,7 @@ import com.example.criapp.services.DateHelper
 
 class RecommendationAdapter(
     private val list: List<RecommendationResponse>,
-    private val onCheckpoint: (recommendationId: Int, completed: Boolean) -> Unit,
+    private val onCheckpoint: (childBookRecommendationId: String, completed: Boolean) -> Unit,
     private val onAlreadyAnswered: () -> Unit = {}
 ) : RecyclerView.Adapter<RecommendationAdapter.ViewHolder>() {
 
@@ -51,7 +51,7 @@ class RecommendationAdapter(
         val item = list[position]
         holder.text.text = item.text
 
-        val completed = item.completedCheckpoints.coerceIn(0, 4)
+        val completed = item.completedCountInWindow.coerceIn(0, 4)
         holder.check1.setImageResource(if (completed >= 1) R.drawable.ic_checkpoint_checked else R.drawable.ic_checkpoint_unchecked)
         holder.check2.setImageResource(if (completed >= 2) R.drawable.ic_checkpoint_checked else R.drawable.ic_checkpoint_unchecked)
         holder.check3.setImageResource(if (completed >= 3) R.drawable.ic_checkpoint_checked else R.drawable.ic_checkpoint_unchecked)
@@ -68,11 +68,11 @@ class RecommendationAdapter(
             holder.image.setImageDrawable(null)
         }
 
-        val alreadyChecked = item.todayCompleted != null
+        val alreadyChecked = item.isCompletedToday != null
 
         if (alreadyChecked) {
             val ctx = holder.itemView.context
-            if (item.todayCompleted == true) {
+            if (item.isCompletedToday == true) {
                 holder.btnYes.isEnabled = true
                 holder.btnNo.isEnabled = false
                 holder.btnYes.backgroundTintList = android.content.res.ColorStateList.valueOf(ContextCompat.getColor(ctx, R.color.btn_yes_active))
@@ -92,7 +92,7 @@ class RecommendationAdapter(
             if (!alreadyChecked && globalEnabled) {
                 globalEnabled = false
                 notifyDataSetChanged()
-                onCheckpoint(item.id, true)
+                onCheckpoint(item.childBookRecommendationId, true)
             } else if (alreadyChecked) {
                 onAlreadyAnswered()
             }
@@ -101,7 +101,7 @@ class RecommendationAdapter(
             if (!alreadyChecked && globalEnabled) {
                 globalEnabled = false
                 notifyDataSetChanged()
-                onCheckpoint(item.id, false)
+                onCheckpoint(item.childBookRecommendationId, false)
             } else if (alreadyChecked) {
                 onAlreadyAnswered()
             }

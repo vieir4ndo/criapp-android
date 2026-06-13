@@ -38,7 +38,7 @@ class DialogFactory {
                 .withTitle(context.getString(R.string.dialog_success_title))
                 .withMessage(message)
                 .withSubmitButtonMessage(context.getString(R.string.dialog_accept_button))
-                .withSubmitButtonCallback { onDismiss() }
+                .withSubmitButtonDismissing()
                 .withOnDismissCallback(onDismiss)
                 .create()
         }

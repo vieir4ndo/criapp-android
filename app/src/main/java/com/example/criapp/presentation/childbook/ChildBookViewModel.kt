@@ -16,10 +16,10 @@ class ChildBookViewModel(private val repository: IChildBookRepository) : ViewMod
     private val _childBookState = MutableLiveData<UiState<ChildBookSummaryResponse?>>()
     val childBookState: LiveData<UiState<ChildBookSummaryResponse?>> = _childBookState
 
-    fun loadChildBook(childId: String) {
+    fun loadChildBook(childBookId: String) {
         _childBookState.value = UiState.Loading
         viewModelScope.launch {
-            val result = repository.getChildBookScore(childId)
+            val result = repository.getChildBookScore(childBookId)
             _childBookState.value = if (result.isSuccess) {
                 UiState.Success(result.getOrNull())
             } else {
