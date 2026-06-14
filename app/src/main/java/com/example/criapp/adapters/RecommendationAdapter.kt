@@ -1,7 +1,5 @@
 package com.example.criapp.adapters
 
-import android.graphics.BitmapFactory
-import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,14 +57,9 @@ class RecommendationAdapter(
 
         holder.date.text = item.createdAt?.let { DateHelper.formatForDisplay(it) } ?: ""
 
-        val b64 = item.image
-        if (!b64.isNullOrBlank()) {
-            val bytes = Base64.decode(b64, Base64.DEFAULT)
-            val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-            holder.image.setImageBitmap(bitmap)
-        } else {
-            holder.image.setImageDrawable(null)
-        }
+        val imageKey = "rec_%02d".format(item.id)
+        val resId = holder.itemView.context.resources.getIdentifier(imageKey, "drawable", holder.itemView.context.packageName)
+        if (resId != 0) holder.image.setImageResource(resId) else holder.image.setImageDrawable(null)
 
         val alreadyChecked = item.isCompletedToday != null
 

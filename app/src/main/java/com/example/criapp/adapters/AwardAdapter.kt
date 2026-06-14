@@ -1,7 +1,5 @@
 package com.example.criapp.adapters
 
-import android.graphics.BitmapFactory
-import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,13 +38,16 @@ class AwardAdapter(
         holder.description.text = item.description ?: ""
         holder.date.text = item.createdAt?.let { DateHelper.formatForDisplay(it) } ?: ""
 
-        val b64 = item.image
-        if (!b64.isNullOrBlank()) {
-            val bytes = Base64.decode(b64, Base64.DEFAULT)
-            val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-            holder.image.setImageBitmap(bitmap)
-        } else {
-            holder.image.setImageDrawable(null)
+        val drawableRes = when (item.type) {
+            1 -> R.drawable.habit_builder_award
+            2 -> R.drawable.consistent_parent_award
+            3 -> R.drawable.silver_cognitive_award
+            4 -> R.drawable.silver_emotional_award
+            5 -> R.drawable.silver_routines_award
+            6 -> R.drawable.silver_social_award
+            7 -> R.drawable.gold_parent_award
+            else -> null
         }
+        if (drawableRes != null) holder.image.setImageResource(drawableRes) else holder.image.setImageDrawable(null)
     }
 }

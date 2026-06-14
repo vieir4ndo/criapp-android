@@ -7,7 +7,6 @@ class AwardResponse(
     val type: Int,
     val text: String,
     val description: String?,
-    val image: String?,
     val createdAt: String?
 ) {
     override fun toString(): String {

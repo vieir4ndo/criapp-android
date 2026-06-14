@@ -4,7 +4,6 @@ data class RecommendationResponse(
     val id: Int,
     val childBookRecommendationId: String,
     val text: String,
-    val image: String?,
     val isCompletedToday: Boolean?,
     val createdAt: String?,
     val completedCountInWindow: Int
