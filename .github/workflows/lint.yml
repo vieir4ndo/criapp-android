@@ -17,14 +17,13 @@ jobs:
         run: |
           BRANCH="${{ github.head_ref || github.ref_name }}"
           echo "Branch: $BRANCH"
-          if ! echo "$BRANCH" | grep -qE '^(main|dev|issue#[0-9]+|hotfix/.+|release/[0-9]+\.[0-9]+\.[0-9]+)$'; then
+          if ! echo "$BRANCH" | grep -qE '^(main|dev|issue#[0-9]+|hotfix/.+)$'; then
             echo "::error::Branch '$BRANCH' does not follow the naming convention."
             echo "Allowed patterns:"
             echo "  main"
             echo "  dev"
             echo "  issue#<number>        e.g. issue#35"
             echo "  hotfix/<description>  e.g. hotfix/auth-crash"
-            echo "  release/<semver>      e.g. release/1.2.0"
             exit 1
           fi
           echo "Branch name is valid."
