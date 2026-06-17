@@ -164,7 +164,7 @@
     <string name="reset_password_hint_with_phone">The code was sent to your email or phone. Enter it along with your new password.</string>
     <string name="error_unknown">Unknown error</string>
     <string name="error_server">Oops, something went wrong. Please try again later</string>
-    <string name="error_no_internet">No Internet connection. Please check your network and try again</string>
+    <string name="error_no_internet">There was an error. Please try again later</string>
 
     <string name="hint_username">email@example.com</string>
     <string name="hint_username_with_phone">email@example.com / +1 555 000 0000</string>
