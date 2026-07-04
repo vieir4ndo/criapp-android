@@ -43,7 +43,7 @@ class AwardAdapter(
             2 -> R.drawable.consistent_parent_award
             3 -> R.drawable.silver_cognitive_award
             4 -> R.drawable.silver_emotional_award
-            5 -> R.drawable.silver_routines_award
+            5 -> R.drawable.silver_routine_award
             6 -> R.drawable.silver_social_award
             7 -> R.drawable.gold_parent_award
             else -> null
