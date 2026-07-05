@@ -19,6 +19,9 @@ class ProfileViewModel(private val repository: IProfileRepository) : ViewModel()
     private val _updateState = MutableLiveData<UiState<Unit>>()
     val updateState: LiveData<UiState<Unit>> = _updateState
 
+    private val _deactivateState = MutableLiveData<UiState<Unit>>()
+    val deactivateState: LiveData<UiState<Unit>> = _deactivateState
+
     fun loadProfile() {
         _profileState.value = UiState.Loading
         viewModelScope.launch {
@@ -44,10 +47,10 @@ class ProfileViewModel(private val repository: IProfileRepository) : ViewModel()
     }
 
     fun deactivateAccount() {
-        _updateState.value = UiState.Loading
+        _deactivateState.value = UiState.Loading
         viewModelScope.launch {
             val result = repository.deactivateAccount()
-            _updateState.value = if (result.isSuccess) {
+            _deactivateState.value = if (result.isSuccess) {
                 UiState.Success(Unit)
             } else {
                 UiState.Error(result.exceptionOrNull()?.message ?: CRIAppApplication.context.getString(R.string.error_unknown))

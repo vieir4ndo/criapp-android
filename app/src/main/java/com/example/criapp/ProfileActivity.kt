@@ -79,7 +79,6 @@ class ProfileActivity : BaseActivity() {
                             getString(R.string.deactivate_account_confirmation)
                         ) {
                             viewModel.deactivateAccount()
-                            onButtonLogoffClick(null)
                         }.show()
                     }
                 }
@@ -97,6 +96,21 @@ class ProfileActivity : BaseActivity() {
                 is UiState.Success -> {
                     aLoadingDialog?.cancel()
                     showSuccessSnackbar(getString(R.string.profile_updated_success))
+                }
+                is UiState.Error -> {
+                    aLoadingDialog?.cancel()
+                    showErrorSnackbar(state.message)
+                }
+                else -> Unit
+            }
+        }
+
+        viewModel.deactivateState.observe(this) { state ->
+            when (state) {
+                is UiState.Loading -> aLoadingDialog?.show()
+                is UiState.Success -> {
+                    aLoadingDialog?.cancel()
+                    onButtonLogoffClick(null)
                 }
                 is UiState.Error -> {
                     aLoadingDialog?.cancel()
